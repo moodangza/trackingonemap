@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-<?php echo $this->extend('./templates/layoutindex'); ?>
+<?php echo $this->extend('templates/header'); ?>
 <?php echo $this->section('content'); ?>
 
 <body>
   <div class="container-scroller d-flex">
     <!-- partial:./partials/_sidebar.html -->
-   <?php $this->include('templates/menu');?>
+   <?php echo $this->include('templates/menu');?>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:./partials/_navbar.html -->
-     <?php $this->include('templates/navbar');?>
+     <?php echo $this->include('templates/navbar');?>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -391,7 +390,7 @@
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:./partials/_footer.html -->
-          <?php $this->include('templates/footer');?>
+          <?php echo $this->include('templates/footer');?>
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
@@ -399,7 +398,7 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
-
+  <?php $this->endSection();?>
 </body>
 
 </html>
