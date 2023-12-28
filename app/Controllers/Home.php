@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 use App\Models\firstModel;
+use Hermawan\DataTables\DataTable;
+
 class Home extends BaseController
 {
     public function index(): string
@@ -21,7 +23,7 @@ class Home extends BaseController
         $return = [
             'product' => $product
         ];
-        return view('spica/showdata',$return);
+        return view('spica/page/showdata',$return);
     }
     
 }
