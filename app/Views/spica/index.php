@@ -16,6 +16,9 @@
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
+        <?php   echo getcwd();;
+        
+        ?>
             <div class="col-12 col-xl-6 grid-margin stretch-card">
               <div class="row w-100 flex-grow">
                 <div class="col-md-12 grid-margin stretch-card">
@@ -203,7 +206,7 @@
                       <tbody>
                         <tr>
                           <td class="py-1">
-                            <img src="images/faces/face1.jpg" alt="image"/>
+                            <img src="spica_rs/images/face1.jpg" alt="image"/>
                           </td>
                           <td>
                             Herman Beck
@@ -222,7 +225,7 @@
                         </tr>
                         <tr>
                           <td class="py-1">
-                            <img src="images/faces/face2.jpg" alt="image"/>
+                            <img src="spica_rs/images/faces/face2.jpg" alt="image"/>
                           </td>
                           <td>
                             Messsy Adam
@@ -241,7 +244,7 @@
                         </tr>
                         <tr>
                           <td class="py-1">
-                            <img src="images/faces/face3.jpg" alt="image"/>
+                            <img src="spica_rs/images/faces/face3.jpg" alt="image"/>
                           </td>
                           <td>
                             John Richards
@@ -260,7 +263,7 @@
                         </tr>
                         <tr>
                           <td class="py-1">
-                            <img src="images/faces/face4.jpg" alt="image"/>
+                            <img src="spica_rs/images/faces/face4.jpg" alt="image"/>
                           </td>
                           <td>
                             Peter Meggik
@@ -279,7 +282,7 @@
                         </tr>
                         <tr>
                           <td class="py-1">
-                            <img src="images/faces/face5.jpg" alt="image"/>
+                            <img src="spica_rs/images/faces/face5.jpg" alt="image"/>
                           </td>
                           <td>
                             Edward
@@ -298,7 +301,7 @@
                         </tr>
                         <tr>
                           <td class="py-1">
-                            <img src="images/faces/face6.jpg" alt="image"/>
+                            <img src="spica_rs/images/faces/face6.jpg" alt="image"/>
                           </td>
                           <td>
                             John Doe
@@ -317,7 +320,7 @@
                         </tr>
                         <tr>
                           <td class="py-1">
-                            <img src="images/faces/face7.jpg" alt="image"/>
+                            <img src="spica_rs/images/faces/face7.jpg" alt="image"/>
                           </td>
                           <td>
                             Henry Tom
