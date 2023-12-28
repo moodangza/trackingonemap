@@ -206,7 +206,7 @@
                       <tbody>
                         <tr>
                           <td class="py-1">
-                            <img src="spica_rs/images/face1.jpg" alt="image"/>
+                            <img src="spica_rs/images/faces/face1.jpg" alt="image"/>
                           </td>
                           <td>
                             Herman Beck
