@@ -22,7 +22,7 @@
                 <div class="card-body">
                   <h4 class="card-title">Financial management review</h4>
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="mytable">
                       <thead>
                         <tr>
                           <th>
@@ -47,7 +47,6 @@
                              foreach($product as $rs){?>
                              <tr>
                                 <td><?php echo $rs['id'];?></td>
-                              
                                 <td><?php echo $rs['OrderDate'];?></td>
                                 <td><?php echo $rs['ProductName'];?></td>
                                 <td><?php echo $rs['Unit'];?></td>

@@ -11,6 +11,10 @@
   <!-- endinject -->
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+  
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
   <!-- inject:css -->
   <link rel="stylesheet" href="<?php echo base_url('spica_rs/css/style.css');?>">
   <!-- endinject -->
@@ -22,6 +26,7 @@
   <!-- Plugin js for this page-->
   <script src="<?php echo base_url('spica_rs/vendors/chart.js/Chart.min.js');?>"></script>
   <!-- End plugin js for this page-->
+  
   <!-- inject:js -->
   <script src="<?php echo base_url('spica_rs/js/off-canvas.js');?>"></script>
   <script src="<?php echo base_url('spica_rs/js/hoverable-collapse.js');?>"></script>
