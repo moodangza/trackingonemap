@@ -12,130 +12,91 @@
     <div class="container-fluid page-body-wrapper">
       <!-- partial:./partials/_navbar.html -->
      <?php echo $this->include('templates/navbar');?>
+     <script>
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+}
+</script>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
         <?php   //echo getcwd();; ?>
-            <div class="col-12 col-xl-6 grid-margin stretch-card">
+            <div class="col-12 col-xl-12 grid-margin stretch-card">
               <div class="row w-100 flex-grow">
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
-                      <button class="btn btn-primary">เพิ่มหัวข้อ</button>
-                      
+                      <button class="btn btn-success"   target="popup"     onclick="window.open('http://kanishkkunal.com','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">เพิ่มหัวข้อ</button>
+                      <br>   <br>   <br>
                       <div class="row mb-3">
-                        <div class="col-md-7">
+                        <div class="col-md-12">
+                          <div class="d-flex justify-content-between traffic-status">
+                            <div class="item">
+                              <p class="mb-">TO DO</p>
+                              <?php for($x=0;$x<3;$x++){?>
+                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="row" style="margin-bottom: 2px">
+                              <div class="card" draggable="true" ondragstart="drag(event)">
+                                <h4 class="font-weight-bold mb-0">93,956</h4>
+                                <h5>วันที่เริ่ม <?php $date = "04-01-2024";
+                                            $date1 = str_replace('-', '/', $date); echo date('d-m-Y',strtotime($date1 . "+$x days"));?></h5>
+                                <h5>วันที่สิ้นสุด</h5>
+                              </div>
+                              </div>
+                            <?php }?>
+                              <div class="color-border"></div>
+                            </div>
+                            <div class="item">
+                              <p class="mb-">IN PROGRESS</p>
+                              <?php for($y=0;$y<5;$y++){?>
+                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="row" style="margin-bottom: 2px">
+                              <div class="card" draggable="true" ondragstart="drag(event)">
+                                <h4 class="font-weight-bold mb-0">93,956</h4>
+                                <h5>วันที่เริ่ม <?php $date2 = "06-01-2024";
+                                            $date2 = str_replace('-', '/', $date2); echo date('d-m-Y',strtotime($date2 . "+$y days"));?></h5>
+                                <h5>วันที่สิ้นสุด</h5>
+                              </div>
+                              </div>
+                            <?php }?>
+                              <div class="color-border"></div>
+                            </div>
+                            <div class="item">
+                              <p class="mb-">DONE</p>
+                              <?php for($z=0;$z<5;$z++){?>
+                              <div class="row" style="margin-bottom: 2px">
+                              <div class="card">
+                                <h4 class="font-weight-bold mb-0">93,956</h4>
+                                <h5>วันที่เริ่ม <?php $date3 = "06-01-2024";
+                                            $date3 = str_replace('-', '/', $date3); echo date('d-m-Y',strtotime($date3 . "+$z days"));?></h5>
+                                <h5>วันที่สิ้นสุด</h5>
+                              </div>
+                              </div>
+                            <?php }?>
+                              <div class="color-border"></div>
+                            </div>
+                          </div>
+                        </div>
                        
-                        </div>
-                        
                       </div>
-                     
+                    
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 stretch-card">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="d-flex align-items-center justify-content-between flex-wrap">
-                        <p class="card-title">Weekly Balance</p>
-                        <p class="text-success font-weight-medium">20.15 %</p>
-                      </div>
-                      <div class="d-flex align-items-center flex-wrap mb-3">
-                        <h5 class="font-weight-normal mb-0 mb-md-1 mb-lg-0 mr-3">$22.736</h5>
-                        <p class="text-muted mb-0">Avg Sessions</p>
-                      </div>
-                      <canvas id="balance-chart" height="130"></canvas>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 stretch-card">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="d-flex align-items-center justify-content-between flex-wrap">
-                        <p class="card-title">Today Task</p>
-                        <p class="text-success font-weight-medium">45.39 %</p>
-                      </div>
-                      <div class="d-flex align-items-center flex-wrap mb-3">
-                        <h5 class="font-weight-normal mb-0 mb-md-1 mb-lg-0 mr-3">17.247</h5>
-                        <p class="text-muted mb-0">Avg Sessions</p>
-                      </div>
-                      <canvas id="task-chart" height="130"></canvas>
-                    </div>
-                  </div>
-                </div>
+              
+            
               </div>
             </div>
-            <div class="col-12 col-xl-6 grid-margin stretch-card">
-              <div class="row w-100 flex-grow">
-                <div class="col-md-6 grid-margin stretch-card">
-                  <div class="card">
-                    <div class="card-body">
-                      <p class="card-title">Regional Load</p>
-                      <p class="text-muted">Last update: 2 Hours ago</p>
-                      <div class="regional-chart-legend d-flex align-items-center flex-wrap mb-1"
-                        id="regional-chart-legend"></div>
-                      <canvas height="280" id="regional-chart"></canvas>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 grid-margin stretch-card">
-                  <div class="card">
-                    <div class="card-body pb-0">
-                      <div class="d-flex align-items-center mb-4">
-                        <p class="card-title mb-0 mr-1">Today activity</p>
-                        <div class="badge badge-info badge-pill">2</div>
-                      </div>
-                      <div class="d-flex flex-wrap pt-2">
-                        <div class="mr-4 mb-lg-2 mb-xl-0">
-                          <p>Time On Site</p>
-                          <h4 class="font-weight-bold mb-0">77.15 %</h4>
-                        </div>
-                        <div>
-                          <p>Page Views</p>
-                          <h4 class="font-weight-bold mb-0">14.15 %</h4>
-                        </div>
-                      </div>
-                    </div>
-                    <canvas height="150" id="activity-chart"></canvas>
-                  </div>
-                </div>
-                <div class="col-md-12 stretch-card">
-                  <div class="card">
-                    <div class="card-body pb-0">
-                      <p class="card-title">Server Status 247</p>
-                      <div class="d-flex justify-content-between flex-wrap">
-                        <p class="text-muted">Last update: 2 Hours ago</p>
-                        <div class="d-flex align-items-center flex-wrap server-status-legend mt-3 mb-3 mb-md-0">
-                          <div class="item mr-3">
-                            <div class="d-flex align-items-center">
-                              <div class="color-bullet"></div>
-                              <h5 class="font-weight-bold mb-0">128GB</h5>
-                            </div>
-                            <p class="mb-">Total Usage</p>
-                          </div>
-                          <div class="item mr-3">
-                            <div class="d-flex align-items-center">
-                              <div class="color-bullet"></div>
-                              <h5 class="font-weight-bold mb-0">92%</h5>
-                            </div>
-                            <p class="mb-">Memory Usage</p>
-                          </div>
-                          <div class="item mr-3">
-                            <div class="d-flex align-items-center">
-                              <div class="color-bullet"></div>
-                              <h5 class="font-weight-bold mb-0">16%</h5>
-                            </div>
-                            <p class="mb-">Disk Usage</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <canvas height="170" id="status-chart"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
+           
           </div>
           <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
