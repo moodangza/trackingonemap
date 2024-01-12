@@ -11,6 +11,7 @@ class Home extends BaseController
         return view('spica/index');
     }
     public function showdata(){
+        
         $firstmodel = new firstModel();
         $firstmodel 
         ->select('orders.OrderID AS id,products.ProductID,Quantity,OrderDate,ProductName,Unit,Price')
@@ -24,6 +25,8 @@ class Home extends BaseController
             'product' => $product
         ];
         return view('spica/page/showdata',$return);
+        
     }
+  
     
 }
