@@ -27,6 +27,8 @@ class Home extends BaseController
         return view('spica/page/showdata',$return);
         
     }
-  
+    public function popupjob(): string{
+        return view('page/popupjob');
+    }
     
 }

@@ -27,6 +27,37 @@ function drop(ev) {
   ev.target.appendChild(document.getElementById(data));
 }
 </script>
+<script>
+  $(document).ready(function () {
+    var modal = $("#jobadd");
+    $("#intjob").click(function () {
+      // alert('cl');
+        // $("#jobadd").fadeIn(300);
+        $("#jobadd").modal({
+                escapeClose: true,
+                clickClose: true,
+                showClose: true,
+                fadeDuration: 100
+            });
+    });
+    $(".close").click(function () {
+        $("#jobadd").fadeOut(300);
+    });
+});
+$(function(){
+            $("#date_start,#date_end").datepicker({
+                language:'th-th',
+                format:'dd/mm/yyyy',
+                autoclose: true
+            });
+        });
+</script>
+<style>
+#jobadd {
+  width: 750px;
+  margin: auto;
+}
+ </style> 
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -37,7 +68,7 @@ function drop(ev) {
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
-                      <button class="btn btn-success"   target="popup"     onclick="window.open('http://kanishkkunal.com','popup','width=600,height=600,scrollbars=no,resizable=no'); return false;">เพิ่มหัวข้อ</button>
+                      <button class="btn btn-success" id="intjob">เพิ่มหัวข้อ</button>
                       <br>   <br>   <br>
                       <div class="row mb-3">
                         <div class="col-md-12">
@@ -322,6 +353,39 @@ function drop(ev) {
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
+  <div class="modal_fade modal-dialog modal-md" id='jobadd' tabindex='-1' role='dialog' >
+      <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                 <div class="modal-body">
+                 <h4 class="modal-title" id="modalpreviewlabel">เพิ่มข้อมูล</h4>                                     
+                 <form class="row g-3">
+  <div class="col-md-12">
+    <label for="inputjob" class="form-label">ชื่อหัวข้อ</label>
+    <input type="email" class="form-control" id="job_name" name="job_name">
+  </div>
+  <div class="col-md-6">
+    <label for="jobstart" class="form-label">วันที่เริ่ม</label>
+    <input type="text" class="form-control" id="date_start" name="job_start">
+  </div>
+  <div class="col-6">
+  <label for="jobend" class="form-label">วันที่สิ้นสุด</label>
+    <input type="text" class="form-control" id="date_end" name="job_end">
+  </div>
+<br>
+<div class="col-6">
+ <br><br>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">บันทึก</button>
+  </div>
+</form>
+                 </div>
+            </div>
+        </div>
+      </div>
+  </div>
+
   <?php $this->endSection();?>
 </body>
 

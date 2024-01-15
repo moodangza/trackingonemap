@@ -1,4 +1,6 @@
-var table = $('#MeetingTable').DataTable({
+<script type='text/javascript'>
+  $().ready(function
+var table = $('#mytable').DataTable({
     dom: "<'row'<'col-sm-12'tr>>" +
         "<'row'<'col-sm-6'i><'col-sm-6'p>>",
     processing: true,
@@ -30,3 +32,4 @@ var table = $('#MeetingTable').DataTable({
       // { targets: [3], render: { _: 'display', sort: 'timestamp' } },
     ],
   });
+  </script>
