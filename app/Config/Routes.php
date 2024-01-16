@@ -7,5 +7,5 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('showdata','Home::showdata');
-$routes->get('popupjob','Home::popupjob');
+$routes->get('showprocess','Home::showprocess');
 
