@@ -15,28 +15,28 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
+            <div class="container">
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+            </div>
         <div class="container">
           <div class="row">
-         
             <div class="col-lg-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Financial management review</h4>
                   <div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-    The current link item
-  </a>
-  <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-  <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-  <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-  <a class="list-group-item list-group-item-action disabled" aria-disabled="true">A disabled link item</a>
-</div>
+                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                                The current link item
+                            </a>
+                            <?php foreach($process_rs as $row){?>
+                                <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+                          <?php }?>
+                    </div>
                 </div>
               </div>
             </div>
@@ -44,15 +44,15 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Financial management review</h4>
-                  <div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-    The current link item
-  </a>
-  <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-  <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-  <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-  <a class="list-group-item list-group-item-action disabled" aria-disabled="true">A disabled link item</a>
-</div>
+                   <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                                The current link item
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+                            <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+                            <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+                            <a class="list-group-item list-group-item-action disabled" aria-disabled="true">A disabled link item</a>
+                    </div>
                 </div>
               </div>
             </div>
