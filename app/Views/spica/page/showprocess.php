@@ -15,49 +15,18 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-         
+        <select class="form-select" aria-label="Default select example">
+  <option selected>Open this select menu</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
+</select>
           <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Financial management review</h4>
-                  <div class="table-responsive">
-                    <table class="table table-striped" id="mytable">
-                      <thead>
-                        <tr>
-                          <th>
-                            User
-                          </th>
-                          <th>
-                            First name
-                          </th>
-                          <th>
-                            Progress
-                          </th>
-                          <th>
-                            Amount
-                          </th>
-                          <th>
-                            Deadline
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php 
-                             foreach($product as $rs){?>
-                             <tr>
-                                <td><?php echo $rs['id'];?></td>
-                                <td><?php echo $rs['OrderDate'];?></td>
-                                <td><?php echo $rs['ProductName'];?></td>
-                                <td><?php echo $rs['Unit'];?></td>
-                                <td><?php echo $rs['Price'];?></td>
-                             </tr>
-                       <?php } ?>
-                        
-                       
-                      </tbody>
-                    </table>
-                  </div>
+                 
                 </div>
               </div>
             </div>
