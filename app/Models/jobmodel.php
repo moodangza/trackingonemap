@@ -3,7 +3,7 @@ namespace App\Models;
 use CodeIgniter\Model;
 class jobModel extends Model{
         // protected $DBGroup      = 'project';
-        protected $table        = 'job';
+        protected $table        = 'job_tb';
         protected $primaryKey   = 'job_id';
         protected $useAutoIncrement = false;
         protected $returnType       = 'array';

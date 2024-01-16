@@ -21,15 +21,42 @@
   <option value="2">Two</option>
   <option value="3">Three</option>
 </select>
+        <div class="container">
           <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card">
+         
+            <div class="col-lg-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Financial management review</h4>
-                 
+                  <div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+    The current link item
+  </a>
+  <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+  <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+  <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+  <a class="list-group-item list-group-item-action disabled" aria-disabled="true">A disabled link item</a>
+</div>
                 </div>
               </div>
             </div>
+            <div class="col-lg-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Financial management review</h4>
+                  <div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+    The current link item
+  </a>
+  <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+  <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+  <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+  <a class="list-group-item list-group-item-action disabled" aria-disabled="true">A disabled link item</a>
+</div>
+                </div>
+              </div>
+            </div>
+          </div>
           </div>
           <!-- row end -->
           <div class="row">
