@@ -33,8 +33,8 @@
                             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
                                 The current link item
                             </a>
-                            <?php foreach($process_rs as $row){?>
-                                <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+                            <?php foreach($process as $row){?>
+                                <a href="#" class="list-group-item list-group-item-action"><?php echo $row['process_name']?></a>
                           <?php }?>
                     </div>
                 </div>

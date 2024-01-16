@@ -15,6 +15,7 @@ class Home extends BaseController
         $jobmodel = new jobModel();
         $jobmodel  ->select('process_name,process_start,process_end,detail,process_status')
         ->join('process_tb','job_id = process_tb.job_id','left')
+        ->where('job_id = 1')
         ->orderBy('process_start','desc');
         $process_rs = $jobmodel->findAll();
         $data = [

@@ -10,12 +10,7 @@ class jobModel extends Model{
         protected $useSoftDeletes   = false;
         protected $protectFields    = false;
         protected $allowedFields    = [
-            'job_id',
-            'job_name',
-            'job_start',
-            'job_end',
-            'job_finish',
-            'status',
+            'job_id'         
         ];
 
          // Dates
