@@ -28,7 +28,6 @@ function drop(ev) {
 }
 </script>
 <script>
-<<<<<<< Updated upstream
   $(document).ready(function () {
     var modal = $("#jobadd");
     $("#intjob").click(function () {
@@ -47,27 +46,18 @@ function drop(ev) {
 });
 $(function(){
             $("#date_start,#date_end").datepicker({
-=======
- 
- $("#date_start,#date_end").click(function () {
-            datepicker({
->>>>>>> Stashed changes
                 language:'th-th',
                 format:'dd/mm/yyyy',
                 autoclose: true
             });
         });
 </script>
-<<<<<<< Updated upstream
 <style>
 #jobadd {
   width: 750px;
   margin: auto;
 }
  </style> 
-=======
-
->>>>>>> Stashed changes
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -139,15 +129,6 @@ $(function(){
             </div>
            
           </div>
-<<<<<<< Updated upstream
-=======
-          <div id="theModal" class="modal fade text-center">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      </div>
-    </div>
-  </div>
->>>>>>> Stashed changes
           <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
