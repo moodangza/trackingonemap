@@ -18,10 +18,12 @@
             <div class="container">
             <select class="form-select" aria-label="Default select example">
                 <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <?php foreach($job as $opj){?>
+                <option value="<?php echo $opj['job_id'];?>"><?php echo $opj['job_name'];?></option>
+              
+                <?php }?>
             </select>
+            &nbsp;&nbsp;<button id='addprocess' class="btn btn-success btn-sm">เพิ่มขั้นตอนการทำงาน</button>
             </div>
         <div class="container">
           <div class="row">
