@@ -18,8 +18,8 @@
             <div class="container">
             <select class="form-select" aria-label="Default select example">
                 <option selected>Open this select menu</option>
-                <?php foreach($process as $opv){?>
-                <option value="<?php echo $opv['job_id'];?>"><?php echo $opv['job_name'];?></option>
+                <?php foreach($job as $opj){?>
+                <option value="<?php echo $opj['job_id'];?>"><?php echo $opj['job_name'];?></option>
               
                 <?php }?>
             </select>
