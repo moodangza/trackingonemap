@@ -67,7 +67,7 @@ $(function(){
               <div class="row w-100 flex-grow">
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
-                    <div class="card-body">
+                    <div class="card-body container">
                       <button class="btn btn-success" id="intjob">เพิ่มหัวข้อ</button>
                       <br>   <br>   <br>
 
