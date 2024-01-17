@@ -67,54 +67,62 @@ $(function(){
               <div class="row w-100 flex-grow">
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
-                    <div class="card-body">
-                      <button class="btn btn-success" id="intjob">เพิ่มหัวข้อtest</button>
+                    <div class="card-body" >
+                      <button class="btn btn-success" id="intjob">เพิ่มหัวข้อ</button>
                       <br>   <br>   <br>
+
                       <div class="row mb-3">
                         <div class="col-md-12">
                           <div class="d-flex justify-content-between traffic-status">
-                            <div class="item">
-                              <h3 class="mb-">ต้องดำเนินการ</h3>
-                              <?php for($x=0;$x<3;$x++){?>
+                            <div class="item">                           
                               <div ondrop="drop(event)" ondragover="allowDrop(event)" class="row" style="margin-bottom: 2px">
-                              <div class="card" draggable="true" ondragstart="drag(event)">
-                                <h4 class="bg-primary font-weight-bold mb-10">สำนักงานปฏิรูปเพื่อเกษตรกรรม</h4>
-                                <h5>วันที่เริ่ม <?php $date = "04-01-2024";
-                                            $date1 = str_replace('-', '/', $date); echo date('d-m-Y',strtotime($date1 . "+$x days"));?></h5>
-                                <h5>วันที่สิ้นสุด</h5>
-                              </div>
-                              </div>
-                            <?php }?>
-                              <div class="color-border"></div>
-                            </div>
-                            <div class="item">
-                              <h3 class="mb-">กำลังดำเนินการ</h3>
-                              <?php for($y=0;$y<5;$y++){?>
-                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="row" style="margin-bottom: 2px">
-                              <div class="card" draggable="true" ondragstart="drag(event)">
-                                <h4 class="bg-info font-weight-bold mb-10">กรมอุทยานแห่งชาติ สัตว์ป่า และพันธุ์พืช</h4>
-                                <h5>วันที่เริ่ม <?php $date2 = "06-01-2024";
-                                            $date2 = str_replace('-', '/', $date2); echo date('d-m-Y',strtotime($date2 . "+$y days"));?></h5>
-                                <h5>วันที่สิ้นสุด</h5>
-                              </div>
-                              </div>
-                            <?php }?>
-                              <div class="color-border"></div>
-                            </div>
-                            <div class="item">
-                              <h3 class="mb-">เสร็จสิ้น</h3>
-                              <?php for($z=0;$z<5;$z++){?>
-                              <div class="row" style="margin-bottom: 2px">
-                              <div class="card">
-                                <h4 class="bg-success font-weight-bold mb-10">กรมป่าไม้</h4>
-                                <h5>วันที่เริ่ม <?php $date3 = "06-01-2024";
-                                            $date3 = str_replace('-', '/', $date3); echo date('d-m-Y',strtotime($date3 . "+$z days"));?></h5>
-                                <h5>วันที่สิ้นสุด</h5>
-                              </div>
-                              </div>
-                            <?php }?>
-                              <div class="color-border"></div>
-                            </div>
+                              <div class="container">
+            <div class="row">          
+            <div class="col-lg-4 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                 
+                  <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                            ต้องดำเนินการ
+                            </a>
+                            <?php foreach($job as $row){?>
+                                <a href="#" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
+                          <?php }?>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                            อยู่ระหว่างดำเนินการ
+                            </a>
+                            <?php foreach($job as $row){?>
+                                <a href="#" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
+                          <?php }?>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                            เสร็จสิ้น
+                            </a>
+                            <?php foreach($job as $row){?>
+                                <a href="#" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
+                          <?php }?>
+                    </div>
+                </div>
+              </div>
+            </div>
                           </div>
                         </div>
                        
@@ -362,7 +370,6 @@ $(function(){
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
-<<<<<<< Updated upstream
   <div class="modal_fade modal-dialog modal-md" id='jobadd' tabindex='-1' role='dialog' >
       <div class="modal-dialog">
         <div class="modal-content">
@@ -396,9 +403,6 @@ $(function(){
       </div>
   </div>
 
-=======
-  
->>>>>>> Stashed changes
   <?php $this->endSection();?>
 </body>
 
