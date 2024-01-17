@@ -13,10 +13,10 @@ class Home extends BaseController
     }
     public function showprocess(){
         $jobmodel = new jobModel();
-        $jobmodel  ->select('job_tb.job_id,process_name,process_start,process_end,detail, process_tb.process_status ')
+        $jobmodel  ->select('job_tb.job_id,job_tb.job_name,process_name,process_start,process_end,detail, process_tb.process_status ')
         ->join('process_tb','job_tb.job_id = process_tb.job_id','INNER')
-        ->where('job_tb.job_id = 1 AND delete_flag = 1' )
-        ->groupBy('job_tb.job_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
+        ->where('delete_flag = 1 and job_tb.division_id = 1' )
+        ->groupBy('job_tb.job_id,job_tb.job_name,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
         ->orderBy('process_start','desc');
         $process_rs = $jobmodel->findAll();
         $data = [
