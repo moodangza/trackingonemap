@@ -19,7 +19,8 @@
   <link rel="stylesheet" href="<?php echo base_url('spica_rs/css/style.css');?>">
   <!-- endinject -->
   <link rel="shortcut icon" href="spica_rs/images/favicon.png" />
-
+  <!-- action js -->
+  <script src="<?php echo base_url('spica_rs/js/action.js');?>"></script>
     <!-- base:js -->
     <script src="<?php echo base_url('spica_rs/vendors/js/vendor.bundle.base.js');?>"></script>
   <!-- endinject -->

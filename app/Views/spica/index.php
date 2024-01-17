@@ -68,7 +68,7 @@ $(function(){
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
-                      <button class="btn btn-success" id="intjob">เพิ่มหัวข้อ</button>
+                      <button class="btn btn-success addprocess" id="intjob">เพิ่มหัวข้อ</button>
                       <br>   <br>   <br>
 
                       <div class="row mb-3">
