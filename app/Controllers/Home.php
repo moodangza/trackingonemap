@@ -21,6 +21,7 @@ class Home extends BaseController
         $process_rs = $jobmodel->findAll();
         $data = [
             'process'=> $process_rs
+            
         ];
         return view('spica/page/showprocess',$data);
         
