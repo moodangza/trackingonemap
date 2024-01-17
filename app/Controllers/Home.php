@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\firstModel;
 use App\Models\jobModel;
+use App\Models\processModel;
 use Hermawan\DataTables\DataTable;
 
 class Home extends BaseController
@@ -13,15 +14,23 @@ class Home extends BaseController
     }
     public function showprocess(){
         $jobmodel = new jobModel();
-        $jobmodel  ->select('job_tb.job_id,job_tb.job_name,process_name,process_start,process_end,detail, process_tb.process_status ')
-        ->join('process_tb','job_tb.job_id = process_tb.job_id','INNER')
-        ->where('delete_flag = 1 and job_tb.division_id = 1' )
-        ->groupBy('job_tb.job_id,job_tb.job_name,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
-        ->orderBy('process_start','desc');
-        $process_rs = $jobmodel->findAll();
+        $jobmodel  ->select('job_tb.job_id,job_tb.job_name ')
+        ->where('job_tb.division_id = 1' )
+        ->groupBy('job_tb.job_id,job_tb.job_name ')
+        ->orderBy('job_id','asc');
+        $job_rs = $jobmodel->findAll();
+
+        $processmodel = new processModel();
+        $processmodel ->select('process_id,process_name,process_start,process_end,detail, process_tb.process_status ')
+        ->where('delete_flag = 1 and process_tb.job_id = 1' )
+        ->groupBy('process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
+        ->orderBy('process_start','asc');
+
+        $process_rs = $processmodel->findAll();
         $data = [
-            'process'=> $process_rs
-            
+            'job'=> $job_rs,
+            'process' => $process_rs
+
         ];
         return view('spica/page/showprocess',$data);
         
