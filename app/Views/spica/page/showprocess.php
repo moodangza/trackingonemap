@@ -23,6 +23,7 @@
               
                 <?php }?>
             </select>
+            &nbsp;&nbsp;<button id='addprocess' class="btn btn-success btn-sm">เพิ่มขั้นตอนการทำงาน</button>
             </div>
         <div class="container">
           <div class="row">
