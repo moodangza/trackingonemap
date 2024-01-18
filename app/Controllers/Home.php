@@ -11,7 +11,7 @@ class Home extends BaseController
     public function index()
     {
         $jobmodel1 = new jobModel();
-        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name ')
+        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status ')
         // ->where('job_tb.division_id = 1' )
         ->groupBy('job_tb.job_id,job_tb.job_name ')
         ->orderBy('job_id','asc');
@@ -19,6 +19,7 @@ class Home extends BaseController
         $job_rs1 = $jobmodel1->findAll();
         $return = [
             'job'=> $job_rs1
+
         ];
         return view('spica/index',$return);
     }

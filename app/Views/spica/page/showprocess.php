@@ -9,7 +9,7 @@
     <!-- partial:./partials/_sidebar.html -->
    <?php echo $this->include('templates/menu');?>
     <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
+    <div class="page-body-wrapper">
       <!-- partial:./partials/_navbar.html -->
      <?php echo $this->include('templates/navbar');?>
       <!-- partial -->
@@ -17,16 +17,18 @@
         <div class="content-wrapper">
             <div class="container">
             <select class="form-select" aria-label="Default select example">
-                <option selected>Open this select menu</option>
+                <option selected>เลือกหัวข้อ</option>
                 <?php foreach($job as $opj){?>
-                <option value="<?php echo $opj['job_id'];?>"><?php echo $opj['job_name'];?></option>
+                
+                  <option value="<?php echo $opj['job_id'];?>" ><?php echo $opj['job_name'];?></option>
               
                 <?php }?>
             </select>
             &nbsp;&nbsp;<button  class="btn btn-success btn-sm ">เพิ่มขั้นตอนการทำงาน</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#test" >
   Launch demo modal
 </button>
+
             </div>
         <div class="container">
           <div class="row">
@@ -110,6 +112,7 @@
           </div>
           <!-- row end -->
         </div>
+      
         <!-- content-wrapper ends -->
         <!-- partial:./partials/_footer.html -->
           <?php echo $this->include('templates/footer');?>
@@ -119,26 +122,7 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+
   <?php $this->endSection();?>
 </body>
 

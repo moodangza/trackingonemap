@@ -87,8 +87,10 @@ $(function(){
                             ต้องดำเนินการ
                             </a>
                             <?php foreach($job as $row){?>
+                              <?php if($row['status'] == 1){?>
                                 <a href="#" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
-                          <?php }?>
+                          <?php }
+                            }?>
                     </div>
                 </div>
               </div>
@@ -102,8 +104,10 @@ $(function(){
                             อยู่ระหว่างดำเนินการ
                             </a>
                             <?php foreach($job as $row){?>
+                              <?php if($row['status'] == 2){?>
                                 <a href="#" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
-                          <?php }?>
+                          <?php }
+                         }?>
                     </div>
                 </div>
               </div>
