@@ -16,7 +16,9 @@
       <div class="main-panel">
         <div class="content-wrapper">
             <div class="container">
-            <select class="form-select" aria-label="Default select example">
+            <div class="row row-cols-auto">
+              <div class="col">  
+            <select class="form-select selectjob" aria-label="Default select example" style="width:auto;">
                 <option selected>เลือกหัวข้อ</option>
                 <?php foreach($job as $opj){?>
                 
@@ -24,11 +26,14 @@
               
                 <?php }?>
             </select>
-            &nbsp;&nbsp;<button  class="btn btn-success btn-sm ">เพิ่มขั้นตอนการทำงาน</button>
+            </div>
+            <div class="col"><button  class="btn btn-success btn-sm ">เพิ่มขั้นตอนการทำงาน</button>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#test" >
   Launch demo modal
 </button>
-
+           
+            </div>
+            </div>
             </div>
         <div class="container">
           <div class="row">
@@ -40,9 +45,11 @@
                             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
                                 The current link item
                             </a>
-                            <?php foreach($process as $row){?>
-                                <a href="#" class="list-group-item list-group-item-action"><?php echo $row['process_name']?></a>
-                          <?php }?>
+                         <div id='processitem'>
+                          
+                         </div>
+                                <!-- <a href="#" id='processitem' class="list-group-item list-group-item-action"></a> -->
+                    
                     </div>
                 </div>
               </div>

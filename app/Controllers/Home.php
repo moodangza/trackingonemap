@@ -30,10 +30,11 @@ class Home extends BaseController
         ->groupBy('job_tb.job_id,job_tb.job_name ')
         ->orderBy('job_id','asc');
         $job_rs = $jobmodel->findAll();
-
+        $jobid1 = $this->request->getVar('jobid1');
         $processmodel = new processModel();
         $processmodel ->select('process_id,process_name,process_start,process_end,detail, process_tb.process_status ')
-        ->where('delete_flag = 1 and process_tb.job_id = 1' )
+        ->where('delete_flag', '1') 
+        ->where('process_tb.job_id', $jobid1 )
         ->groupBy('process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
         ->orderBy('process_start','asc');
 
@@ -43,8 +44,12 @@ class Home extends BaseController
             'process' => $process_rs
 
         ];
-        return view('spica/page/showprocess',$data);
-        
+        if($jobid1!=''){
+        header('Content-Type: application/json');
+         echo json_encode( $data );
+        }else{
+            return view('spica/page/showprocess',$data);
+        }
     }
     public function showdata(){
         
