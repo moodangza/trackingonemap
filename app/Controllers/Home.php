@@ -5,6 +5,7 @@ use App\Models\firstModel;
 use App\Models\jobModel;
 //use App\Models\approveModel;
 use App\Models\processModel;
+use App\Controllers\Date;
 use Hermawan\DataTables\DataTable;
 
 class Home extends BaseController
@@ -56,13 +57,19 @@ class Home extends BaseController
         $job_rs = $jobmodel->findAll();
         $jobid1 = $this->request->getVar('jobid1');
         $processmodel = new processModel();
-        $processmodel ->select('process_id,process_name,process_start,process_end,detail, process_tb.process_status ')
+        $processmodel ->select('process_id,process_name,process_start,process_end,detail, process_tb.process_status')
         ->where('delete_flag', '1') 
         ->where('process_tb.job_id', $jobid1 )
         ->groupBy('process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
         ->orderBy('process_start','asc');
 
         $process_rs = $processmodel->findAll();
+        $dateth = new Date();
+        foreach($process_rs as $key => $date_th){
+            $process_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
+            $process_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
+        }
+        
         $data = [
             'job'=> $job_rs,
             'process' => $process_rs

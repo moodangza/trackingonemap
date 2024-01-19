@@ -13,6 +13,7 @@
       <!-- partial:./partials/_navbar.html -->
      <?php echo $this->include('templates/navbar');?>
       <!-- partial -->
+      
       <div class="main-panel">
         <div class="content-wrapper">
             <div class="container">

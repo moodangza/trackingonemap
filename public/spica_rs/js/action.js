@@ -18,29 +18,16 @@
       success: function (data) {
         var a = JSON.parse(data);
         console.log(a.process)
+        $('#processitem').html('');
         a.process.forEach(element => {
-          console.log(element)
-            $('#processitem').html('<p> Name: ' + element.process_name + '</p>');
-                $('#processitem').append('<p>Age : ' + element.process_start+ '</p>');
-                $('#processitem').append('<p> Sex: ' + element.process_end+ '</p>');  
+            var color = element.process_status;
+            
+            $('#processitem').append('<a href="#" id="'+element.process_id+'" class="list-group-item list-group-item-action">'+
+            '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end + '</a>');
+              
+                
         });
-      //   $.ajax({
-      //     method:'POST',
-      //     contentType:'application/json',
-      //     url:'home/get',
-      //     data: JSON.stringify({"process_id": "process_id", "process_name": "process_name", "data": "detail"}),
-      //     success:function(response){
-      //       $('#processitem').html('<p> Name: ' + data.response.process_name + '</p>');
-      //           $('#processitem').append('<p>Age : ' + data.process_start+ '</p>');
-      //           $('#processitem').append('<p> Sex: ' + data.process_end+ '</p>');
-      //     }
     
-      //  });
-      //   $.getJSON('home.json', function(data) {
-      //     $('#processitem').html('<p> Name: ' + data.process_name + '</p>');
-      //     $('#processitem').append('<p>Age : ' + data.process_start+ '</p>');
-      //     $('#processitem').append('<p> Sex: ' + data.process_end+ '</p>');
-      //  });
   
       }
   });     
