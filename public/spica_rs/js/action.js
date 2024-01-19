@@ -20,9 +20,8 @@
         console.log(a.process)
         $('#processitem').html('');
         a.process.forEach(element => {
-            var color = element.process_status;
             
-            $('#processitem').append('<a href="#" id="'+element.process_id+'" class="list-group-item list-group-item-action">'+
+            $('#processitem').append('<a href="#" id="process'+element.process_id+'" class="list-group-item list-group-item-action process_list">'+
             '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end + '</a>');
               
                 
