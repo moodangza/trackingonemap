@@ -121,7 +121,7 @@ $(function(){
                             รออนุมัติ
                             </a>
                             <?php foreach($job as $row){?>
-                              <?php if($row['status']==2){?>
+                              <?php if($row['job_finish']!='' && $row['status']==2){?>
                                 <a href="#" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
                           <?php }
                         }?>
