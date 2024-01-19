@@ -7,7 +7,8 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('showdata','Home::showdata');
-$routes->get('showjob','Home::showjob');
+$routes->add('showjob','Home::showjob');
 $routes->get('showprocess','Home::showprocess');
+// $routes->add('job/get', 'Home::showjob');
 $routes->add('home/get', 'Home::showprocess');
 

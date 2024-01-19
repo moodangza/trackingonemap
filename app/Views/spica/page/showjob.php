@@ -69,6 +69,8 @@ $(function(){
                   <div class="card">
                     <div class="card-body container">
                       <button class="btn btn-success" id="intjob">เพิ่มหัวข้อ</button>
+                      <button class="btn btn-openButton" onclick="openForm()"><strong>Open Form</strong></button>
+                      <!-- <button style="background-color:green; " class="popup" onclick="myFunction()" id="intjob" >เพื่มหัวข้อ</button> -->
                       <br>   <br>   <br>
 
                       <!-- <div class="row mb-3">
@@ -384,7 +386,7 @@ $(function(){
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
-  <div class="modal_fade modal-dialog modal-md" id='jobadd' tabindex='-1' role='dialog' >
+  <!-- <div class="modal_fade modal-dialog modal-md" id='jobadd' tabindex='-1' role='dialog' >
       <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -415,7 +417,7 @@ $(function(){
             </div>
         </div>
       </div>
-  </div>
+  </div> -->
 
   <?php $this->endSection();?>
 </body>

@@ -46,6 +46,8 @@ class Home extends BaseController
             'job'=> $job_rs1
             // 'approve'=> $approve_rs
         ];
+        // header('Content-Type: application/json');
+        //  json_encode( $return );
         return view('spica/page/showjob',$return);
     }
     public function showprocess(){
