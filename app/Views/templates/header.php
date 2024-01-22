@@ -7,7 +7,7 @@
   <title>Spica Admin</title>
   <!-- base:css -->
   <link rel="stylesheet" href="<?php echo base_url('spica_rs/vendors/mdi/css/materialdesignicons.min.css');?>">
-  <link rel="stylesheet" href="<?php echo base_url('spica_rs/vendors/css/vendor.bundle.base.css');?>">
+  <!-- <link rel="stylesheet" href="<?php //echo base_url('spica_rs/vendors/css/vendor.bundle.base.css');?>"> -->
   <!-- endinject -->
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
@@ -45,7 +45,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js" type="text/javascript"></script>
     <!-- jQuery Modal -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" />    
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.2/jquery.modal.min.css" />     -->
 
     <link href="assets/bootstrap-datepicker-thai/css/datepicker.css" rel="stylesheet">
     <script type="text/javascript" src="bootstrap-datepicker-thai/js/bootstrap-datepicker.js"></script>

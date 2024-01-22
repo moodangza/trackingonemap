@@ -14145,14 +14145,14 @@ a.close.disabled {
 
 .modal {
   position: absolute;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  width: 500px;
+  height: 400px;
   top: 50%;
   left: 50%;
-  z-index: 1050;
-  display: none;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  outline: 0;
+  transform: translate(-50%, -50%);
+  /* additional styles for the modal */
 }
 
 .modal-dialog {
