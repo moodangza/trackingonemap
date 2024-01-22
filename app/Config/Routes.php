@@ -12,4 +12,5 @@ $routes->get('showprocess','Home::showprocess');
 $routes->get('addprocess','Home::addprocess');
 // $routes->add('job/get', 'Home::showjob');
 $routes->add('home/get', 'Home::showprocess');
-
+$routes->get('showjobselect', 'Home::showjobselect');
+$routes->get('showjobselect/(:num)', 'Home::showjobselect/$1');

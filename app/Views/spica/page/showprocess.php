@@ -39,7 +39,7 @@
                 <option selected>เลือกหัวข้อ</option>
                 <?php foreach($job as $opj){?>
                 
-                  <option value="<?php echo $opj['job_id'];?>" ><?php echo $opj['job_name'];?></option>
+                  <option value="<?php echo $opj['job_id'];?>" <?php echo (isset($job_id) && $opj['job_id']==$job_id) ?'selected': '' ?>><?php echo $opj['job_name'];?></option>
               
                 <?php }?>
             </select>
@@ -167,7 +167,13 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
-
+  <script>
+  <?php 
+if ($job_id){?>
+jobselect(<?php echo $job_id;?>)
+<?php }  
+  ?>
+  </script>
   <?php $this->endSection();?>
 </body>
 
