@@ -54,7 +54,7 @@ return false;
         $('#processitem').html('');
         a.process.forEach(element => {
             
-            $('#processitem').append('<a href="#" id="process'+element.process_id+'" class="list-group-item list-group-item-action process_list">'+
+            $('#processitem').append('<a href="#" value="'+element.process_id+'" id="'+element.process_id+'" class="list-group-item list-group-item-action process_list_edit" >'+
             '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end + '</a>');
               
                 
@@ -64,3 +64,26 @@ return false;
       }
   });     
   } );
+  $(document).on("click",".process_list_edit",function(a){
+    var id = a.target.id;
+  
+    alert(id);
+    // return false;
+    processedit(id);
+  });
+  function processedit(id){
+    $.get(`/showprocess/${id}/edit`, function(data){
+      if(data.error){
+        Swal.fire(data.error,'','error');
+      }else{
+        swalLoading(0);
+        $("#myModal .modal").html(data);
+        $("#myModal").modal('show');
+      }
+    })
+    .fail(function(res){
+      swalLoading(0);
+      Swal.fire('มีข้อผิดพลาด','กรุณาลองใหม่','error')
+      console.log(res);
+    })
+  }
