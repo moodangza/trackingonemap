@@ -13,7 +13,23 @@
       <!-- partial:./partials/_navbar.html -->
      <?php echo $this->include('templates/navbar');?>
       <!-- partial -->
-      
+      <div class="modal fade" id="test" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" rel="modal:close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
       <div class="main-panel">
         <div class="content-wrapper">
             <div class="container">
@@ -28,11 +44,10 @@
                 <?php }?>
             </select>
             </div>
-            <div class="col"><button  class="btn btn-success btn-sm ">เพิ่มขั้นตอนการทำงาน</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#test" >
-  Launch demo modal
-</button>
-           
+            <div class="col">
+              <button data-toggle="modal" data-target="#test" class="btn btn-success btn-sm ">
+                เพิ่มขั้นตอนการทำงาน
+              </button>
             </div>
             </div>
             </div>
