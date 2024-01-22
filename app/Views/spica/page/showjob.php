@@ -68,8 +68,41 @@ $(function(){
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body container">
-                      <button class="btn btn-success" id="intjob">เพิ่มหัวข้อ</button>
-                      <button class="btn btn-openButton" onclick="openForm()"><strong>Open Form</strong></button>
+                      <!-- <button class="btn btn-success" id="intjob" onclick="openForm()">เพิ่มหัวข้อ</button> -->
+                      <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">เพิ่มหัวข้อ</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">เพิ่มหัวข้อ</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <div class="col-md-12">
+        <label for="inputjob" class="form-label">ชื่อหัวข้อ</label>
+        <input type="text" class="form-control" id="job_name" name="job_name">
+        </div>
+        <div class="col-md-6">
+        <label for="jobstart" class="form-label">วันที่เริ่ม</label>
+        <input type="text" class="form-control" id="date_start" name="job_start">
+        </div>
+        <div class="col-6">
+        <label for="jobend" class="form-label">วันที่สิ้นสุด</label>
+        <input type="text" class="form-control" id="date_end" name="job_end">
+        </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">บันทึก</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+
+      </div>
+    </div>
+  </div>
+</div>
                       <!-- <button style="background-color:green; " class="popup" onclick="myFunction()" id="intjob" >เพื่มหัวข้อ</button> -->
                       <br>   <br>   <br>
 
