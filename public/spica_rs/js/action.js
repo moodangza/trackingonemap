@@ -41,7 +41,7 @@ return false;
     $( "select option:selected" ).each( function() {
       jobid += $( this ).val() + " ";
     } );
-    alert( jobid );
+    // alert( jobid );
     $.ajax(
       {
       url: "home/get",
@@ -76,14 +76,14 @@ return false;
       if(data.error){
         Swal.fire(data.error,'','error');
       }else{
-        swalLoading(0);
+        // swalLoading(0);
         $("#myModal .modal").html(data);
         $("#myModal").modal('show');
       }
     })
     .fail(function(res){
-      swalLoading(0);
-      Swal.fire('มีข้อผิดพลาด','กรุณาลองใหม่','error')
-      console.log(res);
+      // swalLoading(0);
+      $("#myModal .modal").html(data);
+        $("#myModal").modal('show');
     })
   }
