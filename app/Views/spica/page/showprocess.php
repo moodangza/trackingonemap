@@ -13,7 +13,23 @@
       <!-- partial:./partials/_navbar.html -->
      <?php echo $this->include('templates/navbar');?>
       <!-- partial -->
-      
+      <style>
+          .modal {
+         position: absolute;
+         background-color: #ffffff;
+         border: 1px solid #cccccc;
+         width: 500px;
+         height: 400px;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         /* additional styles for the modal */
+      }
+  
+      </style>
+      <div class="modal fade" id="modaladd" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
+</div>
       <div class="main-panel">
         <div class="content-wrapper">
             <div class="container">
@@ -28,11 +44,32 @@
                 <?php }?>
             </select>
             </div>
-            <div class="col"><button  class="btn btn-success btn-sm ">เพิ่มขั้นตอนการทำงาน</button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#test" >
-  Launch demo modal
-</button>
-           
+            <div class="col">
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">เพิ่มขั้นตอนการทำงาน</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+              <button data-toggle="modal"  class="btn btn-success btn-sm addprocess">
+                เพิ่มขั้นตอนการทำงาน
+              </button>
             </div>
             </div>
             </div>
