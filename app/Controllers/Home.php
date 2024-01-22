@@ -101,6 +101,36 @@ class Home extends BaseController
         return view('spica/page/showdata',$return);
         
     }
-  
+    public function edit($process_id)
+    {
+        
+      $SysdataAgendaTypeModel = new SysdataAgendaTypeModel();
+      $agenda_types = $SysdataAgendaTypeModel
+        ->orderBy('agenda_type_id')
+        ->findAll();
+        
+      $AgendaModel = new AgendaModel();
+      $agenda = $AgendaModel
+        ->where('agenda_id', $agenda_id)
+        ->first();
+
+      // if($agenda['ref_agenda_type_id'] == '' || $agenda['ref_agenda_type_id'] == null)
+        array_unshift($agenda_types, ['agenda_type_id' => '', 'agenda_type_name' => 'วาระ']);
+
+      $AttachmentModel = new AttachmentModel();
+      $attachments = $AttachmentModel
+          ->where('ref_agenda_id', $agenda_id)
+          ->where('deleted_at', NULL)
+          ->orderBy('attachment_id')
+          ->findAll();
+
+      $return = [
+        'title' => 'แก้ไข',
+        'agenda_types' => $agenda_types,
+        'agenda' => $agenda,
+        'attachments' => $attachments,
+      ];
+      return view('meeting/agenda/form', $return);
+    }
     
 }

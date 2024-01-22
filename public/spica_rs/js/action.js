@@ -83,7 +83,7 @@ return false;
     })
     .fail(function(res){
       // swalLoading(0);
-      $("#myModal .modal").html(data);
-        $("#myModal").modal('show');
+      Swal.fire('มีข้อผิดพลาด','กรุณาลองใหม่','error')
+      console.log(res);
     })
   }

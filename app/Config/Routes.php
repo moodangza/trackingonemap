@@ -13,3 +13,4 @@ $routes->get('addprocess','Home::addprocess');
 // $routes->add('job/get', 'Home::showjob');
 $routes->add('home/get', 'Home::showprocess');
 
+$routes->get('home/get/(:num)/edit', 'AgendaController::edit/$1');
