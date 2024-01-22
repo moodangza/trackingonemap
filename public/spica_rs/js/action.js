@@ -1,4 +1,19 @@
+// //showjob
+// $.ajax({
+//     url: "job/get",
+//     type: "post",
+//     datatype: "text",
+//     success: function (data) {
+//     var job = JSON.parse(data); 
+//     console.log(job);
+// // //a.job.forEach(Element => {
+// //     var job = element
+// // })
+// }
 
+// })
+
+// showprocess
   $(document).on('click', '.addprocess', function() {
     console.log("fdfmnjkdsbjhdbsj");
     $('#test').modal('show');
