@@ -77,12 +77,25 @@ class Home extends BaseController
             'process' => $process_rs
 
         ];
-        if($jobid1!=''){
         header('Content-Type: application/json');
          echo json_encode( $data );
-        }else{
-            return view('spica/page/showprocess',$data);
-        }
+        
+    }
+
+    public function showjobselect($job_id=null)
+    {
+        $jobmodel1 = new jobModel();
+        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,job_finish')
+        //->where('job_tb.job_id', $job_id )
+        ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish')
+        ->orderBy('job_id','asc');
+        $job_rs1 = $jobmodel1->findAll();
+        $return = [
+            'job'=> $job_rs1,
+            'job_id'=> $job_id
+        ];
+
+        return view('spica/page/showprocess',$return);
     }
     public function showdata(){
         

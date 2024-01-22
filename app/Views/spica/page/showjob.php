@@ -52,6 +52,7 @@ $(function(){
             });
         });
 </script>
+
 <style>
           .modal {
          position: absolute;
@@ -163,7 +164,7 @@ $(function(){
                             </a>
                             <?php foreach($job as $row){?>
                               <?php if($row['status']==1){?>
-                                <a href="#" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
+                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
                           <?php } 
                         }?>
                     </div>
@@ -180,7 +181,7 @@ $(function(){
                             </a>
                             <?php foreach($job as $row){?>
                               <?php if($row['status']==2){?>
-                                <a href="#" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
+                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
                           <?php }
                         }?>
                     </div>
@@ -197,7 +198,7 @@ $(function(){
                             </a>
                             <?php foreach($job as $row){?>
                               <?php if($row['job_finish']!='' && $row['status']==2){?>
-                                <a href="#" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
+                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
                           <?php }
                         }?>
                     </div>
@@ -214,7 +215,7 @@ $(function(){
                             </a>
                             <?php foreach($job as $row){?>
                               <?php if($row['status']==3){?>
-                                <a href="#" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
+                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
                           <?php }
                         }?>
                     </div>
