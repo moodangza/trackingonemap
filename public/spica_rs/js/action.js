@@ -23,11 +23,15 @@ function jobselect(jobid){
       var a = JSON.parse(data);
       console.log(a.process)
       $('#processitem').html('');
+      $('#addjob_id').html('');
+      $('#addjob_id').append('<input class="addprocessid" type="text" value="'+a.process[0]['job_id']+'">');
+      $("#urladdprocess").attr("href", "/formaddprocess/"+a.process[0]['job_id']+""); 
+       
       a.process.forEach(element => {
-          
+       
           $('#processitem').append('<a href="#" id="process'+element.process_id+'" class="list-group-item list-group-item-action process_list">'+
           '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end + '</a>');
-            
+           
               
       });
   
@@ -65,5 +69,22 @@ return false;
     } );
     jobselect(jobid)    
   } );
+$(document).on("click",".addprocess",function(){
+    let job_idprocess = $('.addprocessid').val();
+    alert(job_idprocess);
+    addprocess(job_idprocess);
+});
+function addprocess(job_idprocess){
+  $.ajax(
+    {
+    url: "/formaddprocess/job",
+    type: "post",
+    dataType: 'text',
+    data: { job_id: job_idprocess},
+    success: function (data) {
+    
 
+    }
+});   
+}
  

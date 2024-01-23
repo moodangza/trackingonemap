@@ -36,7 +36,11 @@ class Home extends BaseController
         ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish')
         ->orderBy('job_id','asc');
         $job_rs1 = $jobmodel1->findAll();
-
+        $dateth = new Date();
+        foreach($job_rs1 as $key => $date_th){
+            $job_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
+            $job_rs1[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
+        }
         // $approve = new $approveModel();
         // $approve ->select ('approve_id,approve_tb.status')
         // ->join('job_name','job_tb.job_id = approve_tb.job_id','left');
@@ -59,10 +63,10 @@ class Home extends BaseController
         $job_rs = $jobmodel->findAll();
         $jobid1 = $this->request->getVar('jobid1');
         $processmodel = new processModel();
-        $processmodel ->select('process_id,process_name,process_start,process_end,detail, process_tb.process_status')
+        $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status')
         ->where('delete_flag', '1') 
         ->where('process_tb.job_id', $jobid1 )
-        ->groupBy('process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
+        ->groupBy('process_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
         ->orderBy('process_start','asc');
 
         $process_rs = $processmodel->findAll();
@@ -98,12 +102,12 @@ class Home extends BaseController
         return view('spica/page/showprocess',$return);
     }
 
-    public function fromaddprocess(){
+    public function formaddprocess($job_id){
         $jobmodel = new jobModel();
-        $jobmodel  ->select('job_tb.job_id,job_tb.job_name ')
+        $jobmodel  ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status ')
         ->where('job_tb.division_id ', 1)
         // $jobid1 = $this->request->getVar('jobid1');
-        ->where('job_tb.job_id', 1 )
+        ->where('job_tb.job_id', $job_id )
         ->groupBy('job_tb.job_id,job_tb.job_name ')
         ->orderBy('job_id','asc');
         $job_rs = $jobmodel->findAll();
@@ -115,9 +119,8 @@ class Home extends BaseController
         
         $data = [
             'job'=> $job_rs,
-            
-
         ];
+        return view('spica/page/formaddprocess',$data);
     }
     // public function edit($process_id)
     // {
