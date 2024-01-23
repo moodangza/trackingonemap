@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\firstModel;
 use App\Models\jobModel;
+use App\Models\addjobModel;
 //use App\Models\approveModel;
 use App\Models\processModel;
 use App\Controllers\Date;
@@ -29,14 +30,18 @@ class Home extends BaseController
     public function showjob()
     {
         $jobmodel1 = new jobModel();
-        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,job_finish')
+        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,job_start,job_end,job_finish')
         // ->where('job_tb.division_id = 1' )
         //->where('job_finish' != NULL )
         //->where('status' == 2 )
-        ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish')
+        ->groupBy('job_tb.job_id,job_tb.job_name,status,job_start,job_end,job_finish')
         ->orderBy('job_id','asc');
         $job_rs1 = $jobmodel1->findAll();
-
+        $dateth = new Date();
+        foreach($job_rs1 as $key => $date_th){
+            $job_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
+            $job_rs1[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
+        }
         // $approve = new $approveModel();
         // $approve ->select ('approve_id,approve_tb.status')
         // ->join('job_name','job_tb.job_id = approve_tb.job_id','left');
@@ -97,6 +102,17 @@ class Home extends BaseController
 
         return view('spica/page/showprocess',$return);
     }
+
+    // เพิ่มหัวข้อ
+    // public function addjob()
+    // {
+    //     $addjobmodel = new addjobModel();
+    //     $addjobmodel -> insert('job_name','job_start','job_end')
+    //     $addjob_rs = $addjobmodal -> insert($job_tb);
+    //     $return = [
+
+    //     ]
+    // }
     public function showdata(){
         
         $firstmodel = new firstModel();

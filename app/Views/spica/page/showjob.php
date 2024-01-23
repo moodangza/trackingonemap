@@ -59,7 +59,7 @@ $(function(){
          background-color: #ffffff;
          border: 1px solid #cccccc;
          width: 500px;
-         height: 600px;
+         height: 500px;
          top: 50%;
          left: 50%;
          transform: translate(-50%, -50%);
@@ -164,7 +164,10 @@ $(function(){
                             </a>
                             <?php foreach($job as $row){?>
                               <?php if($row['status']==1){?>
-                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
+                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action">
+                                <?php echo $row['job_name']?> <br> วันที่เริ่ม :
+                                <?php echo $row['job_start']?> <br> วันที่สิ้นสุด :
+                                <?php echo $row['job_end']?></a>
                           <?php } 
                         }?>
                     </div>
@@ -177,14 +180,17 @@ $(function(){
                 <div class="card-body">
                   <div class="list-group">
                             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                            อยู่ระหว่างดำเนินการdgv dg
+                            อยู่ระหว่างดำเนินการ
                             </a>
                             <?php foreach($job as $row){?>
                               <?php if($row['status']==2){?>
-                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
+                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action">
+                                <?php echo $row['job_name']?> <br> วันที่เริ่ม :
+                                <?php echo $row['job_start']?> <br> วันที่สิ้นสุด :
+                                <?php echo $row['job_end']?></a>
                           <?php }
                         }?>
-                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -198,7 +204,10 @@ $(function(){
                             </a>
                             <?php foreach($job as $row){?>
                               <?php if($row['job_finish']!='' && $row['status']==2){?>
-                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
+                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action">
+                                <?php echo $row['job_name']?> <br> วันที่เริ่ม :
+                                <?php echo $row['job_start']?> <br> วันที่สิ้นสุด :
+                                <?php echo $row['job_end']?> </a>
                           <?php }
                         }?>
                     </div>
