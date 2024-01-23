@@ -177,7 +177,7 @@ $(function(){
                 <div class="card-body">
                   <div class="list-group">
                             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                            อยู่ระหว่างดำเนินการ
+                            อยู่ระหว่างดำเนินการdgv dg
                             </a>
                             <?php foreach($job as $row){?>
                               <?php if($row['status']==2){?>
