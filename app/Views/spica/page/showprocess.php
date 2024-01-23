@@ -45,7 +45,7 @@
             </select>
             </div>
             <div class="col">
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+            <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -58,7 +58,7 @@
        
       </div>
       <div class="modal-body">
-      <h4 class="modal-title">เพิ่มขั้นตอนการทำงาน</h4>
+      <h4  class="modal-title">เพิ่มขั้นตอนการทำงาน</h4>
       <div class="row">
                   <div class="col">
                     aaaa

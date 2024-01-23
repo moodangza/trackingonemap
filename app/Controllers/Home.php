@@ -97,53 +97,58 @@ class Home extends BaseController
 
         return view('spica/page/showprocess',$return);
     }
-    public function showdata(){
+
+    public function fromaddprocess(){
+        $jobmodel = new jobModel();
+        $jobmodel  ->select('job_tb.job_id,job_tb.job_name ')
+        ->where('job_tb.division_id ', 1)
+        // $jobid1 = $this->request->getVar('jobid1');
+        ->where('job_tb.job_id', 1 )
+        ->groupBy('job_tb.job_id,job_tb.job_name ')
+        ->orderBy('job_id','asc');
+        $job_rs = $jobmodel->findAll();
+        $dateth = new Date();
+        foreach($job_rs as $key => $date_th){
+            $job_rs[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
+            $job_rs[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
+        }
         
-        $firstmodel = new firstModel();
-        $firstmodel 
-        ->select('orders.OrderID AS id,products.ProductID,Quantity,OrderDate,ProductName,Unit,Price')
-        ->join('Order_details','Orders.OrderID = Order_details.OrderID','left')
-        ->join('Products','Order_details.ProductID = Products.ProductID','left')
-        ->where("OrderDate Between '2022-07-01' AND '2022-08-30'")
-        
-        ->orderBy('orders.OrderID ASC');
-        $product = $firstmodel->findAll();
-        $return = [
-            'product' => $product
+        $data = [
+            'job'=> $job_rs,
+            
+
         ];
-        return view('spica/page/showdata',$return);
-        
     }
-    public function edit($process_id)
-    {
+    // public function edit($process_id)
+    // {
         
-      $SysdataAgendaTypeModel = new SysdataAgendaTypeModel();
-      $agenda_types = $SysdataAgendaTypeModel
-        ->orderBy('agenda_type_id')
-        ->findAll();
+    //   $SysdataAgendaTypeModel = new SysdataAgendaTypeModel();
+    //   $agenda_types = $SysdataAgendaTypeModel
+    //     ->orderBy('agenda_type_id')
+    //     ->findAll();
         
-      $AgendaModel = new AgendaModel();
-      $agenda = $AgendaModel
-        ->where('agenda_id', $agenda_id)
-        ->first();
+    //   $AgendaModel = new AgendaModel();
+    //   $agenda = $AgendaModel
+    //     ->where('agenda_id', $agenda_id)
+    //     ->first();
 
-      // if($agenda['ref_agenda_type_id'] == '' || $agenda['ref_agenda_type_id'] == null)
-        array_unshift($agenda_types, ['agenda_type_id' => '', 'agenda_type_name' => 'วาระ']);
+    //   // if($agenda['ref_agenda_type_id'] == '' || $agenda['ref_agenda_type_id'] == null)
+    //     array_unshift($agenda_types, ['agenda_type_id' => '', 'agenda_type_name' => 'วาระ']);
 
-      $AttachmentModel = new AttachmentModel();
-      $attachments = $AttachmentModel
-          ->where('ref_agenda_id', $agenda_id)
-          ->where('deleted_at', NULL)
-          ->orderBy('attachment_id')
-          ->findAll();
+    //   $AttachmentModel = new AttachmentModel();
+    //   $attachments = $AttachmentModel
+    //       ->where('ref_agenda_id', $agenda_id)
+    //       ->where('deleted_at', NULL)
+    //       ->orderBy('attachment_id')
+    //       ->findAll();
 
-      $return = [
-        'title' => 'แก้ไข',
-        'agenda_types' => $agenda_types,
-        'agenda' => $agenda,
-        'attachments' => $attachments,
-      ];
-      return view('meeting/agenda/form', $return);
-    }
+    //   $return = [
+    //     'title' => 'แก้ไข',
+    //     'agenda_types' => $agenda_types,
+    //     'agenda' => $agenda,
+    //     'attachments' => $attachments,
+    //   ];
+    //   return view('meeting/agenda/form', $return);
+    // }
     
 }
