@@ -29,7 +29,7 @@ class Home extends BaseController
     public function showjob()
     {
         $jobmodel1 = new jobModel();
-        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,job_finish')
+        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status,job_finish')
         // ->where('job_tb.division_id = 1' )
         //->where('job_finish' != NULL )
         //->where('status' == 2 )
@@ -122,7 +122,23 @@ class Home extends BaseController
         ];
         return view('spica/page/formaddprocess',$data);
     }
+
+    // เพิ่มหัวข้อ
+    public function addjob()
+    {
+        $addjobmodel1 = new jobModel();
+        $data = array('job_name'=>$_POST['jobname'],
+        'job_start'=>$_POST['jobstart'],
+        'job_end'=>$_POST['jobend'],
+        'status'=>'1');
+        $addjobmodel1 -> insert($data);
+        // $return = [
+
+        // ];
+    }
+
 }
+
     // public function edit($process_id)
     // {
         

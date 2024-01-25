@@ -28,8 +28,8 @@ function jobselect(jobid){
 
 
 $(document).ready(function() {
-  $('#s_date,#e_date').datepicker({
-    language:'th-th',
+  $('#s_date,#e_date,#job_start,#job_end').datepicker({
+    language:'th',
     format: 'dd/mm/yyyy',
     todayBtn: 'linked',
     todayHighlight: true,
