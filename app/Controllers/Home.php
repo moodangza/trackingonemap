@@ -136,7 +136,7 @@ class Home extends BaseController
 
         // ];
     }
-    public function addprocess()
+    public function insertprocess()
     {
         $addprocessmodel = new processModel();
         $data = array('job_id'=>$_POST['job_id'],

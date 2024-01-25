@@ -152,7 +152,7 @@
                             </div>
                             <div class="row">
                                     <div class="col-12 text-center">
-                                          <button class="btn btn-success insertprocess" onclick="insertprocess()">บันทึก</button>
+                                          <button class="btn btn-success insertprocess" >บันทึก</button>
                                     </div>
                             </div>
                           

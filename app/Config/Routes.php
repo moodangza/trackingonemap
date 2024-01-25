@@ -17,4 +17,4 @@ $routes->get('showjobselect/(:num)', 'Home::showjobselect/$1');
 $routes->get('formaddprocess', 'Home::formaddprocess');
 $routes->get('formaddprocess/(:num)', 'Home::formaddprocess/$1');
 $routes->post('addjob', 'Home::addjob');
-$routes->post('addprocess', 'Home::addprocess');
+$routes->post('insertprocess', 'Home::insertprocess');

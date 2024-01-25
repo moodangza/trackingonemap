@@ -34,8 +34,12 @@ function jobselect(jobid){
     }
 });   
 }
-
-function addprocess(){
+$(document).on("click",".insertprocess",function(){
+  // let job_idprocess = $('.addprocessid').val();
+  // alert(job_idprocess);
+  insertprocess();
+});
+function insertprocess(){
   let job_id = $('#job_id').val();
   let process_name = $('#process_name').val();
   let processstart = $('#s_date').val();
@@ -46,7 +50,7 @@ function addprocess(){
   let rs_end = p_s_end[2]+'-'+p_s_end[1]+'-'+p_s_end[0];
   $.ajax(
     {
-    url: "addprocess",
+    url: "/insertprocess",
     type: "post",
     dataType: 'text',
     data: { job_id:job_id, process_name: process_name,process_start: rs_start,process_end: rs_end},
