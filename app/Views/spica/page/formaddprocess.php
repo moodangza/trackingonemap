@@ -13,16 +13,7 @@
       <!-- partial:./partials/_navbar.html -->
      <?php echo $this->include('templates/navbar');?>
  
-<script>
- 
-$(function(){
-            $("#date_start,#date_end").datepicker({
-                language:'th-th',
-                format:'dd/mm/yyyy',
-                autoclose: true
-            });
-        });
-</script>
+
 <style>
 #jobadd {
   width: 750px;

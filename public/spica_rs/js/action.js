@@ -35,7 +35,7 @@ function jobselect(jobid){
 });   
 }
 
-function insertprocess(){
+function addprocess(){
   let job_id = $('#job_id').val();
   let process_name = $('#process_name').val();
   let processstart = $('#s_date').val();
