@@ -5,7 +5,7 @@ class jobModel extends Model{
         // protected $DBGroup      = 'project';
         protected $table        = 'job_tb';
         protected $primaryKey   = 'job_id';
-        protected $useAutoIncrement = false;
+        protected $useAutoIncrement = true;
         protected $returnType       = 'array';
         protected $useSoftDeletes   = false;
         protected $protectFields    = false;
