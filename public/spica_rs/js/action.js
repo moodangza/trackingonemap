@@ -19,7 +19,6 @@ function jobselect(jobid){
           $('#processitem').append('<a href="#" id="process'+element.process_id+'" class="list-group-item list-group-item-action process_list">'+
           '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end + '</a>');
            
-              
       });
   
 
@@ -27,12 +26,15 @@ function jobselect(jobid){
 });   
 }
 
-$(function(){
-    $(".datepicker").datepicker({
-        language:'th-th',
-        format:'dd/mm/yyyy',
-        autoclose: true
-    });
+
+$(document).ready(function() {
+  $('#s_date,#e_date').datepicker({
+    language:'th-th',
+    format: 'dd/mm/yyyy',
+    todayBtn: 'linked',
+    todayHighlight: true,
+    autoclose: true
+  });
 });
 
 // showprocess
@@ -61,7 +63,7 @@ return false;
 
   $(document).on( "change",".selectjob", function() {
     $( "select option:selected" ).each( function() {
-      jobid += $( this ).val() + " ";
+      jobid = $(this).val() + " ";
     } );
     jobselect(jobid)    
   

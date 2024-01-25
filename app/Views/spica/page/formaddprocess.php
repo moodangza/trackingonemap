@@ -98,7 +98,7 @@ $(function(){
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-4"> ขั้นตอนการทำงาน</label>
                                         <div class="col-md-8">
-                                            <input type="text" name="process_name" class="form-control" placeholder="เรื่อง" value="" required="">
+                                            <input type="text" id="process_name" name="process_name" class="form-control" placeholder="เรื่อง" value="" required="">
 
                                         </div>
                                     </div>
@@ -113,9 +113,9 @@ $(function(){
                                         <label class="col-form-label col-md-4">วันที่เริ่มขั้นตอนการทำงาน</label>
                                         <div class="col-md-8">
                                             <div class="input-group date">
-                                                <input type="text" id="s_date" class="form-control datepicker create-s-date" name="s_date" data-old="" value="">
+                                                <input type="text" id="s_date" readonly="readonly" class="form-control datepicker create-s-date" name="s_date" data-old="" value="">
                                                 <div class="input-group-append">
-                                                    <div class="input-group-text toggle-datepicker" data-toggle="#create-s-date"><i class="fa fa-calendar"></i>
+                                                    <div required class="input-group-text toggle-datepicker" data-toggle="#create-s-date"><i class="fa fa-calendar"></i>
                                                     </div>
                                                 </div>
 
@@ -134,9 +134,9 @@ $(function(){
                                         <label class="col-form-label col-md-4">จนถึงวันที่</label>
                                         <div class="col-md-8">
                                             <div class="input-group date">
-                                                <input type="text" id="e_date" class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="">
+                                                <input type="text" required readonly="readonly" id="e_date" class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="">
                                                 <div class="input-group-append">
-                                                    <div class="input-group-text toggle-datepicker" data-toggle="#create-e-date"><i class="fa fa-calendar"></i>
+                                                    <div  class="input-group-text toggle-datepicker" data-toggle="#create-e-date"><i class="fa fa-calendar"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -160,7 +160,9 @@ $(function(){
                                     </div>
                             </div>
                             <div class="row">
-
+                                    <div class="col-12 text-center">
+                                          <button class="btn btn-success insertprocess">บันทึก</button>
+                                    </div>
                             </div>
                           
                             
