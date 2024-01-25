@@ -1,3 +1,12 @@
+$(document).ready(function() {
+  $('#s_date,#e_date,#job_start,#job_end').datepicker({
+    language:'th',
+    format: 'dd/mm/yyyy',
+    todayBtn: 'linked',
+    todayHighlight: true,
+    autoclose: true
+  });
+});
 
 function jobselect(jobid){
   $.ajax(
@@ -26,17 +35,6 @@ function jobselect(jobid){
 });   
 }
 
-
-$(document).ready(function() {
-  $('#s_date,#e_date,#job_start,#job_end').datepicker({
-    language:'th',
-    format: 'dd/mm/yyyy',
-    todayBtn: 'linked',
-    todayHighlight: true,
-    autoclose: true
-  });
-});
-
 // addjob
 function addjob(){
   let jobname = $('#job_name').val();
@@ -53,18 +51,7 @@ function addjob(){
     dataType: 'text',
     data: { jobname: jobname,jobstart: jstart,jobend: jend},
     success: function (data) {
-      var a = JSON.parse(data);
-      console.log(a.process)
-      $('#processitem').html('');
-      a.process.forEach(element => {
-          
-          $('#processitem').append('<a href="#" id="process'+element.process_id+'" class="list-group-item list-group-item-action process_list">'+
-          '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end + '</a>');
-            
-              
-      });
-  
-
+   alert('บันทึก')
     }
 });   
 }
