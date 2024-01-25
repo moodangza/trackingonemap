@@ -29,6 +29,14 @@ $(function(){
   margin: auto;
 }
  </style> 
+ <?php 
+      foreach($job as $rs){
+          $job_id = $rs["job_id"];
+          $job_name = $rs["job_name"];
+          $job_start = $rs["job_start"];
+          $job_end = $rs["job_end"];
+      }
+ ?>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -36,106 +44,137 @@ $(function(){
         <?php   //echo getcwd();; ?>
             <div class="col-12 col-xl-12 grid-margin stretch-card">
               <div class="row w-100 flex-grow">
-                <div class="col-md-6 grid-margin stretch-card">
+                <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body container">
-                    <div class="container text-center">
-                    <?php foreach($job as $row){
-         $job_name = $row["job_name"];
-         $job_date_start = $row["job_start"];
-         $job_date_end = $row["job_end"];
-         } ?>
-  <div class="row">
-    <div class="col">
-   
-    </div>
-    <div class="col">
-         <?php echo $job_name;?>
-    </div>
-    <div class="col">
-   
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-   
-    </div>
-    <div class="col">
-    <?php echo $job_date_start;?>
-    </div>
-    <div class="col">
-   
-    </div>
-  </div>
+                    <div class="text-center" style=" margin-bottom: 0.5rem;">
+                    <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title"><i class="fa fa-user"></i> เพิ่มขั้นตอนการทำงาน</h3>
+                </div>
+                <div class="card-body form">
+                    <div class="form-horizontal form-input" role="form">
+                        <div class="row">
+                            <div class="col-12 col-md-12 col-xl-12">
+                                <div class="form-group row">
+                                  
+                                    <label class="col-12 col-md-12 col-xl-12 col-form-label text-center"> <h3><?php echo $job_name;?></h3>  </label>
+                                    <input type="hidden" name="job_id" value="<?php echo $job_id;?>">
+                                </div>
+                            </div>
+                         
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-12 col-md-12 col-xl-6">
+                                <div class="form-group row">
+                                    <label class="col-4 col-md-4 col-xl-4 col-form-label">วันที่เริ่ม : </label>
+                                    <label class="col-8 col-md-8 col-xl-8 col-form-label text-left"><?php echo $job_start;?></label>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-12 col-md-12 col-xl-6">
+                                <div class="form-group row">
+                                    <label class="col-4 col-md-4 col-xl-4 col-form-label">วันที่สิ้นสุด : </label>
+                                    <label class="col-8 col-md-8 col-xl-8 col-form-label text-left">
+                                    <?php echo $job_end;?>
+                                    </label>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        
+                    </div>
+                </div>
+            </div>
 </div>
                    
-                    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label">ขั้นตอนการทำงาน</label>
-      <input type="text" class="form-control process-name" id="processname" value="">
-    </div>
-    <div class="mb-3">
-      <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-    
-                        <!-- </div>
-                       
-                      </div>
-                    
+<div class="card">
+                    <div class="card-body">
+                        <div class="form-body">
+                                                        <div class="row">
+                                <div class="col-12 col-md-12 col-xl-6">
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-4"> ขั้นตอนการทำงาน</label>
+                                        <div class="col-md-8">
+                                            <input type="text" name="process_name" class="form-control" placeholder="เรื่อง" value="" required="">
+
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                                <!--/span-->
+
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-12 col-xl-6">
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-4">วันที่เริ่มขั้นตอนการทำงาน</label>
+                                        <div class="col-md-8">
+                                            <div class="input-group date">
+                                                <input type="text" id="s_date" class="form-control datepicker create-s-date" name="s_date" data-old="" value="">
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text toggle-datepicker" data-toggle="#create-s-date"><i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-3"></div>
+                                        <div id="countLeave" class="col-3 col-form-label"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-12 col-xl-6">
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-4">จนถึงวันที่</label>
+                                        <div class="col-md-8">
+                                            <div class="input-group date">
+                                                <input type="text" id="e_date" class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="">
+                                                <div class="input-group-append">
+                                                    <div class="input-group-text toggle-datepicker" data-toggle="#create-e-date"><i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                    <div class="col-12 col-md-12 col-xl-8">
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-md-3">
+                                              <button class="btn btn-success addsubprocess">เพิ่มขั้นตอนการทำงานย่อย</button>
+                                            </label>
+                                        
+                                        </div>
+                                        <div class="subprocess">
+
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="row">
+
+                            </div>
+                          
+                            
+                                                          
+                          
+                        </div>
                     </div>
-                  </div>
                 </div>
-              
-            
-              </div> -->
             </div>
            
           </div>
         
      
-        </div>
-
-        <div class="col-md-6 grid-margin stretch-card">
-                  <div class="card">
-                    <div class="card-body container">
-                    <div class="container text-center">
-  <div class="row row-cols-4">
-
-
-    <div class="col">Column</div>
-    <?php foreach($job as $opj){?>
-    <div class="col">Column</div>
-    <?php }?>
-    <div class="col">Column</div>
-    <div class="col">Column</div>
-  </div>
-</div>
-                   
-                    <div class="mb-3">
-      <label for="exampleFormControlInput1" class="form-label">ขั้นตอนการทำงานย่อย</label>
-      <input type="text" class="form-control process-name" id="processname" value="">
     </div>
-    <div class="mb-3">
-      <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-    
-                        <!-- </div>
-                       
-                      </div>
-                    
-                    </div>
-                  </div>
-                </div>
-              
-            
-              </div> -->
-            </div>
-           
-          </div>
-        
-     
-        </div>
         <!-- content-wrapper ends -->
         <!-- partial:./partials/_footer.html -->
        

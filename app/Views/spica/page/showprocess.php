@@ -36,7 +36,7 @@
             <div class="row row-cols-auto">
               <div class="col">  
             <select class="form-select selectjob" aria-label="Default select example" style="width:auto;">
-                <option selected>เลือกหัวข้อ</option>
+                <option value="0" selected>เลือกหัวข้อ</option>
                 <?php foreach($job as $opj){?>
                 
                   <option value="<?php echo $opj['job_id'];?>" <?php echo (isset($job_id) && $opj['job_id']==$job_id) ?'selected': '' ?>><?php echo $opj['job_name'];?></option>
@@ -83,9 +83,9 @@
               </button>
               
                 </a>
-              <div id="addjob_id" >
+              <!-- <div id="addjob_id" >
                   
-              </div>
+              </div> -->
             </div>
             </div>
             </div>

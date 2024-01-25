@@ -1,17 +1,4 @@
-// //showjob
-// $.ajax({
-//     url: "job/get",
-//     type: "post",
-//     datatype: "text",
-//     success: function (data) {
-//     var job = JSON.parse(data); 
-//     console.log(job);
-// // //a.job.forEach(Element => {
-// //     var job = element
-// // })
-// }
 
-// })
 function jobselect(jobid){
   $.ajax(
     {
@@ -23,8 +10,8 @@ function jobselect(jobid){
       var a = JSON.parse(data);
       console.log(a.process)
       $('#processitem').html('');
-      $('#addjob_id').html('');
-      $('#addjob_id').append('<input class="addprocessid" type="text" value="'+a.process[0]['job_id']+'">');
+      // $('#addjob_id').html('');
+      // $('#addjob_id').append('<input class="addprocessid" type="text" value="'+a.process[0]['job_id']+'">');
       $("#urladdprocess").attr("href", "/formaddprocess/"+a.process[0]['job_id']+""); 
        
       a.process.forEach(element => {
@@ -39,6 +26,15 @@ function jobselect(jobid){
     }
 });   
 }
+
+$(function(){
+    $(".datepicker").datepicker({
+        language:'th-th',
+        format:'dd/mm/yyyy',
+        autoclose: true
+    });
+});
+
 // showprocess
 $(function() {
   // Open Popup
@@ -62,16 +58,17 @@ return false;
   });
 
 });
+
   $(document).on( "change",".selectjob", function() {
-    let jobid = "";
     $( "select option:selected" ).each( function() {
       jobid += $( this ).val() + " ";
     } );
     jobselect(jobid)    
+  
   } );
 $(document).on("click",".addprocess",function(){
     let job_idprocess = $('.addprocessid').val();
-    alert(job_idprocess);
+    // alert(job_idprocess);
     addprocess(job_idprocess);
 });
 function addprocess(job_idprocess){
