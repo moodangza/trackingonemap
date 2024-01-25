@@ -100,12 +100,12 @@ $(function(){
       <label for="inputjob" class="form-label">ชื่อหัวข้อ</label>
         <input type="text" class="form-control" id="job_name" name="job_name">
         <label for="jobstart" class="form-label">วันที่เริ่ม</label>
-        <input type="text" class="form-control" id="date_start" name="job_start">
+        <input type="text" class="form-control" id="job_start" name="job_start">
         <label for="jobend" class="form-label">วันที่สิ้นสุด</label>
-        <input type="text" class="form-control" id="date_end" name="job_end">
+        <input type="text" class="form-control" id="job_end" name="job_end">
       </div>
       <div class="modal-footer">
-      <button type="button" class="btn btn-primary">บันทึก</button>
+      <button type="button" class="btn btn-primary" onclick="addjob()">บันทึก</button>
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
       </div>
     </div>

@@ -35,6 +35,38 @@ function jobselect(jobid){
     }
 });   
 }
+
+// addjob
+function addjob(){
+  let jobname = $('#job_name').val();
+  let jobstart = $('#job_start').val();
+  let jobend = $('#job_end').val();
+  var arr1 = jobstart.split('/');
+  let jstart = arr1[2]+'-'+arr1[1]+'-'+arr1[0];
+  var arr2 = jobend.split('/');
+  let jend = arr2[2]+'-'+arr2[1]+'-'+arr2[0];
+  $.ajax(
+    {
+    url: "addjob",
+    type: "post",
+    dataType: 'text',
+    data: { jobname: jobname,jobstart: jstart,jobend: jend},
+    success: function (data) {
+      var a = JSON.parse(data);
+      console.log(a.process)
+      $('#processitem').html('');
+      a.process.forEach(element => {
+          
+          $('#processitem').append('<a href="#" id="process'+element.process_id+'" class="list-group-item list-group-item-action process_list">'+
+          '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end + '</a>');
+            
+              
+      });
+  
+
+    }
+});   
+}
 // showprocess
 $(function() {
   // Open Popup

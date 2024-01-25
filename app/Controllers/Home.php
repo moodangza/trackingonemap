@@ -104,15 +104,18 @@ class Home extends BaseController
     }
 
     // เพิ่มหัวข้อ
-    // public function addjob()
-    // {
-    //     $addjobmodel = new addjobModel();
-    //     $addjobmodel -> insert('job_name','job_start','job_end')
-    //     $addjob_rs = $addjobmodal -> insert($job_tb);
-    //     $return = [
+    public function addjob()
+    {
+        $addjobmodel1 = new jobModel();
+        $data = array('job_name'=>$_POST['jobname'],
+        'job_start'=>$_POST['jobstart'],
+        'job_end'=>$_POST['jobend'],
+        'status'=>'1');
+        $addjobmodel1 -> insert($data);
+        // $return = [
 
-    //     ]
-    // }
+        // ];
+    }
     public function showdata(){
         
         $firstmodel = new firstModel();
