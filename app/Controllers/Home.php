@@ -136,6 +136,19 @@ class Home extends BaseController
 
         // ];
     }
+    public function addprocess()
+    {
+        $addprocessmodel = new processModel();
+        $data = array('job_id'=>$_POST['job_id'],
+        'process_name'=>$_POST['process_name'],
+        'process_start'=>$_POST['process_start'],
+        'process_end'=>$_POST['process_end'],
+        'status'=>'1');
+        $addprocessmodel -> insert($data);
+        // $return = [
+
+        // ];
+    }
 
 }
 

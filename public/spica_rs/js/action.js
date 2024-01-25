@@ -35,6 +35,27 @@ function jobselect(jobid){
 });   
 }
 
+function insertprocess(){
+  let job_id = $('#job_id').val();
+  let process_name = $('#process_name').val();
+  let processstart = $('#s_date').val();
+  let processend = $('#e_date').val();
+  var p_s_start = processstart.split('/');
+  let rs_start = p_s_start[2]+'-'+p_s_start[1]+'-'+p_s_start[0];
+  var p_s_end= processend.split('/');
+  let rs_end = p_s_end[2]+'-'+p_s_end[1]+'-'+p_s_end[0];
+  $.ajax(
+    {
+    url: "addprocess",
+    type: "post",
+    dataType: 'text',
+    data: { job_id:job_id, process_name: process_name,process_start: rs_start,process_end: rs_end},
+    success: function (data) {
+        alert('บันทึก')
+    }
+});   
+}
+
 // addjob
 function addjob(){
   let jobname = $('#job_name').val();

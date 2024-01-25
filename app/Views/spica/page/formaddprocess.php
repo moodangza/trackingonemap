@@ -59,7 +59,7 @@ $(function(){
                                 <div class="form-group row">
                                   
                                     <label class="col-12 col-md-12 col-xl-12 col-form-label text-center"> <h3><?php echo $job_name;?></h3>  </label>
-                                    <input type="hidden" name="job_id" value="<?php echo $job_id;?>">
+                                    <input type="hidden" id="job_id" name="job_id" value="<?php echo $job_id;?>">
                                 </div>
                             </div>
                          
@@ -161,7 +161,7 @@ $(function(){
                             </div>
                             <div class="row">
                                     <div class="col-12 text-center">
-                                          <button class="btn btn-success insertprocess">บันทึก</button>
+                                          <button class="btn btn-success insertprocess" onclick="insertprocess()">บันทึก</button>
                                     </div>
                             </div>
                           
