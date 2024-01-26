@@ -36,7 +36,7 @@
             <div class="row row-cols-auto">
               <div class="col">  
             <select class="form-select selectjob" aria-label="Default select example" style="width:auto;">
-                <option selected>เลือกหัวข้อ</option>
+                <option value="0" selected>เลือกหัวข้อ</option>
                 <?php foreach($job as $opj){?>
                 
                   <option value="<?php echo $opj['job_id'];?>" <?php echo (isset($job_id) && $opj['job_id']==$job_id) ?'selected': '' ?>><?php echo $opj['job_name'];?></option>
@@ -45,20 +45,20 @@
             </select>
             </div>
             <div class="col">
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+            <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
 
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+<!-- <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog"> -->
 
     <!-- Modal content-->
-    <div class="modal-content">
+    <!-- <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
        
       </div>
       <div class="modal-body">
-      <h4 class="modal-title">เพิ่มขั้นตอนการทำงาน</h4>
+      <h4  class="modal-title">เพิ่มขั้นตอนการทำงาน</h4>
       <div class="row">
                   <div class="col">
                     aaaa
@@ -74,13 +74,18 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
-    </div>
+    </div> -->
 
-  </div>
-</div>
-              <button data-toggle="modal"  class="btn btn-success btn-sm addprocess">
+  <!-- </div>
+</div> -->
+              <a id="urladdprocess" href="<?php echo base_url('formaddprocess');?>"><button  class="btn btn-success btn-sm addprocess">
                 เพิ่มขั้นตอนการทำงาน
               </button>
+              
+                </a>
+              <div id="addjob_id" >
+                  
+              </div>
             </div>
             </div>
             </div>
@@ -98,7 +103,7 @@
                           
                          </div>
                                 <!-- <a href="#" id='processitem' class="list-group-item list-group-item-action"></a> -->
-                    
+
                     </div>
                 </div>
               </div>

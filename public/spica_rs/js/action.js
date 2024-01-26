@@ -1,17 +1,14 @@
-// //showjob
-// $.ajax({
-//     url: "job/get",
-//     type: "post",
-//     datatype: "text",
-//     success: function (data) {
-//     var job = JSON.parse(data); 
-//     console.log(job);
-// // //a.job.forEach(Element => {
-// //     var job = element
-// // })
-// }
+$(document).ready(function() {
+  $( "#subprocess" ).hide();
+  $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date').datepicker({
+    language:'th',
+    format: 'dd/mm/yyyy',
+    todayBtn: 'linked',
+    todayHighlight: true,
+    autoclose: true
+  });
+});
 
-// })
 function jobselect(jobid){
   $.ajax(
     {
@@ -23,15 +20,99 @@ function jobselect(jobid){
       var a = JSON.parse(data);
       console.log(a.process)
       $('#processitem').html('');
+      // $('#addjob_id').html('');
+      // $('#addjob_id').append('<input class="addprocessid" type="text" value="'+a.process[0]['job_id']+'">');
+      $("#urladdprocess").attr("href", "/formaddprocess/"+a.process[0]['job_id']+""); 
+       
       a.process.forEach(element => {
-          
+       
           $('#processitem').append('<a href="#" id="process'+element.process_id+'" class="list-group-item list-group-item-action process_list">'+
           '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end + '</a>');
-            
-              
+           
       });
   
 
+    }
+});   
+}
+
+$(document).on( "click",".addsubprocess", function() {
+  alert( "Handler for `click` called." );
+  $( ".subprocess" ).show();
+} );
+
+$(document).on("click",".insertprocess",function(){
+  // let job_idprocess = $('.addprocessid').val();
+  // alert(job_idprocess);
+  insertprocess();
+});
+function insertprocess(){
+  let job_id = $('#job_id').val();
+  let process_name = $('#process_name').val();
+  let processstart = $('#s_date').val();
+  let processend = $('#e_date').val();
+  let detail = $('#detail').val();
+  // alert(processstart);
+  // alert(processend);
+  
+  var p_s_start = processstart.split('/');
+  let rs_start = p_s_start[2]+'-'+p_s_start[1]+'-'+p_s_start[0];
+  var p_s_end= processend.split('/');
+  let rs_end = p_s_end[2]+'-'+p_s_end[1]+'-'+p_s_end[0];
+  // alert(rs_start);
+  // alert(rs_end);
+  let s_job = $('#s_job').val();
+  let e_job = $('#e_job').val();
+  if(rs_end < rs_start){
+    alert('วันที่ สิ้นสุดต้องไม่น้อยกว่าวันที่เริ่มต้น');
+    
+  }
+ 
+//   alert(rs_end-rs_start);
+// return false;
+  if(process_name ==''){
+    alert('กรุณากรอก ขั้นตอน');
+    process_name.focus();
+    return false;
+  }else if(processstart == ''){
+    alert('กรุณากรอกวันที่เริ่มต้น');
+    processstart.focus();
+    return false;
+  }else if(processend == ''){
+    alert('กรุณากรอกวันที่สิ้นสุด');
+    processend.focus();
+    return false;
+  }
+
+  $.ajax(
+    {
+    url: "/insertprocess",
+    type: "post",
+    dataType: 'text',
+    data: { job_id:job_id, process_name: process_name,process_start: rs_start,process_end: rs_end,detail:detail},
+    success: function (data) {
+        alert('บันทึก')
+    }
+});   
+}
+
+// addjob
+function addjob(){
+  let jobname = $('#job_name').val();
+  let jobstart = $('#job_start').val();
+  let jobend = $('#job_end').val();
+  var arr1 = jobstart.split('/');
+  let jstart = arr1[2]+'-'+arr1[1]+'-'+arr1[0];
+  var arr2 = jobend.split('/');
+  let jend = arr2[2]+'-'+arr2[1]+'-'+arr2[0];
+  $.ajax(
+    {
+    url: "addjob",
+    type: "post",
+    dataType: 'text',
+    data: { jobname: jobname,jobstart: jstart,jobend: jend},
+    success: function (data) {
+   alert('บันทึก')
     }
 });   
 }
@@ -58,12 +139,31 @@ return false;
   });
 
 });
+
+
   $(document).on( "change",".selectjob", function() {
-    let jobid = "";
     $( "select option:selected" ).each( function() {
-      jobid += $( this ).val() + " ";
+      jobid = $(this).val() + " ";
     } );
     jobselect(jobid)    
+  
   } );
+$(document).on("click",".addprocess",function(){
+    let job_idprocess = $('.addprocessid').val();
+    // alert(job_idprocess);
+    addprocess(job_idprocess);
+});
+function addprocess(job_idprocess){
+  $.ajax(
+    {
+    url: "/formaddprocess/job",
+    type: "post",
+    dataType: 'text',
+    data: { job_id: job_idprocess},
+    success: function (data) {
+    
 
+    }
+});   
+}
  
