@@ -143,11 +143,13 @@ class Home extends BaseController
         'process_name'=>$_POST['process_name'],
         'process_start'=>$_POST['process_start'],
         'process_end'=>$_POST['process_end'],
+        'detail'=>$_POST['detail'],
         'status'=>'1');
         $addprocessmodel -> insert($data);
-        // $return = [
-
-        // ];
+        $updatejob = new jobModel();
+        $dataupdate = array('status'=>'2');
+       
+        
     }
 
 }

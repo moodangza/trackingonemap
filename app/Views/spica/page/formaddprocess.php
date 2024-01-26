@@ -61,6 +61,7 @@
                                 <div class="form-group row">
                                     <label class="col-4 col-md-4 col-xl-4 col-form-label">วันที่เริ่ม : </label>
                                     <label class="col-8 col-md-8 col-xl-8 col-form-label text-left"><?php echo $job_start;?></label>
+                                    <input  type="hidden" readonly id='s_job' value="<?php echo $job_start;?>">
                                 </div>
                             </div>
                             <!--/span-->
@@ -70,6 +71,7 @@
                                     <label class="col-8 col-md-8 col-xl-8 col-form-label text-left">
                                     <?php echo $job_end;?>
                                     </label>
+                                    <input  type="hidden" readonly id='e_job' value="<?php echo $job_end;?>">
                                 </div>
                             </div>
                             <!--/span-->
@@ -136,17 +138,61 @@
 
                                 </div>
 
+                                <div class="col-12 col-md-12 col-xl-8">
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3">รายละเอียด</label>
+                                        <div class="col-md-9">
+                                        <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="detail" style="height: 100px"></textarea>
+                                            <label for="floatingTextarea2">Comments</label>
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
                             </div>
                             <div class="row">
                                     <div class="col-12 col-md-12 col-xl-8">
-                                        <div class="form-group row">
-                                            <label class="col-form-label col-md-3">
-                                              <button class="btn btn-success addsubprocess">เพิ่มขั้นตอนการทำงานย่อย</button>
-                                            </label>
-                                        
-                                        </div>
-                                        <div class="subprocess">
+                                    <button class="btn btn-primary addsubprocess"><i class="fa fa-plus-square"></i> เพิ่ม</button>
+                                        <div class="form-group row subprocess" id="subprocess">
+                                            <table  class="table table-hover">
+                                                <thead>
+                                                      <th>ขั้นตอนการทำงานย่อย</th>
+                                                      <th>วันที่เริ่ม</th>
+                                                      <th>วันที่สิ้นสุด</th>  
+                                                      <th>จัดการ</th>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td><input type="text" class="form-control" id="subprocessinput[]"> </td>
+                                                    <td>
+                                                        <div class="input-group date">
+                                                            <input type="text" id="s_sub_date[]" readonly="readonly" class="form-control datepicker create-s-date" name="s_sub_date" data-old="" value="">
+                                                        <div class="input-group-append">
+                                                        <div required class="input-group-text toggle-datepicker" data-toggle="#create-s-date"><i class="fa fa-calendar"></i>
+                                                        </div>
+                                                        </div>
+                                                        </div>
+                                                    </td>
+                                            <td>
+                                            <div class="input-group date">
+                                                <input type="text" id="e_sub_date" readonly="readonly" class="form-control datepicker create-e-date" name="e_sub_date" data-old="" value="">
+                                                <div class="input-group-append">
+                                                    <div required class="input-group-text toggle-datepicker" data-toggle="#create-s-date"><i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
 
+                                            </div>
+                                            </td>
+                                            <td nowrap>
+                                                <button class="btn btn-warning"><i class="fa fa-pencil"></i> บันทึก</button>
+                                                <button class="btn btn-danger"><i class="fa fa-times-circle"></i> ลบ</button>
+                                            </td>
+                                                       </tr>
+                                                </tbody>   
+                                            </table>
+                                            
                                         </div>
                                     </div>
                             </div>
