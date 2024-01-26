@@ -5,7 +5,7 @@ class processModel extends Model{
         // protected $DBGroup      = 'project';
         protected $table        = 'process_tb';
         protected $primaryKey   = 'process_id';
-        protected $useAutoIncrement = false;
+        protected $useAutoIncrement = true;
         protected $returnType       = 'array';
         protected $useSoftDeletes   = false;
         protected $protectFields    = false;

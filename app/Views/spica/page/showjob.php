@@ -44,13 +44,7 @@ function drop(ev) {
         $("#jobadd").fadeOut(300);
     });
 });
-$(function(){
-            $("#date_start,#date_end").datepicker({
-                language:'th-th',
-                format:'dd/mm/yyyy',
-                autoclose: true
-            });
-        });
+
 </script>
 
 <style>
@@ -99,12 +93,16 @@ $(function(){
       <div class="modal-body">
       <label for="inputjob" class="form-label">ชื่อหัวข้อ</label>
         <input type="text" class="form-control" id="job_name" name="job_name">
-        <label for="jobstart" class="form-label" required="required">วันที่เริ่ม</label>
-        <input type="text" class="form-control" id="job_start" name="job_start">
-        <!-- <span class="bar"></span> -->
+        <label for="jobstart" class="form-label">วันที่เริ่ม</label>
+        <input type="text" class="form-control datepicker-input" id="job_start" readonly name="job_start"> <div class="input-group-append">
+                                                    <div  class="input-group-text toggle-datepicker" data-toggle="#create-e-date"><i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
         <label for="jobend" class="form-label">วันที่สิ้นสุด</label>
-        <input type="text" class="form-control" id="job_end" name="job_end">
-        <!-- <span class="bar"></span> -->
+        <input type="text" class="form-control datepicker-input" id="job_end" readonly name="job_end"> <div class="input-group-append">
+                                                    <div  class="input-group-text toggle-datepicker" data-toggle="#create-e-date"><i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
       </div>
       <div class="modal-footer">
       <button type="button" class="btn btn-primary" onclick="addjob()">บันทึก</button>

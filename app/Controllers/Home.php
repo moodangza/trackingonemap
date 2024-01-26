@@ -3,7 +3,6 @@
 namespace App\Controllers;
 use App\Models\firstModel;
 use App\Models\jobModel;
-use App\Models\addjobModel;
 //use App\Models\approveModel;
 use App\Models\processModel;
 use App\Controllers\Date;
@@ -30,11 +29,11 @@ class Home extends BaseController
     public function showjob()
     {
         $jobmodel1 = new jobModel();
-        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,job_start,job_end,job_finish')
+        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status,job_finish')
         // ->where('job_tb.division_id = 1' )
         //->where('job_finish' != NULL )
         //->where('status' == 2 )
-        ->groupBy('job_tb.job_id,job_tb.job_name,status,job_start,job_end,job_finish')
+        ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish')
         ->orderBy('job_id','asc');
         $job_rs1 = $jobmodel1->findAll();
         $dateth = new Date();
@@ -64,10 +63,10 @@ class Home extends BaseController
         $job_rs = $jobmodel->findAll();
         $jobid1 = $this->request->getVar('jobid1');
         $processmodel = new processModel();
-        $processmodel ->select('process_id,process_name,process_start,process_end,detail, process_tb.process_status')
+        $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status')
         ->where('delete_flag', '1') 
         ->where('process_tb.job_id', $jobid1 )
-        ->groupBy('process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
+        ->groupBy('process_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
         ->orderBy('process_start','asc');
 
         $process_rs = $processmodel->findAll();
@@ -103,6 +102,27 @@ class Home extends BaseController
         return view('spica/page/showprocess',$return);
     }
 
+    public function formaddprocess($job_id){
+        $jobmodel = new jobModel();
+        $jobmodel  ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status ')
+        ->where('job_tb.division_id ', 1)
+        // $jobid1 = $this->request->getVar('jobid1');
+        ->where('job_tb.job_id', $job_id )
+        ->groupBy('job_tb.job_id,job_tb.job_name ')
+        ->orderBy('job_id','asc');
+        $job_rs = $jobmodel->findAll();
+        $dateth = new Date();
+        foreach($job_rs as $key => $date_th){
+            $job_rs[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
+            $job_rs[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
+        }
+        
+        $data = [
+            'job'=> $job_rs,
+        ];
+        return view('spica/page/formaddprocess',$data);
+    }
+
     // เพิ่มหัวข้อ
     public function addjob()
     {
@@ -116,23 +136,41 @@ class Home extends BaseController
 
         // ];
     }
-    public function showdata(){
-        
-        $firstmodel = new firstModel();
-        $firstmodel 
-        ->select('orders.OrderID AS id,products.ProductID,Quantity,OrderDate,ProductName,Unit,Price')
-        ->join('Order_details','Orders.OrderID = Order_details.OrderID','left')
-        ->join('Products','Order_details.ProductID = Products.ProductID','left')
-        ->where("OrderDate Between '2022-07-01' AND '2022-08-30'")
-        
-        ->orderBy('orders.OrderID ASC');
-        $product = $firstmodel->findAll();
-        $return = [
-            'product' => $product
-        ];
-        return view('spica/page/showdata',$return);
-        
+    public function insertprocess()
+    {
+        $addprocessmodel = new processModel();
+        $data = array('job_id'=>$_POST['job_id'],
+        'process_name'=>$_POST['process_name'],
+        'process_start'=>$_POST['process_start'],
+        'process_end'=>$_POST['process_end'],
+        'status'=>'1');
+        $addprocessmodel -> insert($data);
+        // $return = [
+
+        // ];
     }
-  
-    
+
 }
+
+    // public function edit($process_id)
+    // {
+        
+    //     $processmodel = new processModel();
+    //     $processmodel ->select('process_id,process_name,process_start,process_end,detail, process_tb.process_status')
+    //     ->where('delete_flag', '1') 
+    //     ->where('process_tb.job_id', $jobid1 )
+    //     ->groupBy('process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
+    //     ->orderBy('process_start','asc');
+
+    //     $process_rs = $processmodel->findAll();
+    
+    //   $return = [
+    //     'title' => 'แก้ไข',
+    //     'agenda_types' => $agenda_types,
+    //     'agenda' => $agenda,
+    //     'attachments' => $attachments,
+    //   ];
+    //   return view('meeting/agenda/form', $return);
+    // }
+
+
