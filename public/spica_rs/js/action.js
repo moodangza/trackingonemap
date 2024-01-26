@@ -84,8 +84,8 @@ function addjob(){
     alert("กรุณากรอกข้อมูลให้ครบถ้วน")
       end.focus();
       return false;
-  }else if (jend.value<jstart.value){
-    alert("กรุณากรอกข้อมูลให้ครบถ้วน")
+  }else if (jend<jstart){
+    alert("กรุณากรอกข้อมูลวันที่ให้ถูกต้อง")
       // return false;
   }
   
