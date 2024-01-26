@@ -44,7 +44,14 @@ function addjob(){
   var arr1 = jobstart.split('/');
   let jstart = arr1[2]+'-'+arr1[1]+'-'+arr1[0];
   var arr2 = jobend.split('/');
-  let jend = arr2[2]+'-'+arr2[1]+'-'+arr2[0];
+  let jend = arr2[2]+'-'+arr2[1]+'-'+arr2[0];  
+			// if (jobname == null || jobname == "") {
+			// 	document.getElementById("msg").innerHTML = "กรุณาระบุชื่อหัวข้อ";
+			// }
+			// else
+			// {
+			// 	document.getElementById("msg").innerHTML = "เพิ่มข้อมูลสำเร็จ: " + jobname;
+			// }
   $.ajax(
     {
     url: "addjob",
