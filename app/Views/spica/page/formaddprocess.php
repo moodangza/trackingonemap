@@ -33,6 +33,7 @@
         <div class="content-wrapper">
           <div class="row">
         <?php   //echo getcwd();; ?>
+        <form id="formaddprocess">
             <div class="col-12 col-xl-12 grid-margin stretch-card">
               <div class="row w-100 flex-grow">
                 <div class="col-md-12 grid-margin stretch-card">
@@ -40,11 +41,13 @@
                     <div class="card-body container">
                     <div class="text-center" style=" margin-bottom: 0.5rem;">
                     <div class="card">
+       
                 <div class="card-header">
                     <h3 class="card-title"><i class="fa fa-user"></i> เพิ่มขั้นตอนการทำงาน</h3>
                 </div>
-                <div class="card-body form">
-                    <div class="form-horizontal form-input" role="form">
+       
+                <div class="card-body">
+                    <div class="form-horizontal form-input">
                         <div class="row">
                             <div class="col-12 col-md-12 col-xl-12">
                                 <div class="form-group row">
@@ -79,13 +82,13 @@
                         <!--/row-->
                         
                     </div>
-                </div>
+                        </div>
             </div>
-</div>
+                        </div>
                    
-<div class="card">
-                    <div class="card-body">
-                        <div class="form-body">
+                        <div class="card">
+                            <div class="card-body">
+                            <div class="form-body">
                                                         <div class="row">
                                 <div class="col-12 col-md-12 col-xl-6">
                                     <div class="form-group row">
@@ -143,7 +146,7 @@
                                         <label class="col-form-label col-md-3">รายละเอียด</label>
                                         <div class="col-md-9">
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="detail" style="height: 100px"></textarea>
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="detail" name="detail" style="height: 100px"></textarea>
                                             <label for="floatingTextarea2">Comments</label>
                                         </div>
                                         </div>
@@ -154,9 +157,9 @@
                             </div>
                             <div class="row">
                                     <div class="col-12 col-md-12 col-xl-8">
-                                    <button class="btn btn-primary addsubprocess"><i class="fa fa-plus-square"></i> เพิ่ม</button>
+                                    <button class="btn btn-primary addsubprocess" type="button"><i class="fa fa-plus-square"></i> เพิ่ม</button>
                                         <div class="form-group row subprocess" id="subprocess">
-                                            <table  class="table table-hover">
+                                            <table  class="table table-hover" id="tblsubprocess">
                                                 <thead>
                                                       <th>ขั้นตอนการทำงานย่อย</th>
                                                       <th>วันที่เริ่ม</th>
@@ -165,10 +168,10 @@
                                                 </thead>
                                                 <tbody>
                                                 <tr>
-                                                    <td><input type="text" class="form-control" id="subprocessinput[]"> </td>
+                                                    <td><input type="text" class="form-control" name="subprocessinput[]" id="subprocessinput[]"> </td>
                                                     <td>
                                                         <div class="input-group date">
-                                                            <input type="text" id="s_sub_date[]" readonly="readonly" class="form-control datepicker create-s-date" name="s_sub_date" data-old="" value="">
+                                                            <input type="text" id="s_sub_date[]" readonly="readonly" class="form-control datepicker create-s-date" name="s_sub_date[]" data-old="" value="">
                                                         <div class="input-group-append">
                                                         <div required class="input-group-text toggle-datepicker" data-toggle="#create-s-date"><i class="fa fa-calendar"></i>
                                                         </div>
@@ -177,7 +180,7 @@
                                                     </td>
                                             <td>
                                             <div class="input-group date">
-                                                <input type="text" id="e_sub_date" readonly="readonly" class="form-control datepicker create-e-date" name="e_sub_date" data-old="" value="">
+                                                <input type="text" id="e_sub_date[]" readonly="readonly" class="form-control datepicker create-e-date" name="e_sub_date[]" data-old="" value="">
                                                 <div class="input-group-append">
                                                     <div required class="input-group-text toggle-datepicker" data-toggle="#create-s-date"><i class="fa fa-calendar"></i>
                                                     </div>
@@ -198,13 +201,13 @@
                             </div>
                             <div class="row">
                                     <div class="col-12 text-center">
-                                          <button class="btn btn-success insertprocess" >บันทึก</button>
+                                          <button class="btn btn-success insertprocess" type="button" >บันทึก</button>
                                     </div>
                             </div>
                           
                             
                                                           
-                          
+        </form>
                         </div>
                     </div>
                 </div>
@@ -224,7 +227,7 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
-  
+ 
    <?php echo $this->include('templates/footer');?>
   <?php $this->endSection();?>
 </body>
