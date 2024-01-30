@@ -37,7 +37,7 @@ function jobselect(jobid){
 }
 
 $(document).on( "click",".addsubprocess", function() {
-  alert( "Handler for `click` called." );
+  // alert( "Handler for `click` called." );
   $( ".subprocess" ).show();
   let rowcontent = " <tr>"+
   "<td><input type='text' class='form-control' name='subprocessinput[]' id='subprocessinput[]'> </td>"+
