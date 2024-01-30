@@ -131,19 +131,11 @@ class Home extends BaseController
         $processmodel = new processModel();
         $processmodel ->select('process_id,process_name,process_start,process_end,detail, process_tb.process_status')
         ->where('delete_flag', '1') 
-        ->where('process_tb.job_id', $jobid1 )
         ->groupBy('process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
         ->orderBy('process_start','asc');
 
         $process_rs = $processmodel->findAll();
-    
-      $return = [
-        'title' => 'แก้ไข',
-        'agenda_types' => $agenda_types,
-        'agenda' => $agenda,
-        'attachments' => $attachments,
-      ];
-      return view('meeting/agenda/form', $return);
+  
         $addjobmodel1 = new jobModel();
         $data = array('job_name'=>$_POST['jobname'],
         'job_start'=>$_POST['jobstart'],
