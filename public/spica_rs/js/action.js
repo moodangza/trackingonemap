@@ -1,5 +1,6 @@
 $(document).ready(function() {
-  $('#s_date,#e_date,#job_start,#job_end').datepicker({
+  $( "#subprocess" ).hide();
+  $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date').datepicker({
     language:'th',
     format: 'dd/mm/yyyy',
     todayBtn: 'linked',
@@ -34,26 +35,98 @@ function jobselect(jobid){
     }
 });   
 }
+
+$(document).on( "click",".addsubprocess", function() {
+  // alert( "Handler for `click` called." );
+  $( ".subprocess" ).show();
+  let rowcontent = " <tr>"+
+  "<td><input type='text' class='form-control' name='subprocessinput[]' id='subprocessinput[]'> </td>"+
+  "<td>"+
+      "<div class='input-group date'>"+
+          "<input type='text' id='s_sub_date[]' readonly='readonly' class='form-control datepicker create-s-date' name='s_sub_date[]' data-old='' value=''>"+
+      "<div class='input-group-append'>"+
+      "<div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'><i class='fa fa-calendar'></i>"+
+      "</div>"+
+      "</div>"+
+      "</div>"+
+  "</td>"+
+"<td>"+
+"<div class='input-group date'>"+
+"<input type='text' id='e_sub_date[]' readonly='readonly' class='form-control datepicker create-e-date' name='e_sub_date[]' data-old='' value=''>"+
+"<div class='input-group-append'>"+
+  "<div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'><i class='fa fa-calendar'></i>"+
+  "</div>"+
+"</div>"+
+"</div>"+
+"</td>"+
+"<td nowrap>"+
+"<button class='btn btn-warning'><i class='fa fa-pencil'></i> บันทึก</button>"+
+"<button class='btn btn-danger'><i class='fa fa-times-circle'></i> ลบ</button>"+
+"</td>"+
+     "</tr>";
+  $("#tblsubprocess tbody").append(rowcontent);
+  $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date').datepicker({
+    language:'th',
+    format: 'dd/mm/yyyy',
+    todayBtn: 'linked',
+    todayHighlight: true,
+    autoclose: true
+  });
+} );
+
+
+
 $(document).on("click",".insertprocess",function(){
   // let job_idprocess = $('.addprocessid').val();
   // alert(job_idprocess);
   insertprocess();
 });
 function insertprocess(){
+  console.log( $('#formaddprocess').serialize() );
+  // return false;
   let job_id = $('#job_id').val();
   let process_name = $('#process_name').val();
   let processstart = $('#s_date').val();
   let processend = $('#e_date').val();
+  let detail = $('#detail').val();
+  // alert(processstart);
+  // alert(processend);
+  
   var p_s_start = processstart.split('/');
   let rs_start = p_s_start[2]+'-'+p_s_start[1]+'-'+p_s_start[0];
   var p_s_end= processend.split('/');
   let rs_end = p_s_end[2]+'-'+p_s_end[1]+'-'+p_s_end[0];
+  // alert(rs_start);
+  // alert(rs_end);
+  let s_job = $('#s_job').val();
+  let e_job = $('#e_job').val();
+  if(rs_end < rs_start){
+    alert('วันที่ สิ้นสุดต้องไม่น้อยกว่าวันที่เริ่มต้น');
+    
+  }
+ 
+//   alert(rs_end-rs_start);
+// return false;
+  if(process_name ==''){
+    alert('กรุณากรอก ขั้นตอน');
+    process_name.focus();
+    return false;
+  }else if(processstart == ''){
+    alert('กรุณากรอกวันที่เริ่มต้น');
+    processstart.focus();
+    return false;
+  }else if(processend == ''){
+    alert('กรุณากรอกวันที่สิ้นสุด');
+    processend.focus();
+    return false;
+  }
+
   $.ajax(
     {
     url: "/insertprocess",
     type: "post",
     dataType: 'text',
-    data: { job_id:job_id, process_name: process_name,process_start: rs_start,process_end: rs_end},
+    data: $('#formaddprocess').serialize() ,
     success: function (data) {
         alert('บันทึก')
     }
@@ -124,6 +197,7 @@ return false;
   });
 
 });
+
 
   $(document).on( "change",".selectjob", function() {
     $( "select option:selected" ).each( function() {

@@ -5,6 +5,7 @@ use App\Models\firstModel;
 use App\Models\jobModel;
 //use App\Models\approveModel;
 use App\Models\processModel;
+use App\Models\subprocessModel;
 use App\Controllers\Date;
 use Hermawan\DataTables\DataTable;
 
@@ -126,6 +127,15 @@ class Home extends BaseController
     // เพิ่มหัวข้อ
     public function addjob()
     {
+        
+        $processmodel = new processModel();
+        $processmodel ->select('process_id,process_name,process_start,process_end,detail, process_tb.process_status')
+        ->where('delete_flag', '1') 
+        ->groupBy('process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
+        ->orderBy('process_start','asc');
+
+        $process_rs = $processmodel->findAll();
+  
         $addjobmodel1 = new jobModel();
         $data = array('job_name'=>$_POST['jobname'],
         'job_start'=>$_POST['jobstart'],
@@ -138,16 +148,46 @@ class Home extends BaseController
     }
     public function insertprocess()
     {
+        // print_r($_POST['e_sub_date']);
+        // exit;
         $addprocessmodel = new processModel();
         $data = array('job_id'=>$_POST['job_id'],
         'process_name'=>$_POST['process_name'],
-        'process_start'=>$_POST['process_start'],
-        'process_end'=>$_POST['process_end'],
+        // 'process_start'=>$_POST['process_start'],
+        // 'process_end'=>$_POST['process_end'],
+        'detail'=>$_POST['detail'],
         'status'=>'1');
         $addprocessmodel -> insert($data);
-        // $return = [
+        
+        $lastprocessid = $addprocessmodel -> getInsertID();
+        $addsubprocessmodel = new subprocessModel();
+        foreach ($_POST['subprocessinput'] as $key => $subprocessname) {
+            $s = explode("/",$_POST['s_sub_date'][$key]);
+            $e = explode("/",$_POST['e_sub_date'][$key]);
+            $subprocessstart = $s[2].'-'.$s[1].'-'.$s[0];
+            $subprocessend = $e[2].'-'.$e[1].'-'.$e[0];
+            // echo $s[2].'-'.$s[1].'-'.$s[0].'::::::::::::'. $e[2].'-'.$e[1].'-'.$e[0].'<br>';
+            // exit;
+            $subprocess_data = [
+               
+             'job_id' => $_POST['job_id'],
+             'process_id' => $lastprocessid,
+             'subprocess_name' => $subprocessname,
+             'subprocess_start' => $subprocessstart,
+             'subprocess_end' => $subprocessend
+            ];
+            
+           
+             $addsubprocessmodel->insert($subprocess_data);
+             
+             
+           }
 
-        // ];
+        $updatejob = new jobModel();
+        $dataupdate = array('status'=>'2');
+       
+        $updatejob ->set($dataupdate) ->where('status',$_POST['job_id']) -> update();
+        
     }
 
 }
