@@ -94,13 +94,13 @@
             <div class="col-lg-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Financial management review</h4>
+                  <h4 class="card-title">ขั้นตอนการทำงาน</h4>
                   <div class="list-group">
                             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
                                 The current link item
                             </a>
                          <div id='processitem'>
-                          
+                              
                          </div>
                                 <!-- <a href="#" id='processitem' class="list-group-item list-group-item-action"></a> -->
 
@@ -111,7 +111,7 @@
             <div class="col-lg-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Financial management review</h4>
+                  <h4 class="card-title">จบขั้นตอนการทำงาน</h4>
                    <div class="list-group">
                             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
                                 The current link item

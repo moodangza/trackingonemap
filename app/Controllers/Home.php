@@ -158,16 +158,15 @@ class Home extends BaseController
         'detail'=>$_POST['detail'],
         'status'=>'1');
         $addprocessmodel -> insert($data);
-        
+        if($_POST['subprocessinput'] != ''){
         $lastprocessid = $addprocessmodel -> getInsertID();
         $addsubprocessmodel = new subprocessModel();
+    
         foreach ($_POST['subprocessinput'] as $key => $subprocessname) {
             $s = explode("/",$_POST['s_sub_date'][$key]);
             $e = explode("/",$_POST['e_sub_date'][$key]);
             $subprocessstart = $s[2].'-'.$s[1].'-'.$s[0];
             $subprocessend = $e[2].'-'.$e[1].'-'.$e[0];
-            // echo $s[2].'-'.$s[1].'-'.$s[0].'::::::::::::'. $e[2].'-'.$e[1].'-'.$e[0].'<br>';
-            // exit;
             $subprocess_data = [
                
              'job_id' => $_POST['job_id'],
@@ -182,12 +181,15 @@ class Home extends BaseController
              
              
            }
-
+        }
         $updatejob = new jobModel();
         $dataupdate = array('status'=>'2');
        
         $updatejob ->set($dataupdate) ->where('status',$_POST['job_id']) -> update();
-        
+        $returndata = [
+            'job'=> $_POST['job_id'],
+        ];
+        return view('spica/page/showprocess',$returndata);
     }
 
 }
