@@ -21,6 +21,7 @@
 }
  </style> 
  <?php 
+   
       foreach($job as $rs){
           $job_id = $rs["job_id"];
           $job_name = $rs["job_name"];
