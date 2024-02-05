@@ -123,8 +123,6 @@ class Home extends BaseController
         ];
         if($job_id !=''){
         return view('spica/page/formaddprocess',$data);
-    }else{
-        formupdateprocess();
     }
     }
 
@@ -239,7 +237,7 @@ public function formupdateprocess()
     // $returndata = [
     //     'job'=> $_POST['job_id'],
     // ];
-    return view('spica/page/formaddprocess');
+    return view('spica/page/formupdateprocess');
 }
 }
 
