@@ -141,7 +141,27 @@ function addjob(){
   var arr1 = jobstart.split('/');
   let jstart = arr1[2]+'-'+arr1[1]+'-'+arr1[0];
   var arr2 = jobend.split('/');
-  let jend = arr2[2]+'-'+arr2[1]+'-'+arr2[0];
+  let jend = arr2[2]+'-'+arr2[1]+'-'+arr2[0];  
+  var name = document.getElementById("job_name");
+  var start = document.getElementById("job_start");
+  var end = document.getElementById("job_end");
+  if( name.value == "") {
+      alert("กรุณากรอกข้อมูลให้ครบถ้วน")
+      name.focus();
+      return false;
+  }else if (start.value ==""){
+    alert("กรุณากรอกข้อมูลให้ครบถ้วน")
+      start.focus();
+      return false;
+  }else if (end.value == "" ){
+    alert("กรุณากรอกข้อมูลให้ครบถ้วน")
+      end.focus();
+      return false;
+  }else if (jend < jstart){
+    alert("กรุณากรอกข้อมูลวันที่ให้ถูกต้อง")
+    return false;
+  }
+  
   $.ajax(
     {
     url: "addjob",
@@ -149,7 +169,8 @@ function addjob(){
     dataType: 'text',
     data: { jobname: jobname,jobstart: jstart,jobend: jend},
     success: function (data) {
-   alert('บันทึก')
+      alert('บันทึก')
+      window.location.reload(false);
     }
 });   
 }
