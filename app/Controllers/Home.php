@@ -121,7 +121,11 @@ class Home extends BaseController
         $data = [
             'job'=> $job_rs,
         ];
+        if($job_id !=''){
         return view('spica/page/formaddprocess',$data);
+    }else{
+        formupdateprocess();
+    }
     }
 
     // เพิ่มหัวข้อ
@@ -158,16 +162,15 @@ class Home extends BaseController
         'detail'=>$_POST['detail'],
         'status'=>'1');
         $addprocessmodel -> insert($data);
-        
+        if($_POST['subprocessinput'] != ''){
         $lastprocessid = $addprocessmodel -> getInsertID();
         $addsubprocessmodel = new subprocessModel();
+    
         foreach ($_POST['subprocessinput'] as $key => $subprocessname) {
             $s = explode("/",$_POST['s_sub_date'][$key]);
             $e = explode("/",$_POST['e_sub_date'][$key]);
             $subprocessstart = $s[2].'-'.$s[1].'-'.$s[0];
             $subprocessend = $e[2].'-'.$e[1].'-'.$e[0];
-            // echo $s[2].'-'.$s[1].'-'.$s[0].'::::::::::::'. $e[2].'-'.$e[1].'-'.$e[0].'<br>';
-            // exit;
             $subprocess_data = [
                
              'job_id' => $_POST['job_id'],
@@ -182,14 +185,62 @@ class Home extends BaseController
              
              
            }
-
+        }
         $updatejob = new jobModel();
         $dataupdate = array('status'=>'2');
        
         $updatejob ->set($dataupdate) ->where('status',$_POST['job_id']) -> update();
-        
+        $returndata = [
+            'job'=> $_POST['job_id'],
+        ];
+        return view('spica/page/showprocess',$returndata);
     }
+// formupdateprocess
+public function formupdateprocess()
+{
+    // print_r($_POST['e_sub_date']);
+    // exit;
+    // $addprocessmodel = new processModel();
+    // $data = array('job_id'=>$_POST['job_id'],
+    // 'process_name'=>$_POST['process_name'],
+    // // 'process_start'=>$_POST['process_start'],
+    // // 'process_end'=>$_POST['process_end'],
+    // 'detail'=>$_POST['detail'],
+    // 'status'=>'1');
+    // $addprocessmodel -> insert($data);
+    // if($_POST['subprocessinput'] != ''){
+    // $lastprocessid = $addprocessmodel -> getInsertID();
+    // $addsubprocessmodel = new subprocessModel();
 
+    // foreach ($_POST['subprocessinput'] as $key => $subprocessname) {
+    //     $s = explode("/",$_POST['s_sub_date'][$key]);
+    //     $e = explode("/",$_POST['e_sub_date'][$key]);
+    //     $subprocessstart = $s[2].'-'.$s[1].'-'.$s[0];
+    //     $subprocessend = $e[2].'-'.$e[1].'-'.$e[0];
+    //     $subprocess_data = [
+           
+    //      'job_id' => $_POST['job_id'],
+    //      'process_id' => $lastprocessid,
+    //      'subprocess_name' => $subprocessname,
+    //      'subprocess_start' => $subprocessstart,
+    //      'subprocess_end' => $subprocessend
+    //     ];
+        
+       
+    //      $addsubprocessmodel->insert($subprocess_data);
+         
+         
+    //    }
+    // }
+    // $updatejob = new jobModel();
+    // $dataupdate = array('status'=>'2');
+   
+    // $updatejob ->set($dataupdate) ->where('status',$_POST['job_id']) -> update();
+    // $returndata = [
+    //     'job'=> $_POST['job_id'],
+    // ];
+    return view('spica/page/formaddprocess');
+}
 }
 
     // public function edit($process_id)
