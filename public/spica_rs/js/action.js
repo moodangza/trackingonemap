@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  
   $( "#subprocess" ).hide();
   $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date').datepicker({
     language:'th',

@@ -20,8 +20,23 @@
   margin: auto;
 }
  </style> 
+  <script>
+    $( "#subprocess" ).show();
+ </script>   
  <?php 
-   
+   if($flag == 'update'){
+        foreach($job as $rs){
+            $job_id = $rs['job_id'];
+            $job_name = $rs['job_name'];
+            $job_start = $rs['job_start'];
+            $job_end = $rs['job_end'];
+            $process_id = $rs['process_id'];
+            $process_name = $rs['process_name'];
+            $process_start = $rs['process_start'];
+            $process_end = $rs['process_end'];
+            $detail = $rs['detail'];
+        }
+   }
  ?>
       <!-- partial -->
       <div class="main-panel">
@@ -38,7 +53,7 @@
                     <div class="card">
        
                 <div class="card-header">
-                    <h3 class="card-title"><i class="fa fa-user"></i> เพิ่มขั้นตอนการทำงาน</h3>
+                    <h3 class="card-title"><i class="fa fa-user"></i> แก้ไขขั้นตอนการทำงาน</h3>
                 </div>
        
                 <div class="card-body">
@@ -47,8 +62,8 @@
                             <div class="col-12 col-md-12 col-xl-12">
                                 <div class="form-group row">
                                   
-                                    <label class="col-12 col-md-12 col-xl-12 col-form-label text-center"> <h3><?php ?></h3>  </label>
-                                    <input type="hidden" id="job_id" name="job_id" value="<?php ?>">
+                                    <label class="col-12 col-md-12 col-xl-12 col-form-label text-center"> <h3><?php echo $job_name;?></h3>  </label>
+                                    <input type="hidden" id="job_id" name="job_id" value="<?php echo $job_id;?>">
                                 </div>
                             </div>
                          
@@ -58,7 +73,7 @@
                             <div class="col-12 col-md-12 col-xl-6">
                                 <div class="form-group row">
                                     <label class="col-4 col-md-4 col-xl-4 col-form-label">วันที่เริ่ม : </label>
-                                    <label class="col-8 col-md-8 col-xl-8 col-form-label text-left"><?php ?></label>
+                                    <label class="col-8 col-md-8 col-xl-8 col-form-label text-left"><?php echo $job_start; ?></label>
                                     <input  type="hidden" readonly id='s_job' value="<?php ?>">
                                 </div>
                             </div>
@@ -67,7 +82,7 @@
                                 <div class="form-group row">
                                     <label class="col-4 col-md-4 col-xl-4 col-form-label">วันที่สิ้นสุด : </label>
                                     <label class="col-8 col-md-8 col-xl-8 col-form-label text-left">
-                                    <?php ?>
+                                    <?php echo $job_end;?>
                                     </label>
                                     <input  type="hidden" readonly id='e_job' value="<?php ?>">
                                 </div>
@@ -89,7 +104,7 @@
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-4"> ขั้นตอนการทำงาน</label>
                                         <div class="col-md-8">
-                                            <input type="text" id="process_name" name="process_name" class="form-control" placeholder="เรื่อง" value="" required="">
+                                            <input type="text" id="process_name" name="process_name" class="form-control" placeholder="เรื่อง" value="<?php echo $process_name;?>" required="">
 
                                         </div>
                                     </div>
@@ -141,7 +156,7 @@
                                         <label class="col-form-label col-md-3">รายละเอียด</label>
                                         <div class="col-md-9">
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="detail" name="detail" style="height: 100px"></textarea>
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="detail" name="detail" style="height: 100px"><?php echo $detail;?></textarea>
                                             <label for="floatingTextarea2">Comments</label>
                                         </div>
                                         </div>
@@ -162,7 +177,34 @@
                                                       <th>จัดการ</th>
                                                 </thead>
                                                 <tbody>
-                                                
+                                                <?php foreach($subprocess as $rsub){?>    
+                                                <tr>
+                                                    <td><input type='text' class='form-control' name='subprocessinput[]' id='subprocessinput[]'> </td>
+                                                    <td>
+                                                        <div class='input-group date'>
+                                                        <input type='text' id='s_sub_date[]' readonly='readonly' class='form-control datepicker create-s-date' name='s_sub_date[]' data-old='' value=''>
+                                                    <div class='input-group-append'>
+                                                        <div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'>
+                                                            <i class='fa fa-calendar'></i>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    </td>
+                                                    <td><div class='input-group date'>
+                                                        <input type='text' id='e_sub_date[]' readonly='readonly' class='form-control datepicker create-e-date' name='e_sub_date[]' data-old='' value=''>
+                                                        <div class='input-group-append'>
+                                                        <div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'>
+                                                            <i class='fa fa-calendar'></i>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    </td>
+                                                    <td nowrap>
+                                                        <button class='btn btn-warning'><i class='fa fa-pencil'></i> บันทึก</button>
+                                                        <button class='btn btn-danger'><i class='fa fa-times-circle'></i> ลบ</button>
+                                                    </td>
+                                                   </tr>
+                                                   <?php }?>
                                                 </tbody>   
                                             </table>
                                             

@@ -20,6 +20,7 @@
   margin: auto;
 }
  </style> 
+
  <?php 
    
       foreach($job as $rs){
@@ -34,7 +35,7 @@
         <div class="content-wrapper">
           <div class="row">
         <?php   //echo getcwd();; ?>
-        <form id="formaddprocess">
+        <form id="formupdateprocess">
             <div class="col-12 col-xl-12 grid-margin stretch-card">
               <div class="row w-100 flex-grow">
                 <div class="col-md-12 grid-margin stretch-card">
