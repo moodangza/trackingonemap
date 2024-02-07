@@ -15,7 +15,8 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
-  <!-- inject:css -->
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+<!-- inject:css -->
   <link rel="stylesheet" href="<?php echo base_url('spica_rs/css/style.css');?>">
   <!-- endinject -->
   <link rel="shortcut icon" href="spica_rs/images/favicon.png" />

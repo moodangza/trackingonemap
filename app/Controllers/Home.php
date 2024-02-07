@@ -239,6 +239,11 @@ public function formupdateprocess($process_id)
    
     return view('spica/page/formupdateprocess',$returndata);
 }
+
+        public function updatesubprocess(){
+            $updatesubprocessmodel = new subprocessModel();
+            // $updatesubprocessmodel ->set($dataupdate) ->where('status',$_POST['job_id']) -> update();
+        }
 }
 
     // public function edit($process_id)
