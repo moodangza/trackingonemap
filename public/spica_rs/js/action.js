@@ -1,6 +1,10 @@
 $(document).ready(function() {
-  
+   let flag = $('#flag').val();
+   if(flag == ''){
   $( "#subprocess" ).hide();
+}else{
+  $( "#subprocess" ).show();
+}
   $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date').datepicker({
     language:'th',
     format: 'dd/mm/yyyy',
@@ -13,6 +17,7 @@ $(document).ready(function() {
 function jobselect(jobid){
   $.ajax(
     {
+      
     url: "/home/get",
     type: "post",
     dataType: 'text',

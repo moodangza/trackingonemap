@@ -51,7 +51,7 @@
                     <div class="card-body container">
                     <div class="text-center" style=" margin-bottom: 0.5rem;">
                     <div class="card">
-       
+        <input type="hidden" id="flag" value="<?php echo $flag;?>">
                 <div class="card-header">
                     <h3 class="card-title"><i class="fa fa-user"></i> แก้ไขขั้นตอนการทำงาน</h3>
                 </div>
@@ -102,6 +102,7 @@
                                                         <div class="row">
                                 <div class="col-12 col-md-12 col-xl-6">
                                     <div class="form-group row">
+
                                         <label class="col-form-label col-md-4"> ขั้นตอนการทำงาน</label>
                                         <div class="col-md-8">
                                             <input type="text" id="process_name" name="process_name" class="form-control" placeholder="เรื่อง" value="<?php echo $process_name;?>" required="">

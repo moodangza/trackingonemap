@@ -207,16 +207,17 @@ public function formupdateprocess($process_id)
     foreach($process_rs1 as $key => $date_th){
         $process_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
         $process_rs1[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
-        $process_rs1[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
-        $process_rs1[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
+        $process_rs1[$key]['process_start'] = $dateth->Dateinpicker($date_th['process_start']);
+        $process_rs1[$key]['process_end'] = $dateth->Dateinpicker($date_th['process_end']);
+      
     }
     $updatesubprocessmodel = new subprocessModel();
     $updatesubprocessmodel ->select('subprocess_id,subprocess_name,subprocess_start,subprocess_end')
                            ->where('process_id',$process_id);
     $subprocess_rs1 = $updatesubprocessmodel->findAll();
     foreach($subprocess_rs1 as $key => $date_th){
-        $subprocess_rs1[$key]['subprocess_start'] = $dateth->DateThai($date_th['subprocess_start']);
-        $subprocess_rs1[$key]['subprocess_end'] = $dateth->DateThai($date_th['subprocess_start']);
+        $subprocess_rs1[$key]['subprocess_start'] = $dateth->Dateinpicker($date_th['subprocess_start']);
+        $subprocess_rs1[$key]['subprocess_end'] = $dateth->Dateinpicker($date_th['subprocess_start']);
     }
     $returndata = [
         'job'=> $process_rs1,
