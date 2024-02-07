@@ -17,11 +17,8 @@ class Date extends BaseController
 	public function Dateinpicker($strDate)
 	{	
 		$strDate = explode("-",$strDate);
-		$strYear = date("Y",strtotime($strDate[0]));
-		$strMonth = date("n",strtotime($strDate[1]));
-		$strDay = date("j",strtotime($strDate[2]));
-		$strshdate = $strDay.'/'.$strMonth.'/'.$strYear;
-		return "$strshdate";
+  		$strshdate = $strDate[2].'/'.$strDate[1].'/'.$strDate[0];
+  		return "$strshdate";
 	}
 }
 

@@ -20,3 +20,4 @@ $routes->get('formupdateprocess/(:num)', 'Home::formupdateprocess/$1');
 $routes->post('addjob', 'Home::addjob');
 $routes->post('insertprocess', 'Home::insertprocess');
 $routes->post('updatejob','Home::updatejob');
+$routes->post('editjob','Home::editjob');

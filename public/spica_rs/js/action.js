@@ -221,6 +221,49 @@ function addjob(){
     }
 });   
 }
+
+// editjob
+function editjob(){
+  let editjobname = $('#editjob_name').val();
+  let editjobstart = $('#editjob_start').val();
+  let editjobend = $('#editjob_end').val();
+  var arr1 = editjobstart.split('/');
+  let editjstart = arr1[2]+'-'+arr1[1]+'-'+arr1[0];
+  var arr2 = editjobend.split('/');
+  let editjend = arr2[2]+'-'+arr2[1]+'-'+arr2[0];  
+  var editname = document.getElementById("editjob_name");
+  var editstart = document.getElementById("editjob_start");
+  var editend = document.getElementById("editjob_end");
+  if( editname.value == "") {
+      alert("กรุณากรอกข้อมูลให้ครบถ้วน")
+      editname.focus();
+      return false;
+  }else if (editstart.value ==""){
+    alert("กรุณากรอกข้อมูลให้ครบถ้วน")
+    editstart.focus();
+      return false;
+  }else if (editend.value == "" ){
+    alert("กรุณากรอกข้อมูลให้ครบถ้วน")
+    editend.focus();
+      return false;
+  }else if (editjend < editjstart){
+    alert("กรุณากรอกข้อมูลวันที่ให้ถูกต้อง")
+    return false;
+  }
+  
+  $.ajax(
+    {
+    url: "editjob",
+    type: "post",
+    dataType: 'text',
+    data: { editjobname: editjobname,editjobstart: editjstart,editjobend: editjend},
+    success: function (data) {
+      alert('บันทึก')
+      window.location.reload(false);
+    }
+});   
+}
+
 function updatejob(jobid){
   $.ajax(
     {
@@ -229,9 +272,11 @@ function updatejob(jobid){
     dataType: "json",
     data: { jobid: jobid},
     success: function (data) {
-      $('#myModal').modal('show');
+      $('#myModaledit').modal('show');
       console.log(data);
-      $("#job_name").val(data.job_name);
+      $("#editjob_name").val(data.job_name);
+      $("#editjob_start").val(data.job_start);
+      $("#editjob_end").val(data.job_end);
     }
 });   
 }

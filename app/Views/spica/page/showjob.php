@@ -109,56 +109,50 @@ function drop(ev) {
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
       </div>
     </div>
-
-  </div>
-</div>
-
-<!-- Modal -->
-<!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    </div>
+    </div>
+    <br>   <br>   <br>
+    
+  <!-- formodalupdate -->
+    <div id="myModaledit" class="modal fade" role="dialog">
   <div class="modal-dialog">
+
+    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">เพิ่มหัวข้อ</h5>
+        <!-- <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h5 class="modal-title" id="staticBackdropLabel">เพิ่มหัวข้อ</h5> -->
+        <h5 class="modal-title" id="staticBackdropLabel">แก้ไขหัวข้อ</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-        <div class="col-md-12">
-        <label for="inputjob" class="form-label">ชื่อหัวข้อ</label>
-        <input type="text" class="form-control" id="job_name" name="job_name">
-        </div>
-        <div class="col-md-6">
-        <label for="jobstart" class="form-label">วันที่เริ่ม</label>
-        <input type="text" class="form-control" id="date_start" name="job_start">
-        </div>
-        <div class="col-6">
-        <label for="jobend" class="form-label">วันที่สิ้นสุด</label>
-        <input type="text" class="form-control" id="date_end" name="job_end">
-        </div>
       <div class="modal-body">
-        ...
+      <label for="inputjob" class="form-label">ชื่อหัวข้อ</label>
+        <input type="text" class="form-control" id="editjob_name" name="editjob_name">
+        <label for="editjobstart" class="form-label">วันที่เริ่ม</label>
+        <input type="text" class="form-control datepicker-input" id="editjob_start" readonly name="editjob_start"> <div class="input-group-append">
+                                                    <div  class="input-group-text toggle-datepicker" data-toggle="#create-e-date"><i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
+        <label for="editjobend" class="form-label">วันที่สิ้นสุด</label>
+        <input type="text" class="form-control datepicker-input" id="editjob_end" readonly name="editjob_end"> <div class="input-group-append">
+                                                    <div  class="input-group-text toggle-datepicker" data-toggle="#create-e-date"><i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">บันทึก</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-
+      <button type="button" class="btn btn-primary" onclick="editjob()">บันทึก</button>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
       </div>
     </div>
-  </div>
-</div> -->
-                      <!-- <button style="background-color:green; " class="popup" onclick="myFunction()" id="intjob" >เพื่มหัวข้อ</button> -->
-                      <br>   <br>   <br>
+    </div>
+    </div>
+    
 
-                      <!-- <div class="row mb-3">
-                        <div class="col-md-12">
-                          <div class="d-flex justify-content-between traffic-status">
-                            <div class="item">                           
-                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="row" style="margin-bottom: 2px">
-                              <div class="container"> -->
             <div class="row">          
             <div class="col-lg-5 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                 
-                  <div class="list-group">
+            <div class="card">
+            <div class="card-body">
+            <div class="list-group">
                             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
                             ต้องดำเนินการ
                             </a>
@@ -189,8 +183,7 @@ function drop(ev) {
                                 <br> วันที่เริ่ม : <?php echo $row['job_start']?>
                                 <br> วันที่สิ้นสุด : <?php echo $row['job_end']?></a>
                                 <script src="https://kit.fontawesome.com/a076d05399.js"></script> 
-                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action">
-                                <i class="fa fa-pencil" aria-hidden="true"></i> 
+                                <i class="fa fa-pencil" aria-hidden="true" onclick="updatejob(<?php echo $row['job_id'];?>)"></i> 
                           <?php }
                         }?>
                   </div>

@@ -147,12 +147,30 @@ class Home extends BaseController
 
         // ];
     }
+
+    public function editjob()
+    {
+        $editjobmodel = new jobmodel();
+        // $dataedit = array('status'=>'2');
+        // $editjobmodel ->set($dataedit) ->where('status',$_POST['job_id']) -> update();
+        $dataedit = array('job_name'=>$_POST['editjobname'],
+        'job_start'=>$_POST['editjobstart'],
+        'job_end'=>$_POST['editjobend']);
+        // 'status'=>'1');
+        // $editjobmodel -> update($dataedit);
+        $editjobmodel ->set($dataedit) ->where($_POST['job_id']) -> update();
+    }
+
     public function updatejob()
     {
         $updatejobmodel = new jobModel();
-        $updatejobmodel ->select('job_tb.job_id,job_tb.job_name')
+        $dateth = new Date();
+        $updatejobmodel ->select('job_tb.job_id,job_tb.job_name,job_start,job_end')
             ->where('job_id',$_POST['jobid']);
             $updatejobmodel_rs = $updatejobmodel->first();
+            $updatejobmodel_rs["job_start"] = $dateth->Dateinpicker($updatejobmodel_rs['job_start']);
+            $updatejobmodel_rs["job_end"] = $dateth->Dateinpicker($updatejobmodel_rs['job_end']);
+            //array_push//($updatejobmodel_rs ,$datestart,$dateend);
             header('Content-Type: application/json');
             echo json_encode( $updatejobmodel_rs );
 
