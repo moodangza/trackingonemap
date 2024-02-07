@@ -36,6 +36,47 @@ function jobselect(jobid){
 });   
 }
 
+//updatejob
+$(document).on( "click",".updatejob", function() {
+  // alert( "Handler for `click` called." );
+  $( ".updatejob" ).show();
+  let rowcontent = " <tr>"+
+  "<td><input type='text' class='form-control' name='subprocessinput[]' id='subprocessinput[]'> </td>"+
+  "<td>"+
+      "<div class='input-group date'>"+
+          "<input type='text' id='s_sub_date[]' readonly='readonly' class='form-control datepicker create-s-date' name='s_sub_date[]' data-old='' value=''>"+
+      "<div class='input-group-append'>"+
+      "<div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'><i class='fa fa-calendar'></i>"+
+      "</div>"+
+      "</div>"+
+      "</div>"+
+  "</td>"+
+"<td>"+
+"<div class='input-group date'>"+
+"<input type='text' id='e_sub_date[]' readonly='readonly' class='form-control datepicker create-e-date' name='e_sub_date[]' data-old='' value=''>"+
+"<div class='input-group-append'>"+
+  "<div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'><i class='fa fa-calendar'></i>"+
+  "</div>"+
+"</div>"+
+"</div>"+
+"</td>"+
+"<td nowrap>"+
+"<button class='btn btn-warning'><i class='fa fa-pencil'></i> บันทึก</button>"+
+"<button class='btn btn-danger'><i class='fa fa-times-circle'></i> ลบ</button>"+
+"</td>"+
+     "</tr>";
+  $("#tblsubprocess tbody").append(rowcontent);
+  $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date').datepicker({
+    language:'th',
+    format: 'dd/mm/yyyy',
+    todayBtn: 'linked',
+    todayHighlight: true,
+    autoclose: true
+  });
+} );
+
+
+
 $(document).on( "click",".addsubprocess", function() {
   // alert( "Handler for `click` called." );
   $( ".subprocess" ).show();

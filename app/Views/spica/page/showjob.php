@@ -165,9 +165,9 @@ function drop(ev) {
                             <?php foreach($job as $row){?>
                               <?php if($row['status']==1){?>
                                 <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action">
-                                <?php echo $row['job_name']?> <br> วันที่เริ่ม :
-                                <?php echo $row['job_start']?> <br> วันที่สิ้นสุด :
-                                <?php echo $row['job_end']?></a>
+                                <?php echo $row['job_name']?>
+                                <br> วันที่เริ่ม : <?php echo $row['job_start']?>
+                                <br> วันที่สิ้นสุด : <?php echo $row['job_end']?></a>
                           <?php } 
                         }?>
                     </div>
@@ -185,10 +185,11 @@ function drop(ev) {
                             <?php foreach($job as $row){?>
                               <?php if($row['status']==2){?>
                                 <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action">
-                                <?php echo $row['job_name']?><br> วันที่เริ่ม :
-                                <?php echo $row['job_start']?> <br> วันที่สิ้นสุด :
-                                <?php echo $row['job_end']?></a>
+                                <?php echo $row['job_name']?>
+                                <br> วันที่เริ่ม : <?php echo $row['job_start']?>
+                                <br> วันที่สิ้นสุด : <?php echo $row['job_end']?></a>
                                 <script src="https://kit.fontawesome.com/a076d05399.js"></script> 
+                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action">
                                 <i class="fa fa-pencil" aria-hidden="true"></i> 
                           <?php }
                         }?>
