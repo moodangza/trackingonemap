@@ -189,7 +189,7 @@ function drop(ev) {
                                 <?php echo $row['job_start']?> <br> วันที่สิ้นสุด :
                                 <?php echo $row['job_end']?></a>
                                 <script src="https://kit.fontawesome.com/a076d05399.js"></script> 
-                                <i class="fa fa-pencil" aria-hidden="true"></i> 
+                                <i class="fa fa-pencil" aria-hidden="true" onclick="updatejob(<?php echo $row['job_id'];?>)"></i> 
                           <?php }
                         }?>
                   </div>

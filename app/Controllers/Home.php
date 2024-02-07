@@ -147,6 +147,16 @@ class Home extends BaseController
 
         // ];
     }
+    public function updatejob()
+    {
+        $updatejobmodel = new jobModel();
+        $updatejobmodel ->select('job_tb.job_id,job_tb.job_name')
+            ->where('job_id',$_POST['jobid']);
+            $updatejobmodel_rs = $updatejobmodel->first();
+            header('Content-Type: application/json');
+            echo json_encode( $updatejobmodel_rs );
+
+    }   
     public function insertprocess()
     {
         // print_r($_POST['e_sub_date']);

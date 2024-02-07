@@ -170,6 +170,8 @@
                                     <div class="col-12 col-md-12 col-xl-8">
                                     <button class="btn btn-primary addsubprocess" type="button"><i class="fa fa-plus-square"></i> เพิ่ม</button>
                                         <div class="form-group row subprocess" id="subprocess">
+                                            <div class="col-2"></div>
+                                           <div class="col-8">
                                             <table  class="table table-hover" id="tblsubprocess">
                                                 <thead>
                                                       <th>ขั้นตอนการทำงานย่อย</th>
@@ -208,7 +210,7 @@
                                                    <?php }?>
                                                 </tbody>   
                                             </table>
-                                            
+                                            </div> 
                                         </div>
                                     </div>
                             </div>

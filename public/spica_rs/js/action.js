@@ -180,6 +180,20 @@ function addjob(){
     }
 });   
 }
+function updatejob(jobid){
+  $.ajax(
+    {
+    url: "updatejob",
+    type: "post",
+    dataType: "json",
+    data: { jobid: jobid},
+    success: function (data) {
+      $('#myModal').modal('show');
+      console.log(data);
+      $("#job_name").val(data.job_name);
+    }
+});   
+}
 // showprocess
 $(function() {
   // Open Popup
