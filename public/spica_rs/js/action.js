@@ -5,7 +5,9 @@ $(document).ready(function() {
 }else{
   $( "#subprocess" ).show();
 }
-  $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date').datepicker({
+
+//ปฏิทิน
+  $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date,#editjob_start,#editjob_end').datepicker({
     language:'th',
     format: 'dd/mm/yyyy',
     todayBtn: 'linked',
@@ -224,6 +226,7 @@ function addjob(){
 
 // editjob
 function editjob(){
+  let editjob_id = $('#editjob_id').val();
   let editjobname = $('#editjob_name').val();
   let editjobstart = $('#editjob_start').val();
   let editjobend = $('#editjob_end').val();
@@ -256,7 +259,7 @@ function editjob(){
     url: "editjob",
     type: "post",
     dataType: 'text',
-    data: { editjobname: editjobname,editjobstart: editjstart,editjobend: editjend},
+    data: { editjobid: editjob_id,editjobname: editjobname,editjobstart: editjstart,editjobend: editjend},
     success: function (data) {
       alert('บันทึก')
       window.location.reload(false);
@@ -274,6 +277,7 @@ function updatejob(jobid){
     success: function (data) {
       $('#myModaledit').modal('show');
       console.log(data);
+      $("#editjob_id").val(data.job_id);
       $("#editjob_name").val(data.job_name);
       $("#editjob_start").val(data.job_start);
       $("#editjob_end").val(data.job_end);

@@ -151,6 +151,7 @@ class Home extends BaseController
     public function editjob()
     {
         $editjobmodel = new jobmodel();
+        $jobid1 = $this->request->getVar('editjobid');
         // $dataedit = array('status'=>'2');
         // $editjobmodel ->set($dataedit) ->where('status',$_POST['job_id']) -> update();
         $dataedit = array('job_name'=>$_POST['editjobname'],
@@ -158,7 +159,9 @@ class Home extends BaseController
         'job_end'=>$_POST['editjobend']);
         // 'status'=>'1');
         // $editjobmodel -> update($dataedit);
-        $editjobmodel ->set($dataedit) ->where($_POST['job_id']) -> update();
+        $u=$editjobmodel ->set($dataedit) ->where('job_id',$jobid1 ) -> update();
+        print_r($dataedit);
+
     }
 
     public function updatejob()

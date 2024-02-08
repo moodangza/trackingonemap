@@ -125,6 +125,7 @@ function drop(ev) {
         <h5 class="modal-title" id="staticBackdropLabel">แก้ไขหัวข้อ</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <input type="hidden" class="form-control" id="editjob_id" name="editjob_id">
       <div class="modal-body">
       <label for="inputjob" class="form-label">ชื่อหัวข้อ</label>
         <input type="text" class="form-control" id="editjob_name" name="editjob_name">
@@ -184,6 +185,8 @@ function drop(ev) {
                                 <br> วันที่สิ้นสุด : <?php echo $row['job_end']?></a>
                                 <script src="https://kit.fontawesome.com/a076d05399.js"></script> 
                                 <i class="fa fa-pencil" aria-hidden="true" onclick="updatejob(<?php echo $row['job_id'];?>)"></i> 
+                                <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+                                <i class="fa fa-eye" aria-hidden="true" onclick="updatejob(<?php echo $row['job_id'];?>)"></i> 
                           <?php }
                         }?>
                   </div>
