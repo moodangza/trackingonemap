@@ -53,7 +53,7 @@
                 <?php }?>
             </select>
             </div>
-            <div class="draggable-container">
+            <!-- <div class="draggable-container">
       <h1 class="title">Pick from here</h1>
       <p class="shallow-draggable" draggable="true">1</p>
       <p class="shallow-draggable" draggable="true">2</p>
@@ -62,41 +62,8 @@
       <h1 class="title">Put it here !!!</h1>
       <p class="shallow-draggable" draggable="true">3</p>
       <p class="shallow-draggable" draggable="true">4</p>
-    </div>
-            <div class="col">
-            <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
-
-<!-- Modal -->
-<!-- <div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog"> -->
-
-    <!-- Modal content-->
-    <!-- <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-       
-      </div>
-      <div class="modal-body">
-      <h4  class="modal-title">เพิ่มขั้นตอนการทำงาน</h4>
-      <div class="row">
-                  <div class="col">
-                    aaaa
-                  </div>  
-      </div>
-      <div class="row">
-                  <div class="col">
-                                aaaa
-                  </div>
-      </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
     </div> -->
-
-  <!-- </div>
-</div> -->
+            <div class="col">
               <a id="urladdprocess" href="<?php echo base_url('formaddprocess');?>"><button  class="btn btn-success btn-sm addprocess">
                 เพิ่มขั้นตอนการทำงาน
               </button>
@@ -115,13 +82,14 @@
                 <div class="card-body">
                   <h4 class="card-title">ขั้นตอนการทำงาน</h4>
                   <div class="draggable-container">
-                          
+                  <ol class="list-group list-group-numbered">    
                          <div id='processitem'>
                               
                          </div>
                                 <!-- <a href="#" id='processitem' class="list-group-item list-group-item-action"></a> -->
 
                     </div>
+                </ol>
                 </div>
               </div>
             </div>

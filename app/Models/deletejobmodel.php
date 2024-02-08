@@ -1,28 +1,24 @@
 <?php
 namespace App\Models;
 use CodeIgniter\Model;
-class firstModel extends Model{
+class jobModel extends Model{
         // protected $DBGroup      = 'project';
-        protected $table        = 'orders';
-        protected $primaryKey   = 'OrderID';
+        protected $table        = 'job_tb';
+        protected $primaryKey   = 'job_id';
         protected $useAutoIncrement = false;
         protected $returnType       = 'array';
         protected $useSoftDeletes   = false;
         protected $protectFields    = false;
         protected $allowedFields    = [
-            'OrderID',
-            'CustomerID',
-            'EmployeeID',
-            'OrderDate',
-            'ShipperID'
+            'job_id'         
         ];
 
          // Dates
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
-    // protected $updatedField  = 'updated_at';
-    // protected $deletedField  = 'deleted_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
 
     // Validation
     protected $validationRules      = [];

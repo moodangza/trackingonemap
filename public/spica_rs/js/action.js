@@ -86,15 +86,44 @@ function jobselect(jobid){
        
       a.process.forEach(element => {
        
-          $('#processitem').append('<div class="drag"><a  href="/formupdateprocess/'+element.process_id+'"><p  id="process'+element.process_id+'" class="list-group-item list-group-item-action process_list ">'+
-          '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end + '</p> </a></div>');
+          $('#processitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
+          '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
+          '<div class="text-right">'+
+          '<a class="btn btn-warning" href="/formupdateprocess/'+element.process_id+'" title="แก้ไข">'+ '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>'+
+          '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ"><i class="fa fa-window-close" aria-hidden="true"></i></button>'+
+          '</div>'+
+          '</li>'
+          
+          );
           
       });
       
     }
 });   
 }
-
+function deleteprocess(process_id){
+  let text = "Press a button!\nEither OK or Cancel.";
+  if (confirm(text) == true) {
+    text = "ทำการลบข้อมูลแล้ว";
+    alert(text);
+    window.location.reload(false);
+    return false;
+    $.ajax(
+      {
+      url: "/deleteprocess",
+      type: "post",
+      dataType: 'text',
+      data: { process_id: process_id},
+      success: function (data) {
+       
+        window.location.reload(false);
+      }
+  });   
+  } else {
+    // window.location.reload(false);
+  }
+  
+}
 
 function appendsubprocess(input){
   var count=0;
