@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 use CodeIgniter\Model;
-class jobModel extends Model{
+class deletejobModel extends Model{
         // protected $DBGroup      = 'project';
         protected $table        = 'job_tb';
         protected $primaryKey   = 'job_id';

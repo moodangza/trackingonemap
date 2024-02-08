@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 use CodeIgniter\Model;
-class jobModel extends Model{
+class updatejobModel extends Model{
         // protected $DBGroup      = 'project';
         protected $table        = 'job_tb';
         protected $primaryKey   = 'job_id';

@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 use CodeIgniter\Model;
-class processModel extends Model{
+class updateprocessModel extends Model{
         // protected $DBGroup      = 'project';
         protected $table        = 'process_tb';
         protected $primaryKey   = 'process_id';
