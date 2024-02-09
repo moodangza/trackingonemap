@@ -108,17 +108,17 @@ function deleteprocess(process_id){
   if (confirm(text) == true) {
     text = "ทำการลบข้อมูลแล้ว";
     alert(text);
-    window.location.reload(false);
-    return false;
+    // window.location.reload(false);
+    // return false;
     $.ajax(
       {
-      url: "/deleteprocess",
+      url: "deleteprocess",
       type: "post",
       dataType: 'text',
       data: { process_id: process_id},
       success: function (data) {
        
-        window.location.reload(false);
+        // window.location.reload(false);
       }
   });   
   } else {

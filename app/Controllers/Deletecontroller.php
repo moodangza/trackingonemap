@@ -11,6 +11,8 @@ class Manage extends BaseController
 {
     public function deleteprocess($process_id)
     {
+        echo $process_id;
+        exit;
         $deleteprocess = new processModel();
         $dataprocess = array('delete_flag'=>'0',
                               'deleted_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
