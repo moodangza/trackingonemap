@@ -127,6 +127,30 @@ function deleteprocess(process_id){
   
 }
 
+function deletejob(job_id){
+  let text = "Press a button!\nEither OK or Cancel.";
+  if (confirm(text) == true) {
+    text = "ทำการลบข้อมูลแล้ว";
+    alert(text);
+    // window.location.reload(false);
+    // return false;
+    $.ajax(
+      {
+      url: "deletejob",
+      type: "post",
+      dataType: 'text',
+      data: { job_id: job_id},
+      success: function (data) {
+       
+        // window.location.reload(false);
+      }
+  });   
+  } else {
+    // window.location.reload(false);
+  }
+  
+}
+
 function appendsubprocess(input){
   var count=0;
   for(var i=0; i<input; i++) {
