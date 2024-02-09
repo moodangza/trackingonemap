@@ -64,7 +64,7 @@ class Home extends BaseController
         $job_rs = $jobmodel->findAll();
         $jobid1 = $this->request->getVar('jobid1');
         $processmodel = new processModel();
-        $processmodel ->select('process_.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status')
+        $processmodel ->select('process.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status')
         // ->where('delete_flag', '1') 
         ->where('process_tb.job_id', $jobid1 )
         ->groupBy('process_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
