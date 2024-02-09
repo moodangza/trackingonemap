@@ -1,4 +1,49 @@
-$(document).ready(function() {
+
+const draggbles = document.querySelectorAll(".shallow-draggable")
+const containers = document.querySelectorAll(".draggable-container")
+
+draggbles.forEach((draggble) => {
+  //for start dragging costing opacity
+  draggble.addEventListener("dragstart", () => {
+    draggble.classList.add("dragging")
+  })
+
+  //for end the dragging opacity costing
+  draggble.addEventListener("dragend", () => {
+    draggble.classList.remove("dragging")
+  })
+})
+//shit
+containers.forEach((container) => {
+  container.addEventListener("dragover", function (e) {
+    e.preventDefault()
+    const afterElement = dragAfterElement(container, e.clientY)
+    const dragging = document.querySelector(".dragging")
+    if (afterElement == null) {
+      container.appendChild(dragging)
+    } else {
+      container.insertBefore(dragging, afterElement)
+    }
+  })
+})
+
+function dragAfterElement(container, y) {
+  const draggbleElements = [...container.querySelectorAll(".shallow-draggable:not(.dragging)")]
+
+  return draggbleElements.reduce(
+    (closest, child) => {
+      const box = child.getBoundingClientRect()
+      const offset = y - box.top - box.height / 2
+      if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child }
+      } else {
+        return closest
+      }
+    },
+    { offset: Number.NEGATIVE_INFINITY }
+  ).element
+}
+  $(document).ready(function() {
    let flag = $('#flag').val();
    if(flag == ''){
   $( "#subprocess" ).hide();
@@ -14,6 +59,13 @@ $(document).ready(function() {
     todayHighlight: true,
     autoclose: true
   });
+  $(document).on( "click",".addsubprocess", function() {
+    // alert( "Handler for `click` called." );
+   
+    appendsubprocess(1);
+    
+    
+  } );
 });
 
 function jobselect(jobid){
@@ -27,29 +79,59 @@ function jobselect(jobid){
     success: function (data) {
       var a = JSON.parse(data);
       console.log(a.process)
+     
       $('#processitem').html('');
+      
       // $('#addjob_id').html('');
       // $('#addjob_id').append('<input class="addprocessid" type="text" value="'+a.process[0]['job_id']+'">');
       $("#urladdprocess").attr("href", "/formaddprocess/"+a.process[0]['job_id']+""); 
        
       a.process.forEach(element => {
        
-          $('#processitem').append('<a href="/formupdateprocess/'+element.process_id+'" id="process'+element.process_id+'" class="list-group-item list-group-item-action process_list">'+
-          '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end + '</a>');
-           
+          $('#processitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
+          '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
+          '<div class="text-right">'+
+          '<a class="btn btn-warning" href="/formupdateprocess/'+element.process_id+'" title="แก้ไข">'+ '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>'+
+          '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ"><i class="fa fa-window-close" aria-hidden="true"></i></button>'+
+          '</div>'+
+          '</li>'
+          
+          );
+          
       });
-  
-
+      
     }
 });   
 }
+function deleteprocess(process_id){
+  let text = "Press a button!\nEither OK or Cancel.";
+  if (confirm(text) == true) {
+    text = "ทำการลบข้อมูลแล้ว";
+    alert(text);
+    // window.location.reload(false);
+    // return false;
+    $.ajax(
+      {
+      url: "deleteprocess",
+      type: "post",
+      dataType: 'text',
+      data: { process_id: process_id},
+      success: function (data) {
+       
+        // window.location.reload(false);
+      }
+  });   
+  } else {
+    // window.location.reload(false);
+  }
+  
+}
 
-//updatejob
-$(document).on( "click",".updatejob", function() {
-  // alert( "Handler for `click` called." );
-  $( ".updatejob" ).show();
-  let rowcontent = " <tr>"+
-  "<td><input type='text' class='form-control' name='subprocessinput[]' id='subprocessinput[]'> </td>"+
+function appendsubprocess(input){
+  var count=0;
+  for(var i=0; i<input; i++) {
+  let rowcontent = " <tr> "+
+  "<td>"+count+"<input type='text' class='form-control' name='subprocessinput[]' id='subprocessinput[]'> </td>"+
   "<td>"+
       "<div class='input-group date'>"+
           "<input type='text' id='s_sub_date[]' readonly='readonly' class='form-control datepicker create-s-date' name='s_sub_date[]' data-old='' value=''>"+
@@ -74,6 +156,10 @@ $(document).on( "click",".updatejob", function() {
 "</td>"+
      "</tr>";
   $("#tblsubprocess tbody").append(rowcontent);
+  
+  count++;
+  $("input[id=count-field]").val(count);
+}  
   $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date').datepicker({
     language:'th',
     format: 'dd/mm/yyyy',
@@ -81,48 +167,7 @@ $(document).on( "click",".updatejob", function() {
     todayHighlight: true,
     autoclose: true
   });
-} );
-
-
-
-$(document).on( "click",".addsubprocess", function() {
-  // alert( "Handler for `click` called." );
-  $( ".subprocess" ).show();
-  let rowcontent = " <tr>"+
-  "<td><input type='text' class='form-control' name='subprocessinput[]' id='subprocessinput[]'> </td>"+
-  "<td>"+
-      "<div class='input-group date'>"+
-          "<input type='text' id='s_sub_date[]' readonly='readonly' class='form-control datepicker create-s-date' name='s_sub_date[]' data-old='' value=''>"+
-      "<div class='input-group-append'>"+
-      "<div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'><i class='fa fa-calendar'></i>"+
-      "</div>"+
-      "</div>"+
-      "</div>"+
-  "</td>"+
-"<td>"+
-"<div class='input-group date'>"+
-"<input type='text' id='e_sub_date[]' readonly='readonly' class='form-control datepicker create-e-date' name='e_sub_date[]' data-old='' value=''>"+
-"<div class='input-group-append'>"+
-  "<div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'><i class='fa fa-calendar'></i>"+
-  "</div>"+
-"</div>"+
-"</div>"+
-"</td>"+
-"<td nowrap>"+
-"<button class='btn btn-warning'><i class='fa fa-pencil'></i> บันทึก</button>"+
-"<button class='btn btn-danger'><i class='fa fa-times-circle'></i> ลบ</button>"+
-"</td>"+
-     "</tr>";
-  $("#tblsubprocess tbody").append(rowcontent);
-  $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date').datepicker({
-    language:'th',
-    format: 'dd/mm/yyyy',
-    todayBtn: 'linked',
-    todayHighlight: true,
-    autoclose: true
-  });
-} );
-
+}
 
 
 $(document).on("click",".insertprocess",function(){
@@ -284,6 +329,36 @@ function updatejob(jobid){
     }
 });   
 }
+function updatesubprocess(subprocessid){
+  let inputsub = $("#subprocessinput").val();
+  console.log(inputsub);
+  return false;
+  $.ajax(
+    {
+    url: "updatesubprocess",
+    type: "post",
+    dataType: "json",
+    data: { subprocessid: subprocessid},
+    success: function (data) {
+
+    }
+}); 
+}
+$(document).on('click', '.deletesubprocess', function () {
+  alert('dlsnfolsed');
+//   $(this).parent('td.text-center').parent('tr.rowClass').remove(); 
+//   $.ajax(
+//     {
+//     url: "deletesubprocess",
+//     type: "post",
+//     dataType: "json",
+//     data: { subprocessid: subprocessid},
+//     success: function (data) {
+      
+//     }
+// }); 
+});
+
 // showprocess
 $(function() {
   // Open Popup
@@ -334,4 +409,51 @@ function addprocess(job_idprocess){
     }
 });   
 }
+// drag and drop
+// id หรือ class ที่ต้องการลาก
+// const draggbles = document.querySelectorAll(".shallow-draggable")
+// // id หรือ class ที่ต้องการวาง
+// const containers = document.querySelectorAll(".draggable-container")
+
+// draggbles.forEach((draggble) => {
+//   //for start dragging costing opacity
+//   draggble.addEventListener("dragstart", () => {
+//     draggble.classList.add("dragging")
+//   })
+
+//   //for end the dragging opacity costing
+//   draggble.addEventListener("dragend", () => {
+//     draggble.classList.remove("dragging")
+//   })
+// })
+// //shit
+// containers.forEach((container) => {
+//   container.addEventListener("dragover", function (e) {
+//     e.preventDefault()
+//     const afterElement = dragAfterElement(container, e.clientY)
+//     const dragging = document.querySelector(".dragging")
+//     if (afterElement == null) {
+//       container.appendChild(dragging)
+//     } else {
+//       container.insertBefore(dragging, afterElement)
+//     }
+//   })
+// })
+
+// function dragAfterElement(container, y) {
+//   const draggbleElements = [...container.querySelectorAll(".shallow-draggable:not(.dragging)")]
+
+//   return draggbleElements.reduce(
+//     (closest, child) => {
+//       const box = child.getBoundingClientRect()
+//       const offset = y - box.top - box.height / 2
+//       if (offset < 0 && offset > closest.offset) {
+//         return { offset: offset, element: child }
+//       } else {
+//         return closest
+//       }
+//     },
+//     { offset: Number.NEGATIVE_INFINITY }
+//   ).element
+// }
  

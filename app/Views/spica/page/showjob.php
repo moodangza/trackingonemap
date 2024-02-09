@@ -179,15 +179,25 @@ function drop(ev) {
                             </a>
                             <?php foreach($job as $row){?>
                               <?php if($row['status']==2){?>
-                                <a href="#" class="list-group-item list-group-item-action">
-                                <?php echo $row['job_name']?>
-                                <br> วันที่เริ่ม : <?php echo $row['job_start']?>
-                                <br> วันที่สิ้นสุด : <?php echo $row['job_end']?>
-                                <!-- <a class="list-group-item list-group-item-action"> -->
-                                <i class="fa fa-pencil" aria-hidden="true" onclick="updatejob(<?php echo $row['job_id'];?>)"></i> 
-                                <i class="fa fa-eye" aria-hidden="true" ></i>
-                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" >
-                                 
+                                <ul style="padding-bottom: 2px;" class="list-group">
+                                  <li class="list-group-item "> 
+                                    <!-- <a href="<?php // echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action"> -->
+                                  <?php echo $row['job_name']?>
+                                  <br> วันที่เริ่ม : <?php echo $row['job_start']?>
+                                  <br> วันที่สิ้นสุด : <?php echo $row['job_end']?>
+                                  <!-- </a> -->
+                                  <br>
+                                  <div class="text-right">
+                                  <button class="btn btn-warning" onclick="updatejob(<?php echo $row['job_id'];?>)">
+                                    <i class="fa fa-pencil " aria-hidden="true" ></i> 
+                                  </button>
+                            
+                                  <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="btn btn-success">
+                                    <i class="fa fa-eye" aria-hidden="true" ></i> 
+                                  </a>
+                                  </div>
+                                </li>
+                            </ul>
                           <?php }
                         }?>
                               </a>

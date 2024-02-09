@@ -167,11 +167,11 @@
 
                             </div>
                             <div class="row">
-                                    <div class="col-12 col-md-12 col-xl-8">
+                                    <div >
                                     <button class="btn btn-primary addsubprocess" type="button"><i class="fa fa-plus-square"></i> เพิ่ม</button>
-                                        <div class="form-group row subprocess" id="subprocess">
-                                            <div class="col-2"></div>
-                                           <div class="col-8">
+                                        <div class="form-group row subprocess " id="subprocess">
+                                           
+                                           <div class="col-12 ">
                                             <table  class="table table-hover" id="tblsubprocess">
                                                 <thead>
                                                       <th>ขั้นตอนการทำงานย่อย</th>
@@ -180,8 +180,11 @@
                                                       <th>จัดการ</th>
                                                 </thead>
                                                 <tbody>
+                                                    <input id="count-field" class="hidden-field" type="hidden" name="total" value="">
+                                                    <input id="count-field" type="hidden" name="count">
+		                                            
                                                 <?php foreach($subprocess as $rsub){?>    
-                                                <tr>
+                                                <tr id="subprocess<?php echo $rsub['subprocess_id'];?>">
                                                     <td><input type='text' class='form-control' name='subprocessinput[]' id='subprocessinput[]'> </td>
                                                     <td>
                                                         <div class='input-group date'>
@@ -193,7 +196,8 @@
                                                     </div>
                                                     </div>
                                                     </td>
-                                                    <td><div class='input-group date'>
+                                                    <td>
+                                                        <div class='input-group date'>
                                                         <input type='text' id='e_sub_date[]' readonly='readonly' class='form-control datepicker create-e-date' name='e_sub_date[]' data-old='' value=''>
                                                         <div class='input-group-append'>
                                                         <div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'>
@@ -203,8 +207,8 @@
                                                     </div>
                                                     </td>
                                                     <td nowrap>
-                                                        <button class='btn btn-warning'><i class='fa fa-pencil'></i> บันทึก</button>
-                                                        <button class='btn btn-danger'><i class='fa fa-times-circle'></i> ลบ</button>
+                                                        <button class='btn btn-warning' onclick="updatesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-pencil'></i> แก้ไข</button>
+                                                        <button class='btn btn-danger deletesubprocess' ><i class='fa fa-times-circle'></i> ลบ</button>
                                                     </td>
                                                    </tr>
                                                    <?php }?>
@@ -212,7 +216,7 @@
                                             </table>
                                             </div> 
                                         </div>
-                                    </div>
+                                  
                             </div>
                             <div class="row">
                                     <div class="col-12 text-center">
