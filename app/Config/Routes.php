@@ -20,5 +20,6 @@ $routes->get('formupdateprocess/(:num)', 'Home::formupdateprocess/$1');
 $routes->post('addjob', 'Home::addjob');
 $routes->post('insertprocess', 'Home::insertprocess');
 $routes->post('updatejob','Home::updatejob');
-$routes->post('deleteprocess/(:num)','Deletecontroller::deleteprocess/$1');
+$routes->post('deleteprocess/(:num)','Managecontroller::deleteprocess/$1');
+$routes->post('confirmprocess/(:num)','Managecontroller::confirmprocess/$1');
 $routes->post('editjob','Home::editjob');

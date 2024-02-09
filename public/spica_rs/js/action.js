@@ -81,6 +81,7 @@ function jobselect(jobid){
       console.log(a.process)
      
       $('#processitem').html('');
+      $('#finishprocessitem').html('');
       
       // $('#addjob_id').html('');
       // $('#addjob_id').append('<input class="addprocessid" type="text" value="'+a.process[0]['job_id']+'">');
@@ -92,6 +93,7 @@ function jobselect(jobid){
           '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
           '<div class="text-right">'+
           '<a class="btn btn-warning" href="/formupdateprocess/'+element.process_id+'" title="แก้ไข">'+ '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>'+
+          '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน"><i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
           '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ"><i class="fa fa-window-close" aria-hidden="true"></i></button>'+
           '</div>'+
           '</li>'
@@ -99,12 +101,25 @@ function jobselect(jobid){
           );
           
       });
+      a.processfinish.forEach(element => {
+       
+        $('#finishprocessitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
+        '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
+        '<div class="text-right">'+
+        '<a class="btn btn-success" href="/formupdateprocess/'+element.process_id+'" title="ดูข้อมูล">'+ '<i class="fa fa-search" aria-hidden="true"></i></a>'+
+        '</div>'+
+        '</li>'
+        
+        );
+        
+    });
       
     }
 });   
 }
+// ลบขั้นตอนการทำงาน
 function deleteprocess(process_id){
-  let text = "Press a button!\nEither OK or Cancel.";
+  let text = "ยืนยันการลบข้อมูล";
   if (confirm(text) == true) {
     text = "ทำการลบข้อมูลแล้ว";
     alert(text);
@@ -118,13 +133,32 @@ function deleteprocess(process_id){
       // data: { process_id: process_id},
       success: function (data) {
        
-        // window.location.reload(false);
+        window.location.reload(false);
       }
   });   
-  } else {
-    // window.location.reload(false);
-  }
+  } 
   
+}
+
+function confirmprocess(process_id){
+  let text = "ยืนยันการสิ้นสุดการทำงาน";
+  if (confirm(text) == true) {
+    text = "ทำการยืนยันข้อมูลแล้ว";
+    alert(text);
+    // window.location.reload(false);
+    // return false;
+    $.ajax(
+      {
+      url: "confirmprocess/"+process_id,
+      type: "post",
+      dataType: 'text',
+      // data: { process_id: process_id},
+      success: function (data) {
+       
+        window.location.reload(false);
+      }
+  });   
+  } 
 }
 
 function appendsubprocess(input){
