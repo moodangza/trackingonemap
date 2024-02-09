@@ -20,6 +20,7 @@ class Date extends BaseController
 		
 		$strshdate = $strDate[2].'/'.$strDate[1].'/'.$strDate[0];
 		return "$strshdate";
+  	
 	}
 }
 

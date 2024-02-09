@@ -21,3 +21,4 @@ $routes->post('addjob', 'Home::addjob');
 $routes->post('insertprocess', 'Home::insertprocess');
 $routes->post('updatejob','Home::updatejob');
 $routes->post('deleteprocess/(:any)','Manage::deleteprocess/$1');
+$routes->post('editjob','Home::editjob');
