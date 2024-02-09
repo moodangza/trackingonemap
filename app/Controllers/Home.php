@@ -141,6 +141,7 @@ class Home extends BaseController
         $data = array('job_name'=>$_POST['jobname'],
         'job_start'=>$_POST['jobstart'],
         'job_end'=>$_POST['jobend'],
+        'created_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
         'status'=>'1');
         $addjobmodel1 -> insert($data);
         // $return = [
@@ -156,6 +157,7 @@ class Home extends BaseController
         // $editjobmodel ->set($dataedit) ->where('status',$_POST['job_id']) -> update();
         $dataedit = array('job_name'=>$_POST['editjobname'],
         'job_start'=>$_POST['editjobstart'],
+        'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
         'job_end'=>$_POST['editjobend']);
         // 'status'=>'1');
         // $editjobmodel -> update($dataedit);
@@ -187,6 +189,7 @@ class Home extends BaseController
         'process_name'=>$_POST['process_name'],
         // 'process_start'=>$_POST['process_start'],
         // 'process_end'=>$_POST['process_end'],
+        'created_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
         'detail'=>$_POST['detail'],
         'status'=>'1');
         $addprocessmodel -> insert($data);
@@ -213,7 +216,9 @@ class Home extends BaseController
            }
         }
         $updatejob = new jobModel();
-        $dataupdate = array('status'=>'2');
+        $dataupdate = array('status'=>'2',
+                            'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
+                        );
        
         $updatejob ->set($dataupdate) ->where('status',$_POST['job_id']) -> update();
         $returndata = [
