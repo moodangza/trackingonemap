@@ -179,17 +179,19 @@ function drop(ev) {
                             </a>
                             <?php foreach($job as $row){?>
                               <?php if($row['status']==2){?>
-                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action">
+                                <a href="#" class="list-group-item list-group-item-action">
                                 <?php echo $row['job_name']?>
                                 <br> วันที่เริ่ม : <?php echo $row['job_start']?>
-                                <br> วันที่สิ้นสุด : <?php echo $row['job_end']?></a>
-                                <script src="https://kit.fontawesome.com/a076d05399.js"></script> 
+                                <br> วันที่สิ้นสุด : <?php echo $row['job_end']?>
+                                <!-- <a class="list-group-item list-group-item-action"> -->
                                 <i class="fa fa-pencil" aria-hidden="true" onclick="updatejob(<?php echo $row['job_id'];?>)"></i> 
-                                <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action">
-                                <i class="fa fa-eye" aria-hidden="true" ></i> 
+                                <i class="fa fa-eye" aria-hidden="true" ></i>
+                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" >
+                                 
                           <?php }
                         }?>
+                              </a>
+                                
                   </div>
                 </div>
               </div>
