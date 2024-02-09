@@ -112,10 +112,10 @@ function deleteprocess(process_id){
     // return false;
     $.ajax(
       {
-      url: "deleteprocess",
+      url: "deleteprocess/"+process_id,
       type: "post",
       dataType: 'text',
-      data: { process_id: process_id},
+      // data: { process_id: process_id},
       success: function (data) {
        
         // window.location.reload(false);
