@@ -186,7 +186,8 @@ function drop(ev) {
                                 <script src="https://kit.fontawesome.com/a076d05399.js"></script> 
                                 <i class="fa fa-pencil" aria-hidden="true" onclick="updatejob(<?php echo $row['job_id'];?>)"></i> 
                                 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-                                <i class="fa fa-eye" aria-hidden="true" onclick="updatejob(<?php echo $row['job_id'];?>)"></i> 
+                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action">
+                                <i class="fa fa-eye" aria-hidden="true" ></i> 
                           <?php }
                         }?>
                   </div>
