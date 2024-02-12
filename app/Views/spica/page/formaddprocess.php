@@ -30,6 +30,7 @@
           $job_end = $rs["job_end"];
       }
  ?>
+
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -158,7 +159,7 @@
 
                             </div>
                             <div class="row">
-                                    <div class="col-12 col-md-12 col-xl-8">
+                                    <div class="col-12">
                                     <button class="btn btn-primary addsubprocess" type="button"><i class="fa fa-plus-square"></i> เพิ่ม</button>
                                         <div class="form-group row subprocess" id="subprocess">
                                             <table  class="table table-hover" id="tblsubprocess">

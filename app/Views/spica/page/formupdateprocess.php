@@ -22,6 +22,13 @@
  </style> 
   <script>
     $( "#subprocess" ).show();
+ 
+var form = document.getElementById("formupdateprocess");
+var elements = form.elements;
+for (var i = 0, len = elements.length; i < len; ++i) {
+    elements[i].readOnly = true;
+}
+ 
  </script>   
  <?php 
    if($flag == 'update'){
@@ -43,7 +50,7 @@
         <div class="content-wrapper">
           <div class="row">
         <?php   //echo getcwd();; ?>
-        <form id="formaddprocess">
+        <form id="formupdateprocess">
             <div class="col-12 col-xl-12 grid-margin stretch-card">
               <div class="row w-100 flex-grow">
                 <div class="col-md-12 grid-margin stretch-card">
@@ -152,7 +159,7 @@
 
                                 </div>
 
-                                <div class="col-12 col-md-12 col-xl-8">
+                                <div class="col-12">
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-3">รายละเอียด</label>
                                         <div class="col-md-9">

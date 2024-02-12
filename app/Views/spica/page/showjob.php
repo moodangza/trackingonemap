@@ -9,7 +9,7 @@
     <!-- partial:./partials/_sidebar.html -->
    <?php echo $this->include('templates/menu');?>
     <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
+    <div class="page-body-wrapper">
       <!-- partial:./partials/_navbar.html -->
      <?php echo $this->include('templates/navbar');?>
      <script>

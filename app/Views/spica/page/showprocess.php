@@ -16,7 +16,7 @@
       <style>
       .draggable-container {
   background-color: #bddad5;
-  padding: 3rem;
+  padding: 1rem;
   margin: 1rem 0;
   width: 100%;
   border-radius: 5px;
