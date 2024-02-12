@@ -252,7 +252,7 @@ class Home extends BaseController
         return view('spica/page/showprocess',$returndata);
     }
 // formupdateprocess
-public function formupdateprocess($process_id,$flag)
+public function formupdateprocess($process_id)
 {
     // print_r($process_id);
     // exit;
@@ -283,7 +283,7 @@ public function formupdateprocess($process_id,$flag)
     $returndata = [
         'job'=> $process_rs1,
         'subprocess' =>$subprocess_rs1,
-        'flag' => $flag,
+        'flag' => 'update',
     ];
     // print_r($returndata);
     // exit;

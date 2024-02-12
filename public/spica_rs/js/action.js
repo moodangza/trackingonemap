@@ -92,7 +92,7 @@ function jobselect(jobid){
           $('#processitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
           '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
           '<div class="text-right">'+
-          '<a class="btn btn-warning" href="/formupdateprocess/'+element.process_id+'/update" title="แก้ไข">'+ '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>'+
+          '<a class="btn btn-warning" href="/formupdateprocess/'+element.process_id+'" title="แก้ไข">'+ '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>'+
           '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน"><i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
           '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ"><i class="fa fa-window-close" aria-hidden="true"></i></button>'+
           '</div>'+
@@ -106,7 +106,7 @@ function jobselect(jobid){
         $('#finishprocessitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
         '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
         '<div class="text-right">'+
-        '<a class="btn btn-success" href="/formupdateprocess/'+element.process_id+'/view " title="ดูข้อมูล">'+ '<i class="fa fa-search" aria-hidden="true"></i></a>'+
+        '<a class="btn btn-success" href="/formupdateprocess/'+element.process_id+' " title="ดูข้อมูล">'+ '<i class="fa fa-search" aria-hidden="true"></i></a>'+
         '</div>'+
         '</li>'
         
@@ -164,8 +164,8 @@ function confirmprocess(process_id){
 function appendsubprocess(input){
   var count=0;
   for(var i=0; i<input; i++) {
-  let rowcontent = " <tr> "+
-  "<td>"+count+"<input type='text' class='form-control' name='subprocessinput[]' id='subprocessinput[]'> </td>"+
+  let rowcontent = " <tr class='ap'> "+
+  "<td ><input type='text' class='form-control' name='subprocessinput[]' id='subprocessinput[]'> </td>"+
   "<td>"+
       "<div class='input-group date'>"+
           "<input type='text' id='s_sub_date[]' readonly='readonly' class='form-control datepicker create-s-date' name='s_sub_date[]' data-old='' value=''>"+
@@ -186,11 +186,13 @@ function appendsubprocess(input){
 "</td>"+
 "<td nowrap>"+
 "<button type='button' class='btn btn-warning'><i class='fa fa-pencil'></i> บันทึก</button>"+
-"<button type='button' class='btn btn-danger'><i class='fa fa-times-circle'></i> ลบ</button>"+
+"<button type='button' class='btn btn-danger deap' onclick='deap()'><i class='fa fa-times-circle'></i> ลบ</button>"+
 "</td>"+
      "</tr>";
   $("#tblsubprocess tbody").append(rowcontent);
-  
+  $('body').on('click', '.deap', function () {
+    $(this).closest('tr.ap').remove()
+  });
   count++;
   $("input[id=count-field]").val(count);
 }  
