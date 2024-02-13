@@ -180,6 +180,7 @@
                             <div class="row">
                                     <div class="col-12 text-center">
                                           <button class="btn btn-success insertprocess" type="button" >บันทึก</button>
+                                          <a class="btn btn-warning"  href="<?php echo base_url('showjobselect/'.$job_id);?>">ย้อนกลับ</a>
                                     </div>
                             </div>
                           

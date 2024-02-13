@@ -5,6 +5,7 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+$routes->get('login','Home::login');
 $routes->get('/', 'Home::index');
 $routes->get('showdata','Home::showdata');
 $routes->add('showjob','Home::showjob');
