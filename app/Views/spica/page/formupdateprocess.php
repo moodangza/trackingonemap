@@ -215,7 +215,7 @@ for (var i = 0, len = elements.length; i < len; ++i) {
                                                     </td>
                                                     <td nowrap>
                                                         <button class='btn btn-warning' onclick="updatesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-pencil'></i> แก้ไข</button>
-                                                        <button class='btn btn-danger deletesubprocess' ><i class='fa fa-times-circle'></i> ลบ</button>
+                                                        <button class='btn btn-danger' onclick="deletesubprocess(<?php echo $rsub['subprocess_id'];?>)" ><i class='fa fa-times-circle'></i> ลบ</button>
                                                     </td>
                                                    </tr>
                                                    <?php }?>
