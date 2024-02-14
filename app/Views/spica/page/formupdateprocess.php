@@ -15,15 +15,20 @@
  
 
 <style>
-#jobadd {
-  width: 750px;
-  margin: auto;
-}
+  .modal {
+         position: absolute;
+         /* background-color: #fffff4; */
+         border: 1px solid #fffff4;
+         width: 100%;
+         height: 450px;
+         top: 20%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         /* additional styles for the modal */
+      }
  </style> 
   <script>
-    $( "#subprocess" ).show();
  
-
  
  </script>   
  <?php 
@@ -42,6 +47,7 @@
    }
  ?>
       <!-- partial -->
+      
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
@@ -58,7 +64,42 @@
                 <div class="card-header">
                     <h3 class="card-title"><i class="fa fa-user"></i> แก้ไขขั้นตอนการทำงาน</h3>
                 </div>
-       
+                <div class="modal fade" id="exampleModalToggle" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog modal-xl ">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-4" id="exampleModalToggleLabel">เพิ่มขั้นตอนการทำงานย่อย</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+                        <div class="row g-3">
+                    <div class="col-md">
+                        <div class="form-floating">
+                        <input type="text" class="form-control" id="subprocessinput" name="subprocessinput" placeholder="จัดทำร่าง พรบ." value="">
+                        <label for="floatingInputGrid">ขั้นตอนการทำงานย่อย</label>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type='text' id='s_sub_date' readonly='readonly' class='form-control datepicker create-s-date' name='s_sub_date' data-old='' value=''>
+                            <label for="s_sub_date">ระบุวันที่เริ่มต้น</label>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type='text' id='e_sub_date' readonly='readonly' class='form-control datepicker create-s-date' name='e_sub_date' data-old='' value=''>
+                            <label for="e_sub_date">ระบุวันที่สิ้นสุด</label>
+                        </div>
+                    </div>
+                    </div>
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary addsubprocess"  type="button">บันทึก</button>
+          </div>
+        </div>
+      </div>
+    </div>
                 <div class="card-body">
                     <div class="form-horizontal form-input">
                         <div class="row">
@@ -173,7 +214,9 @@
                             </div>
                             <div class="row">
                                     <div >
-                                    <button class="btn btn-primary addsubprocess" type="button"><i class="fa fa-plus-square"></i> เพิ่ม</button>
+                                    <button class="btn btn-primary" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+                                        <i class="fa fa-plus-square"></i> เพิ่ม
+                                    </button>
                                         <div class="form-group row subprocess " id="subprocess">
                                            
                                            <div class="col-12 ">
@@ -190,10 +233,10 @@
 		                                            
                                                 <?php foreach($subprocess as $rsub){?>    
                                                 <tr id="subprocess<?php echo $rsub['subprocess_id'];?>">
-                                                    <td><input type='text' class='form-control' name='subprocessinput[]' id='subprocessinput[]'> </td>
+                                                    <td><input type='text' readonly class='form-control' name='subprocessinput[]' id='subprocessinput[]' value="<?php echo $rsub['subprocess_name'];?>"> </td>
                                                     <td>
                                                         <div class='input-group date'>
-                                                        <input type='text' id='s_sub_date[]' readonly='readonly' class='form-control datepicker create-s-date' name='s_sub_date[]' data-old='' value=''>
+                                                        <input type='text' id='s_sub_date[]' readonly='readonly' class='form-control datepicker create-s-date' name='s_sub_date[]' data-old='' value='<?php echo $rsub['subprocess_start'];?>'>
                                                     <div class='input-group-append'>
                                                         <div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'>
                                                             <i class='fa fa-calendar'></i>
@@ -203,7 +246,7 @@
                                                     </td>
                                                     <td>
                                                         <div class='input-group date'>
-                                                        <input type='text' id='e_sub_date[]' readonly='readonly' class='form-control datepicker create-e-date' name='e_sub_date[]' data-old='' value=''>
+                                                        <input type='text' id='e_sub_date[]' readonly='readonly' class='form-control datepicker create-e-date' name='e_sub_date[]' data-old='' value='<?php echo $rsub['subprocess_end'];?>'>
                                                         <div class='input-group-append'>
                                                         <div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'>
                                                             <i class='fa fa-calendar'></i>
@@ -212,7 +255,7 @@
                                                     </div>
                                                     </td>
                                                     <td nowrap>
-                                                        <button class='btn btn-warning' onclick="updatesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-pencil'></i> แก้ไข</button>
+                                                        <button class='btn btn-warning' type="button" onclick="updatesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-pencil'></i> แก้ไข</button>
                                                         <button class='btn btn-danger' onclick="deletesubprocess(<?php echo $rsub['subprocess_id'];?>)" ><i class='fa fa-times-circle'></i> ลบ</button>
                                                     </td>
                                                    </tr>
@@ -233,7 +276,8 @@
                                     </div>
                             </div>
                           
-                            
+    
+  
                                                           
         </form>
                         </div>

@@ -44,13 +44,6 @@ function dragAfterElement(container, y) {
   ).element
 }
   $(document).ready(function() {
-   let flag = $('#flag').val();
-   if(flag == ''){
-  $( "#subprocess" ).hide();
-}else{
-  $( "#subprocess" ).show();
-}
-
 //ปฏิทิน
   $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date,#editjob_start,#editjob_end').datepicker({
     language:'th',
@@ -60,10 +53,7 @@ function dragAfterElement(container, y) {
     autoclose: true
   });
   $(document).on( "click",".addsubprocess", function() {
-    // alert( "Handler for `click` called." );
-   
-    appendsubprocess(1);
-    
+    alert( "Handler for `click` called." );
     
   } );
 });
@@ -163,51 +153,6 @@ function confirmprocess(process_id){
   });   
   } 
 }
-
-function appendsubprocess(input){
-  var count=0;
-  for(var i=0; i<input; i++) {
-  let rowcontent = " <tr class='ap'> "+
-  "<td ><input type='text' class='form-control' name='subprocessinput[]' id='subprocessinput[]'> </td>"+
-  "<td>"+
-      "<div class='input-group date'>"+
-          "<input type='text' id='s_sub_date[]' readonly='readonly' class='form-control datepicker create-s-date' name='s_sub_date[]' data-old='' value=''>"+
-      "<div class='input-group-append'>"+
-      "<div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'><i class='fa fa-calendar'></i>"+
-      "</div>"+
-      "</div>"+
-      "</div>"+
-  "</td>"+
-"<td>"+
-"<div class='input-group date'>"+
-"<input type='text' id='e_sub_date[]' readonly='readonly' class='form-control datepicker create-e-date' name='e_sub_date[]' data-old='' value=''>"+
-"<div class='input-group-append'>"+
-  "<div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'><i class='fa fa-calendar'></i>"+
-  "</div>"+
-"</div>"+
-"</div>"+
-"</td>"+
-"<td nowrap>"+
-"<button type='button' class='btn btn-warning'><i class='fa fa-pencil'></i> บันทึก</button>"+
-"<button type='button' class='btn btn-danger deap' onclick='deap()'><i class='fa fa-times-circle'></i> ลบ</button>"+
-"</td>"+
-     "</tr>";
-  $("#tblsubprocess tbody").append(rowcontent);
-  $('body').on('click', '.deap', function () {
-    $(this).closest('tr.ap').remove()
-  });
-  count++;
-  $("input[id=count-field]").val(count);
-}  
-  $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date').datepicker({
-    language:'th',
-    format: 'dd/mm/yyyy',
-    todayBtn: 'linked',
-    todayHighlight: true,
-    autoclose: true
-  });
-}
-
 
 $(document).on("click",".insertprocess",function(){
   // let job_idprocess = $('.addprocessid').val();
