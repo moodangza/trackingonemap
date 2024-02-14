@@ -98,6 +98,7 @@ function jobselect(jobid){
           '</div>'+
           '</li>'
           
+          
           );
           
       });
@@ -117,6 +118,8 @@ function jobselect(jobid){
     }
 });   
 }
+
+
 // ลบขั้นตอนการทำงาน
 function deleteprocess(process_id){
   let text = "ยืนยันการลบข้อมูล";
@@ -348,10 +351,10 @@ function editjob(){
 });   
 }
 
-function updatejob(jobid){
+function updatejobform(jobid){
   $.ajax(
     {
-    url: "updatejob",
+    url: "updatejobform",
     type: "post",
     dataType: "json",
     data: { jobid: jobid},
@@ -365,6 +368,26 @@ function updatejob(jobid){
     }
 });   
 }
+
+function deletejob(job_id){
+  let text = "ยืนยันการลบข้อมูล";
+  if (confirm(text) == true) {
+    text = "ทำการลบข้อมูลแล้ว";
+    alert(text);
+
+      $.ajax({
+          url: 'deletejob',
+          type: "post",
+          dataType: "json",
+          data: {job_id: job_id},
+          success: function (data) {
+            alert('ลบข้อมูลเรียบร้อย')
+            window.location.reload(false);
+          }
+      });
+  }
+};
+
 function updatesubprocess(subprocessid){
   let inputsub = $("#subprocessinput").val();
   console.log(inputsub);

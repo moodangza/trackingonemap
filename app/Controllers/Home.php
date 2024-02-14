@@ -178,6 +178,7 @@ class Home extends BaseController
         // ];
     }
 
+    
     public function editjob()
     {
         $editjobmodel = new jobmodel();
@@ -195,7 +196,7 @@ class Home extends BaseController
 
     }
 
-    public function updatejob()
+    public function updatejobform()
     {
         $updatejobmodel = new jobModel();
         $dateth = new Date();
@@ -209,6 +210,18 @@ class Home extends BaseController
             echo json_encode( $updatejobmodel_rs );
 
     }   
+
+    public function deletejob()
+    {
+        
+        $deletejob = new jobModel();
+        $datajob = $_POST['job_id'];
+        $datajob = array('delete_flag'=>'0','deleted_at'=>date('Y-m-d H:i:s', strtotime('7 hour')));
+        $datajob['delete_flag'] = $deletejob ->where('job_id',$datajob['job_id'])-> delete();
+        $deletejob ->set($datajob) ->where('job_id',$datajob) -> update();
+        // echo $datajob;
+        // exit;  
+    }
     public function insertprocess()
     {
         // print_r($_POST['e_sub_date']);

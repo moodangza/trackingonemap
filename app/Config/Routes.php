@@ -22,10 +22,11 @@ $routes->get('formaddprocess/(:num)', 'Home::formaddprocess/$1');
 $routes->get('formupdateprocess/(:num)', 'Home::formupdateprocess/$1');
 $routes->post('addjob', 'Home::addjob');
 $routes->post('insertprocess', 'Home::insertprocess');
-$routes->post('updatejob','Home::updatejob');
+$routes->post('updatejobform','Home::updatejobform');
 $routes->post('deleteprocess/(:num)','Managecontroller::deleteprocess/$1');
 $routes->post('confirmprocess/(:num)','Managecontroller::confirmprocess/$1');
 $routes->post('editjob','Home::editjob');
+$routes->post('deletejob','Home::deletejob');
 // ต้อง login ถึงจะทำงานได้
 // $routes->group('', ['filter' => 'auth'], function($routes){
 

@@ -170,7 +170,7 @@ function drop(ev) {
                                   <!-- </a> -->
                                   </div>
                                   <div class="col-4" class="text-right">
-                                  <button class="btn btn-warning" onclick="updatejob(<?php echo $row['job_id'];?>)">
+                                  <button class="btn btn-warning" onclick="updatejobform(<?php echo $row['job_id'];?>)">
                                     <i class="fa fa-pencil " aria-hidden="true" ></i> 
                                   </button>
                             
