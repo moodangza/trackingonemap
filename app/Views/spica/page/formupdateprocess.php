@@ -15,10 +15,17 @@
  
 
 <style>
-#jobadd {
-  width: 750px;
-  margin: auto;
-}
+  .modal {
+         position: absolute;
+         /* background-color: #fffff4; */
+         border: 1px solid #fffff4;
+         width: 600px;
+         height: 350px;
+         top: 20%;
+         left: 50%;
+         /* transform: translate(-50%, -50%); */
+         /* additional styles for the modal */
+      }
  </style> 
   <script>
     $( "#subprocess" ).show();
@@ -173,7 +180,9 @@
                             </div>
                             <div class="row">
                                     <div >
-                                    <button class="btn btn-primary addsubprocess" type="button"><i class="fa fa-plus-square"></i> เพิ่ม</button>
+                                    <button class="btn btn-primary" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+                                        <i class="fa fa-plus-square"></i> เพิ่ม
+                                    </button>
                                         <div class="form-group row subprocess " id="subprocess">
                                            
                                            <div class="col-12 ">
@@ -233,7 +242,43 @@
                                     </div>
                             </div>
                           
-                            
+     <div class="modal fade" id="exampleModalToggle" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-4" id="exampleModalToggleLabel">เพิ่มขั้นตอนการทำงานย่อย</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+                        <div class="row g-3">
+                    <div class="col-md">
+                        <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInputGrid" placeholder="จัดทำร่าง พรบ." value="">
+                        <label for="floatingInputGrid">ขั้นตอนการทำงานย่อย</label>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type='text' id='s_sub_date' readonly='readonly' class='form-control datepicker create-s-date' name='s_sub_date' data-old='' value=''>
+                            <label for="s_sub_date">ระบุวันที่เริ่มต้น</label>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <input type='text' id='e_sub_date' readonly='readonly' class='form-control datepicker create-s-date' name='e_sub_date' data-old='' value=''>
+                            <label for="e_sub_date">ระบุวันที่สิ้นสุด</label>
+                        </div>
+                    </div>
+                    </div>
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" type="button">บันทึก</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
                                                           
         </form>
                         </div>
