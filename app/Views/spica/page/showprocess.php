@@ -16,7 +16,7 @@
       <style>
       .draggable-container {
   background-color: #bddad5;
-  padding: 3rem;
+  padding: 1rem;
   margin: 1rem 0;
   width: 100%;
   border-radius: 5px;
@@ -87,9 +87,9 @@
                               
                          </div>
                                 <!-- <a href="#" id='processitem' class="list-group-item list-group-item-action"></a> -->
-
+                        </ol>
                     </div>
-                </ol>
+              
                 </div>
               </div>
             </div>
@@ -97,8 +97,13 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">จบขั้นตอนการทำงาน</h4>
-                   <div class="draggable-container">
-                          
+                  <div class="draggable-container">
+                  <ol class="list-group list-group-numbered">    
+                         <div id='finishprocessitem'>
+                              
+                         </div>
+                                <!-- <a href="#" id='processitem' class="list-group-item list-group-item-action"></a> -->
+                        </ol>
                     </div>
                 </div>
               </div>

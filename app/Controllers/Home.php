@@ -6,23 +6,38 @@ use App\Models\jobModel;
 //use App\Models\approveModel;
 use App\Models\processModel;
 use App\Models\subprocessModel;
+use App\Models\divisionModel;
 use App\Controllers\Date;
 use Hermawan\DataTables\DataTable;
 
 class Home extends BaseController
 {
-
+    public function login()
+    {
+        
+        return view('spica/login/index');
+    }
     public function index()
     {
+        $divisionmodel = new divisionModel();
+        $divisionmodel ->select('division_tb.division_id,division_tb.division_name')
+        ->orderBy('division_id','asc');
+        $dv_rs = $divisionmodel->findAll();
         $jobmodel1 = new jobModel();
-        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status ')
+        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end ')
+        ->join('division_tb','job_tb.division_id = division_tb.division_id','inner')
         // ->where('job_tb.division_id = 1' )
-        ->groupBy('job_tb.job_id,job_tb.job_name,status ')
-        ->orderBy('job_id','asc');
+        ->groupBy('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end ')
+        ->orderBy('job_start','asc');
         $job_rs1 = $jobmodel1->findAll();
-
+        $dateth = new Date();
+        foreach($job_rs1 as $key => $date_th){
+            $job_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
+            $job_rs1[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
+        }
         $return = [
-            'job'=> $job_rs1
+            'dv' => $dv_rs,
+            'job' => $job_rs1
 
         ];
         return view('spica/index',$return);
@@ -66,21 +81,35 @@ class Home extends BaseController
         $processmodel = new processModel();
         $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status')
         ->where('delete_flag', '1') 
+        ->where('process_finish ',NULL)
         ->where('process_tb.job_id', $jobid1 )
         ->groupBy('process_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
         ->orderBy('process_start','asc');
 
         $process_rs = $processmodel->findAll();
+
+      
+        $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status')
+        ->where('delete_flag', '1') 
+        ->where('process_finish != ',NULL)
+        ->where('process_tb.job_id', $jobid1 )
+        ->groupBy('process_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
+        ->orderBy('process_start','asc');
+
+        $processfinfish_rs = $processmodel->findAll();
         $dateth = new Date();
         foreach($process_rs as $key => $date_th){
             $process_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
             $process_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
         }
-        
+        foreach($processfinfish_rs as $key => $date_th){
+            $processfinfish_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
+            $processfinfish_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
+        }
         $data = [
             'job'=> $job_rs,
-            'process' => $process_rs
-
+            'process' => $process_rs,
+            'processfinish' => $processfinfish_rs
         ];
         header('Content-Type: application/json');
          echo json_encode( $data );
@@ -233,12 +262,21 @@ public function formupdateprocess($process_id)
     // exit;
     $updateprocessmodel = new processModel();
     $updateprocessmodel ->select('job_tb.job_id,job_tb.job_name,job_tb.job_start,job_tb.job_end')
-    ->select('process_tb.process_id,process_tb.process_name,process_tb.process_start,process_end,detail')
+    ->select('process_tb.process_id,process_tb.process_name,process_tb.process_start,process_end,detail,process_tb.status')
     ->join('job_tb','job_tb.job_id = process_tb.job_id','inner')
     ->where('process_tb.process_id', $process_id )
     ->where('delete_flag', '1') 
-    ->groupBy('job_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ');
+    ->groupBy('job_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status,process_tb.status ');
     $process_rs1 = $updateprocessmodel->findAll();
+    
+    // print_r($process_rs1);
+    // echo $process_rs1[0]["status"];
+    // exit;
+    if($process_rs1[0]["status"]=='2'){
+            $text = 'view';
+    }else{
+        $text = 'update';
+    }
     $dateth = new Date();
     foreach($process_rs1 as $key => $date_th){
         $process_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
@@ -258,7 +296,7 @@ public function formupdateprocess($process_id)
     $returndata = [
         'job'=> $process_rs1,
         'subprocess' =>$subprocess_rs1,
-        'flag' => 'update',
+        'flag' => $text,
     ];
     // print_r($returndata);
     // exit;

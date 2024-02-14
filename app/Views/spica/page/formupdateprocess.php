@@ -22,9 +22,12 @@
  </style> 
   <script>
     $( "#subprocess" ).show();
+ 
+
+ 
  </script>   
  <?php 
-   if($flag == 'update'){
+   if($flag == 'update' || $flag == 'view'){
         foreach($job as $rs){
             $job_id = $rs['job_id'];
             $job_name = $rs['job_name'];
@@ -43,7 +46,7 @@
         <div class="content-wrapper">
           <div class="row">
         <?php   //echo getcwd();; ?>
-        <form id="formaddprocess">
+        <form id="formupdateprocess">
             <div class="col-12 col-xl-12 grid-margin stretch-card">
               <div class="row w-100 flex-grow">
                 <div class="col-md-12 grid-margin stretch-card">
@@ -120,7 +123,8 @@
                                         <label class="col-form-label col-md-4">วันที่เริ่มขั้นตอนการทำงาน</label>
                                         <div class="col-md-8">
                                             <div class="input-group date">
-                                                <input type="text" id="s_date" readonly="readonly" class="form-control datepicker create-s-date" name="s_date" data-old="" value="">
+                                                <input type="text" id="s_date" readonly="readonly" class="form-control datepicker create-s-date" 
+                                                name="s_date" data-old="" value="<?php echo $process_start;?>">
                                                 <div class="input-group-append">
                                                     <div required class="input-group-text toggle-datepicker" data-toggle="#create-s-date"><i class="fa fa-calendar"></i>
                                                     </div>
@@ -141,7 +145,8 @@
                                         <label class="col-form-label col-md-4">จนถึงวันที่</label>
                                         <div class="col-md-8">
                                             <div class="input-group date">
-                                                <input type="text" required readonly="readonly" id="e_date" class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="">
+                                                <input type="text" required readonly="readonly" id="e_date" class="form-control  datepicker-input create-e-date" 
+                                                name="e_date" data-old="" value="<?php echo $process_end;?>">
                                                 <div class="input-group-append">
                                                     <div  class="input-group-text toggle-datepicker" data-toggle="#create-e-date"><i class="fa fa-calendar"></i>
                                                     </div>
@@ -152,7 +157,7 @@
 
                                 </div>
 
-                                <div class="col-12 col-md-12 col-xl-8">
+                                <div class="col-12">
                                     <div class="form-group row">
                                         <label class="col-form-label col-md-3">รายละเอียด</label>
                                         <div class="col-md-9">
@@ -208,7 +213,7 @@
                                                     </td>
                                                     <td nowrap>
                                                         <button class='btn btn-warning' onclick="updatesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-pencil'></i> แก้ไข</button>
-                                                        <button class='btn btn-danger deletesubprocess' ><i class='fa fa-times-circle'></i> ลบ</button>
+                                                        <button class='btn btn-danger' onclick="deletesubprocess(<?php echo $rsub['subprocess_id'];?>)" ><i class='fa fa-times-circle'></i> ลบ</button>
                                                     </td>
                                                    </tr>
                                                    <?php }?>
@@ -220,7 +225,11 @@
                             </div>
                             <div class="row">
                                     <div class="col-12 text-center">
-                                          <button class="btn btn-success insertprocess" type="button" >บันทึก</button>
+                                        <?php if($flag='update'){?>
+                                                <button class="btn btn-success insertprocess" type="button" >บันทึก</button>
+                                        <?php }else { ?>
+                                          <a class="btn btn-warning"  href="<?php echo base_url('showjobselect/'.$job_id);?>">ย้อนกลับ</a>
+                                          <?php }?>
                                     </div>
                             </div>
                           
