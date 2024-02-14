@@ -217,7 +217,7 @@ class Home extends BaseController
         $deletejob = new jobModel();
         $datajob = $_POST['job_id'];
         $datajob = array('delete_flag'=>'0','deleted_at'=>date('Y-m-d H:i:s', strtotime('7 hour')));
-        $datajob = ['delete_flag'] = $deletejob ->where('job_id',$datajob['job_id'])-> delete();
+        // $datajob = ['delete_flag'] = $deletejob ->where('job_id',$datajob['job_id'])-> delete();
         $deletejob ->set($datajob) ->where('job_id',$datajob) -> update();
         // echo $datajob;
         // exit;  
