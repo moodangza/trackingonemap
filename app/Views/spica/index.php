@@ -67,31 +67,129 @@ $(function(){
               <div class="row w-100 flex-grow">
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
-                    <div class="card-body">
+                    <div class="card-body container">
                      
-                      <div class="row mb-3">
-                        <div class="col-md-12">
-                          <div class="d-flex justify-content-between traffic-status">
-                              <?php 
+
+    
+
+            <div class="row">          
+            <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+            <div class="card-body">
+            <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                            ต้องดำเนินการ 
+                            <a href="#" class="btn btn-success">
+                                    <i class="fa fa-eye" aria-hidden="true" ></i> 
+                                  </a>
+                            </a>
+
+                                <ul style="padding-bottom: 2px;" class="list-group">
+                                  <li class="list-group-item "> 
+                                  <div class="row">
+                                  <div class="col-lg-12">
+                                  <?php 
                               $i = 0;
                                     ?>
                                      <div class="row">
                                  <?php   foreach($dv as $group){?>
-                                 
-                                 
-                                  
                                             <div  nowrap><p class="text-justify" nowrap><?php echo $group["division_name"];?></p></div>
                                             <br>
-                                
-                                 
-                               
                               <?php  $i++; }?>
-                              </div>  
+                                  </div>
+                                  </div>
+                                </li>
+                            </ul>
+                        
+                    </div>
+                </div>
+              </div>
+            </div>
 
+            <div class="col-lg-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                            อยู่ระหว่างดำเนินการ
+                            </a>
+                            <?php foreach($job as $row){?>
+                              <?php if($row['status']==2){?>
+                                <ul style="padding-bottom: 2px;" class="list-group">
+                                  <li class="list-group-item "> 
+                                    <div class="row">
+                              <div class="col-lg-8">
+                                    <!-- <a href="<?php // echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action"> -->
+                                  <?php echo $row['job_name']?>
+                                  <br> วันที่เริ่ม : <?php echo $row['job_start']?>
+                                  <br> วันที่สิ้นสุด : <?php echo $row['job_end']?>
+                                  <!-- </a> -->
+                                 
+                              </div>
+                                  <div class="col-4" class="text-right">
+                                  <button class="btn btn-warning" onclick="updatejobform(<?php echo $row['job_id'];?>)">
+                                    <i class="fa fa-pencil " aria-hidden="true" ></i> 
+                                  </button>
                             
-                                        
+                                  <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="btn btn-success">
+                                    <i class="fa fa-eye" aria-hidden="true" ></i> 
+                                  </a>
+
+                                  <button class="btn btn-danger" onclick="#">
+                                  <i class="fa fa-trash" aria-hidden="true"></i></i> 
+                                  </button>
+                                  </div>
+                              
+                              </div>
+                                </li>
+                            </ul>
+                          <?php }
+                        }?>
+                              </a>
+                                
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                            รออนุมัติ
+                            </a>
+                            <?php foreach($job as $row){?>
+                              <?php if($row['job_finish']!='' && $row['status']==2){?>
+                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action">
+                                <?php echo $row['job_name']?> <br> วันที่เริ่ม :
+                                <?php echo $row['job_start']?> <br> วันที่สิ้นสุด :
+                                <?php echo $row['job_end']?> </a>
+                          <?php }
+                        }?>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                            เสร็จสิ้น
+                            </a>
+                            <?php foreach($job as $row){?>
+                              <?php if($row['status']==3){?>
+                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
+                          <?php }
+                        }?>
+                    </div>
+                </div>
+              </div>
+            </div>
                           </div>
-                        </div>
+                        <!-- </div>
                        
                       </div>
                     
@@ -100,56 +198,13 @@ $(function(){
                 </div>
               
             
-              </div>
+              </div> -->
             </div>
            
           </div>
           
           <!-- row end -->
-          <div class="row">
-            <div class="col-md-4 grid-margin stretch-card">
-              <div class="card bg-facebook d-flex align-items-center">
-                <div class="card-body py-5">
-                  <div
-                    class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
-                    <i class="mdi mdi-facebook text-white icon-lg"></i>
-                    <div class="ml-3 ml-md-0 ml-xl-3">
-                      <h5 class="text-white font-weight-bold">2.62 Subscribers</h5>
-                      <p class="mt-2 text-white card-text">You main list growing</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 grid-margin stretch-card">
-              <div class="card bg-google d-flex align-items-center">
-                <div class="card-body py-5">
-                  <div
-                    class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
-                    <i class="mdi mdi-google-plus text-white icon-lg"></i>
-                    <div class="ml-3 ml-md-0 ml-xl-3">
-                      <h5 class="text-white font-weight-bold">3.4k Followers</h5>
-                      <p class="mt-2 text-white card-text">You main list growing</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 grid-margin stretch-card">
-              <div class="card bg-twitter d-flex align-items-center">
-                <div class="card-body py-5">
-                  <div
-                    class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
-                    <i class="mdi mdi-twitter text-white icon-lg"></i>
-                    <div class="ml-3 ml-md-0 ml-xl-3">
-                      <h5 class="text-white font-weight-bold">3k followers</h5>
-                      <p class="mt-2 text-white card-text">You main list growing</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          
           <!-- row end -->
         </div>
         <!-- content-wrapper ends -->
@@ -157,11 +212,6 @@ $(function(){
           <?php echo $this->include('templates/footer');?>
         <!-- partial -->
       </div>
-      <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
   
 
   <?php $this->endSection();?>

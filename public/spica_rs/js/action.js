@@ -314,6 +314,7 @@ function updatejobform(jobid){
 });   
 }
 
+//ลบหัวข้อ job
 function deletejob(job_id){
   let text = "ยืนยันการลบข้อมูล";
   if (confirm(text) == true) {

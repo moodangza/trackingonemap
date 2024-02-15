@@ -42,6 +42,8 @@ class Home extends BaseController
         ];
         return view('spica/index',$return);
     }
+
+    //ดู job
     public function showjob()
     {
         $jobmodel1 = new jobModel();
@@ -49,7 +51,7 @@ class Home extends BaseController
         // ->where('job_tb.division_id = 1' )
         //->where('job_finish' != NULL )
         //->where('status' == 2 )
-        ->where('deleted_at' ,null)
+        ->where('deleted_at' ,null) // ไม่แสดงข้อมูลที่ลบ (ลบไม่จริง)
         ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish')
         ->orderBy('job_id','asc');
         $job_rs1 = $jobmodel1->findAll();
@@ -117,6 +119,7 @@ class Home extends BaseController
         
     }
 
+    //คลิก job ดู process
     public function showjobselect($job_id=null)
     {
         $jobmodel1 = new jobModel();
@@ -132,6 +135,75 @@ class Home extends BaseController
 
         return view('spica/page/showprocess',$return);
     }
+
+// เพิ่มหัวข้อ
+public function addjob()
+{
+    $processmodel = new processModel();
+    $processmodel ->select('process_id,process_name,process_start,process_end,detail, process_tb.process_status')
+    ->where('delete_flag', '1') 
+    ->groupBy('process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
+    ->orderBy('process_start','asc');
+
+    $process_rs = $processmodel->findAll();
+
+    $addjobmodel1 = new jobModel();
+    $data = array('job_name'=>$_POST['jobname'],
+    'job_start'=>$_POST['jobstart'],
+    'job_end'=>$_POST['jobend'],
+    'created_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+    'status'=>'1');
+    $addjobmodel1 -> insert($data);
+    // $return = [
+
+    // ];
+}
+
+
+public function editjob()
+{
+    $editjobmodel = new jobmodel();
+    $jobid1 = $this->request->getVar('editjobid');
+    // $dataedit = array('status'=>'2');
+    // $editjobmodel ->set($dataedit) ->where('status',$_POST['job_id']) -> update();
+    $dataedit = array('job_name'=>$_POST['editjobname'],
+    'job_start'=>$_POST['editjobstart'],
+    'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+    'job_end'=>$_POST['editjobend']);
+    // 'status'=>'1');
+    // $editjobmodel -> update($dataedit);
+    $u=$editjobmodel ->set($dataedit) ->where('job_id',$jobid1 ) -> update();
+    print_r($dataedit);
+
+}
+
+public function updatejobform()
+{
+    $updatejobmodel = new jobModel();
+    $dateth = new Date();
+    $updatejobmodel ->select('job_tb.job_id,job_tb.job_name,job_start,job_end')
+        ->where('job_id',$_POST['jobid']);
+        $updatejobmodel_rs = $updatejobmodel->first();
+        $updatejobmodel_rs["job_start"] = $dateth->Dateinpicker($updatejobmodel_rs['job_start']);
+        $updatejobmodel_rs["job_end"] = $dateth->Dateinpicker($updatejobmodel_rs['job_end']);
+        //array_push//($updatejobmodel_rs ,$datestart,$dateend);
+        header('Content-Type: application/json');
+        echo json_encode( $updatejobmodel_rs );
+
+}   
+
+//ลบหัวข้อ job
+public function deletejob()
+{ 
+    $deletejob = new jobModel();
+    $datajob = $_POST['job_id'];
+    $dataj = array('delete_flag'=>'0','deleted_at'=>date('Y-m-d H:i:s', strtotime('7 hour')));
+    // $datajob = ['delete_flag'] = $deletejob ->where('job_id',$datajob['job_id'])-> update();
+    $deletejob ->set($dataj) ->where('job_id',$datajob) -> update();
+    // echo $datajob;
+    // exit;  
+}
+
 
     public function formaddprocess($job_id){
         $jobmodel = new jobModel();
@@ -156,73 +228,7 @@ class Home extends BaseController
     }
     }
 
-    // เพิ่มหัวข้อ
-    public function addjob()
-    {
-        $processmodel = new processModel();
-        $processmodel ->select('process_id,process_name,process_start,process_end,detail, process_tb.process_status')
-        ->where('delete_flag', '1') 
-        ->groupBy('process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
-        ->orderBy('process_start','asc');
 
-        $process_rs = $processmodel->findAll();
-  
-        $addjobmodel1 = new jobModel();
-        $data = array('job_name'=>$_POST['jobname'],
-        'job_start'=>$_POST['jobstart'],
-        'job_end'=>$_POST['jobend'],
-        'created_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-        'status'=>'1');
-        $addjobmodel1 -> insert($data);
-        // $return = [
-
-        // ];
-    }
-
-    
-    public function editjob()
-    {
-        $editjobmodel = new jobmodel();
-        $jobid1 = $this->request->getVar('editjobid');
-        // $dataedit = array('status'=>'2');
-        // $editjobmodel ->set($dataedit) ->where('status',$_POST['job_id']) -> update();
-        $dataedit = array('job_name'=>$_POST['editjobname'],
-        'job_start'=>$_POST['editjobstart'],
-        'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-        'job_end'=>$_POST['editjobend']);
-        // 'status'=>'1');
-        // $editjobmodel -> update($dataedit);
-        $u=$editjobmodel ->set($dataedit) ->where('job_id',$jobid1 ) -> update();
-        print_r($dataedit);
-
-    }
-
-    public function updatejobform()
-    {
-        $updatejobmodel = new jobModel();
-        $dateth = new Date();
-        $updatejobmodel ->select('job_tb.job_id,job_tb.job_name,job_start,job_end')
-            ->where('job_id',$_POST['jobid']);
-            $updatejobmodel_rs = $updatejobmodel->first();
-            $updatejobmodel_rs["job_start"] = $dateth->Dateinpicker($updatejobmodel_rs['job_start']);
-            $updatejobmodel_rs["job_end"] = $dateth->Dateinpicker($updatejobmodel_rs['job_end']);
-            //array_push//($updatejobmodel_rs ,$datestart,$dateend);
-            header('Content-Type: application/json');
-            echo json_encode( $updatejobmodel_rs );
-
-    }   
-
-    public function deletejob()
-    {
-        
-        $deletejob = new jobModel();
-        $datajob = $_POST['job_id'];
-        $dataj = array('delete_flag'=>'0','deleted_at'=>date('Y-m-d H:i:s', strtotime('7 hour')));
-        // $datajob = ['delete_flag'] = $deletejob ->where('job_id',$datajob['job_id'])-> update();
-        $deletejob ->set($dataj) ->where('job_id',$datajob) -> update();
-        // echo $datajob;
-        // exit;  
-    }
     public function insertprocess()
     {
         // print_r($_POST['e_sub_date']);

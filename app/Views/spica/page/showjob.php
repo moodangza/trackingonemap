@@ -220,7 +220,7 @@ function drop(ev) {
                                     <i class="fa fa-eye" aria-hidden="true" ></i> 
                                   </a>
 
-                                  <button class="btn btn-danger" onclick="#">
+                                  <button class="btn btn-danger" onclick="deletejob(<?php echo $row['job_id'];?>)">
                                   <i class="fa fa-trash" aria-hidden="true"></i></i> 
                                   </button>
                                   </div>
