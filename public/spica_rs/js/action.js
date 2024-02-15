@@ -324,6 +324,7 @@ function deletejob(job_id){
       url: "deletejob",
       type: "POST",
       dataType: 'text',
+      data: { job_id: job_id},
       success: function (data) {
             alert('ลบข้อมูลเรียบร้อย')
             window.location.reload(false);

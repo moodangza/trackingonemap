@@ -49,6 +49,7 @@ class Home extends BaseController
         // ->where('job_tb.division_id = 1' )
         //->where('job_finish' != NULL )
         //->where('status' == 2 )
+        ->where('deleted_at' ,null)
         ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish')
         ->orderBy('job_id','asc');
         $job_rs1 = $jobmodel1->findAll();
@@ -211,7 +212,7 @@ class Home extends BaseController
 
     }   
 
-    public function deletejob($job_id)
+    public function deletejob()
     {
         
         $deletejob = new jobModel();
