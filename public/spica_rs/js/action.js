@@ -321,11 +321,10 @@ function deletejob(job_id){
     alert(text);
 
       $.ajax({
-          url: 'deletejob',
-          type: "post",
-          dataType: "json",
-          data: {job_id: job_id},
-          success: function (data) {
+      url: "deletejob",
+      type: "POST",
+      dataType: 'text',
+      success: function (data) {
             alert('ลบข้อมูลเรียบร้อย')
             window.location.reload(false);
           }
