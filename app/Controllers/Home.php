@@ -24,7 +24,7 @@ class Home extends BaseController
         ->orderBy('division_id','asc');
         $dv_rs = $divisionmodel->findAll();
         $jobmodel1 = new jobModel();
-        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end ')
+        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end,job_tb.job_finish ')
         ->join('division_tb','job_tb.division_id = division_tb.division_id','inner')
         // ->where('job_tb.division_id = 1' )
         ->groupBy('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end ')
