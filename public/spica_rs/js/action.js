@@ -43,6 +43,40 @@ function dragAfterElement(container, y) {
     { offset: Number.NEGATIVE_INFINITY }
   ).element
 }
+//เพิ่ม subprocess
+$(document).on( "click",".addsubprocess", function() {
+
+  // alert( "Handler for `click` called." );
+  let s_job = $('#s_job').val();
+  let e_job = $('#e_job').val();
+  let s_sub_date = $('#s_sub_date').val();
+  let e_sub_date = $('#e_sub_date').val();
+  let sub_process = $('#subprocessinput').val();
+  let job_id = $('#job_id').val();
+  let process_id = $('#process_id').val();
+  if(s_sub_date<s_job||s_sub_date>e_job){
+    alert('โปรดตรวจสอบวันที่เริ่มต้น');
+    return false;
+  }
+  if(e_sub_date<s_job||s_sub_date>e_job){
+    alert('โปรดตรวจสอบวันที่สิ้นสุด');
+    return false;
+  }
+  $.ajax(
+    {
+      
+    url: "/addsubprocess",
+    type: "post",
+    dataType: 'text',
+    data: { job_id : job_id,process_id : process_id, sub_process: sub_process,s_sub_date : s_sub_date ,e_sub_date : e_sub_date},
+    success: function (data) {
+     alert('บันทึกสำเร็จ');
+      showsubprocess();       
+    
+    }
+});   
+} );
+//
   $(document).ready(function() {
 //ปฏิทิน
   $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date,#editjob_start,#editjob_end').datepicker({
@@ -52,11 +86,47 @@ function dragAfterElement(container, y) {
     todayHighlight: true,
     autoclose: true
   });
-  $(document).on( "click",".addsubprocess", function() {
-    alert( "Handler for `click` called." );
-    
-  } );
+  
+  showsubprocess();
+  
 });
+// โชว subprocess
+function showsubprocess(){
+  let process_id = $('#process_id').val();
+  $.ajax(
+    {
+      
+    url: "/showsubprocess",
+    type: "get",
+    dataType: 'text',
+    data: { process_id : process_id},
+    success: function (data) {
+      var a = JSON.parse(data);
+      console.log(a)   
+      $('#subprocess_id').val(data.subprocess_id);
+    }
+});  
+  $('#processitem').html('');
+        
+  // $('#addjob_id').html('');
+  // $('#addjob_id').append('<input class="addprocessid" type="text" value="'+a.process[0]['job_id']+'">');
+  $("#urladdprocess").attr("href", "/formaddprocess/"+a.process[0]['job_id']+""); 
+   
+  a.process.forEach(element => {
+   
+      $('#processitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
+      '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
+      '<div class="text-right">'+
+      '<button class="btn btn-warning editsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">'+ '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>'+
+      '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน"><i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
+      '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ"><i class="fa fa-window-close" aria-hidden="true"></i></button>'+
+      '</div>'+
+      '</li>'
+      );
+  });
+ 
+}
+// 
 
 function jobselect(jobid){
   $.ajax(

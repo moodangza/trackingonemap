@@ -38,6 +38,8 @@
             $job_name = $rs['job_name'];
             $job_start = $rs['job_start'];
             $job_end = $rs['job_end'];
+            $job_startpic = $rs['job_startpic'];
+            $job_endpic = $rs['job_endpic'];
             $process_id = $rs['process_id'];
             $process_name = $rs['process_name'];
             $process_start = $rs['process_start'];
@@ -118,7 +120,7 @@
                                 <div class="form-group row">
                                     <label class="col-4 col-md-4 col-xl-4 col-form-label">วันที่เริ่ม : </label>
                                     <label class="col-8 col-md-8 col-xl-8 col-form-label text-left"><?php echo $job_start; ?></label>
-                                    <input  type="hidden" readonly id='s_job' value="<?php ?>">
+                                    <input  type="hidden" readonly id='s_job' value="<?php echo $job_startpic; ?>">
                                 </div>
                             </div>
                             <!--/span-->
@@ -128,7 +130,7 @@
                                     <label class="col-8 col-md-8 col-xl-8 col-form-label text-left">
                                     <?php echo $job_end;?>
                                     </label>
-                                    <input  type="hidden" readonly id='e_job' value="<?php ?>">
+                                    <input  type="hidden" readonly id='e_job' value="<?php echo $job_endpic; ?>">
                                 </div>
                             </div>
                             <!--/span-->
@@ -214,7 +216,7 @@
                             </div>
                             <div class="row">
                                     <div >
-                                    <button class="btn btn-primary" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+                                    <button class="btn btn-primary subprocessform" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
                                         <i class="fa fa-plus-square"></i> เพิ่ม
                                     </button>
                                         <div class="form-group row subprocess " id="subprocess">
@@ -228,8 +230,8 @@
                                                       <th>จัดการ</th>
                                                 </thead>
                                                 <tbody>
-                                                    <input id="count-field" class="hidden-field" type="hidden" name="total" value="">
-                                                    <input id="count-field" type="hidden" name="count">
+                                                    <input id="process_id" class="hidden-field" type="hidden" name="process_id" value="<?php echo $process_id;?>">
+                                                  
 		                                            
                                                 <?php foreach($subprocess as $rsub){?>    
                                                 <tr id="subprocess<?php echo $rsub['subprocess_id'];?>">
@@ -251,6 +253,7 @@
                                                         <div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'>
                                                             <i class='fa fa-calendar'></i>
                                                         </div>
+                                                        <input type="hidden" id="subprocess_id" name="subprocess_id" value="">
                                                     </div>
                                                     </div>
                                                     </td>
