@@ -77,6 +77,7 @@
                         <div class="row g-3">
                     <div class="col-md">
                         <div class="form-floating">
+                        <input type="hidden" id="sub_id" value="">
                         <input type="text" class="form-control" id="subprocessinput" name="subprocessinput" placeholder="จัดทำร่าง พรบ." value="">
                         <label for="floatingInputGrid">ขั้นตอนการทำงานย่อย</label>
                         </div>
@@ -258,7 +259,7 @@
                                                     </div>
                                                     </td>
                                                     <td nowrap>
-                                                        <button class='btn btn-warning' type="button" onclick="updatesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-pencil'></i> แก้ไข</button>
+                                                        <button class='btn btn-warning' type="button" onclick="formupdatesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-pencil'></i> แก้ไข</button>
                                                         <button class='btn btn-danger' type="button" onclick="deletesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-times-circle'></i> ลบ</button>
                                                     </td>
                                                    </tr>

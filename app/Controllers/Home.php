@@ -331,17 +331,30 @@ public function formupdateprocess($process_id)
         public function showsubprocess(){
             $process_id = $this->request->getVar('process_id');
             $showsubprocees = new subprocessModel();
-            $showsubprocees ->where('delete_flag', '1') 
+            $showsubprocees ->where('subprocess_tb.delete_flag', '1') 
         ->where('subprocess_tb.process_id', $process_id )
-        
         ->orderBy('subprocess_start','asc');
-
         $process_rs = $showsubprocees->findAll();
         print_r($process_rs);
         header('Content-Type: application/json');
         
         echo json_encode( $process_rs );
          
+        }
+        public function formupdatesubprocess(){
+        $subprocess_id = $this->request->getVar('subprocess_id');
+          $form = new subprocessModel();
+          $dateth = new Date();
+          $form ->where('subprocess_tb.subprocess_id',$subprocess_id);
+          $process_rs = $form->findAll();
+        //   print_r($process_rs);
+        $process_rs["subprocess_id"] = $process_rs[0]["subprocess_id"];
+        $process_rs["subprocess_name"] = $process_rs[0]["subprocess_name"];
+          $process_rs["subprocess_start"] = $dateth->Dateinpicker($process_rs[0]['subprocess_start']);
+          $process_rs["subprocess_end"] = $dateth->Dateinpicker($process_rs[0]['subprocess_end']);
+          header('Content-Type: application/json');
+          echo json_encode( $process_rs );
+          
         }
         public function updatesubprocess(){
             $updatesubprocessmodel = new subprocessModel();

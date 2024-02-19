@@ -30,6 +30,7 @@ $routes->post('deletejob','Home::deletejob');
 $routes->get('showsubprocess','Home::showsubprocess');
 $routes->post('addsubprocess','Home::addsubprocess');
 $routes->post('deletesubprocess','Managecontroller::deletesubprocess');
+$routes->get('formupdatesubprocess','Home::formupdatesubprocess');
 
 // ต้อง login ถึงจะทำงานได้
 // $routes->group('', ['filter' => 'auth'], function($routes){

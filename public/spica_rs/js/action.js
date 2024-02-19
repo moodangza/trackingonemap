@@ -409,50 +409,65 @@ function deletejob(job_id){
   }
 };
 
-function updatesubprocess(subprocessid){
-  let inputsub = $("#subprocessinput").val();
-  console.log(inputsub);
-  return false;
+function formupdatesubprocess(subprocessid){
+  
   $.ajax(
     {
-    url: "updatesubprocess",
-    type: "post",
+    url: "/formupdatesubprocess",
+    type: "get",
     dataType: "json",
-    data: { subprocessid: subprocessid},
-    success: function (data) {
-
+    data: { subprocess_id: subprocessid},
+      success: function (data) {
+        $('#exampleModalToggle').modal('show');
+        $("#sub_id").val(data.subprocess_id);
+        $("#subprocessinput").val(data.subprocess_name);
+        $("#s_sub_date").val(data.subprocess_start);
+        $("#e_sub_date").val(data.subprocess_end);
+      
     }
 }); 
 }
-function deletesubprocess(subprocessid){
-  let text = ('ท่านต้องการลบขั้นตอนการทำงานย่อยใช่หรือไม่');
-  Swal.fire({
-    title: text,
-    showDenyButton: false,
-    showCancelButton: true,
-    confirmButtonText: "ยืนยัน",
-    cancelButtonText: "ยกเลิก",
-    // denyButtonText: `Don't save`
-  }).then((result) => {
-    /* Read more about isConfirmed, isDenied below */
-    if (result.isConfirmed) {
-      Swal.fire("ได้ทำการลบข้อมูลแล้ว!", "", "success");
-      // return false;
-      $.ajax(
-        {
-        url: "deletesubprocess",
-        type: "post",
-        dataType: "json",
-        data: { subprocessid: subprocessid},
-        success: function (data) {
-          window.location.reload();
-        }
-    }); 
-    } 
-    // else if (result.isDenied) {
-    //   Swal.fire("Changes are not saved", "", "info");
-    // }
-  });
+function deletesubprocess(subid){
+  $.ajax(
+    {
+    url: "/deletesubprocess",
+    type: "post",
+    dataType: "text",
+    data: { subprocessid: subid},
+    success: function (data) {
+      window.location.reload();
+    }
+}); 
+  // let text = ('ท่านต้องการลบขั้นตอนการทำงานย่อยใช่หรือไม่');
+  // Swal.fire({
+  //   title: text,
+  //   showDenyButton: false,
+  //   showCancelButton: true,
+  //   confirmButtonText: "ยืนยัน",
+  //   cancelButtonText: "ยกเลิก",
+  //   // denyButtonText: `Don't save`
+  // }).then((result) => {
+  //   /* Read more about isConfirmed, isDenied below */
+  //   if (result.isConfirmed) {
+  //     // alert(subprocessid);
+  //     Swal.fire("ได้ทำการลบข้อมูลแล้ว!", "", "success");
+  //     // return false;
+  //     let subprocess_id = subprocessid;
+  //     $.ajax(
+  //       {
+  //       url: "deletesubprocess/"+subprocessid,
+  //       type: "post",
+  //       dataType: "text",
+  //       // data: { subprocessid: subprocess_id},
+  //       success: function (data) {
+  //         // window.location.reload(false);
+  //       }
+  //   }); 
+  //   } 
+  //   // else if (result.isDenied) {
+  //   //   Swal.fire("Changes are not saved", "", "info");
+  //   // }
+  // });
  
 }
 $(document).on( "change",".selectjob", function() {
