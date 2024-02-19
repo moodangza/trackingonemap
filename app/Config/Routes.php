@@ -27,8 +27,9 @@ $routes->post('deleteprocess/(:num)','Managecontroller::deleteprocess/$1');
 $routes->post('confirmprocess/(:num)','Managecontroller::confirmprocess/$1');
 $routes->post('editjob','Home::editjob');
 $routes->post('deletejob','Home::deletejob');
-$routes->post('addsubprocess','Home::addsubprocess');
 $routes->get('showsubprocess','Home::showsubprocess');
+$routes->post('addsubprocess','Home::addsubprocess');
+$routes->post('deletesubprocess','Managecontroller::deletesubprocess');
 
 // ต้อง login ถึงจะทำงานได้
 // $routes->group('', ['filter' => 'auth'], function($routes){

@@ -24,6 +24,19 @@ class Managecontroller extends BaseController
         
        
     }
+    public function deletesubprocess($subprocess_id)
+    {
+        // echo $process_id;
+        // exit;
+        $deletesubprocess = new subprocessModel();
+        $datasubprocess = array('delete_flag'=>'0',
+                              'deleted_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
+                            );
+        $deletesubprocess ->set($datasubprocess) ->where('subprocess_id',$subprocess_id) -> update();
+        
+        
+       
+    }
     public function confirmprocess($process_id)
     {
         // echo $process_id;

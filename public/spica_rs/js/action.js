@@ -86,13 +86,18 @@ $(document).on( "click",".addsubprocess", function() {
     todayHighlight: true,
     autoclose: true
   });
-  
+  const pathname = window.location.pathname;
+  const text = pathname.split("/");
+  // alert(text[1]);
+
+  // return false;
+  if(text[1] = 'formupdateprocess'){
   showsubprocess();
-  
+  }
 });
 // โชว subprocess
 function showsubprocess(){
-  let process_id = $('#process_id').val();
+  const process_id = $('#process_id').val();
   $.ajax(
     {
       
@@ -101,8 +106,8 @@ function showsubprocess(){
     dataType: 'text',
     data: { process_id : process_id},
     success: function (data) {
-      var a = JSON.parse(data);
-      console.log(a)   
+      const a = JSON.parse(data);
+      // console.log(a)   
       $('#subprocess_id').val(data.subprocess_id);
     }
 });  
@@ -419,47 +424,38 @@ function updatesubprocess(subprocessid){
     }
 }); 
 }
-$(document).on('click', '.deletesubprocess', function () {
-  alert('dlsnfolsed');
-//   $(this).parent('td.text-center').parent('tr.rowClass').remove(); 
-//   $.ajax(
-//     {
-//     url: "deletesubprocess",
-//     type: "post",
-//     dataType: "json",
-//     data: { subprocessid: subprocessid},
-//     success: function (data) {
-      
-//     }
-// }); 
-});
-
-// showprocess
-$(function() {
-  // Open Popup
-  $('[popup-open]').on('click', function() {
-      var popup_name = $(this).attr('popup-open');
-$('[popup-name="' + popup_name + '"]').fadeIn(300);
+function deletesubprocess(subprocessid){
+  let text = ('ท่านต้องการลบขั้นตอนการทำงานย่อยใช่หรือไม่');
+  Swal.fire({
+    title: text,
+    showDenyButton: false,
+    showCancelButton: true,
+    confirmButtonText: "ยืนยัน",
+    cancelButtonText: "ยกเลิก",
+    // denyButtonText: `Don't save`
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      Swal.fire("ได้ทำการลบข้อมูลแล้ว!", "", "success");
+      // return false;
+      $.ajax(
+        {
+        url: "deletesubprocess",
+        type: "post",
+        dataType: "json",
+        data: { subprocessid: subprocessid},
+        success: function (data) {
+          window.location.reload();
+        }
+    }); 
+    } 
+    // else if (result.isDenied) {
+    //   Swal.fire("Changes are not saved", "", "info");
+    // }
   });
-
-  // Close Popup
-  $('[popup-close]').on('click', function() {
-var popup_name = $(this).attr('popup-close');
-$('[popup-name="' + popup_name + '"]').fadeOut(300);
-  });
-
-  // Close Popup When Click Outside
-  $('.popup').on('click', function() {
-var popup_name = $(this).find('[popup-close]').attr('popup-close');
-$('[popup-name="' + popup_name + '"]').fadeOut(300);
-  }).children().click(function() {
-return false;
-  });
-
-});
-
-
-  $(document).on( "change",".selectjob", function() {
+ 
+}
+$(document).on( "change",".selectjob", function() {
     $( "select option:selected" ).each( function() {
       jobid = $(this).val() + " ";
     } );

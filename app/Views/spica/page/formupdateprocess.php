@@ -259,7 +259,7 @@
                                                     </td>
                                                     <td nowrap>
                                                         <button class='btn btn-warning' type="button" onclick="updatesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-pencil'></i> แก้ไข</button>
-                                                        <button class='btn btn-danger' onclick="deletesubprocess(<?php echo $rsub['subprocess_id'];?>)" ><i class='fa fa-times-circle'></i> ลบ</button>
+                                                        <button class='btn btn-danger' type="button" onclick="deletesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-times-circle'></i> ลบ</button>
                                                     </td>
                                                    </tr>
                                                    <?php }?>
