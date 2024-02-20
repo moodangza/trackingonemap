@@ -57,4 +57,14 @@ class Managecontroller extends BaseController
         
        
     }
+    public function updateprocess(){
+        $processid = $this->request->getVar('processid');
+        $deleteprocess = new processModel();
+        $dataprocess = array('delete_flag'=>'1',
+                              'process_finish'=>date('Y-m-d'),
+                              'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+                                'status'=>'2'
+                            );
+        $deleteprocess ->set($dataprocess) ->where('process_id',$processid) -> update();
+    }
 }

@@ -251,7 +251,7 @@ public function deletejob()
         $updatejob = new jobModel();
         $dataupdate = array('status'=>'2',
                             'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
-                        );
+        );
        
         $updatejob ->set($dataupdate) ->where('status',$_POST['job_id']) -> update();
         $returndata = [
@@ -308,6 +308,7 @@ public function formupdateprocess($process_id){
    
     return view('spica/page/formprocess',$returndata);
 }
+
         public function addsubprocess(){
             $addsubprocessmodel = new subprocessModel();
     
