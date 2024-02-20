@@ -207,7 +207,7 @@ public function deletejob()
 }
 
 
-    public function formaddprocess($job_id){
+    public function formprocess($job_id){
         $jobmodel = new jobModel();
         $jobmodel  ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status ')
         ->where('job_tb.division_id ', 1)
@@ -220,13 +220,16 @@ public function deletejob()
         foreach($job_rs as $key => $date_th){
             $job_rs[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
             $job_rs[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
+            $job_rs[$key]['job_startpic'] = $dateth->Dateinpicker($date_th['job_start']);
+            $job_rs[$key]['job_endpic'] = $dateth->Dateinpicker($date_th['job_end']);
         }
         
         $data = [
             'job'=> $job_rs,
+            'flag'=> 'add'
         ];
         if($job_id !=''){
-        return view('spica/page/formaddprocess',$data);
+        return view('spica/page/formprocess',$data);
     }
     }
 
@@ -304,7 +307,7 @@ public function formupdateprocess($process_id)
     // print_r($returndata);
     // exit;
    
-    return view('spica/page/formupdateprocess',$returndata);
+    return view('spica/page/formprocess',$returndata);
 }
         public function addsubprocess(){
             $addsubprocessmodel = new subprocessModel();
@@ -341,7 +344,7 @@ public function formupdateprocess($process_id)
         echo json_encode( $process_rs );
          
         }
-        public function formupdatesubprocess(){
+        public function editsubprocess(){
         $subprocess_id = $this->request->getVar('subprocess_id');
           $form = new subprocessModel();
           $dateth = new Date();

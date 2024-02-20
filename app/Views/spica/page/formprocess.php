@@ -46,6 +46,20 @@
             $process_end = $rs['process_end'];
             $detail = $rs['detail'];
         }
+   }else{
+    foreach($job as $rs){
+        $job_id = $rs['job_id'];
+        $job_name = $rs['job_name'];
+        $job_start = $rs['job_start'];
+        $job_end = $rs['job_end'];
+        $job_startpic = $rs['job_startpic'];
+        $job_endpic = $rs['job_endpic'];
+        $process_id = '';
+        $process_name = '';
+        $process_start = '';
+        $process_end = '';
+        $detail = '';
+    }
    }
  ?>
       <!-- partial -->
@@ -70,11 +84,23 @@
       <div class="modal-dialog modal-xl ">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-4" id="exampleModalToggleLabel">เพิ่มขั้นตอนการทำงานย่อย</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h3 class="modal-title fs-4 text-center" id="exampleModalToggleLabel">เพิ่มขั้นตอนการทำงานย่อย</h3>
+            <button type="button" class="btn-close modalclose" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-                        <div class="row g-3">
+          <div class="row g-3">
+                <div class="col-md">
+                    <figure class="text-left">
+                        
+                            <h3><?php echo $job_name;?></h3>
+                        
+                        
+                        <?php echo 'วันที่เริ่มต้น&nbsp;&nbsp;&nbsp;'.$job_start. '&nbsp;&nbsp;&nbsp;วันที่สิ้นสุด&nbsp;&nbsp;&nbsp;'. $job_end ; ?>
+                        
+                    </figure>
+                </div>      
+          </div>
+          <div class="row g-3">
                     <div class="col-md">
                         <div class="form-floating">
                         <input type="hidden" id="sub_id" value="">
@@ -94,11 +120,13 @@
                             <label for="e_sub_date">ระบุวันที่สิ้นสุด</label>
                         </div>
                     </div>
-                    </div>
-
+            </div>
+            
           </div>
           <div class="modal-footer">
             <button class="btn btn-primary addsubprocess"  type="button">บันทึก</button>
+            <button class="btn btn-primary updatesubprocess"  type="button">แก้ไข</button>
+            <button class="btn btn-danger cancel" type="button">ปิด</button>
           </div>
         </div>
       </div>
@@ -215,9 +243,10 @@
                                 </div>
 
                             </div>
+                           <?php if($flag != 'add'){?>
                             <div class="row">
-                                    <div >
-                                    <button class="btn btn-primary subprocessform" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+                                    
+                                    <button class="btn btn-primary formaddsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
                                         <i class="fa fa-plus-square"></i> เพิ่ม
                                     </button>
                                         <div class="form-group row subprocess " id="subprocess">
@@ -234,7 +263,9 @@
                                                     <input id="process_id" class="hidden-field" type="hidden" name="process_id" value="<?php echo $process_id;?>">
                                                   
 		                                            
-                                                <?php foreach($subprocess as $rsub){?>    
+                                                <?php
+                                                       if($flag != 'add'){
+                                                        foreach($subprocess as $rsub){?>    
                                                 <tr id="subprocess<?php echo $rsub['subprocess_id'];?>">
                                                     <td><input type='text' readonly class='form-control' name='subprocessinput[]' id='subprocessinput[]' value="<?php echo $rsub['subprocess_name'];?>"> </td>
                                                     <td>
@@ -259,22 +290,27 @@
                                                     </div>
                                                     </td>
                                                     <td nowrap>
-                                                        <button class='btn btn-warning' type="button" onclick="formupdatesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-pencil'></i> แก้ไข</button>
+                                                        <button class='btn btn-warning' type="button" onclick="editsubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-pencil'></i> แก้ไข</button>
+                                                        <button class='btn btn-success' type="button" onclick="confirmsubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-check'></i> ยืนยัน</button>
                                                         <button class='btn btn-danger' type="button" onclick="deletesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-times-circle'></i> ลบ</button>
                                                     </td>
                                                    </tr>
-                                                   <?php }?>
+                                                   <?php } 
+                                                            }?>
                                                 </tbody>   
                                             </table>
                                             </div> 
                                         </div>
                                   
                             </div>
+                            <?php }?>
                             <div class="row">
                                     <div class="col-12 text-center">
-                                        <?php if($flag='update'){?>
+                                        <?php if($flag=='add'){?>
                                                 <button class="btn btn-success insertprocess" type="button" >บันทึก</button>
-                                        <?php }else { ?>
+                                        <?php }else if($flag=='update'){?>
+                                            <button class="btn btn-warning updateprocess" type="button" >แก้ไข</button>
+                                            <?php }else { ?>
                                           <a class="btn btn-warning"  href="<?php echo base_url('showjobselect/'.$job_id);?>">ย้อนกลับ</a>
                                           <?php }?>
                                     </div>
