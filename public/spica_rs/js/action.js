@@ -339,7 +339,8 @@ $(document).on("click",".updateprocess",function(){
     dataType: 'text',
     data: $('#formaddprocess').serialize() ,
     success: function (data) {
-        alert('บันทึก')
+        alert('บันทึก');
+        window.location.reload();
     }
 });   
 });

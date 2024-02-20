@@ -314,12 +314,8 @@
                                           <a class="btn btn-warning"  href="<?php echo base_url('showjobselect/'.$job_id);?>">ย้อนกลับ</a>
                                           <?php }?>
                                     </div>
-                            </div>
-                          
-    
-  
-                                                          
-        </form>
+                            </div>                                       
+                        </form>
                         </div>
                     </div>
                 </div>

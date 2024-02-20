@@ -259,9 +259,8 @@ public function deletejob()
         ];
         return view('spica/page/showprocess',$returndata);
     }
-// formupdateprocess
-public function formupdateprocess($process_id)
-{
+// เข้าผ่านปุ่มแก้ไขprocess
+public function formupdateprocess($process_id){
     // print_r($process_id);
     // exit;
     $updateprocessmodel = new processModel();
@@ -364,26 +363,5 @@ public function formupdateprocess($process_id)
             // $updatesubprocessmodel ->set($dataupdate) ->where('status',$_POST['job_id']) -> update();
         }
 }
-
-    // public function edit($process_id)
-    // {
-        
-    //     $processmodel = new processModel();
-    //     $processmodel ->select('process_id,process_name,process_start,process_end,detail, process_tb.process_status')
-    //     ->where('delete_flag', '1') 
-    //     ->where('process_tb.job_id', $jobid1 )
-    //     ->groupBy('process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
-    //     ->orderBy('process_start','asc');
-
-    //     $process_rs = $processmodel->findAll();
-    
-    //   $return = [
-    //     'title' => 'แก้ไข',
-    //     'agenda_types' => $agenda_types,
-    //     'agenda' => $agenda,
-    //     'attachments' => $attachments,
-    //   ];
-    //   return view('meeting/agenda/form', $return);
-    // }
 
 
