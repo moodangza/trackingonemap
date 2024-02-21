@@ -62,27 +62,63 @@ class Managecontroller extends BaseController
         // print_r($_POST['e_sub_date']);
         // exit;
         $addprocessmodel = new processModel();
+        $job_id = $this->request->getVar('job_id');
+        // echo $job_id;
         print_r($_POST);
+        // exit;
         $data = array('job_id'=>$_POST['job_id'],
         'process_name'=>$_POST['process_name'],
-        'process_start'=>$_POST['rs_start'],
-        'process_end'=>$_POST['rs_end'],
+        'process_start'=>$_POST['process_start'],
+        'process_end'=>$_POST['process_end'],
         'created_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
         'detail'=>$_POST['detail'],
+        'delete_flag'=>'1',
         'status'=>'1');
+        
         $addprocessmodel -> insert($data);
-     
+         $addprocessmodel -> lastInsertId();
+        print_r($addprocessmodel);
+        exit();
         $updatejob = new jobModel();
         $dataupdate = array('status'=>'2',
                             'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
         );
        
-        $updatejob ->set($dataupdate) ->where('status',$_POST['job_id']) -> update();
+        $updatejob ->set($dataupdate) ->where('job_id',$job_id) -> update();
 
+        $updateprocessmodel = new processModel();
+        $updateprocessmodel ->select('job_tb.job_id,job_tb.job_name,job_tb.job_start,job_tb.job_end')
+        ->select('process_tb.process_id,process_tb.process_name,process_tb.process_start,process_end,detail,process_tb.status')
+        ->join('job_tb','job_tb.job_id = process_tb.job_id','inner')
+        ->where('process_tb.process_id', $addprocessmodel )
+        ->where('process_tb.delete_flag', '1') 
+        ->groupBy('job_tb.job_id,job_tb.job_name,job_tb.job_start,job_tb.job_end,process_tb.process_id,process_tb.process_name,process_tb.process_start,process_end,detail,process_tb.status ');
+        $process_rs1 = $updateprocessmodel->findAll();
+        
+        // print_r($process_rs1);
+        // echo $process_rs1[0]["status"];
+        // exit;
+        if($process_rs1[0]["status"]=='2'){
+                $text = 'view';
+        }else{
+            $text = 'update';
+        }
+        $dateth = new Date();
+        foreach($process_rs1 as $key => $date_th){
+            $process_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
+            $process_rs1[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
+            $process_rs1[$key]['job_startpic'] = $dateth->Dateinpicker($date_th['job_start']);
+            $process_rs1[$key]['job_endpic'] = $dateth->Dateinpicker($date_th['job_end']);
+            $process_rs1[$key]['process_start'] = $dateth->Dateinpicker($date_th['process_start']);
+            $process_rs1[$key]['process_end'] = $dateth->Dateinpicker($date_th['process_end']);
+          
+        }
+       
         $returndata = [
-            'job'=> $_POST['job_id'],
-            'flag'=> 'update'
+            'job'=> $process_rs1,
+            'flag' => $text,
         ];
+       
         return view('spica/page/formprocess',$returndata);
     }
     public function updateprocess(){

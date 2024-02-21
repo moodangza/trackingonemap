@@ -234,20 +234,11 @@ function confirmprocess(process_id){
 }
 // เพิ่มขั้นตอนการทำงาน
 $(document).on("click",".insertprocess",function(){
-  // let job_idprocess = $('.addprocessid').val();
-  // alert(job_idprocess);
-  insertprocess();
-});
-function insertprocess(){
-  console.log( $('#formupdateprocess').serialize() );
-  // return false;
   let job_id = $('#job_id').val();
   let process_name = $('#process_name').val();
   let processstart = $('#s_date').val();
   let processend = $('#e_date').val();
   let detail = $('#detail').val();
-  alert(job_id);
-  // alert(processend);
   
   var p_s_start = processstart.split('/');
   let rs_start = p_s_start[2]+'-'+p_s_start[1]+'-'+p_s_start[0];
@@ -262,8 +253,6 @@ function insertprocess(){
     
   }
  
-//   alert(rs_end-rs_start);
-// return false;
   if(process_name ==''){
     alert('กรุณากรอก ขั้นตอน');
     process_name.focus();
@@ -283,12 +272,13 @@ function insertprocess(){
     url: "/insertprocess",
     type: "post",
     dataType: 'text',
-    data: $('#formupdateprocess').serialize() ,
+    data: {job_id : job_id, process_name : process_name,process_start : rs_start, process_end : rs_end,detail : detail} ,
     success: function (data) {
         alert('บันทึก')
     }
 });   
-}
+});
+
 //เพิ่มขั้นตอนการทำงาน
 // แก้ไขขั้นตอนการทำงาน
 $(document).on("click",".updateprocess",function(){

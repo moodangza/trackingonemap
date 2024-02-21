@@ -228,9 +228,9 @@ public function deletejob()
             'job'=> $job_rs,
             'flag'=> 'add'
         ];
-        if($job_id !=''){
-        return view('spica/page/formprocess',$data);
-    }
+            if($job_id !=''){
+            return view('spica/page/formprocess',$data);
+        }
     }
 
 
@@ -294,7 +294,6 @@ public function formupdateprocess($process_id){
                 $subprocessstart = $s[2].'-'.$s[1].'-'.$s[0];
                 $subprocessend = $e[2].'-'.$e[1].'-'.$e[0];
                 $subprocess_data = [
-                   
                  'job_id' => $_POST['job_id'],
                  'process_id' => $_POST['process_id'],
                  'subprocess_name' => $_POST['sub_process'],
