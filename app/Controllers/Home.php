@@ -234,31 +234,7 @@ public function deletejob()
     }
 
 
-    public function insertprocess()
-    {
-        // print_r($_POST['e_sub_date']);
-        // exit;
-        $addprocessmodel = new processModel();
-        $data = array('job_id'=>$_POST['job_id'],
-        'process_name'=>$_POST['process_name'],
-        // 'process_start'=>$_POST['process_start'],
-        // 'process_end'=>$_POST['process_end'],
-        'created_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-        'detail'=>$_POST['detail'],
-        'status'=>'1');
-        $addprocessmodel -> insert($data);
-     
-        $updatejob = new jobModel();
-        $dataupdate = array('status'=>'2',
-                            'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
-        );
-       
-        $updatejob ->set($dataupdate) ->where('status',$_POST['job_id']) -> update();
-        $returndata = [
-            'job'=> $_POST['job_id'],
-        ];
-        return view('spica/page/showprocess',$returndata);
-    }
+    
 // เข้าผ่านปุ่มแก้ไขprocess
 public function formupdateprocess($process_id){
     // print_r($process_id);

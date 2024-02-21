@@ -239,14 +239,14 @@ $(document).on("click",".insertprocess",function(){
   insertprocess();
 });
 function insertprocess(){
-  console.log( $('#formaddprocess').serialize() );
+  console.log( $('#formupdateprocess').serialize() );
   // return false;
   let job_id = $('#job_id').val();
   let process_name = $('#process_name').val();
   let processstart = $('#s_date').val();
   let processend = $('#e_date').val();
   let detail = $('#detail').val();
-  // alert(processstart);
+  alert(job_id);
   // alert(processend);
   
   var p_s_start = processstart.split('/');
@@ -283,7 +283,7 @@ function insertprocess(){
     url: "/insertprocess",
     type: "post",
     dataType: 'text',
-    data: $('#formaddprocess').serialize() ,
+    data: $('#formupdateprocess').serialize() ,
     success: function (data) {
         alert('บันทึก')
     }
