@@ -245,10 +245,12 @@
                             </div>
                            <?php if($flag != 'add'){?>
                             <div class="row">
-                                    
-                                    <button class="btn btn-primary formaddsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
-                                        <i class="fa fa-plus-square"></i> เพิ่ม
-                                    </button>
+                                    <div class="col-2">
+                                        <button class="btn btn-primary formaddsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+                                            <i class="fa fa-plus-square"></i> เพิ่ม
+                                        </button>
+                                    </div>
+                                   
                                         <div class="form-group row subprocess " id="subprocess">
                                            
                                            <div class="col-12 ">
@@ -265,6 +267,7 @@
 		                                            
                                                 <?php
                                                        if($flag != 'add'){
+                                                        if(isset($subprocess)){
                                                         foreach($subprocess as $rsub){?>    
                                                 <tr id="subprocess<?php echo $rsub['subprocess_id'];?>">
                                                     <td><input type='text' readonly class='form-control' name='subprocessinput[]' id='subprocessinput[]' value="<?php echo $rsub['subprocess_name'];?>"> </td>
@@ -295,8 +298,9 @@
                                                         <button class='btn btn-danger' type="button" onclick="deletesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-times-circle'></i> ลบ</button>
                                                     </td>
                                                    </tr>
-                                                   <?php } 
-                                                            }?>
+                                                   <?php }
+                                                            } 
+                                                                }?>
                                                 </tbody>   
                                             </table>
                                             </div> 
@@ -310,9 +314,9 @@
                                                 <button class="btn btn-success insertprocess" type="button" >บันทึก</button>
                                         <?php }else if($flag=='update'){?>
                                             <button class="btn btn-warning updateprocess" type="button" >แก้ไข</button>
-                                            <?php }else { ?>
-                                          <a class="btn btn-warning"  href="<?php echo base_url('showjobselect/'.$job_id);?>">ย้อนกลับ</a>
-                                          <?php }?>
+                                            <?php } ?>
+                                          <a class="btn btn-danger"  href="<?php echo base_url('showjobselect/'.$job_id);?>">ย้อนกลับ</a>
+                                          
                                     </div>
                             </div>                                       
                         </form>

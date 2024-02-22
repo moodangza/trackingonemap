@@ -274,7 +274,10 @@ $(document).on("click",".insertprocess",function(){
     dataType: 'text',
     data: {job_id : job_id, process_name : process_name,process_start : rs_start, process_end : rs_end,detail : detail} ,
     success: function (data) {
-        alert('บันทึก')
+      
+      const obj = JSON.parse(data);
+      console.log(obj);
+      location.replace("/formupdateprocess/"+obj.process)
     }
 });   
 });
@@ -470,6 +473,7 @@ function editsubprocess(subprocessid){
     dataType: "json",
     data: { subprocess_id: subprocessid},
       success: function (data) {
+        
         $('#exampleModalToggle').modal('show');
         $('.addsubprocess').hide();
         $('.updatesubprocess').show();
@@ -483,6 +487,10 @@ function editsubprocess(subprocessid){
 }
 
 function confirmsubprocess(subid){
+  let text = "ยืนยันข้อมูลใช่หรือไม่";
+  if (confirm(text) == true) {
+    text = "ยืนยันข้อมูลแล้ว";
+    alert(text);
   $.ajax(
     {
       url: "/confirmsubprocess",
@@ -495,7 +503,12 @@ function confirmsubprocess(subid){
     }
   )
 }
+}
 function deletesubprocess(subid){
+  let text = "ลบขั้นตอนการทำงานใช่หรือไม่";
+  if (confirm(text) == true) {
+    text = "ทำการลบข้อมูลแล้ว";
+    alert(text);
   $.ajax(
     {
     url: "/deletesubprocess",
@@ -536,7 +549,7 @@ function deletesubprocess(subid){
   //   //   Swal.fire("Changes are not saved", "", "info");
   //   // }
   // });
- 
+  }
 }
 $(document).on( "change",".selectjob", function() {
     $( "select option:selected" ).each( function() {
