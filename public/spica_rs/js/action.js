@@ -70,7 +70,9 @@ $(document).on( "click",".addsubprocess", function() {
     dataType: 'text',
     data: { job_id : job_id,process_id : process_id, sub_process: sub_process,s_sub_date : s_sub_date ,e_sub_date : e_sub_date},
     success: function (data) {
+
      alert('บันทึกสำเร็จ');
+     
       showsubprocess();       
     
     }
@@ -78,6 +80,7 @@ $(document).on( "click",".addsubprocess", function() {
 } );
 //
   $(document).ready(function() {
+    $('#urladdprocess').hide();
 //ปฏิทิน
   $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date,#editjob_start,#editjob_end').datepicker({
     language:'th',
@@ -86,13 +89,18 @@ $(document).on( "click",".addsubprocess", function() {
     todayHighlight: true,
     autoclose: true
   });
-  
+  const pathname = window.location.pathname;
+  const text = pathname.split("/");
+  // alert(text[1]);
+
+  // return false;
+  if(text[1] = 'formupdateprocess'){
   showsubprocess();
-  
+  }
 });
 // โชว subprocess
 function showsubprocess(){
-  let process_id = $('#process_id').val();
+  const process_id = $('#process_id').val();
   $.ajax(
     {
       
@@ -101,8 +109,8 @@ function showsubprocess(){
     dataType: 'text',
     data: { process_id : process_id},
     success: function (data) {
-      var a = JSON.parse(data);
-      console.log(a)   
+      const a = JSON.parse(data);
+      // console.log(a)   
       $('#subprocess_id').val(data.subprocess_id);
     }
 });  
@@ -110,7 +118,7 @@ function showsubprocess(){
         
   // $('#addjob_id').html('');
   // $('#addjob_id').append('<input class="addprocessid" type="text" value="'+a.process[0]['job_id']+'">');
-  $("#urladdprocess").attr("href", "/formaddprocess/"+a.process[0]['job_id']+""); 
+  $("#urladdprocess").attr("href", "/formprocess/"+a.process[0]['job_id']+""); 
    
   a.process.forEach(element => {
    
@@ -129,6 +137,7 @@ function showsubprocess(){
 // 
 
 function jobselect(jobid){
+  $('#urladdprocess').show();
   $.ajax(
     {
       
@@ -145,7 +154,7 @@ function jobselect(jobid){
       
       // $('#addjob_id').html('');
       // $('#addjob_id').append('<input class="addprocessid" type="text" value="'+a.process[0]['job_id']+'">');
-      $("#urladdprocess").attr("href", "/formaddprocess/"+a.process[0]['job_id']+""); 
+      $("#urladdprocess").attr("href", "/formprocess/"+a.process[0]['job_id']+""); 
        
       a.process.forEach(element => {
        
@@ -223,13 +232,57 @@ function confirmprocess(process_id){
   });   
   } 
 }
-
+// เพิ่มขั้นตอนการทำงาน
 $(document).on("click",".insertprocess",function(){
-  // let job_idprocess = $('.addprocessid').val();
-  // alert(job_idprocess);
-  insertprocess();
+  let job_id = $('#job_id').val();
+  let process_name = $('#process_name').val();
+  let processstart = $('#s_date').val();
+  let processend = $('#e_date').val();
+  let detail = $('#detail').val();
+  
+  var p_s_start = processstart.split('/');
+  let rs_start = p_s_start[2]+'-'+p_s_start[1]+'-'+p_s_start[0];
+  var p_s_end= processend.split('/');
+  let rs_end = p_s_end[2]+'-'+p_s_end[1]+'-'+p_s_end[0];
+  // alert(rs_start);
+  // alert(rs_end);
+  let s_job = $('#s_job').val();
+  let e_job = $('#e_job').val();
+  if(rs_end < rs_start){
+    alert('วันที่ สิ้นสุดต้องไม่น้อยกว่าวันที่เริ่มต้น');
+    
+  }
+ 
+  if(process_name ==''){
+    alert('กรุณากรอก ขั้นตอน');
+    process_name.focus();
+    return false;
+  }else if(processstart == ''){
+    alert('กรุณากรอกวันที่เริ่มต้น');
+    processstart.focus();
+    return false;
+  }else if(processend == ''){
+    alert('กรุณากรอกวันที่สิ้นสุด');
+    processend.focus();
+    return false;
+  }
+
+  $.ajax(
+    {
+    url: "/insertprocess",
+    type: "post",
+    dataType: 'text',
+    data: {job_id : job_id, process_name : process_name,process_start : rs_start, process_end : rs_end,detail : detail} ,
+    success: function (data) {
+        alert('บันทึก')
+    }
+});   
 });
-function insertprocess(){
+
+//เพิ่มขั้นตอนการทำงาน
+// แก้ไขขั้นตอนการทำงาน
+$(document).on("click",".updateprocess",function(){
+  // let job_idprocess = $('.addprocessid').val();
   console.log( $('#formaddprocess').serialize() );
   // return false;
   let job_id = $('#job_id').val();
@@ -271,16 +324,17 @@ function insertprocess(){
 
   $.ajax(
     {
-    url: "/insertprocess",
+    url: "/updateprocess",
     type: "post",
     dataType: 'text',
     data: $('#formaddprocess').serialize() ,
     success: function (data) {
-        alert('บันทึก')
+        alert('บันทึก');
+        window.location.reload();
     }
 });   
-}
-
+});
+// แก้ไขขั้นตอนการทำงาน
 // addjob
 function addjob(){
   let jobname = $('#job_name').val();
@@ -398,71 +452,97 @@ function deletejob(job_id){
       data: { job_id: job_id},
       success: function (data) {
             alert('ลบข้อมูลเรียบร้อย')
-            window.location.reload(false);
+            window.location.reload();
           }
       });
   }
 };
-
-function updatesubprocess(subprocessid){
-  let inputsub = $("#subprocessinput").val();
-  console.log(inputsub);
-  return false;
+$(document).on('click','.formaddsubprocess',function(){
+  $('.addsubprocess').show();
+  $('.updatesubprocess').hide();
+});
+function editsubprocess(subprocessid){
+  
   $.ajax(
     {
-    url: "updatesubprocess",
-    type: "post",
+    url: "/editsubprocess",
+    type: "get",
     dataType: "json",
-    data: { subprocessid: subprocessid},
-    success: function (data) {
-
+    data: { subprocess_id: subprocessid},
+      success: function (data) {
+        $('#exampleModalToggle').modal('show');
+        $('.addsubprocess').hide();
+        $('.updatesubprocess').show();
+        $("#sub_id").val(data.subprocess_id);
+        $("#subprocessinput").val(data.subprocess_name);
+        $("#s_sub_date").val(data.subprocess_start);
+        $("#e_sub_date").val(data.subprocess_end);
+      
     }
 }); 
 }
-$(document).on('click', '.deletesubprocess', function () {
-  alert('dlsnfolsed');
-//   $(this).parent('td.text-center').parent('tr.rowClass').remove(); 
-//   $.ajax(
-//     {
-//     url: "deletesubprocess",
-//     type: "post",
-//     dataType: "json",
-//     data: { subprocessid: subprocessid},
-//     success: function (data) {
-      
-//     }
-// }); 
-});
 
-// showprocess
-$(function() {
-  // Open Popup
-  $('[popup-open]').on('click', function() {
-      var popup_name = $(this).attr('popup-open');
-$('[popup-name="' + popup_name + '"]').fadeIn(300);
-  });
-
-  // Close Popup
-  $('[popup-close]').on('click', function() {
-var popup_name = $(this).attr('popup-close');
-$('[popup-name="' + popup_name + '"]').fadeOut(300);
-  });
-
-  // Close Popup When Click Outside
-  $('.popup').on('click', function() {
-var popup_name = $(this).find('[popup-close]').attr('popup-close');
-$('[popup-name="' + popup_name + '"]').fadeOut(300);
-  }).children().click(function() {
-return false;
-  });
-
-});
-
-
-  $(document).on( "change",".selectjob", function() {
+function confirmsubprocess(subid){
+  $.ajax(
+    {
+      url: "/confirmsubprocess",
+      type: "post",
+      dataType: "text",
+      data: { subprocessid: subid},
+      success: function (data) {
+        window.location.reload();
+      } 
+    }
+  )
+}
+function deletesubprocess(subid){
+  $.ajax(
+    {
+    url: "/deletesubprocess",
+    type: "post",
+    dataType: "text",
+    data: { subprocessid: subid},
+    success: function (data) {
+      window.location.reload();
+    }
+}); 
+  // let text = ('ท่านต้องการลบขั้นตอนการทำงานย่อยใช่หรือไม่');
+  // Swal.fire({
+  //   title: text,
+  //   showDenyButton: false,
+  //   showCancelButton: true,
+  //   confirmButtonText: "ยืนยัน",
+  //   cancelButtonText: "ยกเลิก",
+  //   // denyButtonText: `Don't save`
+  // }).then((result) => {
+  //   /* Read more about isConfirmed, isDenied below */
+  //   if (result.isConfirmed) {
+  //     // alert(subprocessid);
+  //     Swal.fire("ได้ทำการลบข้อมูลแล้ว!", "", "success");
+  //     // return false;
+  //     let subprocess_id = subprocessid;
+  //     $.ajax(
+  //       {
+  //       url: "deletesubprocess/"+subprocessid,
+  //       type: "post",
+  //       dataType: "text",
+  //       // data: { subprocessid: subprocess_id},
+  //       success: function (data) {
+  //         // window.location.reload(false);
+  //       }
+  //   }); 
+  //   } 
+  //   // else if (result.isDenied) {
+  //   //   Swal.fire("Changes are not saved", "", "info");
+  //   // }
+  // });
+ 
+}
+$(document).on( "change",".selectjob", function() {
     $( "select option:selected" ).each( function() {
       jobid = $(this).val() + " ";
     } );
+    $('#urladdprocess').hide();
     jobselect(jobid)    
   
   } );
@@ -474,61 +554,20 @@ $(document).on("click",".addprocess",function(){
 function addprocess(job_idprocess){
   $.ajax(
     {
-    url: "/formaddprocess/job",
+    url: "/formprocess/job",
     type: "post",
     dataType: 'text',
     data: { job_id: job_idprocess},
     success: function (data) {
-    
-
+  
     }
 });   
 }
-// drag and drop
-// id หรือ class ที่ต้องการลาก
-// const draggbles = document.querySelectorAll(".shallow-draggable")
-// // id หรือ class ที่ต้องการวาง
-// const containers = document.querySelectorAll(".draggable-container")
+$(document).on("click",".modalclose,.cancel",function(){
+  $('#exampleModalToggle').modal('hide');
 
-// draggbles.forEach((draggble) => {
-//   //for start dragging costing opacity
-//   draggble.addEventListener("dragstart", () => {
-//     draggble.classList.add("dragging")
-//   })
+  // โหลดหน้าเว็บใหม่
+  window.location.reload();
+});
 
-//   //for end the dragging opacity costing
-//   draggble.addEventListener("dragend", () => {
-//     draggble.classList.remove("dragging")
-//   })
-// })
-// //shit
-// containers.forEach((container) => {
-//   container.addEventListener("dragover", function (e) {
-//     e.preventDefault()
-//     const afterElement = dragAfterElement(container, e.clientY)
-//     const dragging = document.querySelector(".dragging")
-//     if (afterElement == null) {
-//       container.appendChild(dragging)
-//     } else {
-//       container.insertBefore(dragging, afterElement)
-//     }
-//   })
-// })
-
-// function dragAfterElement(container, y) {
-//   const draggbleElements = [...container.querySelectorAll(".shallow-draggable:not(.dragging)")]
-
-//   return draggbleElements.reduce(
-//     (closest, child) => {
-//       const box = child.getBoundingClientRect()
-//       const offset = y - box.top - box.height / 2
-//       if (offset < 0 && offset > closest.offset) {
-//         return { offset: offset, element: child }
-//       } else {
-//         return closest
-//       }
-//     },
-//     { offset: Number.NEGATIVE_INFINITY }
-//   ).element
-// }
  

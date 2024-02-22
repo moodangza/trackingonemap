@@ -31,7 +31,9 @@
   <!-- Plugin js for this page-->
   <script src="<?php echo base_url('spica_rs/vendors/chart.js/Chart.min.js');?>"></script>
   <!-- End plugin js for this page-->
-  
+  <!-- sweetalert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- sweetalert -->
   <!-- inject:js -->
   <script src="<?php echo base_url('spica_rs/js/off-canvas.js');?>"></script>
   <script src="<?php echo base_url('spica_rs/js/hoverable-collapse.js');?>"></script>

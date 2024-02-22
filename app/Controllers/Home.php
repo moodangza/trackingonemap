@@ -208,7 +208,7 @@ public function deletejob()
 }
 
 
-    public function formaddprocess($job_id){
+    public function formprocess($job_id){
         $jobmodel = new jobModel();
         $jobmodel  ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status ')
         ->where('job_tb.division_id ', 1)
@@ -221,45 +221,23 @@ public function deletejob()
         foreach($job_rs as $key => $date_th){
             $job_rs[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
             $job_rs[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
+            $job_rs[$key]['job_startpic'] = $dateth->Dateinpicker($date_th['job_start']);
+            $job_rs[$key]['job_endpic'] = $dateth->Dateinpicker($date_th['job_end']);
         }
         
         $data = [
             'job'=> $job_rs,
+            'flag'=> 'add'
         ];
-        if($job_id !=''){
-        return view('spica/page/formaddprocess',$data);
-    }
+            if($job_id !=''){
+            return view('spica/page/formprocess',$data);
+        }
     }
 
 
-    public function insertprocess()
-    {
-        // print_r($_POST['e_sub_date']);
-        // exit;
-        $addprocessmodel = new processModel();
-        $data = array('job_id'=>$_POST['job_id'],
-        'process_name'=>$_POST['process_name'],
-        // 'process_start'=>$_POST['process_start'],
-        // 'process_end'=>$_POST['process_end'],
-        'created_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-        'detail'=>$_POST['detail'],
-        'status'=>'1');
-        $addprocessmodel -> insert($data);
-     
-        $updatejob = new jobModel();
-        $dataupdate = array('status'=>'2',
-                            'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
-                        );
-       
-        $updatejob ->set($dataupdate) ->where('status',$_POST['job_id']) -> update();
-        $returndata = [
-            'job'=> $_POST['job_id'],
-        ];
-        return view('spica/page/showprocess',$returndata);
-    }
-// formupdateprocess
-public function formupdateprocess($process_id)
-{
+    
+// เข้าผ่านปุ่มแก้ไขprocess
+public function formupdateprocess($process_id){
     // print_r($process_id);
     // exit;
     $updateprocessmodel = new processModel();
@@ -305,8 +283,9 @@ public function formupdateprocess($process_id)
     // print_r($returndata);
     // exit;
    
-    return view('spica/page/formupdateprocess',$returndata);
+    return view('spica/page/formprocess',$returndata);
 }
+
         public function addsubprocess(){
             $addsubprocessmodel = new subprocessModel();
     
@@ -316,7 +295,6 @@ public function formupdateprocess($process_id)
                 $subprocessstart = $s[2].'-'.$s[1].'-'.$s[0];
                 $subprocessend = $e[2].'-'.$e[1].'-'.$e[0];
                 $subprocess_data = [
-                   
                  'job_id' => $_POST['job_id'],
                  'process_id' => $_POST['process_id'],
                  'subprocess_name' => $_POST['sub_process'],
@@ -332,11 +310,9 @@ public function formupdateprocess($process_id)
         public function showsubprocess(){
             $process_id = $this->request->getVar('process_id');
             $showsubprocees = new subprocessModel();
-            $showsubprocees ->where('delete_flag', '1') 
+            $showsubprocees ->where('subprocess_tb.delete_flag', '1') 
         ->where('subprocess_tb.process_id', $process_id )
-        
         ->orderBy('subprocess_start','asc');
-
         $process_rs = $showsubprocees->findAll();
         print_r($process_rs);
         header('Content-Type: application/json');
@@ -344,31 +320,25 @@ public function formupdateprocess($process_id)
         echo json_encode( $process_rs );
          
         }
+        public function editsubprocess(){
+        $subprocess_id = $this->request->getVar('subprocess_id');
+          $form = new subprocessModel();
+          $dateth = new Date();
+          $form ->where('subprocess_tb.subprocess_id',$subprocess_id);
+          $process_rs = $form->findAll();
+        //   print_r($process_rs);
+        $process_rs["subprocess_id"] = $process_rs[0]["subprocess_id"];
+        $process_rs["subprocess_name"] = $process_rs[0]["subprocess_name"];
+          $process_rs["subprocess_start"] = $dateth->Dateinpicker($process_rs[0]['subprocess_start']);
+          $process_rs["subprocess_end"] = $dateth->Dateinpicker($process_rs[0]['subprocess_end']);
+          header('Content-Type: application/json');
+          echo json_encode( $process_rs );
+          
+        }
         public function updatesubprocess(){
             $updatesubprocessmodel = new subprocessModel();
             // $updatesubprocessmodel ->set($dataupdate) ->where('status',$_POST['job_id']) -> update();
         }
 }
-
-    // public function edit($process_id)
-    // {
-        
-    //     $processmodel = new processModel();
-    //     $processmodel ->select('process_id,process_name,process_start,process_end,detail, process_tb.process_status')
-    //     ->where('delete_flag', '1') 
-    //     ->where('process_tb.job_id', $jobid1 )
-    //     ->groupBy('process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
-    //     ->orderBy('process_start','asc');
-
-    //     $process_rs = $processmodel->findAll();
-    
-    //   $return = [
-    //     'title' => 'แก้ไข',
-    //     'agenda_types' => $agenda_types,
-    //     'agenda' => $agenda,
-    //     'attachments' => $attachments,
-    //   ];
-    //   return view('meeting/agenda/form', $return);
-    // }
 
 

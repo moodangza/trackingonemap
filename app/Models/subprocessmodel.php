@@ -10,7 +10,7 @@ class subprocessModel extends Model{
         protected $useSoftDeletes   = false;
         protected $protectFields    = false;
         protected $allowedFields    = [
-            'process_id,job_id,subprocess_id'         
+            'process_id,job_id,subprocess_id,delete_flag'         
         ];
 
          // Dates
