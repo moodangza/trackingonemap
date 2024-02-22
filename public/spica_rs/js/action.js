@@ -495,7 +495,7 @@ function confirmsubprocess(subid){
     {
       url: "/confirmsubprocess",
       type: "post",
-      dataType: "text",
+      dataType: "่json",
       data: { subprocessid: subid},
       success: function (data) {
         window.location.reload();
