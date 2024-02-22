@@ -121,6 +121,23 @@ class Home extends BaseController
         
     }
 
+    //คลิก หน่วยงาน ดู job
+    public function showdvselect($division_id=null)
+    {
+        $jobmodel1 = new jobModel();
+        $jobmodel1  ->select('division.division_id,job_tb.job_id,job_tb.job_name,status,job_finish')
+        //->where('job_tb.job_id', $job_id )
+        ->where('delete_flag', '1') 
+        ->groupBy('division.division_id,job_tb.job_id,job_tb.job_name,status,job_finish')
+        ->orderBy('division_id','asc');
+        $division_rs1 = $jobmodel1->findAll();
+        $return = [
+            'division'=> $division_rs1,
+        ];
+
+        return view('spica/page/showjob',$return);
+    }
+
     //คลิก job ดู process
     public function showjobselect($job_id=null)
     {

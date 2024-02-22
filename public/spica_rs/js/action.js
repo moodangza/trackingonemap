@@ -134,6 +134,7 @@ function showsubprocess(){
   });
  
 }
+
 // 
 
 function jobselect(jobid){
@@ -546,6 +547,16 @@ $(document).on( "change",".selectjob", function() {
     jobselect(jobid)    
   
   } );
+
+  $(document).on( "change",".selectdivision", function() {
+    $( "select option:selected" ).each( function() {
+      divisionid = $(this).val() + " ";
+    } );
+    $('#urladdprocess').hide();
+    dvselect(divisionid)    
+  
+  } );
+
 $(document).on("click",".addprocess",function(){
     let job_idprocess = $('.addprocessid').val();
     // alert(job_idprocess);

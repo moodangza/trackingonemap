@@ -76,6 +76,14 @@ function drop(ev) {
                     <div class="card-body container">
                       <!-- <button class="btn btn-success" id="intjob" onclick="openForm()">เพิ่มหัวข้อ</button> -->
                       <!-- Button trigger modal -->
+                        
+            <select class="form-select selectjob" aria-label="Default select example" style="width:auto;">
+                <option value="0" selected>เลือกหน่วยงาน</option>
+                  <?php foreach($division as $opj){?>
+                    <option value="<?php echo $opj['division_id'];?>" <?php echo (isset($division_id) && $opj['division_id']==$division_id) ?'selected': '' ?>><?php echo $opj['division_name'];?></option>
+                  <?php }?>
+            </select> <br>
+            
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">เพิ่มหัวข้อ</button>
 <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
 <!-- Modal -->
