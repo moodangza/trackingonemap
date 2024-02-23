@@ -125,7 +125,7 @@
           </div>
           <div class="modal-footer">
             <button class="btn btn-primary addsubprocess"  type="button">บันทึก</button>
-            <button class="btn btn-primary updatesubprocess"  type="button">แก้ไข</button>
+            <button class="btn btn-primary"  type="button">แก้ไข</button>
             <button class="btn btn-danger cancel" type="button">ปิด</button>
           </div>
         </div>
@@ -174,7 +174,7 @@
                         <div class="card">
                             <div class="card-body">
                             <div class="form-body">
-                                                        <div class="row">
+                               <div class="row">
                                 <div class="col-12 col-md-12 col-xl-6">
                                     <div class="form-group row">
 
