@@ -104,7 +104,7 @@
                     <div class="col-md">
                         <div class="form-floating">
                         <input type="hidden" id="sub_id" value="">
-                        <input type="text" class="form-control" id="subprocessinput" name="subprocessinput" placeholder="จัดทำร่าง พรบ." value="">
+                        <input type="text" autocomplete="off" class="form-control" id="subprocessinput" name="subprocessinput" placeholder="จัดทำร่าง พรบ." value="">
                         <label for="floatingInputGrid">ขั้นตอนการทำงานย่อย</label>
                         </div>
                     </div>
@@ -124,8 +124,11 @@
             
           </div>
           <div class="modal-footer">
+           
             <button class="btn btn-primary addsubprocess"  type="button">บันทึก</button>
-            <button class="btn btn-primary"  type="button">แก้ไข</button>
+            
+            <button class="btn btn-primary updatesubprocess"  type="button">แก้ไข</button>
+            
             <button class="btn btn-danger cancel" type="button">ปิด</button>
           </div>
         </div>
@@ -180,7 +183,7 @@
 
                                         <label class="col-form-label col-md-4"> ขั้นตอนการทำงาน</label>
                                         <div class="col-md-8">
-                                            <input type="text" id="process_name" name="process_name" class="form-control" placeholder="เรื่อง" value="<?php echo $process_name;?>" required="">
+                                            <input type="text" autocomplete="off" id="process_name" name="process_name" class="form-control" placeholder="เรื่อง" value="<?php echo $process_name;?>" required="">
 
                                         </div>
                                     </div>
@@ -234,7 +237,7 @@
                                         <label class="col-form-label col-md-3">รายละเอียด</label>
                                         <div class="col-md-9">
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="detail" name="detail" style="height: 100px"><?php echo $detail;?></textarea>
+                                            <textarea autocomplete="off" class="form-control" placeholder="Leave a comment here" id="detail" name="detail" style="height: 100px"><?php echo $detail;?></textarea>
                                             <label for="floatingTextarea2">Comments</label>
                                         </div>
                                         </div>
@@ -293,9 +296,11 @@
                                                     </div>
                                                     </td>
                                                     <td nowrap>
-                                                        <button class='btn btn-warning' type="button" onclick="editsubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-pencil'></i> แก้ไข</button>
-                                                        <button class='btn btn-success' type="button" onclick="confirmsubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-check'></i> ยืนยัน</button>
-                                                        <button class='btn btn-danger' type="button" onclick="deletesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-times-circle'></i> ลบ</button>
+                                                    <?php if($rsub['subprocess_finish']==''){?>
+                                                        <button class='btn btn-warning' type="button" id="editsub" onclick="editsubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-pencil'></i> แก้ไข</button>
+                                                        <button class='btn btn-success' type="button" id="confirmsub" onclick="confirmsubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-check'></i> ยืนยัน</button>
+                                                        <button class='btn btn-danger' type="button" id="deletesub" onclick="deletesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-times-circle'></i> ลบ</button>
+                                                    <?php }?>
                                                     </td>
                                                    </tr>
                                                    <?php }

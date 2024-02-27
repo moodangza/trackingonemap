@@ -77,7 +77,6 @@ class Managecontroller extends BaseController
         
         $last_id = $addprocessmodel -> insert($data);
          
-        
         $updatejob = new jobModel();
         $dataupdate = array('status'=>'2',
                             'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
@@ -127,6 +126,23 @@ class Managecontroller extends BaseController
         $ckcs_rs = $ckconsub->getNumRows();
         if($ck_rs == $ckconfsub){
             // ให้แก้สถานะ process เป็น 2 แล้ว ให้ไป view process มีสถานะเป็น view
+            $updateprocess = new processModel();
+            $dataprocess = array('process_finish'=>date('Y-m-d'),
+                              'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+                                'status'=>'2'
+                            );
+        
+            $last_id  = $updateprocess ->set($dataprocess) ->where('process_id',$processid) -> update();
+            $returndata = [
+                'process'=> $last_id,
+                'flag' => 'view',
+            ];
+            header('Content-Type: application/json');
+            
+            echo json_encode( $returndata );
         }
+    }
+    public function updatesubprocess(){
+
     }
 }

@@ -267,7 +267,7 @@ public function formupdateprocess($process_id){
       
     }
     $updatesubprocessmodel = new subprocessModel();
-    $updatesubprocessmodel ->select('subprocess_id,subprocess_name,subprocess_start,subprocess_end')
+    $updatesubprocessmodel ->select('subprocess_id,subprocess_name,subprocess_start,subprocess_end,subprocess_finish')
                            ->where('process_id',$process_id);
     $subprocess_rs1 = $updatesubprocessmodel->findAll();
     foreach($subprocess_rs1 as $key => $date_th){
