@@ -489,6 +489,7 @@ function editsubprocess(subprocessid){
 function confirmsubprocess(subid){
   let text = "ยืนยันข้อมูลใช่หรือไม่";
   let process_id = $('#process_id').val();
+  let job_id = $('#job_id').val();
   if (confirm(text) == true) {
     text = "ยืนยันข้อมูลแล้ว";
     alert(text);
@@ -497,7 +498,7 @@ function confirmsubprocess(subid){
       url: "/confirmsubprocess",
       type: "post",
       dataType: "่json",
-      data: { subprocessid: subid,processid: process_id },
+      data: {job: job_id, subprocessid: subid,processid: process_id },
       success: function (data) {
         window.location.reload();
       } 

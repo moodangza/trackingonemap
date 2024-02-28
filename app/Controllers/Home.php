@@ -100,20 +100,30 @@ class Home extends BaseController
         ->groupBy('process_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
         ->orderBy('process_start','asc');
 
-        $processfinfish_rs = $processmodel->findAll();
+        $processfinish_rs = $processmodel->findAll();
+
+        $subprocessmodel = new subprocessModel();
+        $subprocessmodel ->select('CASE WHEN subprocess_finish IS NOT NULL THEN "success"
+                                    ELSE "unsuccess"
+                                    END AS segment,
+                                    COUNT(*) n')
+                         ->where('delete_flag','1')
+                         ->where('process_id',$processfinish_rs['process_id']);
+        $subprocess_rs = $subprocessmodel->findAll();                 
         $dateth = new Date();
         foreach($process_rs as $key => $date_th){
             $process_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
             $process_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
         }
-        foreach($processfinfish_rs as $key => $date_th){
+        foreach($processfinish_rs as $key => $date_th){
             $processfinfish_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
             $processfinfish_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
         }
         $data = [
             'job'=> $job_rs,
             'process' => $process_rs,
-            'processfinish' => $processfinfish_rs
+            'processfinish' => $processfinfish_rs,
+            'subrs'=>$subprocess_rs
         ];
         header('Content-Type: application/json');
          echo json_encode( $data );

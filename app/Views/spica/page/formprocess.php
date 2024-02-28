@@ -273,10 +273,12 @@
                                                         if(isset($subprocess)){
                                                         foreach($subprocess as $rsub){?>    
                                                 <tr id="subprocess<?php echo $rsub['subprocess_id'];?>">
-                                                    <td><input type='text' readonly class='form-control' name='subprocessinput[]' id='subprocessinput[]' value="<?php echo $rsub['subprocess_name'];?>"> </td>
+                                                    <td>
+                                                        <input type='text' readonly class='form-control' name='subprocessinput[]' id='subprocessinput[]' value="<?php echo $rsub['subprocess_name'];?>"> 
+                                                    </td>
                                                     <td>
                                                         <div class='input-group date'>
-                                                        <input type='text' id='s_sub_date[]' readonly='readonly' class='form-control datepicker create-s-date' name='s_sub_date[]' data-old='' value='<?php echo $rsub['subprocess_start'];?>'>
+                                                        <input type='text' id='s_sub_date[]' <?php if($rsub['subprocess_finish']!=''){?>disabled <?php }?> readonly='readonly' class='form-control datepicker create-s-date' name='s_sub_date[]' data-old='' value='<?php echo $rsub['subprocess_start'];?>'>
                                                     <div class='input-group-append'>
                                                         <div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'>
                                                             <i class='fa fa-calendar'></i>
@@ -286,7 +288,7 @@
                                                     </td>
                                                     <td>
                                                         <div class='input-group date'>
-                                                        <input type='text' id='e_sub_date[]' readonly='readonly' class='form-control datepicker create-e-date' name='e_sub_date[]' data-old='' value='<?php echo $rsub['subprocess_end'];?>'>
+                                                        <input type='text' id='e_sub_date[]' <?php if($rsub['subprocess_finish']!=''){?>disabled <?php }?> readonly='readonly' class='form-control datepicker create-e-date' name='e_sub_date[]' data-old='' value='<?php echo $rsub['subprocess_end'];?>'>
                                                         <div class='input-group-append'>
                                                         <div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'>
                                                             <i class='fa fa-calendar'></i>
