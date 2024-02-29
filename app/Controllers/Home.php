@@ -48,12 +48,26 @@ class Home extends BaseController
     //ดู job
     public function showjob()
     {
+        $divisionmodel1 = new divisionModel();
+        $divisionmodel1  ->select('division_tb.division_id,division_tb.division_name')
+        ->where('diviion1_tb.division_id' , $division)
+        //->where('job_tb.job_id', $job_id )
+        //->join('division_tb', 'division_tb.division_id = job_tb.division_id','left')
+        //->join('job_tb','job_tb.job_id = process_tb.job_id','inner')
+        //->where('delete_flag', '1') 
+    
+        ->groupBy('division_tb.division_id,division_tb.division_name')
+        ->orderBy('division_tb.division_id','asc');
+        $division_rs1 = $divisionmodel1->findAll();
+        $divisionid1 = $this->request->getVar('divisionid1');
+
         $jobmodel1 = new jobModel();
         $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status,job_finish')
         // ->where('job_tb.division_id = 1' )
         //->where('job_finish' != NULL )
         //->where('status' == 2 )
         ->where('deleted_at' ,null) // ไม่แสดงข้อมูลที่ลบ (ลบไม่จริง)
+        ->where('job_tb.division_id', $divisionid1 )
         ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish')
         ->orderBy('job_id','asc');
         $job_rs1 = $jobmodel1->findAll();
@@ -68,7 +82,8 @@ class Home extends BaseController
         // $approve_rs = $approveModel->findAll();
 
         $return = [
-            'job'=> $job_rs1
+            'job'=> $job_rs1,
+            'division'=> $division_rs1
             // 'approve'=> $approve_rs
         ];
         // header('Content-Type: application/json');
@@ -81,14 +96,14 @@ class Home extends BaseController
     public function showdvselect($division_id=null)
     {
         $jobmodel1 = new jobModel();
-        $jobmodel1  ->select('division.division_id,job_tb.job_id,job_tb.job_name,status,job_finish')
+        $jobmodel1  ->select('division_tb.division_id,division_tb.division_name,job_tb.job_id,job_tb.job_name,status,job_finish')
         //->where('job_tb.job_id', $job_id )
         ->where('delete_flag', '1') 
-        ->groupBy('division.division_id,job_tb.job_id,job_tb.job_name,status,job_finish')
-        ->orderBy('division_id','asc');
+        ->groupBy('division_tb.division_id,division_tb.division_name,job_tb.job_id,job_tb.job_name,status,job_finish')
+        ->orderBy('division_tb.division_id','asc');
         $division_rs1 = $jobmodel1->findAll();
         $return = [
-            'division'=> $division_rs1,
+            'division'=> $division_rs1
         ];
 
         return view('spica/page/showjob',$return);
@@ -189,6 +204,7 @@ public function showprocess(){
     ->orderBy('job_id','asc');
     $job_rs = $jobmodel->findAll();
     $jobid1 = $this->request->getVar('jobid1');
+
     $processmodel = new processModel();
     $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status')
     ->where('delete_flag', '1') 

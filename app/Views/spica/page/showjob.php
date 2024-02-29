@@ -80,7 +80,7 @@ function drop(ev) {
             <select class="form-select selectjob" aria-label="Default select example" style="width:auto;">
                 <option value="0" selected>เลือกหน่วยงาน</option>
                   <?php foreach($division as $opj){?>
-                    <option value="<?php echo $opj['division_id'];?>" <?php echo (isset($division_id) && $opj['division_id']==$division_id) ?'selected': '' ?>><?php echo $opj['division_name'];?></option>
+                    <option value="<?php echo $opj['division_id'];?>" <?php echo (isset($opj) && $opj['division_id']==$opj) ?'selected': '' ?>><?php echo $opj['division_name'];?></option>
                   <?php }?>
             </select> <br>
             
@@ -111,6 +111,7 @@ function drop(ev) {
                                                     <div  class="input-group-text toggle-datepicker" data-toggle="#create-e-date"><i class="fa fa-calendar"></i>
                                                     </div>
                                                 </div>
+        <input type="hidden" class="form-control" id="division_id" name="division_id">
       </div>
       <div class="modal-footer">
       <button type="button" class="btn btn-primary" onclick="addjob()">บันทึก</button>
