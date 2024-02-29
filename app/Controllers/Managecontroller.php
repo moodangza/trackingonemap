@@ -112,9 +112,17 @@ class Managecontroller extends BaseController
                               'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
     );
     $confirmsubprocess ->set($dataprocess) ->where('subprocess_id',$subprocessid) ->update();
-      
+    return redirect()->to(current_url());
     }
     public function updatesubprocess(){
-
+        $subprocessid = $_POST['sub_id'];
+        $confirmsubprocess = new subprocessModel();
+        $dataprocess = array('subprocess_name'=>$_POST['subprocess_name'],
+                              'subprocess_start'=>$_POST['subprocess_start'],
+                              'subprocess_end'=>$_POST['subprocess_end'],                  
+                              'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
+    );
+    $confirmsubprocess ->set($dataprocess) ->where('subprocess_id',$subprocessid) ->update();
+    return redirect()->to(current_url());
     }
 }
