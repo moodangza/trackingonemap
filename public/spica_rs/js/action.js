@@ -624,7 +624,7 @@ $(document).on("click",".updatesubprocess",function(){
       dataType: 'json',
       data: { sub_id: subid,subprocess_name: subinput,subprocess_start: substart,subprocess_end: subend},
       success: function (data) {
-       
+        location.reload();
       }
   });   
 });
