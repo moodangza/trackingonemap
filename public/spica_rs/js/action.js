@@ -135,45 +135,6 @@ function showsubprocess(){
  
 }
 
-//เลือก หน่วยงาน แสดง job
-function dvselect(divisionid){
-  $('#urladdjob').show();
-  $.ajax(
-    {
-      
-    url: "/home/get",
-    type: "post",
-    dataType: 'text',
-    data: { divisionid1: divisionid},
-    success: function (data) {
-      var a = JSON.parse(data);
-      console.log(a.job)
-     
-      $('#jobitem').html('');
-      $('#finishjobitem').html('');
-      
-      a.division.forEach(element => {
-      $('#division_id').val(element.division_id); 
-          
-      });
-
-      a.processfinish.forEach(element => {
-       
-        $('#finishprocessitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
-        '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
-        '<div class="text-right">'+
-        '<a class="btn btn-success" href="/formupdateprocess/'+element.process_id+' " title="ดูข้อมูล">'+ '<i class="fa fa-search" aria-hidden="true"></i></a>'+
-        '</div>'+
-        '</li>'
-        
-        );
-        
-    });
-      
-    }
-});   
-}
-
 //เลือก job แสดง process
 
 function jobselect(jobid){

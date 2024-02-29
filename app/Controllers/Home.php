@@ -50,7 +50,7 @@ class Home extends BaseController
     {
         $divisionmodel1 = new divisionModel();
         $divisionmodel1  ->select('division_tb.division_id,division_tb.division_name')
-        ->where('diviion1_tb.division_id' , $division)
+        //->where('division_tb.division_id' , $division)
         //->where('job_tb.job_id', $job_id )
         //->join('division_tb', 'division_tb.division_id = job_tb.division_id','left')
         //->join('job_tb','job_tb.job_id = process_tb.job_id','inner')
