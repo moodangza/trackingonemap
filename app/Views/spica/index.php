@@ -69,42 +69,46 @@ $(function(){
                   <div class="card">
                     <div class="card-body container">
                      
-
-    
-
             <div class="row">          
-            <div class="col-lg-6 grid-margin stretch-card">
-            <div class="card">
-            <div class="card-body">
-            <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                            ต้องดำเนินการ 
-                            <a href="#" class="btn btn-success">
-                                    <i class="fa fa-eye" aria-hidden="true" ></i> 
-                                  </a>
-                            </a>
-
-                                <ul style="padding-bottom: 2px;" class="list-group">
-                                  <li class="list-group-item "> 
-                                  <div class="row">
-                                  <div class="col-lg-12">
-                                  <?php 
-                              $i = 0;
-                                    ?>
-                                     <div class="row">
-                                 <?php   foreach($dv as $group){?>
-                                            <div  nowrap><p class="text-justify" nowrap><?php echo $group["division_name"];?></p></div>
-                                            <br>
-                              <?php  $i++; }?>
-                                  </div>
-                                  </div>
-                                </li>
-                            </ul>
+              <div class="col-lg-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="list-group">
+                      <a href="#" class="list-group-item list-group-item-action active" aria-current="true">ต้องดำเนินการ</a>
                         
+                                <?php $i = 0;?>
+                                <?php   foreach($dv as $group){?>
+                                    <ul style="padding-bottom: 2px;" class="list-group">
+                                    <li class="list-group-item "> 
+                                    <div class="row">
+                                    <div class="col-lg-8">
+                                  <div  nowrap><p class="text-justify" nowrap>
+                                    <?php echo $group["division_tb.division_name"];?></p> 
+                                  </div>
+                                        <div class="col-lg-4">
+                                            <a href="<?php echo base_url('showdvselect/'.$group['division_tb.division_id']);?>" class="btn btn-success">
+                                            <i class="fa fa-eye" aria-hidden="true" ></i> 
+                                            </a>
+
+                                </div>
+                              </div>
+                            </div>
+                            </li>
+                          </ul>
+                        </div>
+                       
+                                          <?php  $i++; }?>
                     </div>
+                  </div>
                 </div>
               </div>
             </div>
+                         
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
             <div class="col-lg-6 grid-margin stretch-card">
               <div class="card">

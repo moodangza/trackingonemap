@@ -76,6 +76,14 @@ function drop(ev) {
                     <div class="card-body container">
                       <!-- <button class="btn btn-success" id="intjob" onclick="openForm()">เพิ่มหัวข้อ</button> -->
                       <!-- Button trigger modal -->
+                        
+            <select class="form-select selectjob" aria-label="Default select example" style="width:auto;">
+                <option value="0" selected>เลือกหน่วยงาน</option>
+                  <?php foreach($division as $opj){?>
+                    <option value="<?php echo $opj['division_id'];?>" <?php echo (isset($opj) && $opj['division_id']==$opj) ?'selected': '' ?>><?php echo $opj['division_name'];?></option>
+                  <?php }?>
+            </select> <br>
+            
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">เพิ่มหัวข้อ</button>
 <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
 <!-- Modal -->
@@ -103,6 +111,7 @@ function drop(ev) {
                                                     <div  class="input-group-text toggle-datepicker" data-toggle="#create-e-date"><i class="fa fa-calendar"></i>
                                                     </div>
                                                 </div>
+        <input type="hidden" class="form-control" id="division_id" name="division_id">
       </div>
       <div class="modal-footer">
       <button type="button" class="btn btn-primary" onclick="addjob()">บันทึก</button>
@@ -162,7 +171,7 @@ function drop(ev) {
                                 <ul style="padding-bottom: 2px;" class="list-group">
                                   <li class="list-group-item "> 
                                   <div class="row">
-                                  <div class="col-lg-8">
+                                  <div class="col-8">
                                     <!-- <a href="<?php // echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action"> -->
                                   <?php echo $row['job_name']?>
                                   <br> วันที่เริ่ม : <?php echo $row['job_start']?>

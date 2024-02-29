@@ -98,7 +98,44 @@ $(document).on( "click",".addsubprocess", function() {
   showsubprocess();
   }
 });
-// โชวprocessหลังจากเลือก jobในหน้า showprocess
+// โชว subprocess
+function showsubprocess(){
+  const process_id = $('#process_id').val();
+  $.ajax(
+    {
+      
+    url: "/showsubprocess",
+    type: "get",
+    dataType: 'text',
+    data: { process_id : process_id},
+    success: function (data) {
+      const a = JSON.parse(data);
+      // console.log(a)   
+      $('#subprocess_id').val(data.subprocess_id);
+    }
+});  
+  $('#processitem').html('');
+        
+  // $('#addjob_id').html('');
+  // $('#addjob_id').append('<input class="addprocessid" type="text" value="'+a.process[0]['job_id']+'">');
+  $("#urladdprocess").attr("href", "/formprocess/"+a.process[0]['job_id']+""); 
+   
+  a.process.forEach(element => {
+   
+      $('#processitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
+      '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
+      '<div class="text-right">'+
+      '<button class="btn btn-warning editsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">'+ '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>'+
+      '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน"><i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
+      '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ"><i class="fa fa-window-close" aria-hidden="true"></i></button>'+
+      '</div>'+
+      '</li>'
+      );
+  });
+ 
+}
+// 
+
 function jobselect(jobid){
   $('#urladdprocess').show();
   $.ajax(
