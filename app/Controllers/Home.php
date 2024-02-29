@@ -114,7 +114,7 @@ class Home extends BaseController
     {
         $jobmodel1 = new jobModel();
         $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,job_finish')
-        //->where('job_tb.job_id', $job_id )
+        ->where('job_tb.division_id', '1' )
         ->where('delete_flag', '1') 
         ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish')
         ->orderBy('job_id','asc');
@@ -198,7 +198,7 @@ public function deletejob()
 public function showprocess(){
     $jobmodel = new jobModel();
     $jobmodel  ->select('job_tb.job_id,job_tb.job_name ')
-    ->where('job_tb.division_id = 1' )
+    ->where('job_tb.division_id',  '1' )
     ->where('delete_flag !=','0')
     ->groupBy('job_tb.job_id,job_tb.job_name ')
     ->orderBy('job_id','asc');
@@ -215,37 +215,29 @@ public function showprocess(){
 
     $process_rs = $processmodel->findAll();
 
-    $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status')
-    ->where('delete_flag', '1') 
-    ->where('process_finish != ',NULL)
-    ->where('process_tb.job_id', $jobid1 )
-    ->groupBy('process_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
-    ->orderBy('process_start','asc');
+    // $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status')
+    // ->where('delete_flag', '1') 
+    // ->where('process_finish != ',NULL)
+    // ->where('process_tb.job_id', $jobid1 )
+    // ->groupBy('process_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
+    // ->orderBy('process_start','asc');
 
-    $processfinish_rs = $processmodel->findAll();
-
-    $subprocessmodel = new subprocessModel();
-    $subprocessmodel ->select('CASE WHEN subprocess_finish IS NOT NULL THEN "success"
-                                ELSE "unsuccess"
-                                END AS segment,
-                                COUNT(*) n')
-                     ->where('delete_flag','1')
-                     ->where('process_id',$processfinish_rs['process_id']);
-    $subprocess_rs = $subprocessmodel->findAll();                 
+    // $processfinish_rs = $processmodel->findAll();
     $dateth = new Date();
     foreach($process_rs as $key => $date_th){
         $process_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
         $process_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
     }
-    foreach($processfinish_rs as $key => $date_th){
-        $processfinfish_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
-        $processfinfish_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
-    }
+    // foreach($processfinish_rs as $key => $date_th){
+    //     $processfinfish_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
+    //     $processfinfish_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
+    // }
     $data = [
         'job'=> $job_rs,
-        'process' => $process_rs,
-        'processfinish' => $processfinfish_rs,
-        'subrs'=>$subprocess_rs
+        'process' => $process_rs ,
+        // if()
+        // 'processfinish' => $processfinfish_rs,
+       
     ];
     header('Content-Type: application/json');
      echo json_encode( $data );
@@ -278,8 +270,6 @@ public function showprocess(){
         }
     }
 
-
-    
 // เข้าผ่านปุ่มแก้ไขprocess
 public function formupdateprocess($process_id){
     // print_r($process_id);
@@ -329,8 +319,8 @@ public function formupdateprocess($process_id){
    
     return view('spica/page/formprocess',$returndata);
 }
-
-        public function addsubprocess(){
+// insert subprocess
+public function addsubprocess(){
             $addsubprocessmodel = new subprocessModel();
     
             
@@ -351,6 +341,7 @@ public function formupdateprocess($process_id){
                  
                
         }
+        // แสดง subprocess
         public function showsubprocess(){
             $process_id = $this->request->getVar('process_id');
             $showsubprocees = new subprocessModel();
@@ -364,6 +355,7 @@ public function formupdateprocess($process_id){
         echo json_encode( $process_rs );
          
         }
+        // แก้ไข subprocess
         public function editsubprocess(){
         $subprocess_id = $this->request->getVar('subprocess_id');
           $form = new subprocessModel();
@@ -379,10 +371,7 @@ public function formupdateprocess($process_id){
           echo json_encode( $process_rs );
           
         }
-        public function updatesubprocess(){
-            $updatesubprocessmodel = new subprocessModel();
-            // $updatesubprocessmodel ->set($dataupdate) ->where('status',$_POST['job_id']) -> update();
-        }
+      
 }
 
 

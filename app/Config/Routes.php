@@ -33,7 +33,7 @@ $routes->post('addsubprocess','Home::addsubprocess');
 $routes->post('deletesubprocess','Managecontroller::deletesubprocess');
 $routes->get('editsubprocess','Home::editsubprocess');
 $routes->post('confirmsubprocess','Managecontroller::confirmsubprocess');
-$routes->get('updatesubprocess','Managecontroller::updatesubprocess');
+$routes->post('updatesubprocess','Managecontroller::updatesubprocess');
 // ต้อง login ถึงจะทำงานได้
 // $routes->group('', ['filter' => 'auth'], function($routes){
 
