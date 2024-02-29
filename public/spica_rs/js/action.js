@@ -137,7 +137,15 @@ function showsubprocess(){
 }
 
 //เลือก หน่วยงาน แสดง job
-function dvselect(divisionid){
+$(document).on( "change",".selectdivision", function() {
+  $( "select option:selected" ).each( function() {
+    divid = $(this).val() + " ";
+  } );
+  // $('#urladdprocess').hide();
+  jobselect(divid)    
+
+} );
+function jobselect(divid){
   $('#urladdjob').show();
   $.ajax(
     {
@@ -145,15 +153,16 @@ function dvselect(divisionid){
     url: "/home/get",
     type: "post",
     dataType: 'text',
-    data: { divisionid1: divisionid},
+    data: { divisionid1: divid},
     success: function (data) {
+      // location.reload();
       var a = JSON.parse(data);
       console.log(a.job)
      
       $('#jobitem').html('');
       $('#finishjobitem').html('');
       
-      a.division.forEach(element => {
+      a.job.forEach(element => {
       $('#division_id').val(element.division_id); 
           
       });
