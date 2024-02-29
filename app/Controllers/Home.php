@@ -17,6 +17,7 @@ class Home extends BaseController
         
         return view('spica/login/index');
     }
+
     public function index()
     {
         $divisionmodel = new divisionModel();
@@ -74,52 +75,7 @@ class Home extends BaseController
         //  json_encode( $return );
         return view('spica/page/showjob',$return);
     }
-    public function showprocess(){
-        $jobmodel = new jobModel();
-        $jobmodel  ->select('job_tb.job_id,job_tb.job_name ')
-        ->where('job_tb.division_id = 1' )
-        ->where('delete_flag !=','0')
-        ->groupBy('job_tb.job_id,job_tb.job_name ')
-        ->orderBy('job_id','asc');
-        $job_rs = $jobmodel->findAll();
-        $jobid1 = $this->request->getVar('jobid1');
-        $processmodel = new processModel();
-        $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status')
-        ->where('delete_flag', '1') 
-        ->where('process_finish ',NULL)
-        ->where('process_tb.job_id', $jobid1 )
-        ->groupBy('process_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
-        ->orderBy('process_start','asc');
-
-        $process_rs = $processmodel->findAll();
-
-      
-        $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status')
-        ->where('delete_flag', '1') 
-        ->where('process_finish != ',NULL)
-        ->where('process_tb.job_id', $jobid1 )
-        ->groupBy('process_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
-        ->orderBy('process_start','asc');
-
-        $processfinfish_rs = $processmodel->findAll();
-        $dateth = new Date();
-        foreach($process_rs as $key => $date_th){
-            $process_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
-            $process_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
-        }
-        foreach($processfinfish_rs as $key => $date_th){
-            $processfinfish_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
-            $processfinfish_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
-        }
-        $data = [
-            'job'=> $job_rs,
-            'process' => $process_rs,
-            'processfinish' => $processfinfish_rs
-        ];
-        header('Content-Type: application/json');
-         echo json_encode( $data );
-        
-    }
+    
 
     //คลิก หน่วยงาน ดู job
     public function showdvselect($division_id=null)
@@ -178,8 +134,23 @@ public function addjob()
 
     // ];
 }
+// ส่งข้อมูลไป form แก้ไข job
+public function updatejobform()
+{
+    $updatejobmodel = new jobModel();
+    $dateth = new Date();
+    $updatejobmodel ->select('job_tb.job_id,job_tb.job_name,job_start,job_end')
+        ->where('job_id',$_POST['jobid']);
+        $updatejobmodel_rs = $updatejobmodel->first();
+        $updatejobmodel_rs["job_start"] = $dateth->Dateinpicker($updatejobmodel_rs['job_start']);
+        $updatejobmodel_rs["job_end"] = $dateth->Dateinpicker($updatejobmodel_rs['job_end']);
+        //array_push//($updatejobmodel_rs ,$datestart,$dateend);
+        header('Content-Type: application/json');
+        echo json_encode( $updatejobmodel_rs );
 
+}   
 
+// แก้ไข  job (update)
 public function editjob()
 {
     $editjobmodel = new jobmodel();
@@ -197,21 +168,6 @@ public function editjob()
 
 }
 
-public function updatejobform()
-{
-    $updatejobmodel = new jobModel();
-    $dateth = new Date();
-    $updatejobmodel ->select('job_tb.job_id,job_tb.job_name,job_start,job_end')
-        ->where('job_id',$_POST['jobid']);
-        $updatejobmodel_rs = $updatejobmodel->first();
-        $updatejobmodel_rs["job_start"] = $dateth->Dateinpicker($updatejobmodel_rs['job_start']);
-        $updatejobmodel_rs["job_end"] = $dateth->Dateinpicker($updatejobmodel_rs['job_end']);
-        //array_push//($updatejobmodel_rs ,$datestart,$dateend);
-        header('Content-Type: application/json');
-        echo json_encode( $updatejobmodel_rs );
-
-}   
-
 //ลบหัวข้อ job
 public function deletejob()
 { 
@@ -223,8 +179,63 @@ public function deletejob()
     // echo $datajob;
     // exit;  
 }
+// หน้า showprocess เลือกjob
+public function showprocess(){
+    $jobmodel = new jobModel();
+    $jobmodel  ->select('job_tb.job_id,job_tb.job_name ')
+    ->where('job_tb.division_id = 1' )
+    ->where('delete_flag !=','0')
+    ->groupBy('job_tb.job_id,job_tb.job_name ')
+    ->orderBy('job_id','asc');
+    $job_rs = $jobmodel->findAll();
+    $jobid1 = $this->request->getVar('jobid1');
+    $processmodel = new processModel();
+    $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status')
+    ->where('delete_flag', '1') 
+    ->where('process_finish ',NULL)
+    ->where('process_tb.job_id', $jobid1 )
+    ->groupBy('process_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
+    ->orderBy('process_start','asc');
 
+    $process_rs = $processmodel->findAll();
 
+    $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status')
+    ->where('delete_flag', '1') 
+    ->where('process_finish != ',NULL)
+    ->where('process_tb.job_id', $jobid1 )
+    ->groupBy('process_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
+    ->orderBy('process_start','asc');
+
+    $processfinish_rs = $processmodel->findAll();
+
+    $subprocessmodel = new subprocessModel();
+    $subprocessmodel ->select('CASE WHEN subprocess_finish IS NOT NULL THEN "success"
+                                ELSE "unsuccess"
+                                END AS segment,
+                                COUNT(*) n')
+                     ->where('delete_flag','1')
+                     ->where('process_id',$processfinish_rs['process_id']);
+    $subprocess_rs = $subprocessmodel->findAll();                 
+    $dateth = new Date();
+    foreach($process_rs as $key => $date_th){
+        $process_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
+        $process_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
+    }
+    foreach($processfinish_rs as $key => $date_th){
+        $processfinfish_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
+        $processfinfish_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
+    }
+    $data = [
+        'job'=> $job_rs,
+        'process' => $process_rs,
+        'processfinish' => $processfinfish_rs,
+        'subrs'=>$subprocess_rs
+    ];
+    header('Content-Type: application/json');
+     echo json_encode( $data );
+    
+}
+    // หน้าเพิ่ม process
     public function formprocess($job_id){
         $jobmodel = new jobModel();
         $jobmodel  ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status ')
@@ -285,7 +296,7 @@ public function formupdateprocess($process_id){
       
     }
     $updatesubprocessmodel = new subprocessModel();
-    $updatesubprocessmodel ->select('subprocess_id,subprocess_name,subprocess_start,subprocess_end')
+    $updatesubprocessmodel ->select('subprocess_id,subprocess_name,subprocess_start,subprocess_end,subprocess_finish')
                            ->where('process_id',$process_id);
     $subprocess_rs1 = $updatesubprocessmodel->findAll();
     foreach($subprocess_rs1 as $key => $date_th){

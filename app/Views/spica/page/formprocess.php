@@ -104,7 +104,7 @@
                     <div class="col-md">
                         <div class="form-floating">
                         <input type="hidden" id="sub_id" value="">
-                        <input type="text" class="form-control" id="subprocessinput" name="subprocessinput" placeholder="จัดทำร่าง พรบ." value="">
+                        <input type="text" autocomplete="off" class="form-control" id="subprocessinput" name="subprocessinput" placeholder="จัดทำร่าง พรบ." value="">
                         <label for="floatingInputGrid">ขั้นตอนการทำงานย่อย</label>
                         </div>
                     </div>
@@ -124,8 +124,11 @@
             
           </div>
           <div class="modal-footer">
+           
             <button class="btn btn-primary addsubprocess"  type="button">บันทึก</button>
+            
             <button class="btn btn-primary updatesubprocess"  type="button">แก้ไข</button>
+            
             <button class="btn btn-danger cancel" type="button">ปิด</button>
           </div>
         </div>
@@ -174,13 +177,13 @@
                         <div class="card">
                             <div class="card-body">
                             <div class="form-body">
-                                                        <div class="row">
+                               <div class="row">
                                 <div class="col-12 col-md-12 col-xl-6">
                                     <div class="form-group row">
 
                                         <label class="col-form-label col-md-4"> ขั้นตอนการทำงาน</label>
                                         <div class="col-md-8">
-                                            <input type="text" id="process_name" name="process_name" class="form-control" placeholder="เรื่อง" value="<?php echo $process_name;?>" required="">
+                                            <input type="text" autocomplete="off" id="process_name" name="process_name" class="form-control" placeholder="เรื่อง" value="<?php echo $process_name;?>" required="">
 
                                         </div>
                                     </div>
@@ -234,7 +237,7 @@
                                         <label class="col-form-label col-md-3">รายละเอียด</label>
                                         <div class="col-md-9">
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="detail" name="detail" style="height: 100px"><?php echo $detail;?></textarea>
+                                            <textarea autocomplete="off" class="form-control" placeholder="Leave a comment here" id="detail" name="detail" style="height: 100px"><?php echo $detail;?></textarea>
                                             <label for="floatingTextarea2">Comments</label>
                                         </div>
                                         </div>
@@ -245,10 +248,12 @@
                             </div>
                            <?php if($flag != 'add'){?>
                             <div class="row">
-                                    
-                                    <button class="btn btn-primary formaddsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
-                                        <i class="fa fa-plus-square"></i> เพิ่ม
-                                    </button>
+                                    <div class="col-2">
+                                        <button class="btn btn-primary formaddsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
+                                            <i class="fa fa-plus-square"></i> เพิ่ม
+                                        </button>
+                                    </div>
+                                   
                                         <div class="form-group row subprocess " id="subprocess">
                                            
                                            <div class="col-12 ">
@@ -265,12 +270,15 @@
 		                                            
                                                 <?php
                                                        if($flag != 'add'){
+                                                        if(isset($subprocess)){
                                                         foreach($subprocess as $rsub){?>    
                                                 <tr id="subprocess<?php echo $rsub['subprocess_id'];?>">
-                                                    <td><input type='text' readonly class='form-control' name='subprocessinput[]' id='subprocessinput[]' value="<?php echo $rsub['subprocess_name'];?>"> </td>
+                                                    <td>
+                                                        <input type='text' readonly class='form-control' name='subprocessinput[]' id='subprocessinput[]' value="<?php echo $rsub['subprocess_name'];?>"> 
+                                                    </td>
                                                     <td>
                                                         <div class='input-group date'>
-                                                        <input type='text' id='s_sub_date[]' readonly='readonly' class='form-control datepicker create-s-date' name='s_sub_date[]' data-old='' value='<?php echo $rsub['subprocess_start'];?>'>
+                                                        <input type='text' id='s_sub_date[]' <?php if($rsub['subprocess_finish']!=''){?>disabled <?php }?> readonly='readonly' class='form-control datepicker create-s-date' name='s_sub_date[]' data-old='' value='<?php echo $rsub['subprocess_start'];?>'>
                                                     <div class='input-group-append'>
                                                         <div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'>
                                                             <i class='fa fa-calendar'></i>
@@ -280,7 +288,7 @@
                                                     </td>
                                                     <td>
                                                         <div class='input-group date'>
-                                                        <input type='text' id='e_sub_date[]' readonly='readonly' class='form-control datepicker create-e-date' name='e_sub_date[]' data-old='' value='<?php echo $rsub['subprocess_end'];?>'>
+                                                        <input type='text' id='e_sub_date[]' <?php if($rsub['subprocess_finish']!=''){?>disabled <?php }?> readonly='readonly' class='form-control datepicker create-e-date' name='e_sub_date[]' data-old='' value='<?php echo $rsub['subprocess_end'];?>'>
                                                         <div class='input-group-append'>
                                                         <div required class='input-group-text toggle-datepicker' data-toggle='#create-s-date'>
                                                             <i class='fa fa-calendar'></i>
@@ -290,13 +298,16 @@
                                                     </div>
                                                     </td>
                                                     <td nowrap>
-                                                        <button class='btn btn-warning' type="button" onclick="editsubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-pencil'></i> แก้ไข</button>
-                                                        <button class='btn btn-success' type="button" onclick="confirmsubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-check'></i> ยืนยัน</button>
-                                                        <button class='btn btn-danger' type="button" onclick="deletesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-times-circle'></i> ลบ</button>
+                                                    <?php if($rsub['subprocess_finish']==''){?>
+                                                        <button class='btn btn-warning' type="button" id="editsub" onclick="editsubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-pencil'></i> แก้ไข</button>
+                                                        <button class='btn btn-success' type="button" id="confirmsub" onclick="confirmsubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-check'></i> ยืนยัน</button>
+                                                        <button class='btn btn-danger' type="button" id="deletesub" onclick="deletesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-times-circle'></i> ลบ</button>
+                                                    <?php }?>
                                                     </td>
                                                    </tr>
-                                                   <?php } 
-                                                            }?>
+                                                   <?php }
+                                                            } 
+                                                                }?>
                                                 </tbody>   
                                             </table>
                                             </div> 
@@ -310,9 +321,9 @@
                                                 <button class="btn btn-success insertprocess" type="button" >บันทึก</button>
                                         <?php }else if($flag=='update'){?>
                                             <button class="btn btn-warning updateprocess" type="button" >แก้ไข</button>
-                                            <?php }else { ?>
-                                          <a class="btn btn-warning"  href="<?php echo base_url('showjobselect/'.$job_id);?>">ย้อนกลับ</a>
-                                          <?php }?>
+                                            <?php } ?>
+                                          <a class="btn btn-danger"  href="<?php echo base_url('showjobselect/'.$job_id);?>">ย้อนกลับ</a>
+                                          
                                     </div>
                             </div>                                       
                         </form>

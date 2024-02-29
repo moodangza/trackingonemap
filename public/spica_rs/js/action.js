@@ -275,7 +275,10 @@ $(document).on("click",".insertprocess",function(){
     dataType: 'text',
     data: {job_id : job_id, process_name : process_name,process_start : rs_start, process_end : rs_end,detail : detail} ,
     success: function (data) {
-        alert('บันทึก')
+      
+      const obj = JSON.parse(data);
+      console.log(obj);
+      location.replace("/formupdateprocess/"+obj.process)
     }
 });   
 });
@@ -471,9 +474,10 @@ function editsubprocess(subprocessid){
     dataType: "json",
     data: { subprocess_id: subprocessid},
       success: function (data) {
+        
         $('#exampleModalToggle').modal('show');
         $('.addsubprocess').hide();
-        $('.updatesubprocess').show();
+  
         $("#sub_id").val(data.subprocess_id);
         $("#subprocessinput").val(data.subprocess_name);
         $("#s_sub_date").val(data.subprocess_start);
@@ -484,29 +488,40 @@ function editsubprocess(subprocessid){
 }
 
 function confirmsubprocess(subid){
+  let text = "ยืนยันข้อมูลใช่หรือไม่";
+  let process_id = $('#process_id').val();
+  let job_id = $('#job_id').val();
+  if (confirm(text) == true) {
+    text = "ยืนยันข้อมูลแล้ว";
+    alert(text);
   $.ajax(
     {
       url: "/confirmsubprocess",
       type: "post",
-      dataType: "text",
-      data: { subprocessid: subid},
+      dataType: "่json",
+      data: {job: job_id, subprocessid: subid,processid: process_id },
       success: function (data) {
         window.location.reload();
       } 
     }
   )
 }
+}
 function deletesubprocess(subid){
-  $.ajax(
-    {
-    url: "/deletesubprocess",
-    type: "post",
-    dataType: "text",
-    data: { subprocessid: subid},
-    success: function (data) {
-      window.location.reload();
-    }
-}); 
+  let text = "ลบขั้นตอนการทำงานใช่หรือไม่";
+  if (confirm(text) == true) {
+    text = "ทำการลบข้อมูลแล้ว";
+    alert(text);
+        $.ajax(
+          {
+            url: "/deletesubprocess",
+            type: "post",
+            dataType: "text",
+            data: { subprocessid: subid},
+            success: function (data) {
+              window.location.reload();
+            }
+      }); 
   // let text = ('ท่านต้องการลบขั้นตอนการทำงานย่อยใช่หรือไม่');
   // Swal.fire({
   //   title: text,
@@ -537,7 +552,7 @@ function deletesubprocess(subid){
   //   //   Swal.fire("Changes are not saved", "", "info");
   //   // }
   // });
- 
+  }
 }
 $(document).on( "change",".selectjob", function() {
     $( "select option:selected" ).each( function() {
@@ -547,21 +562,13 @@ $(document).on( "change",".selectjob", function() {
     jobselect(jobid)    
   
   } );
-
-  $(document).on( "change",".selectdivision", function() {
-    $( "select option:selected" ).each( function() {
-      divisionid = $(this).val() + " ";
-    } );
-    $('#urladdprocess').hide();
-    dvselect(divisionid)    
-  
-  } );
-
+  // ปุ่มเพิ่ม process
 $(document).on("click",".addprocess",function(){
     let job_idprocess = $('.addprocessid').val();
     // alert(job_idprocess);
     addprocess(job_idprocess);
 });
+// เพิ่ม process
 function addprocess(job_idprocess){
   $.ajax(
     {
@@ -574,11 +581,51 @@ function addprocess(job_idprocess){
     }
 });   
 }
+
 $(document).on("click",".modalclose,.cancel",function(){
   $('#exampleModalToggle').modal('hide');
-
+  $('#sub_id,#subprocessinput,#s_sub_date,#e_sub_date').val("");
   // โหลดหน้าเว็บใหม่
-  window.location.reload();
+  // window.location.reload();
 });
-
+// แก้ไข subprocess
+$(document).on("click","#updatesubprocess",function(){
+  let subid = $('#sub_id').val();
+  let subinput = $('#subprocessinput').val();
+  let s_sub_date = $('#s_sub_date').val();
+  let e_sub_date = $('#e_sub_date').val();
+  var arr1 = s_sub_date.split('/');
+  let substart = arr1[2]+'-'+arr1[1]+'-'+arr1[0];
+  var arr2 = e_sub_date.split('/');
+  let subend = arr2[2]+'-'+arr2[1]+'-'+arr2[0]; 
+  var start = document.getElementById("s_date");
+  var end = document.getElementById("e_date");
+  if( subinput.value == "") {
+      alert("กรุณากรอกข้อมูลให้ครบถ้วน")
+      subinput.focus();
+      return false;
+  }else if (s_sub_date.value == "" || e_sub_date.value == ""){
+    alert("กรุณากรอกข้อมูลให้ครบถ้วน")
+      return false;
+  }else if (e_sub_date < s_sub_date){
+    alert("กรุณากรอกข้อมูลวันที่ให้ถูกต้อง")
+    return false;
+  }else if(substart < start){
+    alert("กรุณากรอกข้อมูลวันที่ให้ถูกต้อง")
+    return false;
+  }else if(subend > end){
+    alert("กรุณากรอกข้อมูลวันที่ให้ถูกต้อง")
+    return false;
+  }
+    $.ajax(
+      {
+      url: "/updatesubprocess",
+      type: "post",
+      dataType: 'json',
+      data: { sub_id: subid,subprocess_name: subinput,subprocess_start: substart,subprocess_end: subend},
+      success: function (data) {
+        
+      }
+  });   
+});
  
