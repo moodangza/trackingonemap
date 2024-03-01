@@ -110,7 +110,7 @@ function showsubprocess(){
     dataType: 'text',
     data: { process_id : process_id},
     success: function (data) {
-      const a = JSON.parse(data);
+      let a = JSON.parse(data);
       // console.log(a)   
       $('#subprocess_id').val(data.subprocess_id);
     }
@@ -150,48 +150,120 @@ function showjobselect(divid){
   $('#urladdjob').show();
   $.ajax(
     {
-      url: "/home/get",
+      url: "showafterdiv",
       type: "post",
-      dataType: 'json',
+      dataType: 'text',
       data: { divisionid1: divid},
     success: function (data) {
       // location.reload();
-      var a = JSON.parse(data);
-      console.log(a.job)
-     
-      $('#jobitem').html('');
-      $('#finishjobitem').html('');
-      
-      a.job.forEach(element => {
-      $('#division_id').val(element.division_id); 
-          
-      });
-
-      a.processfinish.forEach(element => {
-      
+      let showdata = JSON.parse(data);
+      console.log(showdata.job)
+      $('#mustact,#inprogress,#waitapprove,#approve').html('');
+      // $('#finishjobitem').html('');
+      if(showdata.job != 0){
+      showdata.job.forEach(element => {
+      if(element.status == '1'){
         $('#mustact').append('<ul style="padding-bottom: 2px;" class="list-group">'+
             '<li class="list-group-item "> '+
             '<div class="row">'+
             '<div class="col-8">'+
-              'ชื่อ job'+
-            '<br> วันที่เริ่ม : <br> วันที่สิ้นสุด : '+
+              element.job_name+
+            '<br> วันที่เริ่ม :'+ element.job_start + '<br> วันที่สิ้นสุด :'+ element.job_end +
             '</div>'+
             '<div class="col-4" class="text-right">'+
-              '<button class="btn btn-warning" onclick="updatejobform(รหัสjob)">'+
+              '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
                   '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
                 '</button>'+
-                '<a href="/showjobselect/'+jobid+'" class="btn btn-success">'+
+                '<a href="/showjobselect/'+element.job_id+'" class="btn btn-success">'+
                   '<i class="fa fa-eye" aria-hidden="true" ></i>'+
                 '</a>'+
-                '<button class="btn btn-danger" onclick="deletejob(jobid)">'+
+                '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+
                 '<i class="fa fa-trash" aria-hidden="true"></i></i> '+
                 '</button>'+
             '</div>'+
           '</li>'+
       '</ul>'
+      
         );
+      }
+      if(element.status == '2'){
+        $('#inprogress').append('<ul style="padding-bottom: 2px;" class="list-group">'+
+            '<li class="list-group-item "> '+
+            '<div class="row">'+
+            '<div class="col-8">'+
+              element.job_name+
+            '<br> วันที่เริ่ม :'+ element.job_start + '<br> วันที่สิ้นสุด :'+ element.job_end +
+            '</div>'+
+            '<div class="col-4" class="text-right">'+
+              '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
+                  '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
+                '</button>'+
+                '<a href="/showjobselect/'+element.job_id+'" class="btn btn-success">'+
+                  '<i class="fa fa-eye" aria-hidden="true" ></i>'+
+                '</a>'+
+                '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+
+                '<i class="fa fa-trash" aria-hidden="true"></i></i> '+
+                '</button>'+
+            '</div>'+
+          '</li>'+
+      '</ul>'
+      
+        );
+      }
+      if(element.status == '3'){
+        $('#waitapprove').append('<ul style="padding-bottom: 2px;" class="list-group">'+
+            '<li class="list-group-item "> '+
+            '<div class="row">'+
+            '<div class="col-8">'+
+              element.job_name+
+            '<br> วันที่เริ่ม :'+ element.job_start + '<br> วันที่สิ้นสุด :'+ element.job_end +
+            '</div>'+
+            '<div class="col-4" class="text-right">'+
+              '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
+                  '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
+                '</button>'+
+                '<a href="/showjobselect/'+element.job_id+'" class="btn btn-success">'+
+                  '<i class="fa fa-eye" aria-hidden="true" ></i>'+
+                '</a>'+
+                '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+
+                '<i class="fa fa-trash" aria-hidden="true"></i></i> '+
+                '</button>'+
+            '</div>'+
+          '</li>'+
+      '</ul>'
+      
+        );
+      }
+      if(element.status == '4'){
+        $('#approve').append('<ul style="padding-bottom: 2px;" class="list-group">'+
+            '<li class="list-group-item "> '+
+            '<div class="row">'+
+            '<div class="col-8">'+
+              element.job_name+
+            '<br> วันที่เริ่ม :'+ element.job_start + '<br> วันที่สิ้นสุด :'+ element.job_end +
+            '</div>'+
+            '<div class="col-4" class="text-right">'+
+              '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
+                  '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
+                '</button>'+
+                '<a href="/showjobselect/'+element.job_id+'" class="btn btn-success">'+
+                  '<i class="fa fa-eye" aria-hidden="true" ></i>'+
+                '</a>'+
+                '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+
+                '<i class="fa fa-trash" aria-hidden="true"></i></i> '+
+                '</button>'+
+            '</div>'+
+          '</li>'+
+      '</ul>'
+      
+        );
+      }
         
     });
+  }
+  else{
+    alert('ไม่พบ');
+  }
       
     }
 });   
@@ -262,7 +334,7 @@ function showsubprocess(){
     dataType: 'text',
     data: { process_id : process_id},
     success: function (data) {
-      const a = JSON.parse(data);
+      let a = JSON.parse(data);
       // console.log(a)   
       $('#subprocess_id').val(data.subprocess_id);
     }

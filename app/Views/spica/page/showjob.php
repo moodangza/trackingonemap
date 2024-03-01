@@ -77,7 +77,7 @@ function drop(ev) {
                       <!-- <button class="btn btn-success" id="intjob" onclick="openForm()">เพิ่มหัวข้อ</button> -->
                       <!-- Button trigger modal -->
                         
-            <select class="form-select selectjob" aria-label="Default select example" style="width:auto;">
+            <select class="form-select selectdivision" aria-label="Default select example" style="width:auto;">
                 <option value="0" selected>เลือกหน่วยงาน</option>
                   <?php foreach($division as $opj){?>
                     <option value="<?php echo $opj['division_id'];?>" <?php echo (isset($opj) && $opj['division_id']==$opj) ?'selected': '' ?>><?php echo $opj['division_name'];?></option>
@@ -157,7 +157,6 @@ function drop(ev) {
     </div>
     </div>
     
-
             <div class="row">          
             <div class="col-lg-6 grid-margin stretch-card">
             <div class="card">
@@ -166,9 +165,11 @@ function drop(ev) {
                             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
                             ต้องดำเนินการ
                             </a>
-                           <div id='mustact'>
-                            <!-- divโชวข้อมูล job ต้องดำเนินการ -->
-                           </div>
+                            
+                           
+                    <div id="mustact">
+                      
+                      </div>
                     </div>
                 </div>
               </div>
@@ -181,9 +182,11 @@ function drop(ev) {
                             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
                             อยู่ระหว่างดำเนินการ
                             </a>
-                            <div id='processact'>
-                            <!-- divโชวข้อมูล job ระหว่างดำเนินการ -->
-                           </div>
+                           
+                    <div id="inprogress">
+                      
+                      </div>
+                              </a>
                                 
                   </div>
                 </div>
@@ -197,9 +200,10 @@ function drop(ev) {
                             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
                             รออนุมัติ
                             </a>
-                            <div id='waitapprove'>
-                            <!-- divโชวข้อมูล job รออนุมัติ -->
-                           </div>
+                       
+                    <div id="waitapprove">
+                      
+                      </div>
                     </div>
                 </div>
               </div>
@@ -212,13 +216,15 @@ function drop(ev) {
                             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
                             เสร็จสิ้น
                             </a>
-                            <div id='approve'>
-                            <!-- divโชวข้อมูล job ดำเนินการเสร็จ -->
-                           </div>
+                           
+                    <div id="approve">
+                      
+                      </div>
                     </div>
                 </div>
               </div>
             </div>
+            
                           </div>
                         <!-- </div>
                        

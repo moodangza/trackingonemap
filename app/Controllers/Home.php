@@ -44,7 +44,23 @@ class Home extends BaseController
         ];
         return view('spica/index',$return);
     }
-
+     //คลิก หน่วยงาน ดู job
+     public function showdvselect($division_id=null)
+     {
+         $jobmodel1 = new jobModel();
+         $jobmodel1  ->select('division_tb.division_id,division_tb.division_name,job_tb.job_id,job_tb.job_name,status,job_finish')
+         //->where('job_tb.job_id', $job_id )
+         ->where('delete_flag', '1') 
+         ->groupBy('division_tb.division_id,division_tb.division_name,job_tb.job_id,job_tb.job_name,status,job_finish')
+         ->orderBy('division_tb.division_id','asc');
+         $division_rs1 = $jobmodel1->findAll();
+         $return = [
+             'division'=> $division_rs1
+         ];
+ 
+         return view('spica/page/showjob',$return);
+     }
+ 
     //ดู job
     public function showjob()
     {
@@ -53,52 +69,53 @@ class Home extends BaseController
         ->groupBy('division_tb.division_id,division_tb.division_name')
         ->orderBy('division_tb.division_id','asc');
         $division_rs1 = $divisionmodel1->findAll();
-        $divisionid1 = $this->request->getVar('divisionid1');
-        $jobmodel1 = new jobModel();
-        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status,job_finish')
-        ->where('delete_flag' ,'1') // ไม่แสดงข้อมูลที่ลบ (ลบไม่จริง)
-        ->where('job_tb.division_id', $divisionid1 )
-        ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish')
-        ->orderBy('job_id','asc');
-        $job_rs1 = $jobmodel1->findAll();
-        $dateth = new Date();
-        foreach($job_rs1 as $key => $date_th){
-            $job_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
-            $job_rs1[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
-        }
+        
+        
         // $approve = new $approveModel();
         // $approve ->select ('approve_id,approve_tb.status')
         // ->join('job_name','job_tb.job_id = approve_tb.job_id','left');
         // $approve_rs = $approveModel->findAll();
 
-        $return = [
-            'job'=> $job_rs1,
+        $returnjob = [
+            
             'division'=> $division_rs1
             // 'approve'=> $approve_rs
         ];
-        header('Content-Type: application/json');
-         json_encode( $return );
-        return view('spica/page/showjob',$return);
+        
+        return view('spica/page/showjob',$returnjob);
     }
-    
-
-    //คลิก หน่วยงาน ดู job
-    public function showdvselect($division_id=null)
-    {
-        $jobmodel1 = new jobModel();
-        $jobmodel1  ->select('division_tb.division_id,division_tb.division_name,job_tb.job_id,job_tb.job_name,status,job_finish')
-        //->where('job_tb.job_id', $job_id )
-        ->where('delete_flag', '1') 
-        ->groupBy('division_tb.division_id,division_tb.division_name,job_tb.job_id,job_tb.job_name,status,job_finish')
+    // แสดงผลหลังเลือก หน่วยงานส่งค่าไปjson
+    public function showafterdiv(){
+        $divisionmodel1 = new divisionModel();
+        $divisionmodel1  ->select('division_tb.division_id,division_tb.division_name')
+        ->groupBy('division_tb.division_id,division_tb.division_name')
         ->orderBy('division_tb.division_id','asc');
-        $division_rs1 = $jobmodel1->findAll();
+        $division_rs1 = $divisionmodel1->findAll();
+
+        $divisionid1 = $this->request->getVar('divisionid1');
+        $jobmodel1 = new jobModel();
+        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status,job_finish,status')
+        ->where('delete_flag' ,'1') // ไม่แสดงข้อมูลที่ลบ (ลบไม่จริง)
+        ->where('job_tb.division_id', $divisionid1 )
+        ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish,status')
+        ->orderBy('job_id','asc');
+        $job_rs1 = $jobmodel1->findAll();
+        // print_r($job_rs1);
+        $dateth = new Date();
+        foreach($job_rs1 as $key => $date_th){
+            $job_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
+            $job_rs1[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
+        }
         $return = [
-            'division'=> $division_rs1
+            'division'=> $division_rs1,
+            'job'=> $job_rs1,
+            'flag'=>'afterselect'
         ];
-
-        return view('spica/page/showjob',$return);
+        header('Content-Type: application/json');
+        echo json_encode( $return );
+        //  return view('spica/page/showjob',$return);
     }
-
+   
     //คลิก job ดู process
     public function showjobselect($job_id=null)
     {
