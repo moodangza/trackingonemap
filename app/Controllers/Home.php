@@ -53,9 +53,7 @@ class Home extends BaseController
         ->groupBy('division_tb.division_id,division_tb.division_name')
         ->orderBy('division_tb.division_id','asc');
         $division_rs1 = $divisionmodel1->findAll();
-
         $divisionid1 = $this->request->getVar('divisionid1');
-
         $jobmodel1 = new jobModel();
         $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status,job_finish')
         ->where('delete_flag' ,'1') // ไม่แสดงข้อมูลที่ลบ (ลบไม่จริง)
@@ -80,7 +78,7 @@ class Home extends BaseController
         ];
         header('Content-Type: application/json');
          json_encode( $return );
-        // return view('spica/page/showjob',$return);
+        return view('spica/page/showjob',$return);
     }
     
 

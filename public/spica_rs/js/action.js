@@ -142,18 +142,18 @@ $(document).on( "change",".selectdivision", function() {
     divid = $(this).val() + " ";
   } );
   // $('#urladdprocess').hide();
-  jobselect(divid)    
+  showjobselect(divid)    
 
 } );
-function jobselect(divid){
+// show job หลังจากเลือกหน่วยงาน
+function showjobselect(divid){
   $('#urladdjob').show();
   $.ajax(
     {
-      
-    url: "/home/get",
-    type: "post",
-    dataType: 'text',
-    data: { divisionid1: divid},
+      url: "/home/get",
+      type: "post",
+      dataType: 'json',
+      data: { divisionid1: divid},
     success: function (data) {
       // location.reload();
       var a = JSON.parse(data);
@@ -168,14 +168,27 @@ function jobselect(divid){
       });
 
       a.processfinish.forEach(element => {
-       
-        $('#finishprocessitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
-        '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
-        '<div class="text-right">'+
-        '<a class="btn btn-success" href="/formupdateprocess/'+element.process_id+' " title="ดูข้อมูล">'+ '<i class="fa fa-search" aria-hidden="true"></i></a>'+
-        '</div>'+
-        '</li>'
-        
+      
+        $('#mustact').append('<ul style="padding-bottom: 2px;" class="list-group">'+
+            '<li class="list-group-item "> '+
+            '<div class="row">'+
+            '<div class="col-8">'+
+              'ชื่อ job'+
+            '<br> วันที่เริ่ม : <br> วันที่สิ้นสุด : '+
+            '</div>'+
+            '<div class="col-4" class="text-right">'+
+              '<button class="btn btn-warning" onclick="updatejobform(รหัสjob)">'+
+                  '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
+                '</button>'+
+                '<a href="/showjobselect/'+jobid+'" class="btn btn-success">'+
+                  '<i class="fa fa-eye" aria-hidden="true" ></i>'+
+                '</a>'+
+                '<button class="btn btn-danger" onclick="deletejob(jobid)">'+
+                '<i class="fa fa-trash" aria-hidden="true"></i></i> '+
+                '</button>'+
+            '</div>'+
+          '</li>'+
+      '</ul>'
         );
         
     });
@@ -694,7 +707,7 @@ $(document).on("click",".updatesubprocess",function(){
     alert("กรุณากรอกข้อมูลให้ครบถ้วน")
       return false;
   }else if (e_sub_date < s_sub_date){
-    alert("กรุณากรอกข้อมูลวันที่ให้ถูกต้อง1")
+    alert("กรุณากรอกข้อมูลวันที่ให้ถูกต้อง")
     return false;
   }
   // else if(s_sub_date < start){
