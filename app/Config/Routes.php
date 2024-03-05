@@ -16,6 +16,7 @@ $routes->add('home/get', 'Home::showprocess');
 $routes->get('showjobselect', 'Home::showjobselect');
 $routes->get('showdvselect', 'Home::showdvselect');
 $routes->post('showafterdiv','Home::showafterdiv');
+$routes->get('showdvselect/(:num)', 'Home::showdvselect/$1');
 $routes->get('showjobselect/(:num)', 'Home::showjobselect/$1');
 
 $routes->get('formprocess', 'Home::formprocess');

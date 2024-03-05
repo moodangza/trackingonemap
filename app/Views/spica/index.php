@@ -65,50 +65,45 @@ $(function(){
         <?php   //echo getcwd();; ?>
             <div class="col-12 col-xl-12 grid-margin stretch-card">
               <div class="row w-100 flex-grow">
-                <div class="col-md-12 grid-margin stretch-card">
+                <div class="col-md-6 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body container">
                      
             <div class="row">          
-              <div class="col-lg-6 grid-margin stretch-card">
+              <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
                     <div class="list-group">
                       <a href="#" class="list-group-item list-group-item-action active" aria-current="true">ต้องดำเนินการ</a>
-                        
-                                <?php $i = 0;?>
-                                <?php   foreach($dv as $group){?>
-                                    <ul style="padding-bottom: 2px;" class="list-group">
-                                    <li class="list-group-item "> 
-                                    <div class="row">
-                                    <div class="col-lg-8">
-                                  <div  nowrap><p class="text-justify" nowrap>
-                                    <?php echo $group["division_name"];?></p> 
-                                  </div>
-                                        <div class="col-lg-4">
-                                            <a href="<?php echo base_url('showdvselect/'.$group['division_id']);?>" class="btn btn-success">
-                                            <i class="fa fa-eye" aria-hidden="true" ></i> 
-                                            </a>
-
-                                </div>
-                              </div>
-                            </div>
-                            </li>
-                          </ul>
-                        </div>
-                       
-                                          <?php  $i++; }?>
+                          <?php $i = 0;?>
+                           <?php foreach($dv as $group){?>
+                              <ul style="padding-bottom: 2px;" class="list-group">
+                                <li class="list-group-item "> 
+                                  <div class="row">
+                                    <div class="col-lg-9">
+                                      <div  nowrap><p class="text-justify" nowrap>
+                                        <?php echo $group["division_name"];?></p> 
+                                          </div>
+                                            </div>
+                                              <div class="col-lg-3">
+                                                <a href="<?php echo base_url('showdvselect/'.$group['division_id']);?>" class="btn btn-success">
+                                                  <i class="fa fa-eye" aria-hidden="true" ></i> </a>
+                                                </div>
+                                              </div>
+                                            </li>
+                                          </ul>
+                                            <?php  $i++; }?>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-                         
           </div>
         </div>
       </div>
-    </div>
-  </div>
+              
+                            
+
 
             <div class="col-lg-6 grid-margin stretch-card">
               <div class="card">
@@ -122,15 +117,15 @@ $(function(){
                                 <ul style="padding-bottom: 2px;" class="list-group">
                                   <li class="list-group-item "> 
                                     <div class="row">
-                              <div class="col-lg-8">
+                              <div class="col-lg-9">
                                     <!-- <a href="<?php // echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action"> -->
                                   <?php echo $row['job_name']?>
                                   <br> วันที่เริ่ม : <?php echo $row['job_start']?>
                                   <br> วันที่สิ้นสุด : <?php echo $row['job_end']?>
                                   <!-- </a> -->
-                                 
                               </div>
-                                  <div class="col-4" class="text-right">
+                              
+                                  <div class="col-3" class="text-right">
                                   <button class="btn btn-warning" onclick="updatejobform(<?php echo $row['job_id'];?>)">
                                     <i class="fa fa-pencil " aria-hidden="true" ></i> 
                                   </button>
