@@ -53,7 +53,8 @@ class Home extends BaseController
          ->orderBy('division_tb.division_id','asc');
          $division_rs1 = $jobmodel1->findAll();
          $return = [
-             'division'=> $division_rs1
+            'division'=> $division_rs1,
+            'division_id'=> $division_id
          ];
  
          return view('spica/page/showjob',$return);
@@ -75,7 +76,6 @@ class Home extends BaseController
         // $approve_rs = $approveModel->findAll();
 
         $returnjob = [
-            
             'division'=> $division_rs1
             // 'approve'=> $approve_rs
         ];
