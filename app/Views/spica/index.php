@@ -83,10 +83,10 @@ $(function(){
                                     <div class="row">
                                     <div class="col-lg-8">
                                   <div  nowrap><p class="text-justify" nowrap>
-                                    <?php echo $group["division_tb.division_name"];?></p> 
+                                    <?php echo $group["division_name"];?></p> 
                                   </div>
                                         <div class="col-lg-4">
-                                            <a href="<?php echo base_url('showdvselect/'.$group['division_tb.division_id']);?>" class="btn btn-success">
+                                            <a href="<?php echo base_url('showdvselect/'.$group['division_id']);?>" class="btn btn-success">
                                             <i class="fa fa-eye" aria-hidden="true" ></i> 
                                             </a>
 

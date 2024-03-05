@@ -110,7 +110,7 @@ function showsubprocess(){
     dataType: 'text',
     data: { process_id : process_id},
     success: function (data) {
-      const a = JSON.parse(data);
+      let a = JSON.parse(data);
       // console.log(a)   
       $('#subprocess_id').val(data.subprocess_id);
     }
@@ -134,6 +134,139 @@ function showsubprocess(){
       );
   });
  
+}
+
+//เลือก หน่วยงาน แสดง job
+$(document).on( "change",".selectdivision", function() {
+  $( "select option:selected" ).each( function() {
+    divid = $(this).val() + " ";
+  } );
+  // $('#urladdprocess').hide();
+  showjobselect(divid)    
+
+} );
+// show job หลังจากเลือกหน่วยงาน
+function showjobselect(divid){
+  $('#urladdjob').show();
+  $.ajax(
+    {
+      url: "showafterdiv",
+      type: "post",
+      dataType: 'text',
+      data: { divisionid1: divid},
+    success: function (data) {
+      // location.reload();
+      let showdata = JSON.parse(data);
+      console.log(showdata.job)
+      $('#mustact,#inprogress,#waitapprove,#approve').html('');
+      // $('#finishjobitem').html('');
+      if(showdata.job != 0){
+      showdata.job.forEach(element => {
+      if(element.status == '1'){
+        $('#mustact').append('<ul style="padding-bottom: 2px;" class="list-group">'+
+            '<li class="list-group-item "> '+
+            '<div class="row">'+
+            '<div class="col-8">'+
+              element.job_name+
+            '<br> วันที่เริ่ม :'+ element.job_start + '<br> วันที่สิ้นสุด :'+ element.job_end +
+            '</div>'+
+            '<div class="col-4" class="text-right">'+
+              '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
+                  '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
+                '</button>'+
+                '<a href="/showjobselect/'+element.job_id+'" class="btn btn-success">'+
+                  '<i class="fa fa-eye" aria-hidden="true" ></i>'+
+                '</a>'+
+                '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+
+                '<i class="fa fa-trash" aria-hidden="true"></i></i> '+
+                '</button>'+
+            '</div>'+
+          '</li>'+
+      '</ul>'
+      
+        );
+      }
+      if(element.status == '2'){
+        $('#inprogress').append('<ul style="padding-bottom: 2px;" class="list-group">'+
+            '<li class="list-group-item "> '+
+            '<div class="row">'+
+            '<div class="col-8">'+
+              element.job_name+
+            '<br> วันที่เริ่ม :'+ element.job_start + '<br> วันที่สิ้นสุด :'+ element.job_end +
+            '</div>'+
+            '<div class="col-4" class="text-right">'+
+              '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
+                  '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
+                '</button>'+
+                '<a href="/showjobselect/'+element.job_id+'" class="btn btn-success">'+
+                  '<i class="fa fa-eye" aria-hidden="true" ></i>'+
+                '</a>'+
+                '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+
+                '<i class="fa fa-trash" aria-hidden="true"></i></i> '+
+                '</button>'+
+            '</div>'+
+          '</li>'+
+      '</ul>'
+      
+        );
+      }
+      if(element.status == '3'){
+        $('#waitapprove').append('<ul style="padding-bottom: 2px;" class="list-group">'+
+            '<li class="list-group-item "> '+
+            '<div class="row">'+
+            '<div class="col-8">'+
+              element.job_name+
+            '<br> วันที่เริ่ม :'+ element.job_start + '<br> วันที่สิ้นสุด :'+ element.job_end +
+            '</div>'+
+            '<div class="col-4" class="text-right">'+
+              '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
+                  '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
+                '</button>'+
+                '<a href="/showjobselect/'+element.job_id+'" class="btn btn-success">'+
+                  '<i class="fa fa-eye" aria-hidden="true" ></i>'+
+                '</a>'+
+                '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+
+                '<i class="fa fa-trash" aria-hidden="true"></i></i> '+
+                '</button>'+
+            '</div>'+
+          '</li>'+
+      '</ul>'
+      
+        );
+      }
+      if(element.status == '4'){
+        $('#approve').append('<ul style="padding-bottom: 2px;" class="list-group">'+
+            '<li class="list-group-item "> '+
+            '<div class="row">'+
+            '<div class="col-8">'+
+              element.job_name+
+            '<br> วันที่เริ่ม :'+ element.job_start + '<br> วันที่สิ้นสุด :'+ element.job_end +
+            '</div>'+
+            '<div class="col-4" class="text-right">'+
+              '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
+                  '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
+                '</button>'+
+                '<a href="/showjobselect/'+element.job_id+'" class="btn btn-success">'+
+                  '<i class="fa fa-eye" aria-hidden="true" ></i>'+
+                '</a>'+
+                '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+
+                '<i class="fa fa-trash" aria-hidden="true"></i></i> '+
+                '</button>'+
+            '</div>'+
+          '</li>'+
+      '</ul>'
+      
+        );
+      }
+        
+    });
+  }
+  else{
+    alert('ไม่พบ');
+  }
+      
+    }
+});   
 }
 
 //เลือก job แสดง process
@@ -201,7 +334,7 @@ function showsubprocess(){
     dataType: 'text',
     data: { process_id : process_id},
     success: function (data) {
-      const a = JSON.parse(data);
+      let a = JSON.parse(data);
       // console.log(a)   
       $('#subprocess_id').val(data.subprocess_id);
     }
@@ -646,7 +779,7 @@ $(document).on("click",".updatesubprocess",function(){
     alert("กรุณากรอกข้อมูลให้ครบถ้วน")
       return false;
   }else if (e_sub_date < s_sub_date){
-    alert("กรุณากรอกข้อมูลวันที่ให้ถูกต้อง1")
+    alert("กรุณากรอกข้อมูลวันที่ให้ถูกต้อง")
     return false;
   }
   // else if(s_sub_date < start){

@@ -77,7 +77,7 @@ function drop(ev) {
                       <!-- <button class="btn btn-success" id="intjob" onclick="openForm()">เพิ่มหัวข้อ</button> -->
                       <!-- Button trigger modal -->
                         
-            <select class="form-select selectjob" aria-label="Default select example" style="width:auto;">
+            <select class="form-select selectdivision" aria-label="Default select example" style="width:auto;">
                 <option value="0" selected>เลือกหน่วยงาน</option>
                   <?php foreach($division as $opj){?>
                     <option value="<?php echo $opj['division_id'];?>" <?php echo (isset($opj) && $opj['division_id']==$opj) ?'selected': '' ?>><?php echo $opj['division_name'];?></option>
@@ -157,7 +157,6 @@ function drop(ev) {
     </div>
     </div>
     
-
             <div class="row">          
             <div class="col-lg-6 grid-margin stretch-card">
             <div class="card">
@@ -166,35 +165,11 @@ function drop(ev) {
                             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
                             ต้องดำเนินการ
                             </a>
-                            <?php foreach($job as $row){?>
-                              <?php if($row['status']==1){?>
-                                <ul style="padding-bottom: 2px;" class="list-group">
-                                  <li class="list-group-item "> 
-                                  <div class="row">
-                                  <div class="col-8">
-                                    <!-- <a href="<?php // echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action"> -->
-                                  <?php echo $row['job_name']?>
-                                  <br> วันที่เริ่ม : <?php echo $row['job_start']?>
-                                  <br> วันที่สิ้นสุด : <?php echo $row['job_end']?>
-                                  <!-- </a> -->
-                                  </div>
-                                  <div class="col-4" class="text-right">
-                                  <button class="btn btn-warning" onclick="updatejobform(<?php echo $row['job_id'];?>)">
-                                    <i class="fa fa-pencil " aria-hidden="true" ></i> 
-                                  </button>
                             
-                                  <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="btn btn-success">
-                                    <i class="fa fa-eye" aria-hidden="true" ></i> 
-                                  </a>
-
-                                  <button class="btn btn-danger" onclick="deletejob(<?php echo $row['job_id'];?>)">
-                                  <i class="fa fa-trash" aria-hidden="true"></i></i> 
-                                  </button>
-                                  </div>
-                                </li>
-                            </ul>
-                          <?php } 
-                        }?>
+                           
+                    <div id="mustact">
+                      
+                      </div>
                     </div>
                 </div>
               </div>
@@ -207,38 +182,10 @@ function drop(ev) {
                             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
                             อยู่ระหว่างดำเนินการ
                             </a>
-                            <?php foreach($job as $row){?>
-                              <?php if($row['status']==2){?>
-                                <ul style="padding-bottom: 2px;" class="list-group">
-                                  <li class="list-group-item "> 
-                                    <div class="row">
-                              <div class="col-lg-8">
-                                    <!-- <a href="<?php // echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action"> -->
-                                  <?php echo $row['job_name']?>
-                                  <br> วันที่เริ่ม : <?php echo $row['job_start']?>
-                                  <br> วันที่สิ้นสุด : <?php echo $row['job_end']?>
-                                  <!-- </a> -->
-                                 
-                              </div>
-                                  <div class="col-4" class="text-right">
-                                  <button class="btn btn-warning" onclick="updatejobform(<?php echo $row['job_id'];?>)">
-                                    <i class="fa fa-pencil " aria-hidden="true" ></i> 
-                                  </button>
-                            
-                                  <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="btn btn-success">
-                                    <i class="fa fa-eye" aria-hidden="true" ></i> 
-                                  </a>
-
-                                  <button class="btn btn-danger" onclick="deletejob(<?php echo $row['job_id'];?>)">
-                                  <i class="fa fa-trash" aria-hidden="true"></i></i> 
-                                  </button>
-                                  </div>
-                              
-                              </div>
-                                </li>
-                            </ul>
-                          <?php }
-                        }?>
+                           
+                    <div id="inprogress">
+                      
+                      </div>
                               </a>
                                 
                   </div>
@@ -253,14 +200,10 @@ function drop(ev) {
                             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
                             รออนุมัติ
                             </a>
-                            <?php foreach($job as $row){?>
-                              <?php if($row['job_finish']!='' && $row['status']==2){?>
-                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action">
-                                <?php echo $row['job_name']?> <br> วันที่เริ่ม :
-                                <?php echo $row['job_start']?> <br> วันที่สิ้นสุด :
-                                <?php echo $row['job_end']?> </a>
-                          <?php }
-                        }?>
+                       
+                    <div id="waitapprove">
+                      
+                      </div>
                     </div>
                 </div>
               </div>
@@ -273,15 +216,15 @@ function drop(ev) {
                             <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
                             เสร็จสิ้น
                             </a>
-                            <?php foreach($job as $row){?>
-                              <?php if($row['status']==3){?>
-                                <a href="<?php echo base_url('showjobselect/'.$row['job_id']);?>" class="list-group-item list-group-item-action"><?php echo $row['job_name']?></a>
-                          <?php }
-                        }?>
+                           
+                    <div id="approve">
+                      
+                      </div>
                     </div>
                 </div>
               </div>
             </div>
+            
                           </div>
                         <!-- </div>
                        
