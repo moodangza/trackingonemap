@@ -34,6 +34,8 @@ $routes->post('deletesubprocess','Managecontroller::deletesubprocess');
 $routes->get('editsubprocess','Home::editsubprocess');
 $routes->post('confirmsubprocess','Managecontroller::confirmsubprocess');
 $routes->post('updatesubprocess','Managecontroller::updatesubprocess');
+// ส่วน approve
+$routes->get('showapprove','Home::showapprove');
 // ต้อง login ถึงจะทำงานได้
 // $routes->group('', ['filter' => 'auth'], function($routes){
 
