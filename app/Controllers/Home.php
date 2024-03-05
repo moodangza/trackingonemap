@@ -53,7 +53,9 @@ class Home extends BaseController
          ->where('delete_flag', '1') 
          ->groupBy('division_tb.division_id,division_tb.division_name,job_tb.job_id,job_tb.job_name,status,job_finish')
          ->orderBy('division_tb.division_id','asc');
-         $division_rs1 = $jobmodel1->findAll();
+         //->join('division_id','division_tb.division_id = job_tb.division_id','left');
+         $division_rs1 = $jobmodel1->findAll();         
+         
          $return = [
             'division'=> $division_rs1,
             'division_id'=> $division_id
