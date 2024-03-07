@@ -100,7 +100,7 @@ class Home extends BaseController
         ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish,status')
         ->orderBy('job_id','asc');
         $job_rs1 = $jobmodel1->findAll();
-        // print_r($job_rs1);
+        print_r($job_rs1);
         $dateth = new Date();
         foreach($job_rs1 as $key => $date_th){
             $job_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
