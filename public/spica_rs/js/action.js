@@ -139,7 +139,7 @@ function showsubprocess(){
 //เลือก หน่วยงาน แสดง job
 $(document).on( "change",".selectdivision", function() {
   $( "select option:selected" ).each( function() {
-    divid = $(this).val() + " ";
+    divid = $(this).val();
   } );
   // $('#urladdprocess').hide();
   showjobselect(divid)    
@@ -150,8 +150,8 @@ function showjobselect(divid){
   $('#urladdjob').show();
   $.ajax(
     {
-      url: "showafterdiv",
-      type: "post",
+      url: "/showafterdiv",
+      type: "get",
       dataType: 'text',
       data: { divisionid1: divid},
     success: function (data) {

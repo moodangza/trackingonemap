@@ -80,7 +80,8 @@ function drop(ev) {
             <select class="form-select selectdivision" aria-label="Default select example" style="width:auto;">
                 <option value="0" selected>เลือกหน่วยงาน</option>
                   <?php foreach($division as $opj){?>
-                    <option value="<?php echo $opj['division_id'];?>" <?php echo (isset($opj) && $opj['division_id']==$opj) ?'selected': '' ?>><?php echo $opj['division_name'];?></option>
+                    <option value="<?php echo $opj['division_id'];?>" <?php 
+                    if($divisionid==$opj['division_id']){echo 'selected';}?>><?php echo $opj['division_name'];?></option>
                   <?php }?>
             </select> <br>
             
@@ -286,7 +287,9 @@ function drop(ev) {
         </div>
       </div>
   </div> -->
-
+<?php if ($divisionid){ ?>
+  <script>showjobselect(<?=$divisionid?>)</script>
+<?php }?>
   <?php $this->endSection();?>
 </body>
 
