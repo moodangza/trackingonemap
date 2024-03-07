@@ -29,7 +29,7 @@ class Home extends BaseController
         $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end,job_finish ')
         ->join('division_tb','job_tb.division_id = division_tb.division_id','inner')
         // ->where('job_tb.division_id = 1' )
-        ->groupBy('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end ')
+        ->groupBy('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end,job_finish ')
         ->orderBy('job_start','asc');
         $job_rs1 = $jobmodel1->findAll();
         $dateth = new Date();
