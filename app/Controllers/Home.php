@@ -45,21 +45,51 @@ class Home extends BaseController
      //คลิก หน่วยงาน ดู job
      public function showdvselect($division_id=null)
      {
-         $jobmodel1 = new jobModel();
-         $jobmodel1  ->select('division_tb.division_id,division_tb.division_name,job_tb.job_id,job_tb.job_name,status,job_finish')
-         //->where('job_tb.job_id', $job_id )
-         ->where('delete_flag', '1') 
-         ->groupBy('division_tb.division_id,division_tb.division_name,job_tb.job_id,job_tb.job_name,status,job_finish')
-         ->orderBy('division_tb.division_id','asc');
-         //->join('division_id','division_tb.division_id = job_tb.division_id','left');
-         $division_rs1 = $jobmodel1->findAll();         
+        //  $jobmodel1 = new jobModel();
+        //  $jobmodel1  ->select('division_tb.division_id,division_tb.division_name,job_tb.job_id,job_tb.job_name,status,job_finish')
+        //  //->where('job_tb.job_id', $job_id )
+        //  ->where('delete_flag', '1') 
+        //  ->groupBy('division_tb.division_id,division_tb.division_name,job_tb.job_id,job_tb.job_name,status,job_finish')
+        //  ->orderBy('division_tb.division_id','asc');
+        //  //->join('division_id','division_tb.division_id = job_tb.division_id','left');
+        //  $division_rs1 = $jobmodel1->findAll();         
          
-         $return = [
-            'division'=> $division_rs1,
-            'division_id'=> $division_id
-         ];
+        //  $return = [
+        //     'division'=> $division_rs1,
+        //     'division_id'=> $division_id
+        //  ];
  
+        //  return view('spica/page/showjob',$return);
+
+        $jobmodel1 = new jobModel();
+        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,job_finish')
+        //->where('job_tb.job_id', $job_id )
+        ->where('delete_flag', '1') 
+        ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish')
+        ->orderBy('job_tb.division_id','asc');
+        //->join('division_id','division_tb.division_id = job_tb.division_id','left');
+        $job_rs1 = $jobmodel1->findAll();         
+        
+        // $return = [
+        //    'job'=> $job_rs1,
+           //'division_id'=> $division_id
+        // ];
+
+
+         $divisionmodel1 = new divisionModel();
+         $divisionmodel1  ->select('division_tb.division_id,division_tb.division_name,division_short')
+         ->where('division_tb.division_id', '1' )
+         //->where('delete_flag', '1') 
+         ->groupBy('division_tb.division_id,division_tb.division_name,division_short')
+         ->orderBy('division_id','asc');
+         $division_rs1 = $divisionmodel1->findAll();
+         $return = [
+             'job'=> $job_rs1,
+             'division'=> $division_rs1,
+             'division_id'=> $division_id
+         ];
          return view('spica/page/showjob',$return);
+        
      }
  
     //ดู job
@@ -94,13 +124,15 @@ class Home extends BaseController
 
         $divisionid1 = $this->request->getVar('divisionid1');
         $jobmodel1 = new jobModel();
-        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status,job_finish,status')
+        $jobmodel1  
+        ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status,job_finish,status')
         ->where('delete_flag' ,'1') // ไม่แสดงข้อมูลที่ลบ (ลบไม่จริง)
-        ->where('job_tb.division_id', $divisionid1 )
-        ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish,status')
-        ->orderBy('job_id','asc');
+        // ->where('job_tb.division_id', $divisionid1 )
+        // ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish,status')
+        ->orderBy('job_id','asc')
+        ;
         $job_rs1 = $jobmodel1->findAll();
-        print_r($job_rs1);
+        // print_r($job_rs1);
         $dateth = new Date();
         foreach($job_rs1 as $key => $date_th){
             $job_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);

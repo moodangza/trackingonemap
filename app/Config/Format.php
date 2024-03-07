@@ -41,6 +41,7 @@ class Format extends BaseConfig
      *
      * @var array<string, string>
      */
+    
     public array $formatters = [
         'application/json' => JSONFormatter::class,
         'application/xml'  => XMLFormatter::class,

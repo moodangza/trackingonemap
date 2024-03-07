@@ -151,7 +151,7 @@ function showjobselect(divid){
   $.ajax(
     {
       url: "showafterdiv",
-      type: "post",
+      type: "get",
       dataType: 'text',
       data: { divisionid1: divid},
     success: function (data) {
