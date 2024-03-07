@@ -86,7 +86,7 @@ $(function(){
                                           </div>
                                             </div>
                                               <div class="col-lg-3">
-                                                <a href="<?php echo base_url('showdvselect/'.$group['division_id']);?>" class="btn btn-success">
+                                                <a href="<?php echo base_url('showjob/'.$group['division_id']);?>" class="btn btn-success">
                                                   <i class="fa fa-eye" aria-hidden="true" ></i> </a>
                                                 </div>
                                               </div>

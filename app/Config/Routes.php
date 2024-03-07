@@ -9,6 +9,7 @@ $routes->get('login','Home::login');
 $routes->get('/', 'Home::index');
 $routes->get('showdata','Home::showdata');
 $routes->add('showjob','Home::showjob');
+$routes->add('showjob/(:num)','Home::showjob/$1');
 $routes->get('showprocess','Home::showprocess');
 // $routes->get('addprocess','Home::addprocess');
 // $routes->add('job/get', 'Home::showjob');
