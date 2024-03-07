@@ -23,6 +23,8 @@
   <link rel="shortcut icon" href="spica_rs/images/favicon.png" />
   <!-- action js -->
   <script src="<?php echo base_url('spica_rs/js/action.js');?>"></script>
+  <!-- aprove js -->
+  <script src="<?php echo base_url('spica_rs/js/aprove.js');?>"></script>
   <!-- modal js -->
   <script src="<?php echo base_url('spica_rs/js/modal.js');?>"></script>
     <!-- base:js -->

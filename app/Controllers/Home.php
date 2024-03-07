@@ -1,14 +1,12 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\firstModel;
 use App\Models\jobModel;
-//use App\Models\approveModel;
+use App\Models\approveModel;
 use App\Models\processModel;
 use App\Models\subprocessModel;
 use App\Models\divisionModel;
 use App\Controllers\Date;
-use Hermawan\DataTables\DataTable;
 
 class Home extends BaseController
 {
@@ -380,7 +378,33 @@ public function addsubprocess(){
           echo json_encode( $process_rs );
           
         }
-      
+        // โชว์ approve
+        public function showapprove()
+    {
+        $divisionmodel = new divisionModel();
+        $divisionmodel ->select('division_tb.division_id,division_tb.division_name')
+        ->orderBy('division_id','asc');
+        $dv_rs = $divisionmodel->findAll();
+        $jobmodel1 = new jobModel();
+
+        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end,job_finish ')
+        ->join('division_tb','job_tb.division_id = division_tb.division_id','inner')
+        // ->where('job_tb.division_id = 1' )
+        ->groupBy('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end ')
+        ->orderBy('job_start','asc');
+        $job_rs1 = $jobmodel1->findAll();
+        $dateth = new Date();
+        foreach($job_rs1 as $key => $date_th){
+            $job_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
+            $job_rs1[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
+        }
+        $return = [
+            'dv' => $dv_rs,
+            'job' => $job_rs1
+
+        ];
+        return view('spica/page/manager/showapprove',$return);
+    }
 }
 
 

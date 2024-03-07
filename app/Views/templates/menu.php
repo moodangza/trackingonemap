@@ -16,6 +16,12 @@
           <span></span>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="<?php echo base_url('showapprove');?>">
+            <i class="mdi mdi-view-headline menu-icon"></i>
+            <span class="menu-title">approve</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
             <i class="mdi mdi-palette menu-icon"></i>
             <span class="menu-title">UI Elements</span>
