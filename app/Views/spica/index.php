@@ -71,7 +71,7 @@ $(function(){
                      
             <div class="row">          
               <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card">
+                <!-- <div class="card"> -->
                   <div class="card-body">
                     <div class="list-group">
                       <a href="#" class="list-group-item list-group-item-action active" aria-current="true">ต้องดำเนินการ</a>
@@ -95,16 +95,14 @@ $(function(){
                                             <?php  $i++; }?>
                     </div>
                   </div>
-                </div>
+                <!-- </div> -->
               </div>
             </div>
           </div>
         </div>
       </div>
               
-                            
-
-
+                          
             <div class="col-lg-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
