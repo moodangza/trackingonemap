@@ -12,58 +12,7 @@
     <div class="page-body-wrapper">
       <!-- partial:./partials/_navbar.html -->
      <?php echo $this->include('templates/navbar');?>
-     <script>
-function allowDrop(ev) {
-  ev.preventDefault();
-}
-
-function drag(ev) {
-  ev.dataTransfer.setData("text", ev.target.id);
-}
-
-function drop(ev) {
-  ev.preventDefault();
-  var data = ev.dataTransfer.getData("text");
-  ev.target.appendChild(document.getElementById(data));
-}
-</script>
-<script>
-  $(document).ready(function () {
-    var modal = $("#jobadd");
-    $("#intjob").click(function () {
-      // alert('cl');
-        // $("#jobadd").fadeIn(300);
-        $("#jobadd").modal({
-                escapeClose: true,
-                clickClose: true,
-                showClose: true,
-                fadeDuration: 100
-            });
-    });
-    $(".close").click(function () {
-        $("#jobadd").fadeOut(300);
-    });
-});
-
-</script>
-
-<style>
-          .modal {
-         position: absolute;
-         background-color: #ffffff;
-         border: 1px solid #cccccc;
-         width: 500px;
-         height: 500px;
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-         /* additional styles for the modal */
-      }
-#jobadd {
-  width: 750px;
-  margin: auto;
-}
- </style> 
+  
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">

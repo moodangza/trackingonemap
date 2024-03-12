@@ -7,8 +7,22 @@ use App\Models\processModel;
 use App\Models\subprocessModel;
 
 
-class Managecontroller extends BaseController
+class Approvecontroller extends BaseController
 {
+    public function approvefirstpage(){
+        $showjob = new jobModel();
+        $showjob ->select('job_tb.job_id,job_tb.job_name,job_tb.job_start,job_tb.job_end')
+        ->where('job_tb.delete_flag', '1') 
+        ->groupBy('job_tb.job_id,job_tb.job_name,job_tb.job_start,job_tb.job_end ');
+        $job_rs = $showjob->findAll();
+        $returndata = [
+            'job'=> $job_rs
+        ];
+        // print_r($returndata);
+        // exit;
+       
+        return view('spica/page/manager/showapprove',$returndata);
+    }
     public function deleteprocess($process_id)
     {
         // echo $process_id;
