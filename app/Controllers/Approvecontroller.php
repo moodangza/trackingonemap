@@ -5,21 +5,33 @@ use App\Models\jobModel;
 use App\Models\approveModel;
 use App\Models\processModel;
 use App\Models\subprocessModel;
+use App\Models\divisionModel;
 
 
 class Approvecontroller extends BaseController
 {
     public function approvefirstpage(){
+        $showdivision = new divisionModel();
+        $showdivision ->select('division_id as d_id ,division_name as d_name');
+        $divi_rs = $showdivision->findAll();
+        
         $showjob = new jobModel();
-        $showjob ->select('job_tb.job_id,job_tb.job_name,job_tb.job_start,job_tb.job_end')
+        
+      
+        foreach($divi_rs as $x => $value){
+        $showjob ->select('sum(job_name) as c_job')
         ->where('job_tb.delete_flag', '1') 
+        ->where('job_tb.division_id',$value["d_id"])
         ->groupBy('job_tb.job_id,job_tb.job_name,job_tb.job_start,job_tb.job_end ');
         $job_rs = $showjob->findAll();
+        $divi_rs[$x]["job"] = $job_rs;
+        }
         $returndata = [
-            'job'=> $job_rs
+            'divi'=>$divi_rs,
+            
         ];
-        // print_r($returndata);
-        // exit;
+        // header('Content-Type: application/json');
+        // echo json_encode( $returndata );
        
         return view('spica/page/manager/showapprove',$returndata);
     }

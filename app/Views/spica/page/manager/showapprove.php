@@ -17,138 +17,35 @@
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
-        <?php   //echo getcwd();; ?>
             <div class="col-12 col-xl-12 grid-margin stretch-card">
               <div class="row w-100 flex-grow">
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
-                    <div class="card-body container">
-                      <!-- <button class="btn btn-success" id="intjob" onclick="openForm()">เพิ่มหัวข้อ</button> -->
-                      <!-- Button trigger modal -->
-                        
-            <select class="form-select selectdivision" aria-label="Default select example" style="width:auto;">
-                <option value="0" selected>เลือกหน่วยงาน</option>
-                  <?php if(isset($dv)){
-                        foreach($dv as $opj){?>
-                    <option value="<?php echo $opj['division_id'];?>" <?php echo (isset($opj) && $opj['division_id']==$opj) ?'selected': '' ?>><?php echo $opj['division_name'];?></option>
-                  <?php }
-                          }           ?>
-            </select> <br>
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <!-- <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h5 class="modal-title" id="staticBackdropLabel">เพิ่มหัวข้อ</h5> -->
-        <h5 class="modal-title" id="staticBackdropLabel">เพิ่มหัวข้อ</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <label for="inputjob" class="form-label">ชื่อหัวข้อ</label>
-        <input type="text" class="form-control" id="job_name" name="job_name">
-        <label for="jobstart" class="form-label">วันที่เริ่ม</label>
-        <input type="text" class="form-control datepicker-input" id="job_start" readonly name="job_start"> <div class="input-group-append">
-                                                    <div  class="input-group-text toggle-datepicker" data-toggle="#create-e-date"><i class="fa fa-calendar"></i>
-                                                    </div>
-                                                </div>
-        <label for="jobend" class="form-label">วันที่สิ้นสุด</label>
-        <input type="text" class="form-control datepicker-input" id="job_end" readonly name="job_end"> <div class="input-group-append">
-                                                    <div  class="input-group-text toggle-datepicker" data-toggle="#create-e-date"><i class="fa fa-calendar"></i>
-                                                    </div>
-                                                </div>
-        <input type="hidden" class="form-control" id="division_id" name="division_id">
-      </div>
-      <div class="modal-footer">
-      <button type="button" class="btn btn-primary" onclick="addjob()">บันทึก</button>
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-      </div>
-    </div>
-    </div>
-    </div>
-    <br>   <br>   <br>
-            <div class="row">          
-            <div class="col-lg-6 grid-margin stretch-card">
-            <div class="card">
-            <div class="card-body">
-            <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                            ต้องดำเนินการ
-                            </a>
-                            
-                           
-                    <div id="mustact">
-                      
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                            อยู่ระหว่างดำเนินการ
-                            </a>
-                           
-                    <div id="inprogress">
-                      
-                      </div>
-                              </a>
-                                
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                            รออนุมัติ
-                            </a>
-                       
-                    <div id="waitapprove">
-                      
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                            เสร็จสิ้น
-                            </a>
-                           
-                    <div id="approve">
-                      
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-            
+                     <div class="card-body container">
+                      <div class="row mb-4"> 
+                        <?php 
+                              foreach ($divi as $x) {?>
+                          <div class="card col-4">
+                                <?php echo $x["d_name"]. "<br>";?>
+                                <?php 
+                                      foreach($x["job"] as $y){?>
+                                <?php echo $y["c_job"] ;?>
+                                <?php }?>
                           </div>
-                        <!-- </div>
-                       
+                       <?php }?>
                       </div>
-                    
-                    </div>
-                  </div>
-                </div>
-              
-            
-              </div> -->
-            </div>
+                      <!-- <div class="row md-4">          
+                        <div class="col-lg-6 grid-margin stretch-card">
+                          <div class="card">
+                            <div class="card-body">
+                             
+                            </div>
+                          </div>
+                        </div>
+
+                          </div> -->
+                        
+            </div> 
            
           </div>
           
