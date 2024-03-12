@@ -287,8 +287,10 @@ function drop(ev) {
         </div>
       </div>
   </div> -->
+
+<!-- คลิก หน่วยงาน ดู Job -->
 <?php if ($divisionid){ ?>
-  <script>showjobselect(<?=$divisionid?>)</script>
+  <script>showjobselect(<?=$divisionid?>)</script> 
 <?php }?>
   <?php $this->endSection();?>
 </body>
