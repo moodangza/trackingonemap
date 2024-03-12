@@ -67,7 +67,29 @@ $(function(){
               <div class="row w-100 flex-grow">
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
-                    <div class="card-body container">
+                    <div class="card-body p-5">
+
+ <div class="row">
+   <?php foreach($dv as $group){?>
+  <div class="col-sm-4">
+    <div class="card" style="margin: 10px;">
+      <div class="card-body">
+      <div  nowrap><p class="text-justify" nowrap>
+                                        <?php echo $group["division_name"];?></p>
+
+                                        จำนวนงานทั้งหมด : <?php ?>
+                                        <br> จำนวนงานที่ดำเนินการแล้ว : <?php ?>
+                                        <br> จำนวนงานที่คงเหลือ : <?php ?>     
+                                      </div>
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="<?php echo base_url('showjob/'.$group['division_id']);?>" class="btn btn-primary">ดูรายละเอียด</a>
+      </div>
+    </div>
+  </div>
+   <?php }?>
+</div>
+
                      
             <div class="row">          
               <div class="col-lg-12 grid-margin stretch-card">
@@ -80,8 +102,8 @@ $(function(){
                             <div class="col-lg-9">
                                       <div  nowrap><p class="text-justify" nowrap>
                                         <?php echo $group["division_name"];?></p>
-                                        <a href="<?php echo base_url('showjob/'.$group['division_id']);?>"> </a>
-                                      จำนวนงานทั้งหมด : <?php ?>
+
+                                        จำนวนงานทั้งหมด : <?php ?>
                                         <br> จำนวนงานที่ดำเนินการแล้ว : <?php ?>
                                         <br> จำนวนงานที่คงเหลือ : <?php ?>     
                                       </div>
@@ -94,6 +116,7 @@ $(function(){
                             <?php }?>
                       </div>
                     </div>
+                
                   </div>
                 <!-- </div> -->
               </div>
