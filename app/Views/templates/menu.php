@@ -16,7 +16,7 @@
           <span></span>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?php echo base_url('showapprove');?>">
+          <a class="nav-link" href="<?php echo base_url('approvefirstpage');?>">
             <i class="mdi mdi-view-headline menu-icon"></i>
             <span class="menu-title">approve</span>
           </a>
