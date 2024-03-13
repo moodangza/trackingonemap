@@ -19,10 +19,11 @@ class Approvecontroller extends BaseController
         
       
         foreach($divi_rs as $x => $value){
-        $showjob ->select('sum(job_name) as c_job')
+        $showjob ->select(' count(status) as c_job, status,job_name ')
+       
         ->where('job_tb.delete_flag', '1') 
         ->where('job_tb.division_id',$value["d_id"])
-        ->groupBy('job_tb.job_id,job_tb.job_name,job_tb.job_start,job_tb.job_end ');
+        ->groupBy('status,job_name ');
         $job_rs = $showjob->findAll();
         $divi_rs[$x]["job"] = $job_rs;
         }
