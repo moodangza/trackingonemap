@@ -24,20 +24,23 @@ class Home extends BaseController
         $dv_rs = $divisionmodel->findAll();
         $jobmodel1 = new jobModel();
 
-        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end,job_finish ')
-        ->join('division_tb','job_tb.division_id = division_tb.division_id','inner')
+        foreach($dv_rs as $x => $value){
+            $jobmodel1 ->select('job_tb.job_id,job_tb.job_name,status')
+            ->where('job_tb.delete_flag', '1') 
+            ->where('job_tb.division_id',$value["division_id"])
+            ->groupBy('job_tb.job_id,job_tb.job_name,status')
+            ->orderBy('job_start','asc');
+            $job_rs = $jobmodel1->findAll();
+            $dv_rs[$x]["job"] = $job_rs;
+            }
+        //$jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end,job_finish ')
+        //->join('division_tb','job_tb.division_id = division_tb.division_id','inner')
         // ->where('job_tb.division_id = 1' )
-        ->groupBy('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end,job_finish ')
-        ->orderBy('job_start','asc');
-        $job_rs1 = $jobmodel1->findAll();
-        $dateth = new Date();
-        foreach($job_rs1 as $key => $date_th){
-            $job_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
-            $job_rs1[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
-        }
+        //->groupBy('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end,job_finish ')
+        //->orderBy('job_start','asc');
+
         $return = [
-            'dv' => $dv_rs,
-            'job' => $job_rs1
+            'job' => $dv_rs
 
         ];
         return view('spica/index',$return);

@@ -70,38 +70,18 @@ $(function(){
                     <div class="card-body p-5">
 
  <div class="row">
-   <?php foreach($dv as $group){?>
-    <div class="row">          
-            <div class="col-lg-6 grid-margin stretch-card">
-            <div class="card">
-            <div class="card-body">
-            <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                            ต้องดำเนินการ
-                            </a>
-                            
-                           
-                    <div id="mustact">
-                      
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-
-
+   <?php foreach($job as $group){?>
   <div class="col-sm-4">
-    <div class="card" style="margin: 10px;">
-    <div class="card-header bg-primary"><?php echo $group["division_name"];?></p></div>
+    <div class="card" style="margin: 10px;" bg-primary>
       <div class="card-body">
       <div  nowrap><p class="text-justify" nowrap>
-                                        
-                                        <?php foreach($job as $job_name){?>
-                                        <?php echo $job_name["job_name"];?>
+      <div class="card-header bg-info text-black" ><?php echo $group["division_name"];?></p></div>
+                                        <?php foreach($group["job"] as $job_name){?>
+                                        <?php echo $job_name["job_name"];?> <br>
                                         <?php }?>
+                                        จำนวนงานทั้งหมด : <?php ?>
                                         <br> จำนวนงานที่ดำเนินการแล้ว : <?php ?>
                                         <br> จำนวนงานที่คงเหลือ : <?php ?>     
-                                        </div>
                                       </div>
         <h5 class="card-title">Special title treatment</h5>
         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -113,35 +93,7 @@ $(function(){
 </div>
 
                      
-            <div class="row">          
-              <div class="col-lg-12 grid-margin stretch-card">
-                <!-- <div class="card"> -->
-                  <div class="card-body">
-                    <div class="row mb-4"> 
-                    <?php $i = 0;?>
-                           <?php foreach($dv as $group){?>
-                            <div class="col-4 card"> 
-                            <div class="col-lg-9">
-                                      <div  nowrap><p class="text-justify" nowrap>
-                                        <?php echo $group["division_name"];?></p>
 
-                                        จำนวนงานทั้งหมด : <?php ?>
-                                        <br> จำนวนงานที่ดำเนินการแล้ว : <?php ?>
-                                        <br> จำนวนงานที่คงเหลือ : <?php ?>     
-                                      </div>
-                            </div>
-                                              <div class="col-lg-3">
-                                                <a href="<?php echo base_url('showjob/'.$group['division_id']);?>" class="btn btn-success">
-                                                  <i class="fa fa-eye" aria-hidden="true" ></i> </a>
-                                              </div>
-                            </div>
-                            <?php }?>
-                      </div>
-                    </div>
-                
-                  </div>
-                <!-- </div> -->
-              </div>
             </div>
           </div>
         </div>
