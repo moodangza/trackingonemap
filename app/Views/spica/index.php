@@ -71,15 +71,37 @@ $(function(){
 
  <div class="row">
    <?php foreach($dv as $group){?>
+    <div class="row">          
+            <div class="col-lg-6 grid-margin stretch-card">
+            <div class="card">
+            <div class="card-body">
+            <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                            ต้องดำเนินการ
+                            </a>
+                            
+                           
+                    <div id="mustact">
+                      
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+
   <div class="col-sm-4">
     <div class="card" style="margin: 10px;">
+    <div class="card-header bg-primary"><?php echo $group["division_name"];?></p></div>
       <div class="card-body">
       <div  nowrap><p class="text-justify" nowrap>
-                                        <?php echo $group["division_name"];?></p>
-
-                                        จำนวนงานทั้งหมด : <?php ?>
+                                        
+                                        <?php foreach($job as $job_name){?>
+                                        <?php echo $job_name["job_name"];?>
+                                        <?php }?>
                                         <br> จำนวนงานที่ดำเนินการแล้ว : <?php ?>
                                         <br> จำนวนงานที่คงเหลือ : <?php ?>     
+                                        </div>
                                       </div>
         <h5 class="card-title">Special title treatment</h5>
         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
