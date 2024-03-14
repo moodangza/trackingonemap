@@ -67,7 +67,6 @@
               <a id="urladdprocess" href="<?php echo base_url('formprocess');?>"><button  class="btn btn-success btn-sm addprocess">
                 เพิ่มขั้นตอนการทำงาน
               </button>
-              
                 </a>
               <div id="addjob_id" >
                   

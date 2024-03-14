@@ -19,14 +19,13 @@ class Approvecontroller extends BaseController
         // $showstatus = new statusModel();
         
         foreach($divi_rs as $x => $value){
-        $showjob ->select(' count(status) as c_job, status,job_name,status_job_name ')
-        ->join("statusjob_tb.status_job_id = job_tb.status ","inner")    
+        $showjob ->select(' count(status) as c_job,status')
         ->where('job_tb.delete_flag', '1') 
         ->where('job_tb.division_id',$value["d_id"])
-        ->groupBy('status,job_name ')
-        ->orderBy('status_job_id','asc');
+        ->groupBy('status');
         $job_rs = $showjob->findAll();
         $divi_rs[$x]["job"] = $job_rs;
+       
         
         }
         $returndata = [
@@ -37,6 +36,9 @@ class Approvecontroller extends BaseController
         // echo json_encode( $returndata );
        
         return view('spica/page/manager/showapprove',$returndata);
+    }
+    public function listjobapprove(){
+        return view('spica/page/manager/listjobapprove');
     }
     public function deleteprocess($process_id)
     {
