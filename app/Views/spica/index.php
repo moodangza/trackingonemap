@@ -69,20 +69,27 @@ $(function(){
                   <div class="card">
                     <div class="card-body p-5">
 
+                    
  <div class="row">
-   <?php foreach($job as $group){?>
+ <?php foreach($job as $group){?>
   <div class="col-sm-4">
     <div class="card" style="margin: 10px;" bg-primary>
+      <div class="card-header bg-info text-black text-center" ><?php echo $group["division_name"];?></div>
       <div class="card-body">
-      <div  nowrap><p class="text-justify" nowrap>
-      <div class="card-header bg-info text-black" ><?php echo $group["division_name"];?></p></div>
+      <div nowrap>
+                                        <div class="list-group">
                                         <?php foreach($group["job"] as $job_name){?>
+                                          <li class="list-group-item">
                                         <?php echo $job_name["job_name"];?> <br>
+                                        </li>
                                         <?php }?>
+                                        
+                                        </div>
                                         จำนวนงานทั้งหมด : <?php ?>
                                         <br> จำนวนงานที่ดำเนินการแล้ว : <?php ?>
-                                        <br> จำนวนงานที่คงเหลือ : <?php ?>     
-                                      </div>
+                                        <br> จำนวนงานที่คงเหลือ : <?php ?> 
+
+      </div>
         <h5 class="card-title">Special title treatment</h5>
         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
         <a href="<?php echo base_url('showjob/'.$group['division_id']);?>" class="btn btn-primary">ดูรายละเอียด</a>
