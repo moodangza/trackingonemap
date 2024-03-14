@@ -71,23 +71,31 @@ $(function(){
 
                     
  <div class="row">
- <?php foreach($job as $group){?>
-  <div class="col-sm-4">
+  <div class="col-sm-9">
     <div class="card" style="margin: 10px;" bg-primary>
-      <div class="card-header bg-info text-black text-center" ><?php echo $group["division_name"];?></div>
+      <div class="card-header bg-info text-black text-center" >กกกก</div>
       <div class="card-body">
       <div nowrap>
                                         <div class="list-group">
+                                        
+                                        <?php foreach($job as $group){?>
+                                          <li class="list-group-item css.active bg-success">
+                                        <?php echo $group["division_name"];?>
+                                          </li>
+                                        <li class="list-group-item">
+                                        จำนวนงานทั้งหมด : <?php ?>
+                                        <br> จำนวนงานที่ดำเนินการแล้ว : <?php ?>
+                                        <br> จำนวนงานที่คงเหลือ : <?php ?> 
+                                        <br><a href="<?php echo base_url('showjob/'.$group['division_id']);?>" class="btn btn-primary">ดูรายละเอียด</a>
+                                        </li>
                                         <?php foreach($group["job"] as $job_name){?>
                                           <li class="list-group-item">
                                         <?php echo $job_name["job_name"];?> <br>
                                         </li>
                                         <?php }?>
-                                        
+                                        <?php }?>
                                         </div>
-                                        จำนวนงานทั้งหมด : <?php ?>
-                                        <br> จำนวนงานที่ดำเนินการแล้ว : <?php ?>
-                                        <br> จำนวนงานที่คงเหลือ : <?php ?> 
+
 
       </div>
         <h5 class="card-title">Special title treatment</h5>
@@ -96,7 +104,7 @@ $(function(){
       </div>
     </div>
   </div>
-   <?php }?>
+   
 </div>
 
                      
