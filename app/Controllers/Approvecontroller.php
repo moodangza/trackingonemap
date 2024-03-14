@@ -6,7 +6,7 @@ use App\Models\approveModel;
 use App\Models\processModel;
 use App\Models\subprocessModel;
 use App\Models\divisionModel;
-
+use App\Models\statusModel;
 
 class Approvecontroller extends BaseController
 {
@@ -16,16 +16,18 @@ class Approvecontroller extends BaseController
         $divi_rs = $showdivision->findAll();
         
         $showjob = new jobModel();
+        // $showstatus = new statusModel();
         
-      
         foreach($divi_rs as $x => $value){
-        $showjob ->select(' count(status) as c_job, status,job_name ')
-       
+        $showjob ->select(' count(status) as c_job, status,job_name,status_job_name ')
+        ->join("statusjob_tb.status_job_id = job_tb.status ","inner")    
         ->where('job_tb.delete_flag', '1') 
         ->where('job_tb.division_id',$value["d_id"])
-        ->groupBy('status,job_name ');
+        ->groupBy('status,job_name ')
+        ->orderBy('status_job_id','asc');
         $job_rs = $showjob->findAll();
         $divi_rs[$x]["job"] = $job_rs;
+        
         }
         $returndata = [
             'divi'=>$divi_rs,
