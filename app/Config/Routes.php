@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\Approvecontroller;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -38,6 +39,7 @@ $routes->post('confirmsubprocess','Managecontroller::confirmsubprocess');
 $routes->post('updatesubprocess','Managecontroller::updatesubprocess');
 // ส่วน approve
 $routes->get('approvefirstpage','Approvecontroller::approvefirstpage');
+$routes->get('listjobapprove/(:num)','Approvecontroller::listjobapprove/$1');
 // ต้อง login ถึงจะทำงานได้
 // $routes->group('', ['filter' => 'auth'], function($routes){
 // });
