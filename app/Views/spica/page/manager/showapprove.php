@@ -25,13 +25,28 @@
                       <div class="row mb-4"> 
                         <?php 
                               foreach ($divi as $x) {?>
-                          <div class="card col-4">
-                                <?php echo $x["d_name"]. "<br>";?>
+                          <div class="col-4">
+                            <div class="card" style="margin : 10px" >
+                               <div class="card-header bg-primary text-white">
+                               <?php echo $x["d_name"]. "<br>";?>
+                               </div> 
+                                <div class="card-body">
                                 <?php 
                                       foreach($x["job"] as $y){?>
-                                <?php echo $y["c_job"] ;?>
+                                      
+                                <?php if($y["status"]==1){?> 
+                                  ต้องดำเนินการ  <?php echo $y["job_name"];?>  <br>        
+                                 <?php } ?> 
+                                 <?php if($y["status"]==2){?> 
+                                  กำลังดำเนินการ  <?php echo $y["job_name"];?> <br>         
+                                 <?php } ?> 
+                                 <?php if($y["status"]==3){?> 
+                                     รอยืนยัน <?php echo $y["job_name"];?><br>          
+                                 <?php } ?> 
                                 <?php }?>
+                                </div>
                           </div>
+                                      </div>
                        <?php }?>
                       </div>
                       <!-- <div class="row md-4">          
