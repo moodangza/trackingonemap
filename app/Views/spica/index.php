@@ -70,8 +70,9 @@ $(function(){
                     <div class="card-body p-5">
 
                     
- <div class="row">
-  <div class="col-sm-9">
+ <div class="row justify-content-center">
+<!-- <div class="col-2"></div> -->
+  <div class="col-sm-8">
     <div class="card" style="margin: 10px;" bg-primary>
       <div class="card-header bg-info text-black text-center" >กกกก</div>
       <div class="card-body">
@@ -88,11 +89,11 @@ $(function(){
                                         <br> จำนวนงานที่คงเหลือ : <?php ?> 
                                         <br><a href="<?php echo base_url('showjob/'.$group['division_id']);?>" class="btn btn-primary">ดูรายละเอียด</a>
                                         </li>
-                                        <?php foreach($group["job"] as $job_name){?>
-                                          <li class="list-group-item">
-                                        <?php echo $job_name["job_name"];?> <br>
-                                        </li>
-                                        <?php }?>
+                                        <?php// foreach($group["job"] as $job_name){?>
+                                          <!-- <li class="list-group-item"> -->
+                                        <?php //echo $job_name["job_name"];?> <br>
+                                        <!-- </li> -->
+                                        <?php// }?>
                                         <?php }?>
                                         </div>
 
@@ -104,6 +105,7 @@ $(function(){
       </div>
     </div>
   </div>
+  <!-- <div class="col-2"></div> -->
    
 </div>
 
