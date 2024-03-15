@@ -70,10 +70,10 @@ $(function(){
                     <div class="card-body p-5">
 
                     
- <div class="row justify-content-center">
+ <div class="justify-content-center">
 <!-- <div class="col-2"></div> -->
 <div class="card">
-<div class="bg-info text-black text-center" >กกกก</div>
+<div class="card-header bg-info text-black text-center" >กกกก</div>
   <div class="card-body">
   <div class="row justify-content-center" >
   <?php foreach($job as $group){?>
