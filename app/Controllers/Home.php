@@ -20,24 +20,34 @@ class Home extends BaseController
     {
         $divisionmodel = new divisionModel();
         $divisionmodel ->select('division_tb.division_id,division_tb.division_name')
+        ->select('count(status) as c_job')
+        ->select("(select count(*) from job_tb where job_tb.division_id=division_tb.division_id and status = '1' ) As a_job")
+        ->select("(select count(*) from job_tb where job_tb.division_id=division_tb.division_id and status = '2' ) As p_job")
+        ->select("(select count(*) from job_tb where job_tb.division_id=division_tb.division_id and status = '3' ) As w_job")
+        ->select("(select count(*) from job_tb where job_tb.division_id=division_tb.division_id and status = '4' ) As s_job")
+        ->join("job_tb","division_tb.division_id = job_tb.division_id","left")
+        ->groupBy('division_tb.division_id,division_tb.division_name')
         ->orderBy('division_id','asc');
         $dv_rs = $divisionmodel->findAll();
         $jobmodel1 = new jobModel();
 
+        foreach($dv_rs as $x => $value){
+            $jobmodel1 ->select('job_tb.job_id,job_tb.job_name,status')
+            ->where('job_tb.delete_flag', '1') 
+            ->where('job_tb.division_id',$value["division_id"])
+            ->groupBy('job_tb.job_id,job_tb.job_name,status')
+            ->orderBy('job_start','asc');
+            $job_rs = $jobmodel1->findAll();
+            $dv_rs[$x]["job"] = $job_rs;
+            }
         $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end,job_finish ')
         ->join('division_tb','job_tb.division_id = division_tb.division_id','inner')
-        // ->where('job_tb.division_id = 1' )
+        ->where('job_tb.division_id = 1' )
         ->groupBy('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end,job_finish ')
         ->orderBy('job_start','asc');
-        $job_rs1 = $jobmodel1->findAll();
-        $dateth = new Date();
-        foreach($job_rs1 as $key => $date_th){
-            $job_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
-            $job_rs1[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
-        }
+
         $return = [
-            'dv' => $dv_rs,
-            'job' => $job_rs1
+            'job' => $dv_rs
 
         ];
         return view('spica/index',$return);
