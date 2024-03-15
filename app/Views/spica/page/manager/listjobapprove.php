@@ -52,20 +52,25 @@
                     <div class="card-head bg-primary">
                         กำลังดำเนินการ
                     </div>
+                
                     <div class="card-body">
+                 
                   <div class="candidate-list">
+                  <?php foreach($showjob as $rs_job){?>
+                    <?php if($rs_job["status"] == 2){?>
                     <div class="candidate-list-box card mt-2">
                         <div class="p-2 card-body">
+                            
                             <div class="align-items-center row">
                                 <!-- <div class="col-auto">
                                     <div class="candidate-list-images">
                                         <a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-md img-thumbnail rounded-circle" /></a>
                                     </div>
                                 </div> -->
-                                <div class="col-lg-5">
+                                <div class="col-8">
                                     <div class="candidate-list-content mt-3 mt-lg-0">
                                         <h5 class="fs-19 mb-0">
-                                            <a class="primary-link" href="#">Charles Dickens</a><span class="badge bg-success ms-1"><i class="mdi mdi-star align-middle"></i>4.8</span>
+                                            <a class="primary-link" href="#"><?php echo $rs_job["job_name"];?></a><span class="badge bg-success ms-1"><i class="mdi mdi-star align-middle"></i>4.8</span>
                                         </h5>
                                         <p class="text-muted mb-2">Project Manager</p>
                                         <ul class="list-inline mb-0 text-muted">
@@ -80,13 +85,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="favorite-icon">
-                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
-                            </div>
+                          
+                          
                         </div>
-                    </div> 
+                    </div>
+                        <?php }?>
+                    <?php }?> 
                 </div>
+              
                 </div>
+             
             <!-- row end -->
             </div>
             </div>
