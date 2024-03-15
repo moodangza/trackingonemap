@@ -72,21 +72,56 @@ $(function(){
                     
  <div class="row justify-content-center">
 <!-- <div class="col-2"></div> -->
-  <div class="col-sm-8">
+<div class="card">
+<div class="bg-info text-black text-center" >กกกก</div>
+  <div class="card-body">
+  <div class="row justify-content-center" >
+  <?php foreach($job as $group){?>
+  <div class="col-sm-5">
+  <div class="card" style="margin: 10px;" bg-primary>
+  <div nowrap>
+                                        <div class="list-group">
+                                        <li class="list-group-item css.active bg-success">
+                                        <?php echo $group["division_name"];?>
+                                        </li>
+                                        <li class="list-group-item">
+                                        จำนวนงานทั้งหมด :  <?php echo $group["c_job"];?>                                      
+                                        <br> จำนวนงานที่ต้องดำเนินการ : <?php  echo $group["a_job"]; ?>
+                                        <br> จำนวนงานที่กำลังดำเนินการ : <?php  echo $group["p_job"]; ?>
+                                        <br> จำนวนงานที่รออนุมัติ : <?php echo $group["w_job"]; ?>
+                                        <br> จำนวนงานที่ดำเนินการเสร็จแล้ว : <?php echo $group["s_job"]; ?>
+                                        <br> จำนวนงานที่คงเหลือ : <?php echo $group["c_job"]-$group["s_job"]; ?> 
+                                        <br><a href="<?php echo base_url('showjob/'.$group['division_id']);?>" class="btn btn-primary">ดูรายละเอียด</a>
+                                        </li>
+  </div>
+  </div>
+  </div>
+  </div>
+  <?php }?>
+</div>
+</div>
+</div>
+</div>
+
+  <div class="col-sm-7">
     <div class="card" style="margin: 10px;" bg-primary>
       <div class="card-header bg-info text-black text-center" >กกกก</div>
       <div class="card-body">
       <div nowrap>
                                         <div class="list-group">
-                                        
                                         <?php foreach($job as $group){?>
                                           <li class="list-group-item css.active bg-success">
                                         <?php echo $group["division_name"];?>
                                           </li>
                                         <li class="list-group-item">
-                                        จำนวนงานทั้งหมด : <?php ?>
-                                        <br> จำนวนงานที่ดำเนินการแล้ว : <?php ?>
-                                        <br> จำนวนงานที่คงเหลือ : <?php ?> 
+                                        จำนวนงานทั้งหมด :  <?php 
+                                          echo $group["c_job"];
+                                          ?>                                      
+                                        <br> จำนวนงานที่ต้องดำเนินการ : <?php  echo $group["a_job"]; ?>
+                                        <br> จำนวนงานที่กำลังดำเนินการ : <?php  echo $group["p_job"]; ?>
+                                        <br> จำนวนงานที่รออนุมัติ : <?php echo $group["w_job"]; ?>
+                                        <br> จำนวนงานที่ดำเนินการเสร็จแล้ว : <?php echo $group["s_job"]; ?>
+                                        <br> จำนวนงานที่คงเหลือ : <?php echo $group["c_job"]-$group["s_job"]; ?> 
                                         <br><a href="<?php echo base_url('showjob/'.$group['division_id']);?>" class="btn btn-primary">ดูรายละเอียด</a>
                                         </li>
                                         <?php// foreach($group["job"] as $job_name){?>
