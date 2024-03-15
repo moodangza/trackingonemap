@@ -38,7 +38,11 @@ class Approvecontroller extends BaseController
         return view('spica/page/manager/showapprove',$returndata);
     }
     public function listjobapprove(){
-        return view('spica/page/manager/listjobapprove');
+        $jobselect = new jobModel();
+        $jobselect ->select('job_id,job_name,job_start,job_finish')
+        ->where('job_tb.delete_flag','1')
+        ->where('job_tb.division_id',$_GET["d_id"]);
+        return view('spica/page/manager/listjobapprove,status,job_finish');
     }
     public function deleteprocess($process_id)
     {
