@@ -32,6 +32,17 @@
 .fs-14 {
     font-size: 14px;
 }
+.modal {
+         position: fixed;
+         background-color: #ffffff;
+         border: 1px solid #cccccc;
+         width: 500px;
+         height: 500px;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         /* additional styles for the modal */
+      }
 </style>    
 <body>
   <div class="container-scroller d-flex">
@@ -43,18 +54,37 @@
      <?php echo $this->include('templates/navbar');?>
       <!-- partial -->
       <div class="main-panel">
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
         <div class="content-wrapper">
           <div class="row">
             <div class="col-12 col-xl-12 grid-margin stretch-card">
               <div class="row w-100 flex-grow">
                 <div class="col-md-4 grid-margin stretch-card">
                   <div class="card">
-                    <div class="card-head bg-primary">
+                    <div class="card-head bg-primary text-center">
                         กำลังดำเนินการ
                     </div>
                 
                     <div class="card-body">
-                 
+                
                   <div class="candidate-list">
                   <?php foreach($showjob as $rs_job){?>
                     <?php if($rs_job["status"] == 2){?>
@@ -62,27 +92,27 @@
                         <div class="p-2 card-body">
                             
                             <div class="align-items-center row">
-                                <!-- <div class="col-auto">
-                                    <div class="candidate-list-images">
-                                        <a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-md img-thumbnail rounded-circle" /></a>
-                                    </div>
-                                </div> -->
-                                <div class="col-8">
+                            
+                                <div class="col-10">
                                     <div class="candidate-list-content mt-3 mt-lg-0">
-                                        <h5 class="fs-19 mb-0">
-                                            <a class="primary-link" href="#"><?php echo $rs_job["job_name"];?></a><span class="badge bg-success ms-1"><i class="mdi mdi-star align-middle"></i>4.8</span>
+                                        <h5 class="fs-19 mb-0" nowrap>
+                                                <b> <?php echo $rs_job["job_name"];?></b>
+                                          
+                                            
                                         </h5>
-                                        <p class="text-muted mb-2">Project Manager</p>
+                                        <p class="text-muted mb-2">คนบันทึก</p>
                                         <ul class="list-inline mb-0 text-muted">
-                                            <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> Oakridge Lane Richardson</li>
-                                            <li class="list-inline-item"><i class="mdi mdi-wallet"></i> $650 / hours</li>
+                                            <li class="list-inline-item">
+                                                <i class="mdi mdi-map-marker"></i> วันที่ เริ่มต้น วันที่ สิ้นสุด
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <i class="mdi mdi-wallet"></i> วันที่เสร็จสิ้นการดำเนินการ
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1">
-                                        <span class="badge bg-soft-secondary fs-14 mt-1">Leader</span><span class="badge bg-soft-secondary fs-14 mt-1">Manager</span><span class="badge bg-soft-secondary fs-14 mt-1">Developer</span>
-                                    </div>
+                                <div class="col-auto">
+                                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalCenter">ดูรายละเอียด</button>
                                 </div>
                             </div>
                           
@@ -100,42 +130,48 @@
             </div>
             <div class="col-md-4 grid-margin stretch-card text-white">
                   <div class="card">
-                    <div class="card-head bg-primary">
+                    <div class="card-head bg-primary text-center">
                         รออนุมัติ
                     </div>
                     <div class="card-body">
                   <div class="candidate-list">
+                  <?php foreach($showjob as $rs_job){?>
+                    <?php if($rs_job["status"] == 3){?>
                     <div class="candidate-list-box card mt-2">
                         <div class="p-2 card-body">
+                            
                             <div class="align-items-center row">
                                 <!-- <div class="col-auto">
                                     <div class="candidate-list-images">
                                         <a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-md img-thumbnail rounded-circle" /></a>
                                     </div>
                                 </div> -->
-                                <div class="col-lg-5">
+                                <div class="col-10">
                                     <div class="candidate-list-content mt-3 mt-lg-0">
-                                        <h5 class="fs-19 mb-0">
-                                            <a class="primary-link" href="#">Charles Dickens</a><span class="badge bg-success ms-1"><i class="mdi mdi-star align-middle"></i>4.8</span>
+                                        <h5 class="fs-19 mb-0" nowrap>
+                                                <b> <?php echo $rs_job["job_name"];?></b>
+                                          
+                                            
                                         </h5>
-                                        <p class="text-muted mb-2">Project Manager</p>
+                                        <p class="text-muted mb-2">คนบันทึก</p>
                                         <ul class="list-inline mb-0 text-muted">
-                                            <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> Oakridge Lane Richardson</li>
-                                            <li class="list-inline-item"><i class="mdi mdi-wallet"></i> $650 / hours</li>
+                                            <li class="list-inline-item">
+                                                <i class="mdi mdi-map-marker"></i> วันที่ เริ่มต้น วันที่ สิ้นสุด
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <i class="mdi mdi-wallet"></i> วันที่เสร็จสิ้นการดำเนินการ
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1">
-                                        <span class="badge bg-soft-secondary fs-14 mt-1">Leader</span><span class="badge bg-soft-secondary fs-14 mt-1">Manager</span><span class="badge bg-soft-secondary fs-14 mt-1">Developer</span>
-                                    </div>
-                                </div>
+                              
                             </div>
-                            <div class="favorite-icon">
-                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
-                            </div>
+                          
+                          
                         </div>
-                    </div> 
+                    </div>
+                        <?php }?>
+                    <?php }?>  
                 </div>
                 </div>
             <!-- row end -->
@@ -144,42 +180,48 @@
 
             <div class="col-md-4 grid-margin stretch-card text-white">
                   <div class="card">
-                    <div class="card-head bg-primary">
+                    <div class="card-head bg-primary text-center">
                         อนุมัติเสร็จสิ้น
                     </div>
                     <div class="card-body">
                   <div class="candidate-list">
+                  <?php foreach($showjob as $rs_job){?>
+                    <?php if($rs_job["status"] == 4){?>
                     <div class="candidate-list-box card mt-2">
                         <div class="p-2 card-body">
+                            
                             <div class="align-items-center row">
                                 <!-- <div class="col-auto">
                                     <div class="candidate-list-images">
                                         <a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-md img-thumbnail rounded-circle" /></a>
                                     </div>
                                 </div> -->
-                                <div class="col-lg-5">
+                                <div class="col-10">
                                     <div class="candidate-list-content mt-3 mt-lg-0">
-                                        <h5 class="fs-19 mb-0">
-                                            <a class="primary-link" href="#">Charles Dickens</a><span class="badge bg-success ms-1"><i class="mdi mdi-star align-middle"></i>4.8</span>
+                                        <h5 class="fs-19 mb-0" nowrap>
+                                                <b> <?php echo $rs_job["job_name"];?></b>
+                                          
+                                            
                                         </h5>
-                                        <p class="text-muted mb-2">Project Manager</p>
+                                        <p class="text-muted mb-2">คนบันทึก</p>
                                         <ul class="list-inline mb-0 text-muted">
-                                            <li class="list-inline-item"><i class="mdi mdi-map-marker"></i> Oakridge Lane Richardson</li>
-                                            <li class="list-inline-item"><i class="mdi mdi-wallet"></i> $650 / hours</li>
+                                            <li class="list-inline-item">
+                                                <i class="mdi mdi-map-marker"></i> วันที่ เริ่มต้น วันที่ สิ้นสุด
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <i class="mdi mdi-wallet"></i> วันที่เสร็จสิ้นการดำเนินการ
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="mt-2 mt-lg-0 d-flex flex-wrap align-items-start gap-1">
-                                        <span class="badge bg-soft-secondary fs-14 mt-1">Leader</span><span class="badge bg-soft-secondary fs-14 mt-1">Manager</span><span class="badge bg-soft-secondary fs-14 mt-1">Developer</span>
-                                    </div>
-                                </div>
+                              
                             </div>
-                            <div class="favorite-icon">
-                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
-                            </div>
+                          
+                          
                         </div>
-                    </div> 
+                    </div>
+                        <?php }?>
+                    <?php }?>  
                 </div>
                 </div>
             <!-- row end -->
