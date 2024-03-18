@@ -116,7 +116,7 @@ function drop(ev) {
       </div>
       <div class="modal-footer">
       <button type="button" class="btn btn-primary" onclick="addjob()">บันทึก</button>
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิกก</button>
       </div>
     </div>
     </div>
