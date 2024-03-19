@@ -51,7 +51,18 @@ class Approvecontroller extends BaseController
     }
    public function detailapprove(){
     $jobid = $this->request->getVar('job_id');
-    
+    $job_sql = new jobModel();
+    $job_sql ->select('job_id,job_name,job_start,job_finish,status')
+    ->where('job_tb.delete_flag','1')
+    ->where('job_tb.division_id',$jobid);
+    $job_rs = $job_sql->findAll();
+
+    $return = [
+        'job'=> $job_rs,
+        'flag'=>'afterselect'
+    ];
+    header('Content-Type: application/json');
+    echo json_encode( $return );
    }
     public function confirmapprove()
     {
