@@ -598,7 +598,7 @@ function editjob(){
 function updatejobform(jobid){
   $.ajax(
     {
-    url: "updatejobform",
+    url: "../updatejobform",
     type: "post",
     dataType: "json",
     data: { jobid: jobid},
