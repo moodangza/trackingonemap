@@ -49,33 +49,21 @@ class Approvecontroller extends BaseController
         ];
         return view('spica/page/manager/listjobapprove',$returndata);
     }
-    public function deleteprocess($process_id)
-    {
-        // echo $process_id;
-        // exit;
-        $deleteprocess = new processModel();
-        $dataprocess = array('delete_flag'=>'0',
-                              'deleted_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
-                            );
-       
-        $deleteprocess ->set($dataprocess) ->where('process_id',$process_id) -> update();
-        $deletesubprocess = new subprocessModel();
-        $deletesubprocess ->set($dataprocess) ->where('process_id',$process_id) -> update();
-        
-       
-    }
-    public function deletesubprocess()
+   public function detailapprove(){
+    $jobid = $this->request->getVar('job_id');
+   }
+    public function confirmapprove()
     {
         // echo $process_id;
         // exit;
         // $subprocessid = $_POST['subprocess_id'];
         $subprocessid = $this->request->getVar('subprocessid');
         // print_r ($subprocess_id);
-        $deletesubprocess = new subprocessModel();
-        $datasubprocess = array('delete_flag'=>'0',
-                              'deleted_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
-                            );
-        $deletesubprocess ->set($datasubprocess) ->where('subprocess_id',$subprocessid) -> update();
+        // $deletesubprocess = new subprocessModel();
+        // $datasubprocess = array('delete_flag'=>'0',
+        //                       'deleted_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
+        //                     );
+        // $deletesubprocess ->set($datasubprocess) ->where('subprocess_id',$subprocessid) -> update();
         
         
        

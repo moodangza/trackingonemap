@@ -65,7 +65,23 @@
         </button>
       </div>
       <div class="modal-body">
-        ...
+            <div class="row">
+                <div class="col-12">
+                        <div class="card">
+                          <div class="card-header text-center border">
+                          <h5 class="card-title align-middle">หัวข้อการทำงาน</h5>
+                          </div>
+                            <div class="card-body">
+                             
+                                ขั้นตอนการทำงาน
+                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Button with data-bs-target
+  </button>
+
+                            </div>
+                        </div>
+                </div>
+            </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -113,7 +129,7 @@
                                     </div>
                                 </div>
                                 <div class="col-auto">
-                                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalCenter">ดูรายละเอียด</button>
+                                <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalCenter" onclick="detailprocessapprove(<?php echo $rs_job['job_id'];?>)">ดูรายละเอียด</button>
                                 </div>
                             </div>
                           
