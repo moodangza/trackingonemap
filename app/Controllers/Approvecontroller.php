@@ -51,6 +51,7 @@ class Approvecontroller extends BaseController
     }
    public function detailapprove(){
     $jobid = $this->request->getVar('job_id');
+    
    }
     public function confirmapprove()
     {
