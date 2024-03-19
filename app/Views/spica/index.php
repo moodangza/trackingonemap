@@ -70,7 +70,7 @@ $(function(){
                     <div class="card-body p-5">
                       <div class="justify-content-center">
                         <div class="card">
-                          <div class="card-header bg-info text-black text-center" >กกกก</div>
+                          <div class="card-header bg-info text-black text-center" >ความก้าวหน้าการดำเนินงาน ONE MAP แต่ละหน่วยงาน</div>
                             <div class="card-body">
                               <div class="row">
                                   <?php foreach($job as $group){?>
@@ -88,6 +88,12 @@ $(function(){
                                                                         <br> จำนวนงานที่รออนุมัติ : <?php echo $group["w_job"]; ?>
                                                                         <br> จำนวนงานที่ดำเนินการเสร็จแล้ว : <?php echo $group["s_job"]; ?>
                                                                         <br> จำนวนงานที่คงเหลือ : <?php echo $group["c_job"]-$group["s_job"]; ?> 
+                                                                        <br> ร้อยละความก้าวหน้า (%) : <?php if ($group["s_job"]!=0 && $group["a_job"]!=0 ){
+                                                                        echo number_format( ($group["s_job"]/$group["c_job"])*100, 2 ).'%'   ;
+                                                                        } else {
+                                                                          echo "ยังไม่มีงานที่สำเร็จ";
+                                                                        } 
+                                                                        ?>                                                             
                                                                         <br><a href="<?php echo base_url('showjob/'.$group['division_id']);?>" class="btn btn-primary">ดูรายละเอียด</a>
                                                                         </li>
                                     </div>
@@ -101,43 +107,7 @@ $(function(){
                         </div>
                       </div>
 
-  <div class="col-sm-7">
-    <div class="card" style="margin: 10px;" bg-primary>
-      <div class="card-header bg-info text-black text-center" >กกกก</div>
-      <div class="card-body">
-      <div nowrap>
-                                        <div class="list-group">
-                                        <?php foreach($job as $group){?>
-                                          <li class="list-group-item css.active bg-success">
-                                        <?php echo $group["division_name"];?>
-                                          </li>
-                                        <li class="list-group-item">
-                                        จำนวนงานทั้งหมด :  <?php 
-                                          echo $group["c_job"];
-                                          ?>                                      
-                                        <br> จำนวนงานที่ต้องดำเนินการ : <?php  echo $group["a_job"]; ?>
-                                        <br> จำนวนงานที่กำลังดำเนินการ : <?php  echo $group["p_job"]; ?>
-                                        <br> จำนวนงานที่รออนุมัติ : <?php echo $group["w_job"]; ?>
-                                        <br> จำนวนงานที่ดำเนินการเสร็จแล้ว : <?php echo $group["s_job"]; ?>
-                                        <br> จำนวนงานที่คงเหลือ : <?php echo $group["c_job"]-$group["s_job"]; ?> 
-                                        <br><a href="<?php echo base_url('showjob/'.$group['division_id']);?>" class="btn btn-primary">ดูรายละเอียด</a>
-                                        </li>
-                                        <?php// foreach($group["job"] as $job_name){?>
-                                          <!-- <li class="list-group-item"> -->
-                                        <?php //echo $job_name["job_name"];?> <br>
-                                        <!-- </li> -->
-                                        <?php// }?>
-                                        <?php }?>
-                                        </div>
-
-
-      </div>
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="<?php echo base_url('showjob/'.$group['division_id']);?>" class="btn btn-primary">ดูรายละเอียด</a>
-      </div>
-    </div>
-  </div>
+  
   <!-- <div class="col-2"></div> -->
    
 </div>
@@ -159,18 +129,18 @@ $(function(){
               
              <?php echo $this->include('templates/footer');?>
               </div> -->
+                      <!-- content-wrapper ends -->
+        <!-- partial:./partials/_footer.html -->
+          <?php echo $this->include('templates/footer');?>
+        <!-- partial -->
             </div>
            
           </div>
-          
+  
           <!-- row end -->
           
           <!-- row end -->
         </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:./partials/_footer.html -->
-         
-        <!-- partial -->
       </div>
   
 

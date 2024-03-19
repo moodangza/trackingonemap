@@ -136,6 +136,32 @@ function showsubprocess(){
  
 }
 
+function jobText(id, element){
+    console.log('in Function('+id+')');
+    $('#'+id).append('<ul style="padding-bottom: 2px;" class="list-group">'+
+          '<li class="list-group-item "> '+
+          '<div class="row">'+
+          '<div class="col-8">'+
+            element.job_name+
+          '<br> วันที่เริ่ม :'+ element.job_start + '<br> วันที่สิ้นสุด :'+ element.job_end +
+          '<br> '+ ((+element.dateremain<0)?'วันที่เกิน :'+(element.dateremain*-1):'วันคงเหลือ :'+element.dateremain) +'วัน' +
+          '</div>'+
+          '<div class="col-4" class="text-right">'+
+            '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
+                '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
+              '</button>'+
+              '<a href="/showjobselect/'+element.job_id+'" class="btn btn-success">'+
+                '<i class="fa fa-eye" aria-hidden="true" ></i>'+
+              '</a>'+
+              '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+
+              '<i class="fa fa-trash" aria-hidden="true"></i></i> '+
+              '</button>'+
+          '</div>'+
+        '</li>'+
+    '</ul>'
+    );
+}
+
 //เลือก หน่วยงาน แสดง job
 $(document).on( "change",".selectdivision", function() {
   $( "select option:selected" ).each( function() {
@@ -163,76 +189,13 @@ function showjobselect(divid){
       if(showdata.job != 0){
       showdata.job.forEach(element => {
       if(element.status == '1'){
-        $('#mustact').append('<ul style="padding-bottom: 2px;" class="list-group">'+
-            '<li class="list-group-item "> '+
-            '<div class="row">'+
-            '<div class="col-8">'+
-              element.job_name+
-            '<br> วันที่เริ่ม :'+ element.job_start + '<br> วันที่สิ้นสุด :'+ element.job_end +
-            '</div>'+
-            '<div class="col-4" class="text-right">'+
-              '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
-                  '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
-                '</button>'+
-                '<a href="/showjobselect/'+element.job_id+'" class="btn btn-success">'+
-                  '<i class="fa fa-eye" aria-hidden="true" ></i>'+
-                '</a>'+
-                '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+
-                '<i class="fa fa-trash" aria-hidden="true"></i></i> '+
-                '</button>'+
-            '</div>'+
-          '</li>'+
-      '</ul>'
-      
-        );
+        jobText('mustact', element);
       }
       if(element.status == '2'){
-        $('#inprogress').append('<ul style="padding-bottom: 2px;" class="list-group">'+
-            '<li class="list-group-item "> '+
-            '<div class="row">'+
-            '<div class="col-8">'+
-              element.job_name+
-            '<br> วันที่เริ่ม :'+ element.job_start + '<br> วันที่สิ้นสุด :'+ element.job_end +
-            '</div>'+
-            '<div class="col-4" class="text-right">'+
-              '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
-                  '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
-                '</button>'+
-                '<a href="/showjobselect/'+element.job_id+'" class="btn btn-success">'+
-                  '<i class="fa fa-eye" aria-hidden="true" ></i>'+
-                '</a>'+
-                '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+
-                '<i class="fa fa-trash" aria-hidden="true"></i></i> '+
-                '</button>'+
-            '</div>'+
-          '</li>'+
-      '</ul>'
-      
-        );
+        jobText('inprogress', element);
       }
       if(element.status == '3'){
-        $('#waitapprove').append('<ul style="padding-bottom: 2px;" class="list-group">'+
-            '<li class="list-group-item "> '+
-            '<div class="row">'+
-            '<div class="col-8">'+
-              element.job_name+
-            '<br> วันที่เริ่ม :'+ element.job_start + '<br> วันที่สิ้นสุด :'+ element.job_end +
-            '</div>'+
-            '<div class="col-4" class="text-right">'+
-              '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
-                  '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
-                '</button>'+
-                '<a href="/showjobselect/'+element.job_id+'" class="btn btn-success">'+
-                  '<i class="fa fa-eye" aria-hidden="true" ></i>'+
-                '</a>'+
-                '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+
-                '<i class="fa fa-trash" aria-hidden="true"></i></i> '+
-                '</button>'+
-            '</div>'+
-          '</li>'+
-      '</ul>'
-      
-        );
+        jobText('waitapprove', element);
       }
       if(element.status == '4'){
         $('#approve').append('<ul style="padding-bottom: 2px;" class="list-group">'+
