@@ -86,7 +86,7 @@ class Home extends BaseController
         $divisionid1 = $this->request->getVar('divisionid1');
         $jobmodel1 = new jobModel();
         $jobmodel1  
-        ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status,job_finish,status')
+        ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status,job_finish,status,job_end-CURRENT_DATE as dateremain', false)
         ->where('delete_flag' ,'1') // ไม่แสดงข้อมูลที่ลบ (ลบไม่จริง)
         ->where('job_tb.division_id', $divisionid1 )
         ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish,status')
@@ -113,7 +113,8 @@ class Home extends BaseController
     public function showjobselect($job_id=null)
     {
         $jobmodel1 = new jobModel();
-        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,job_finish')
+        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,job_finish,job_end-CURRENT_DATE as dateremain')
+        // -> select ('CURRENT_DATE-job_end as dateremain')
         ->where('job_tb.division_id', '1' )
         ->where('delete_flag', '1') 
         ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish')
