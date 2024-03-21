@@ -113,7 +113,7 @@ class Home extends BaseController
     public function showjobselect($job_id=null)
     {
         $jobmodel1 = new jobModel();
-        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,job_finish,job_end-CURRENT_DATE as dateremain')
+        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,job_finish')
         // -> select ('CURRENT_DATE-job_end as dateremain')
         ->where('job_tb.division_id', '1' )
         ->where('delete_flag', '1') 
