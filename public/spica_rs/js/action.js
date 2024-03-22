@@ -144,7 +144,7 @@ function jobText(id, element){
           '<div class="col-8">'+
             element.job_name+
           '<br> วันที่เริ่ม :'+ element.job_start + '<br> วันที่สิ้นสุด :'+ element.job_end +
-          '<br> '+ ((+element.dateremain<0)?'เกินกำหนดมาแล้ว :'+(element.dateremain*-1):'วันคงเหลือก่อนครบกำหนด :'+element.dateremain) +'วัน' +
+          '<br> '+ ((+element.dateremain<0)?'ล่าช้ามาแล้ว :'+(element.dateremain*-1):'วันคงเหลือก่อนครบกำหนด :'+element.dateremain) +'วัน' +
           '</div>'+
           '<div class="col-4" class="text-right">'+
             '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+

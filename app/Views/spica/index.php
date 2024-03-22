@@ -77,6 +77,7 @@ $(function(){
                                     <?php  ?>
                                     <li class="list-group-item">
                                     จำนวนหน่วยงานทั้งหมด :  <?php echo count($job) .' หน่วยงาน' ?>    
+                                    <br> หน่วยงานที่ทำงานเสร็จแล้ว :  <?php  ?>        
                                     <br> จำนวนงานทั้งหมด :  <?php echo $total_c ?>                                      
                                     <br> จำนวนงานที่ต้องดำเนินการ : <?php echo $total_a  ?>
                                     <br> จำนวนงานที่กำลังดำเนินการ : <?php echo $total_p  ?>
