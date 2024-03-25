@@ -18,8 +18,14 @@ class Home extends BaseController
 
     public function index()
     {
+        $total_c=0; //$total_c-total_s ตัวแปรนับทั้งหมดทุกหน่วยงาน
+        $total_a=0;
+        $total_p=0;
+        $total_w=0;
+        $total_s=0;
         $divisionmodel = new divisionModel();
         $divisionmodel ->select('division_tb.division_id,division_tb.division_name')
+        ->select('count(division_name) as d_division')
         ->select('count(status) as c_job')
         ->select("(select count(*) from job_tb where job_tb.division_id=division_tb.division_id and status = '1' ) As a_job")
         ->select("(select count(*) from job_tb where job_tb.division_id=division_tb.division_id and status = '2' ) As p_job")
@@ -32,6 +38,12 @@ class Home extends BaseController
         $jobmodel1 = new jobModel();
 
         foreach($dv_rs as $x => $value){
+            $total_c=$value["c_job"]+$total_c; //$total_c-total_s วนลูป+ตัวแปรนับทั้งหมดทุกหน่วยงาน
+            $total_a=$value["a_job"]+$total_a;
+            $total_p=$value["p_job"]+$total_p;
+            $total_w=$value["w_job"]+$total_w;
+            $total_s=$value["s_job"]+$total_s;
+
             $jobmodel1 ->select('job_tb.job_id,job_tb.job_name,status')
             ->where('job_tb.delete_flag', '1') 
             ->where('job_tb.division_id',$value["division_id"])
@@ -47,7 +59,12 @@ class Home extends BaseController
         ->orderBy('job_start','asc');
 
         $return = [
-            'job' => $dv_rs
+            'job' => $dv_rs,
+            'total_c' => $total_c, //$total_c-total_s นำตัวแปรนับทั้งหมดทุกหน่วยงานไปแสดงผลที่หน้า index
+            'total_a' => $total_a,
+            'total_p' => $total_p,
+            'total_w' => $total_w,
+            'total_s' => $total_s
 
         ];
         return view('spica/index',$return);
@@ -113,7 +130,7 @@ class Home extends BaseController
     public function showjobselect($job_id=null)
     {
         $jobmodel1 = new jobModel();
-        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,job_finish,job_end-CURRENT_DATE as dateremain')
+        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,job_finish')
         // -> select ('CURRENT_DATE-job_end as dateremain')
         ->where('job_tb.division_id', '1' )
         ->where('delete_flag', '1') 

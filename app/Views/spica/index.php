@@ -68,9 +68,36 @@ $(function(){
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body p-5">
+                                <!-- <div class="col-12"> -->
+                                  <!-- <div class="card" style="margin: 10px;" bg-primary> -->
+                                  <div class="list-group">
+                                  <li class="list-group-item css.active bg-info">
+                                    <?php ?> <center> ความก้าวหน้าการดำเนินการทั้งหมด </center>
+                                    </li>
+                                    <?php  ?>
+                                    <li class="list-group-item">
+                                    จำนวนหน่วยงานทั้งหมด :  <?php echo count($job) .' หน่วยงาน' ?>    
+                                    <br> หน่วยงานที่ทำงานเสร็จแล้ว :  <?php  ?>        
+                                    <br> จำนวนงานทั้งหมด :  <?php echo $total_c ?>                                      
+                                    <br> จำนวนงานที่ต้องดำเนินการ : <?php echo $total_a  ?>
+                                    <br> จำนวนงานที่กำลังดำเนินการ : <?php echo $total_p  ?>
+                                    <br> จำนวนงานที่รออนุมัติ : <?php echo $total_w ?>
+                                    <br> จำนวนงานที่ดำเนินการเสร็จแล้ว : <?php echo $total_s ?>
+                                    <br> จำนวนงานที่คงเหลือ : <?php echo $total_c-$total_s ?> 
+                                    <br> ร้อยละความก้าวหน้าจากหน่วยงานทั้งหมด (%) : <?php if ($total_s!=0 && $total_a!=0 ){
+                                                                        echo number_format( ($total_s/$total_c)*100, 2 ).'%'   ;
+                                                                        } else {
+                                                                          echo "ยังไม่มีงานที่สำเร็จ";
+                                                                        } ?>                                                             
+                                  </li>
+                                  </div>
+                                  <?php ?>
+                                  <br>
+                                  <!-- </div> -->
+                                <!-- </div> -->
                       <div class="justify-content-center">
                         <div class="card">
-                          <div class="card-header bg-info text-black text-center" >ความก้าวหน้าการดำเนินงาน ONE MAP แต่ละหน่วยงาน</div>
+                          <div class="card-header bg-warning text-black text-center" >ความก้าวหน้าการดำเนินงานแต่ละหน่วยงาน</div>
                             <div class="card-body">
                               <div class="row">
                                   <?php foreach($job as $group){?>
