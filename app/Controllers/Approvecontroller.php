@@ -57,12 +57,30 @@ class Approvecontroller extends BaseController
     ->where('job_tb.job_id',$job_id)
     ->groupBy('job_id,job_name,job_start,job_finish,status');
     $job_rs = $job_sql->findAll();
+    $processmodel = new processModel();
+    $processmodel ->select('process_tb.process_id,process_tb.process_name,process_tb.process_start,process_tb.process_end,process_tb.process_finish,process_tb.detail,process_tb.status')
+    ->where('process_tb.delete_flag', '1') 
+    ->where('process_tb.job_id',$job_id);
+    $process_rs = $processmodel->findAll();
+    $subprocessmodel = new subprocessModel();
+        foreach($process_rs as $x => $value){
 
+            $subprocessmodel ->select('subprocess_tb.subprocess_id,subprocess_tb.subprocess_name,subprocess_tb.subprocess_start,subprocess_tb.subprocess_end,subprocess_tb.subprocess_finish,subprocess_tb.subprocess_status')
+            ->where('subprocess_tb.delete_flag', '1') 
+            ->where('subprocess_tb.process_id',$value["process_id"])
+            // ->groupBy('job_tb.job_id,job_tb.job_name,status')
+            ->orderBy('subprocess_start','asc');
+            $subprocess_rs = $subprocessmodel->findAll();
+            $process_rs[$x]["subprocess"] = $subprocess_rs;
+            }
     $return = [
         'job'=> $job_rs,
+        'process' => $process_rs,
         'flag'=>'afterselect'
     ];
+    return $this->response->setJSON($return);
     header('Content-Type: application/json');
+    
     echo json_encode( $return );
    }
     public function confirmapprove()
