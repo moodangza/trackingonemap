@@ -137,7 +137,9 @@
                 
                   <div class="candidate-list">
                   <?php foreach($showjob as $rs_job){?>
-                    <?php if($rs_job["status"] == 2){ cardlistjobapprove($rs_job); }?>
+                    <?php if($rs_job["status"] == 2){ 
+                        cardlistjobapprove($rs_job); 
+                        }?>
                     <?php }?> 
                 </div>
               
@@ -154,41 +156,9 @@
                     <div class="card-body">
                   <div class="candidate-list">
                   <?php foreach($showjob as $rs_job){?>
-                    <?php if($rs_job["status"] == 3){?>
-                    <div class="candidate-list-box card mt-2">
-                        <div class="p-2 card-body">
-                            
-                            <div class="align-items-center row">
-                                <!-- <div class="col-auto">
-                                    <div class="candidate-list-images">
-                                        <a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-md img-thumbnail rounded-circle" /></a>
-                                    </div>
-                                </div> -->
-                                <div class="col-10">
-                                    <div class="candidate-list-content mt-3 mt-lg-0">
-                                        <h5 class="fs-19 mb-0" nowrap>
-                                                <b> <?php echo $rs_job["job_name"];?></b>
-                                          
-                                            
-                                        </h5>
-                                        <p class="text-muted mb-2">คนบันทึก</p>
-                                        <ul class="list-inline mb-0 text-muted">
-                                            <li class="list-inline-item">
-                                                <i class="mdi mdi-map-marker"></i> วันที่ เริ่มต้น วันที่ สิ้นสุด
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <i class="mdi mdi-wallet"></i> วันที่เสร็จสิ้นการดำเนินการ
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                              
-                            </div>
-                          
-                          
-                        </div>
-                    </div>
-                        <?php }?>
+                    <?php if($rs_job["status"] == 3){
+                          cardlistjobapprove($rs_job); 
+                     }?>
                     <?php }?>  
                 </div>
                 </div>
@@ -204,41 +174,11 @@
                     <div class="card-body">
                   <div class="candidate-list">
                   <?php foreach($showjob as $rs_job){?>
-                    <?php if($rs_job["status"] == 4){?>
-                    <div class="candidate-list-box card mt-2">
-                        <div class="p-2 card-body">
-                            
-                            <div class="align-items-center row">
-                                <!-- <div class="col-auto">
-                                    <div class="candidate-list-images">
-                                        <a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-md img-thumbnail rounded-circle" /></a>
-                                    </div>
-                                </div> -->
-                                <div class="col-10">
-                                    <div class="candidate-list-content mt-3 mt-lg-0">
-                                        <h5 class="fs-19 mb-0" nowrap>
-                                                <b> <?php echo $rs_job["job_name"];?></b>
-                                          
-                                            
-                                        </h5>
-                                        <p class="text-muted mb-2">คนบันทึก</p>
-                                        <ul class="list-inline mb-0 text-muted">
-                                            <li class="list-inline-item">
-                                                <i class="mdi mdi-map-marker"></i> วันที่ เริ่มต้น วันที่ สิ้นสุด
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <i class="mdi mdi-wallet"></i> วันที่เสร็จสิ้นการดำเนินการ
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                              
-                            </div>
-                          
-                          
-                        </div>
-                    </div>
-                        <?php }?>
+                  
+                    <?php if($rs_job["status"] == 4){
+                          cardlistjobapprove($rs_job); 
+                     }?>
+                  
                     <?php }?>  
                 </div>
                 </div>

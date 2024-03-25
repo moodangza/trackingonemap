@@ -1,21 +1,17 @@
 function detailprocessapprove(jobid){
     $.ajax(
         {
-            url: "/showsubprocess",
+            url: "/detailapprove",
             type: "post",
-            dataType: 'text',
+            dataType: 'json',
             data: { job_id : jobid},
             success: function (data) {
             let a = JSON.parse(data);
-          // console.log(a)   
+          console.log(a)   
             $('#subprocess_id').val(data.subprocess_id);
         }
     });  
       $('#processitem').html('');
-            
-      // $('#addjob_id').html('');
-      // $('#addjob_id').append('<input class="addprocessid" type="text" value="'+a.process[0]['job_id']+'">');
-      $("#urladdprocess").attr("href", "/formprocess/"+a.process[0]['job_id']+""); 
        
       a.process.forEach(element => {
        
