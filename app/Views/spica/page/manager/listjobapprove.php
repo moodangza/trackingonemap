@@ -36,7 +36,7 @@
          position: fixed;
          background-color: #ffffff;
          border: 1px solid #cccccc;
-         width: 500px;
+         width: 80%;
          height: 500px;
          top: 50%;
          left: 50%;
@@ -102,14 +102,19 @@
                 <div class="col-12">
                         <div class="card">
                           <div class="card-header text-center border">
-                          <h5 class="card-title align-middle">หัวข้อการทำงาน</h5>
+                            <h5 id="job_name" class="card-title align-middle">หัวข้อการทำงาน</h5>
+                          <br>
+                          <div>
+                              เริ่มต้น : <input id="date_start" type="text" class="align-middle" value=""> สิ้นสุด : <input id="date_start" type="text" class="align-middle" value="">
+                          </div>
+                            
                           </div>
                             <div class="card-body">
-                             
-                                ขั้นตอนการทำงาน
-                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Button with data-bs-target
-  </button>
+                             <div>
+                                <h6 >ขั้นตอนการทำงาน</h6>     
+                             </div>
+                                
+                               
 
                             </div>
                         </div>

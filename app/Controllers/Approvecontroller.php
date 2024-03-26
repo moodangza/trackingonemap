@@ -52,11 +52,16 @@ class Approvecontroller extends BaseController
    public function detailapprove(){
     $job_id = $this->request->getVar('job_id');
     $job_sql = new jobModel();
-    $job_sql ->select('job_id,job_name,job_start,job_finish,status')
+    $job_sql ->select('job_id,job_name,job_start,job_end,job_finish,status')
     ->where('job_tb.delete_flag','1')
     ->where('job_tb.job_id',$job_id)
     ->groupBy('job_id,job_name,job_start,job_finish,status');
     $job_rs = $job_sql->findAll();
+    $dateth = new Date();
+    foreach($job_rs as $key => $date_th){
+        $job_rs[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
+        $job_rs[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
+    }
     $processmodel = new processModel();
     $processmodel ->select('process_tb.process_id,process_tb.process_name,process_tb.process_start,process_tb.process_end,process_tb.process_finish,process_tb.detail,process_tb.status')
     ->where('process_tb.delete_flag', '1') 
