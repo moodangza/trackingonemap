@@ -18,6 +18,7 @@ class Home extends BaseController
 
     public function index()
     {
+        $total_ts=0; //ตัวแปรเก็บค่าหน่วยงานที่ทำงานเสร็จแล้ว
         $total_c=0; //$total_c-total_s ตัวแปรนับทั้งหมดทุกหน่วยงาน
         $total_a=0;
         $total_p=0;
@@ -39,6 +40,7 @@ class Home extends BaseController
 
         foreach($dv_rs as $x => $value){
             $total_c=$value["c_job"]+$total_c; //$total_c-total_s วนลูป+ตัวแปรนับทั้งหมดทุกหน่วยงาน
+            //$total_ts=$value["c_job"=="s_job"]+$total_c=$total_s;
             $total_a=$value["a_job"]+$total_a;
             $total_p=$value["p_job"]+$total_p;
             $total_w=$value["w_job"]+$total_w;
@@ -51,7 +53,12 @@ class Home extends BaseController
             ->orderBy('job_start','asc');
             $job_rs = $jobmodel1->findAll();
             $dv_rs[$x]["job"] = $job_rs;
+            if($value["c_job"]-$value["s_job"]=='0'&& $value["c_job"]!='0'&&$value["s_job"]!=0) {
+                $total_ts++ ; //คำนวนจำนวนหน่วยงานที่ทำงานเสร็จแล้ว
             }
+            //echo $value["division_name"].$value["c_job"]." ".$value["s_job"]."<br>";
+            }
+            //exit;
         $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end,job_finish ')
         ->join('division_tb','job_tb.division_id = division_tb.division_id','inner')
         ->where('job_tb.division_id = 1' )
@@ -60,6 +67,7 @@ class Home extends BaseController
 
         $return = [
             'job' => $dv_rs,
+            'total_ts' => $total_ts, //ส่งค่าตัวแปรเก็บค่าหน่วยงานที่ทำงานเสร็จแล้ว
             'total_c' => $total_c, //$total_c-total_s นำตัวแปรนับทั้งหมดทุกหน่วยงานไปแสดงผลที่หน้า index
             'total_a' => $total_a,
             'total_p' => $total_p,

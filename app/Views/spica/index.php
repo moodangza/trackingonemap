@@ -75,7 +75,7 @@ $(function(){
   <div class="row">
                                     <div class="col-6 pe-0">
                                     จำนวนหน่วยงานทั้งหมด :  <?php echo count($job) .' หน่วยงาน' ?>    
-                                    <br> หน่วยงานที่ทำงานเสร็จแล้ว :  <?php  ?>        
+                                    <br> หน่วยงานที่ทำงานเสร็จแล้ว :  <?php echo $total_ts .' หน่วยงาน'  ?>        
                                     <br> จำนวนงานทั้งหมด :  <?php echo $total_c ?>                                      
                                     <br> จำนวนงานที่ต้องดำเนินการ : <?php echo $total_a  ?>
                                     <br> จำนวนงานที่กำลังดำเนินการ : <?php echo $total_p  ?>
@@ -115,14 +115,14 @@ $(function(){
                                 <!-- </div> -->
                       <div class="justify-content-center">
                         <div class="card">
-                          <div class="card-header bg-warning text-black text-center" >ความก้าวหน้าการดำเนินงานแต่ละหน่วยงาน</div>
+                          <h5 class="card-header bg-warning text-black text-center" >ความก้าวหน้าการดำเนินงานแต่ละหน่วยงาน</h5>
                             <div class="card-body">
                               <div class="row">
                                   <?php foreach($job as $group){?>
 
                                   <div class="col-6">
                                   <div class="card" style="margin: 10px;" bg-primary>
-                                  <h5 class="card-header bg-success text-center"><?php echo $group["division_name"];?></h5>
+                                  <h6 class="card-header bg-success text-center"><?php echo $group["division_name"];?></h6>
                                   <div class= "card-body">
                                   <div class="row" nowrap>
                                 
@@ -234,10 +234,10 @@ new Chart(ctx<?php echo $group['division_id'] ;?>, config<?php echo $group['divi
 <script> //ตั้งค่าชาร์ตแสดงงาน
 // Data for the donut chart (Group 2 first, then Group 1)
 const data = {
-    labels: ['จำนวนงานที่เสร็จแล้ว', 'จำนวนงานที่คงเหลือ'], // Swap the order of labels
+    labels: ['จำนวนหน่วยงานที่งานเสร็จแล้ว', 'จำนวนหน่วยงานที่งานยังไม่เสร็จ'], // Swap the order of labels
     datasets: [{
-        data: [<?php echo $total_s ?>,<?php echo $total_c-$total_s ?>], // Swap the order of data values
-        backgroundColor: ['#A1A5B7', '#F1BC00'], // Colors for each group
+        data: [<?php echo $total_ts ?>,<?php echo count($job) ?>], // Swap the order of data values
+        backgroundColor: ['#F1BC00','#A1A5B7'], // Colors for each group
     }]
 };
 
@@ -269,7 +269,7 @@ const dataa = {
     labels: ['จำนวนงานที่เสร็จแล้ว', 'จำนวนงานที่คงเหลือ'], // Swap the order of labels
     datasets: [{
         data: [<?php echo $total_s ?>,<?php echo $total_c-$total_s ?>], // Swap the order of data values
-        backgroundColor: ['#A1A5B7', '#F1BC00'], // Colors for each group
+        backgroundColor: ['#2ECC71', '#F1BC00'], // Colors for each group
     }]
 };
 
