@@ -103,16 +103,20 @@
                         <div class="card">
                           <div class="card-header text-center border">
                             <h5 id="job_name" class="card-title align-middle">หัวข้อการทำงาน</h5>
-                          <br>
-                          <div>
-                              เริ่มต้น : <input id="date_start" type="text" class="align-middle" value=""> สิ้นสุด : <input id="date_start" type="text" class="align-middle" value="">
+                          
+                          <div class="">
+                              
+                              เริ่มต้น : <em id="showjob_start">วันที่เริ่มต้น</em>
+                              สิ้นสุด : <em id="showjob_end">วันที่สิ้นสุด</em>
+                               
                           </div>
                             
                           </div>
                             <div class="card-body">
-                             <div>
-                                <h6 >ขั้นตอนการทำงาน</h6>     
+                             <div id="showprocess">
+                                  
                              </div>
+                           
                                 
                                
 

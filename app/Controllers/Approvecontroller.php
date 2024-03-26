@@ -62,25 +62,26 @@ class Approvecontroller extends BaseController
         $job_rs[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
         $job_rs[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
     }
-    $processmodel = new processModel();
-    $processmodel ->select('process_tb.process_id,process_tb.process_name,process_tb.process_start,process_tb.process_end,process_tb.process_finish,process_tb.detail,process_tb.status')
+    $processsql = new processModel();
+    $processsql ->select('process_tb.process_id,process_tb.process_name,process_tb.process_start,process_tb.process_end,process_tb.process_finish,process_tb.detail,process_tb.status')
     ->where('process_tb.delete_flag', '1') 
     ->where('process_tb.job_id',$job_id);
-    $process_rs = $processmodel->findAll();
-    $subprocessmodel = new subprocessModel();
+    $process_rs = $processsql->findAll();
+    $subprocesssql = new subprocessModel();
         foreach($process_rs as $x => $value){
 
-            $subprocessmodel ->select('subprocess_tb.subprocess_id,subprocess_tb.subprocess_name,subprocess_tb.subprocess_start,subprocess_tb.subprocess_end,subprocess_tb.subprocess_finish,subprocess_tb.subprocess_status')
+            $subprocesssql ->select('subprocess_tb.subprocess_id,subprocess_tb.subprocess_name,subprocess_tb.subprocess_start,subprocess_tb.subprocess_end,subprocess_tb.subprocess_finish,subprocess_tb.subprocess_status')
             ->where('subprocess_tb.delete_flag', '1') 
-            ->where('subprocess_tb.process_id',$value["process_id"])
+            ->where('subprocess_tb.process_id',$value['process_id'])
             // ->groupBy('job_tb.job_id,job_tb.job_name,status')
             ->orderBy('subprocess_start','asc');
-            $subprocess_rs = $subprocessmodel->findAll();
+            $subprocess_rs = $subprocesssql->findAll();
             $process_rs[$x]["subprocess"] = $subprocess_rs;
             }
     $return = [
         'job'=> $job_rs,
         'process' => $process_rs,
+        // 'subprocess' => $subprocess_rs,
         'flag'=>'afterselect'
     ];
     return $this->response->setJSON($return);
