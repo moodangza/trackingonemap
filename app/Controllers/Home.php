@@ -25,15 +25,16 @@ class Home extends BaseController
         $total_w=0;
         $total_s=0;
         $divisionmodel = new divisionModel();
-        $divisionmodel ->select('division_tb.division_id,division_tb.division_name')
+        $divisionmodel ->select('division_tb.division_id,division_tb.division_name,division_tb.division_status')
         ->select('count(division_name) as d_division')
         ->select('count(status) as c_job')
         ->select("(select count(*) from job_tb where job_tb.division_id=division_tb.division_id and status = '1' ) As a_job")
         ->select("(select count(*) from job_tb where job_tb.division_id=division_tb.division_id and status = '2' ) As p_job")
         ->select("(select count(*) from job_tb where job_tb.division_id=division_tb.division_id and status = '3' ) As w_job")
         ->select("(select count(*) from job_tb where job_tb.division_id=division_tb.division_id and status = '4' ) As s_job")
+        ->where("division_tb.division_status!=",'1')
         ->join("job_tb","division_tb.division_id = job_tb.division_id","left")
-        ->groupBy('division_tb.division_id,division_tb.division_name')
+        ->groupBy('division_tb.division_id,division_tb.division_name,division_tb.division_status')
         ->orderBy('division_id','asc');
         $dv_rs = $divisionmodel->findAll();
         $jobmodel1 = new jobModel();

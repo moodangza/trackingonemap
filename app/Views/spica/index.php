@@ -77,11 +77,11 @@ $(function(){
                                     จำนวนหน่วยงานทั้งหมด :  <?php echo count($job) .' หน่วยงาน' ?>    
                                     <br> หน่วยงานที่ทำงานเสร็จแล้ว :  <?php echo $total_ts .' หน่วยงาน'  ?>        
                                     <br> จำนวนงานทั้งหมด :  <?php echo $total_c ?>                                      
-                                    <br> จำนวนงานที่ต้องดำเนินการ : <?php echo $total_a  ?>
-                                    <br> จำนวนงานที่กำลังดำเนินการ : <?php echo $total_p  ?>
-                                    <br> จำนวนงานที่รออนุมัติ : <?php echo $total_w ?>
-                                    <br> จำนวนงานที่ดำเนินการเสร็จแล้ว : <?php echo $total_s ?>
-                                    <br> จำนวนงานที่คงเหลือ : <?php echo $total_c-$total_s ?> 
+                                    <br> จำนวนงานรวมที่ต้องดำเนินการ : <?php echo $total_a  ?>
+                                    <br> จำนวนงานรวมที่กำลังดำเนินการ : <?php echo $total_p  ?>
+                                    <br> จำนวนงานรวมที่รออนุมัติ : <?php echo $total_w ?>
+                                    <br> จำนวนงานรวมที่ดำเนินการเสร็จแล้ว : <?php echo $total_s ?>
+                                    <br> จำนวนงานรวมที่คงเหลือ : <?php echo $total_c-$total_s ?> 
                                     <br> ร้อยละความก้าวหน้าจากหน่วยงานทั้งหมด (%) : <?php if ($total_s!=0 && $total_a!=0 ){
                                                                         echo number_format( ($total_s/$total_c)*100, 2 ).'%'   ;
                                                                         } else {
@@ -122,7 +122,7 @@ $(function(){
 
                                   <div class="col-6">
                                   <div class="card" style="margin: 10px;" bg-primary>
-                                  <h6 class="card-header bg-success text-center"><?php echo $group["division_name"];?></h6>
+                                  <h6 class="card-header bg-success text-center text-white"><?php echo $group["division_name"];?></h6>
                                   <div class= "card-body">
                                   <div class="row" nowrap>
                                 
@@ -265,7 +265,7 @@ new Chart(ctx, config);
 <script> //ตั้งค่าชาร์ตแสดงงาน
 // Data for the donut chart (Group 2 first, then Group 1)
 const dataa = {
-    labels: ['จำนวนงานที่เสร็จแล้ว', 'จำนวนงานที่คงเหลือ'], // Swap the order of labels
+    labels: ['จำนวนงานรวมที่เสร็จแล้ว', 'จำนวนงานรวมที่คงเหลือ'], // Swap the order of labels
     datasets: [{
         data: [<?php echo $total_s ?>,<?php echo $total_c-$total_s ?>], // Swap the order of data values
         backgroundColor: ['#2ECC71', '#F1BC00'], // Colors for each group
