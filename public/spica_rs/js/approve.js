@@ -1,3 +1,4 @@
+
 function detailprocessapprove(jobid){
         $.ajax(
       {
@@ -10,44 +11,28 @@ function detailprocessapprove(jobid){
         // console.log(rs_data.process);
       //     // $('#subprocess_id').val(data.subprocess_id);
       rs_data.job.forEach(rs_job => {
+        $('#job_id').val(rs_job.job_id);
         $('#job_name').text(rs_job.job_name);
-        $('#showjob_start').text(rs_job.job_start).attr('disabled',true);
-        $('#showjob_end').text(rs_job.job_end).attr('disabled',true);
-        // $('#approveitem').append('<li id="process'+rs_job.process_id+'" class="list-group-item  process_list ">'+
-        // '&nbsp; ชื่อ: ' + rs_job.process_name +'<br>&nbsp; วันที่เริ่ม: '+ rs_job.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ rs_job.process_end +'<br>'+
-        // '<div class="text-right">'+
-        // '<button class="btn btn-warning editsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">'+ '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>'+
-        // '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+rs_job.process_id+')" title="จบขั้นตอนการทำงาน"><i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
-        // '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+rs_job.process_id+')" title="ลบ"><i class="fa fa-window-close" aria-hidden="true"></i></button>'+
-        // '</div>'+
-        // '</li>'
-        // );
+        $('#showjob_start').text(rs_job.job_start);
+        $('#showjob_end').text(rs_job.job_end);
+  
     });
     $('#showprocess').html('');
        
     rs_data.process.forEach(rs_process => {
      
-        $('#showprocess').append('<li id="process'+rs_process.process_id+'" '+
-         'class="list-group-item  process_list " data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">'+
-        '&nbsp; ชื่อ: ' + rs_process.process_name +'<br>&nbsp; วันที่เริ่ม: '+ rs_process.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ rs_process.process_end +'<br>'+
-        '<div class="text-right">'+
-        '<button class="btn btn-warning editsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">'+ '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>'+
-        '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+rs_process.process_id+')" title="จบขั้นตอนการทำงาน"><i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
-        '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+rs_process.process_id+')" title="ลบ"><i class="fa fa-window-close" aria-hidden="true"></i></button>'+
-        '</div>'+
-        '</li>'
+        $('#showprocess').append('<div id="process'+rs_process.process_id+'" '+
+         'class="card" data-bs-toggle="collapse" data-bs-target="#collapseExample'+rs_process.process_id+'" '+ 'aria-expanded="false" aria-controls="collapseExample">'+
+        '&nbsp; ขั้นตอนการทำงาน : ' + rs_process.process_name +'<br>&nbsp; วันที่เริ่ม : '+ rs_process.process_start +'&nbsp; วันที่สิ้นสุด : '+ rs_process.process_end +'<br>'+
+        '</div>'
         );
         rs_process.subprocess.forEach(rs_subprocess => {
           console.log(rs_subprocess)
-          $('#process'+rs_process.process_id+'').append('<li id="subprocess'+rs_subprocess.subprocess_id+'" '+
-           'class="list-group-item  process_list " data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">'+
-          '&nbsp; ชื่อ: ' + rs_subprocess.process_name +'<br>&nbsp; วันที่เริ่ม: '+ rs_subprocess.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ rs_subprocess.process_end +'<br>'+
-          '<div class="text-right">'+
-          '<button class="btn btn-warning editsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">'+ '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>'+
-          '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+rs_subprocess.process_id+')" title="จบขั้นตอนการทำงาน"><i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
-          '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+rs_subprocess.process_id+')" title="ลบ"><i class="fa fa-window-close" aria-hidden="true"></i></button>'+
-          '</div>'+
-          '</li>'
+          $('#process'+rs_process.process_id+'').append('<div class="col-1"></div> <div class="col-auto"><div class="list-group list-group-light">'+
+        
+          '<a href="#" class="list-group-item list-group-item-action px-3 border-0 rounded-3 mb-2 list-group-item-danger">'+
+            rs_subprocess.subprocess_name+ ' ตั้งแต่วันที่ : '+ rs_subprocess.subprocess_start +' ถึง ' + rs_subprocess.subprocess_end + '</a>'+
+        '</div></div>'
           );
       });
     });
@@ -57,3 +42,24 @@ function detailprocessapprove(jobid){
       
      
 }
+$(document).on( "click",".approvejob", function() {
+  let job_id = $('#job_id').val();
+  console.log(job_id);
+  let text = "ยืนยันหรือไม่";
+  if (confirm(text) == true) {
+    $.ajax(
+      {
+          url: "/confirmapprove",
+          type: "post",
+          // dataType: 'json',
+          data: { job_id : job_id},
+          success: function (rs_data) {
+
+          }
+        });  
+  } else {
+   $('#exampleModalCenter').modal();
+   $('#exampleModalCenter1').modal('show')
+  }
+
+} );
