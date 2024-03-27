@@ -214,7 +214,7 @@ new Chart(ctx<?php echo $group['division_id'] ;?>, config<?php echo $group['divi
                   </div>
                 </div>
               
-            
+             <?php echo $this->include('templates/footer');?>
               </div> -->
                       <!-- content-wrapper ends -->
         <!-- partial:./partials/_footer.html -->
@@ -228,7 +228,6 @@ new Chart(ctx<?php echo $group['division_id'] ;?>, config<?php echo $group['divi
           
           <!-- row end -->
         </div>
-
       </div>
   
 <script> //ตั้งค่าชาร์ตแสดงงาน

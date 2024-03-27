@@ -40,6 +40,7 @@ $routes->post('updatesubprocess','Managecontroller::updatesubprocess');
 // ส่วน approve
 $routes->get('approvefirstpage','Approvecontroller::approvefirstpage');
 $routes->get('listjobapprove/(:num)','Approvecontroller::listjobapprove/$1');
+$routes->post('detailapprove','Approvecontroller::detailapprove');
 // ต้อง login ถึงจะทำงานได้
 // $routes->group('', ['filter' => 'auth'], function($routes){
 // });

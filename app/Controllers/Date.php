@@ -22,6 +22,7 @@ class Date extends BaseController
 		return "$strshdate";
   	
 	}
+	
 }
 
 ?>

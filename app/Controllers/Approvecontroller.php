@@ -49,33 +49,58 @@ class Approvecontroller extends BaseController
         ];
         return view('spica/page/manager/listjobapprove',$returndata);
     }
-    public function deleteprocess($process_id)
-    {
-        // echo $process_id;
-        // exit;
-        $deleteprocess = new processModel();
-        $dataprocess = array('delete_flag'=>'0',
-                              'deleted_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
-                            );
-       
-        $deleteprocess ->set($dataprocess) ->where('process_id',$process_id) -> update();
-        $deletesubprocess = new subprocessModel();
-        $deletesubprocess ->set($dataprocess) ->where('process_id',$process_id) -> update();
-        
-       
+   public function detailapprove(){
+    $job_id = $this->request->getVar('job_id');
+    $job_sql = new jobModel();
+    $job_sql ->select('job_id,job_name,job_start,job_end,job_finish,status')
+    ->where('job_tb.delete_flag','1')
+    ->where('job_tb.job_id',$job_id)
+    ->groupBy('job_id,job_name,job_start,job_finish,status');
+    $job_rs = $job_sql->findAll();
+    $dateth = new Date();
+    foreach($job_rs as $key => $date_th){
+        $job_rs[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
+        $job_rs[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
     }
-    public function deletesubprocess()
+    $processsql = new processModel();
+    $processsql ->select('process_tb.process_id,process_tb.process_name,process_tb.process_start,process_tb.process_end,process_tb.process_finish,process_tb.detail,process_tb.status')
+    ->where('process_tb.delete_flag', '1') 
+    ->where('process_tb.job_id',$job_id);
+    $process_rs = $processsql->findAll();
+    $subprocesssql = new subprocessModel();
+        foreach($process_rs as $x => $value){
+
+            $subprocesssql ->select('subprocess_tb.subprocess_id,subprocess_tb.subprocess_name,subprocess_tb.subprocess_start,subprocess_tb.subprocess_end,subprocess_tb.subprocess_finish,subprocess_tb.subprocess_status')
+            ->where('subprocess_tb.delete_flag', '1') 
+            ->where('subprocess_tb.process_id',$value['process_id'])
+            // ->groupBy('job_tb.job_id,job_tb.job_name,status')
+            ->orderBy('subprocess_start','asc');
+            $subprocess_rs = $subprocesssql->findAll();
+            $process_rs[$x]["subprocess"] = $subprocess_rs;
+            }
+    $return = [
+        'job'=> $job_rs,
+        'process' => $process_rs,
+        // 'subprocess' => $subprocess_rs,
+        'flag'=>'afterselect'
+    ];
+    return $this->response->setJSON($return);
+    header('Content-Type: application/json');
+    
+    echo json_encode( $return );
+   }
+    public function confirmapprove()
     {
         // echo $process_id;
         // exit;
         // $subprocessid = $_POST['subprocess_id'];
         $subprocessid = $this->request->getVar('subprocessid');
         // print_r ($subprocess_id);
-        $deletesubprocess = new subprocessModel();
-        $datasubprocess = array('delete_flag'=>'0',
-                              'deleted_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
-                            );
-        $deletesubprocess ->set($datasubprocess) ->where('subprocess_id',$subprocessid) -> update();
+        // $deletesubprocess = new subprocessModel();
+        // $datasubprocess = array('delete_flag'=>'0',
+        //                       'deleted_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
+        //                     );
+        // $deletesubprocess ->set($datasubprocess) ->where('subprocess_id',$subprocessid) -> update();
         
         
        
