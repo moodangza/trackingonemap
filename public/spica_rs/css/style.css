@@ -44,7 +44,7 @@
 /* === Import template variables === */
 /*-------------------------------------------------------------------*/
 /* === SCSS Compass Functions === */
-@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900");
 @-moz-keyframes flash {
   0% {
     opacity: 1;
@@ -14148,7 +14148,7 @@ a.close.disabled {
   background-color: #ffffff;
   border: 1px solid #cccccc;
   width: 500px;
-  height: auto;
+  height: 400px;
   top: 70%;
   left: 50%;
   transform: translate(50%, 50%);
@@ -20516,8 +20516,7 @@ dl li {
   -webkit-transition: width 0.25s ease, background 0.25s ease;
   -moz-transition: width 0.25s ease, background 0.25s ease;
   -ms-transition: width 0.25s ease, background 0.25s ease;
-  width: 340px;
-  /* position: fixed; */
+  width: 240px;
 }
 
 .sidebar .nav {
