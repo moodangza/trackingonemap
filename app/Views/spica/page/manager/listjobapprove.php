@@ -37,7 +37,7 @@
          background-color: #ffffff;
          border: 1px solid #cccccc;
          width: 90%;
-        
+         height: 500px;
          top: 50%;
          left: 50%;
          transform: scale(1) translate(-45%, -45%);
