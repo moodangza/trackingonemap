@@ -32,7 +32,7 @@ class Home extends BaseController
         ->select("(select count(*) from job_tb where job_tb.division_id=division_tb.division_id and status = '2' ) As p_job")
         ->select("(select count(*) from job_tb where job_tb.division_id=division_tb.division_id and status = '3' ) As w_job")
         ->select("(select count(*) from job_tb where job_tb.division_id=division_tb.division_id and status = '4' ) As s_job")
-        ->where("division_tb.division_status!=",'1')
+        ->where("division_tb.division_status!=",'1') //แสดงหน่วยงานต้องส่งมอบงาน
         ->join("job_tb","division_tb.division_id = job_tb.division_id","left")
         ->groupBy('division_tb.division_id,division_tb.division_name,division_tb.division_status')
         ->orderBy('division_id','asc');
@@ -83,8 +83,9 @@ class Home extends BaseController
     public function showjob($division=null)
     {
         $divisionmodel1 = new divisionModel();
-        $divisionmodel1  ->select('division_tb.division_id,division_tb.division_name')
-        ->groupBy('division_tb.division_id,division_tb.division_name')
+        $divisionmodel1  ->select('division_tb.division_id,division_tb.division_name,division_status')
+        ->where("division_tb.division_status!=",'1') //แสดงหน่วยงานต้องส่งมอบงาน
+        ->groupBy('division_tb.division_id,division_tb.division_name,division_status')
         ->orderBy('division_tb.division_id','asc');
         $division_rs1 = $divisionmodel1->findAll();
         

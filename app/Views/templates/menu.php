@@ -24,7 +24,7 @@
         <li class="nav-item">
           <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
             <i class="mdi mdi-palette menu-icon"></i>
-            <span class="menu-title">UI Elements</span>
+            <span class="menu-title">ติดตามงาน UI Elements</span>
             <i class="menu-arrow"></i>
           </a>
           <div class="collapse" id="ui-basic">
