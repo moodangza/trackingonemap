@@ -14144,14 +14144,14 @@ a.close.disabled {
 }
 
 .modal {
-  position: block;
+  position: fixed;
   background-color: #ffffff;
   border: 1px solid #cccccc;
-  width: 500px;
-  height: auto;
-  top: 70%;
+  width: 90%;
+  height: 500px;
+  top: 50%;
   left: 50%;
-  transform: translate(50%, 50%);
+  transform: scale(1) translate(-45%, -45%);
   /* additional styles for the modal */
 }
 
