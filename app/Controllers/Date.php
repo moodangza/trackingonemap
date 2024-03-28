@@ -14,6 +14,15 @@ class Date extends BaseController
 		$strMonthThai=$strMonthCut[$strMonth];
 		return "$strDay $strMonthThai $strYear";
 	}
+	public function Dateinpicker($strDate)
+	{	
+		$strDate = explode("-",$strDate);
+		
+		$strshdate = $strDate[2].'/'.$strDate[1].'/'.$strDate[0];
+		return "$strshdate";
+  	
+	}
+	
 }
 
 ?>

@@ -14,18 +14,27 @@
      <?php echo $this->include('templates/navbar');?>
       <!-- partial -->
       <style>
-          .modal {
-         position: absolute;
-         background-color: #ffffff;
-         border: 1px solid #cccccc;
-         width: 500px;
-         height: 400px;
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-         /* additional styles for the modal */
-      }
-  
+      .draggable-container {
+  background-color: #bddad5;
+  padding: 1rem;
+  margin: 1rem 0;
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 10px 15px 20px #1e192844;
+}
+.shallow-draggable {
+  background-color: #f1edf3;
+  color: black;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-radius: 5px;
+  transition: opacity 200ms ease;
+}
+
+.dragging {
+  opacity: 0.5;
+  transition: opacity 1s ease;
+}
       </style>
       <div class="modal fade" id="modaladd" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
   
@@ -44,44 +53,20 @@
                 <?php }?>
             </select>
             </div>
-            <div class="col">
-            <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
-
-<!-- Modal -->
-<!-- <div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog"> -->
-
-    <!-- Modal content-->
-    <!-- <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-       
-      </div>
-      <div class="modal-body">
-      <h4  class="modal-title">เพิ่มขั้นตอนการทำงาน</h4>
-      <div class="row">
-                  <div class="col">
-                    aaaa
-                  </div>  
-      </div>
-      <div class="row">
-                  <div class="col">
-                                aaaa
-                  </div>
-      </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+            <!-- <div class="draggable-container">
+      <h1 class="title">Pick from here</h1>
+      <p class="shallow-draggable" draggable="true">1</p>
+      <p class="shallow-draggable" draggable="true">2</p>
+    </div>
+    <div class="draggable-container">
+      <h1 class="title">Put it here !!!</h1>
+      <p class="shallow-draggable" draggable="true">3</p>
+      <p class="shallow-draggable" draggable="true">4</p>
     </div> -->
-
-  <!-- </div>
-</div> -->
-              <a id="urladdprocess" href="<?php echo base_url('formaddprocess');?>"><button  class="btn btn-success btn-sm addprocess">
+            <div class="col">
+              <a id="urladdprocess" href="<?php echo base_url('formprocess');?>"><button  class="btn btn-success btn-sm addprocess">
                 เพิ่มขั้นตอนการทำงาน
               </button>
-              
                 </a>
               <div id="addjob_id" >
                   
@@ -91,35 +76,33 @@
             </div>
         <div class="container">
           <div class="row">
-            <div class="col-lg-6 grid-margin stretch-card">
+            <div class="col-lg-6 grid-margin stretch-card ">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">ขั้นตอนการทำงาน</h4>
-                  <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                                The current link item
-                            </a>
+                  <div class="draggable-container">
+                  <ol class="list-group list-group-numbered">    
                          <div id='processitem'>
                               
                          </div>
                                 <!-- <a href="#" id='processitem' class="list-group-item list-group-item-action"></a> -->
-
+                        </ol>
                     </div>
+              
                 </div>
               </div>
             </div>
-            <div class="col-lg-6 grid-margin stretch-card">
+            <div class="col-lg-6 grid-margin stretch-card ">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">จบขั้นตอนการทำงาน</h4>
-                   <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-                                The current link item
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-                            <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-                            <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-                            <a class="list-group-item list-group-item-action disabled" aria-disabled="true">A disabled link item</a>
+                  <div class="draggable-container">
+                  <ol class="list-group list-group-numbered">    
+                         <div id='finishprocessitem'>
+                              
+                         </div>
+                                <!-- <a href="#" id='processitem' class="list-group-item list-group-item-action"></a> -->
+                        </ol>
                     </div>
                 </div>
               </div>

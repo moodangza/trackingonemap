@@ -3,13 +3,14 @@
 
 <?php echo $this->extend('templates/header'); ?>
 <?php echo $this->section('content'); ?>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <body>
   <div class="container-scroller d-flex">
     <!-- partial:./partials/_sidebar.html -->
    <?php echo $this->include('templates/menu');?>
     <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
+    <div class="page-body-wrapper">
       <!-- partial:./partials/_navbar.html -->
      <?php echo $this->include('templates/navbar');?>
      <script>
@@ -67,56 +68,145 @@ $(function(){
               <div class="row w-100 flex-grow">
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
-                    <div class="card-body">
-                      <button class="btn btn-success" id="intjob">เพิ่มหัวข้อtest</button>
-                      <br>   <br>   <br>
-                      <div class="row mb-3">
-                        <div class="col-md-12">
-                          <div class="d-flex justify-content-between traffic-status">
-                            <div class="item">
-                              <h3 class="mb-">ต้องดำเนินการ</h3>
-                              <?php for($x=0;$x<3;$x++){?>
-                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="row" style="margin-bottom: 2px">
-                              <div class="card" draggable="true" ondragstart="drag(event)">
-                                <h4 class="bg-primary font-weight-bold mb-10">สำนักงานปฏิรูปเพื่อเกษตรกรรม</h4>
-                                <h5>วันที่เริ่ม <?php $date = "04-01-2024";
-                                            $date1 = str_replace('-', '/', $date); echo date('d-m-Y',strtotime($date1 . "+$x days"));?></h5>
-                                <h5>วันที่สิ้นสุด</h5>
+                    <div class="card-body p-5">
+                    <div class="card">
+  <h5 class="card-header bg-info text-center">ความก้าวหน้าการดำเนินการทั้งหมด</h5>
+  <div class="card-body">
+  <div class="row">
+                                    <div class="col-6 pe-0">
+                                    จำนวนหน่วยงานทั้งหมด :  <?php echo count($job) .' หน่วยงาน' ?>    
+                                    <br> หน่วยงานที่ทำงานเสร็จแล้ว :  <?php echo $total_ts .' หน่วยงาน'  ?>        
+                                    <br> จำนวนงานทั้งหมด :  <?php echo $total_c ?>                                      
+                                    <br> จำนวนงานรวมที่ต้องดำเนินการ : <?php echo $total_a  ?>
+                                    <br> จำนวนงานรวมที่กำลังดำเนินการ : <?php echo $total_p  ?>
+                                    <br> จำนวนงานรวมที่รออนุมัติ : <?php echo $total_w ?>
+                                    <br> จำนวนงานรวมที่ดำเนินการเสร็จแล้ว : <?php echo $total_s ?>
+                                    <br> จำนวนงานรวมที่คงเหลือ : <?php echo $total_c-$total_s ?> 
+                                    <br> ร้อยละความก้าวหน้าจากหน่วยงานทั้งหมด (%) : <?php if ($total_s!=0 && $total_a!=0 ){
+                                                                        echo number_format( ($total_s/$total_c)*100, 2 ).'%'   ;
+                                                                        } else {
+                                                                          echo "ยังไม่มีงานที่สำเร็จ";
+                                                                        } ?>                                                             
+                                  </div>
+                                  <div class="col-3 ps-0 "> 
+                                  <!-- ชาร์ตแสดงงาน -->
+                                  <div class="donut-container">
+                                  <div class="chart-container"  style="position: relative; height:25vh; width:80vw">
+                                  <canvas id="donut-chart"></canvas>
+                                  </div>
+                                  </div>
+                                  </div>
+                                  <!-- ชาร์ตแสดงงาน -->
+                                  <div class="col-3 ps-0 ">
+                                  <div class="donut-container">
+                                  <div class="chart-container"  style="position: relative; height:25vh; width:80vw">
+                                  <canvas id="donut-charta"></canvas>
+                                  </div>
+                                  </div>
+                                  </div>
+                                  </div>
+  </div>
+</div>
+<br>
+                                <!-- <div class="col-12"> -->
+                                  <!-- <div class="card" style="margin: 10px;" bg-primary> -->                              
+                                  
+                                  <!-- </div> -->
+                                <!-- </div> -->
+                      <div class="justify-content-center">
+                        <div class="card">
+                          <h5 class="card-header bg-warning text-black text-center" >ความก้าวหน้าการดำเนินงานแต่ละหน่วยงาน</h5>
+                            <div class="card-body">
+                              <div class="row">
+                                  <?php foreach($job as $group){?>
+
+                                  <div class="col-6">
+                                  <div class="card" style="margin: 10px;" bg-primary>
+                                  <h6 class="card-header bg-success text-center text-white"><?php echo $group["division_name"];?></h6>
+                                  <div class= "card-body">
+                                  <div class="row" nowrap>
+                                
+                                  <div class="col-7">
+                                                                        
+                                            จำนวนงานทั้งหมด :  <?php echo $group["c_job"];?>                                      
+                                            <br> จำนวนงานที่ต้องดำเนินการ : <?php  echo $group["a_job"]; ?>
+                                            <br> จำนวนงานที่กำลังดำเนินการ : <?php  echo $group["p_job"]; ?>
+                                            <br> จำนวนงานที่รออนุมัติ : <?php echo $group["w_job"]; ?>
+                                            <br> จำนวนงานที่ดำเนินการเสร็จแล้ว : <?php echo $group["s_job"]; ?>
+                                            <br> จำนวนงานที่คงเหลือ : <?php echo $group["c_job"]-$group["s_job"]; ?> 
+                                            <br> ร้อยละความก้าวหน้า (%) : <?php if ($group["s_job"]!=0 && $group["a_job"]!=0 ){
+                                            echo number_format( ($group["s_job"]/$group["c_job"])*100, 2 ).'%'   ;
+                                            } else {
+                                            echo "ยังไม่มีงานที่สำเร็จ";
+                                            } 
+                                            ?>                                                             
+                                            <br>
+                                            <a href="<?php echo base_url('showjob/'.$group['division_id']);?>" class="btn btn-primary mt-4">ดูรายละเอียด</a>
+                                                                      
+                                  </div>
+                                  <div class="col-5">
+                                  <div class="donut-container" style="text-align: center;">
+                                  <div class="container"  style="width: 100%; display: inline-block;">
+                                  <canvas id="donut-chart<?php echo $group['division_id'] ;?>"></canvas>
+                                  </div>
+                                  </div>
+                                  </div>
+                                  </div>
+                                  </div>
+                                  </div>
+                                  </div>
+    <script> //ตั้งค่าชาร์ตแสดงงาน
+    // Data for the donut chart (Group 2 first, then Group 1)
+    const data<?php echo $group['division_id'] ;?> = {
+    labels: ['จำนวนงานที่เสร็จแล้ว', 'จำนวนงานที่คงเหลือ'], // Swap the order of labels
+    datasets: [{
+        data: [<?php echo $group["s_job"]; ?>,<?php echo $group["c_job"]-$group["s_job"]; ?>], // Swap the order of data values
+        backgroundColor: ['#A1A5B7', '#F1BC00'], // Colors for each group
+    }]
+};
+
+// Configuration for the chart
+const config<?php echo $group['division_id'] ;?> = {
+    type: 'doughnut', // Use doughnut chart type for a donut chart
+    data: data<?php echo $group['division_id'] ;?>,
+    options: {
+        rotation: -90, 
+        circumference: 180,
+        cutout: '70%', // Cutout percentage for a 180-degree chart
+        plugins: {
+            legend: {
+                display: true, // Hide the legend if not needed
+                position: 'bottom' 
+            },
+        },
+    },
+};
+
+// Get the canvas element and create the chart
+const canvas<?php echo $group['division_id'] ;?> = document.getElementById('donut-chart<?php echo $group['division_id'] ;?>');
+const ctx<?php echo $group['division_id'] ;?> = canvas<?php echo $group['division_id'] ;?>.getContext('2d');
+new Chart(ctx<?php echo $group['division_id'] ;?>, config<?php echo $group['division_id'] ;?>);
+</script>
+                                  <?php }?>
                               </div>
-                              </div>
-                            <?php }?>
-                              <div class="color-border"></div>
-                            </div>
-                            <div class="item">
-                              <h3 class="mb-">กำลังดำเนินการ</h3>
-                              <?php for($y=0;$y<5;$y++){?>
-                              <div ondrop="drop(event)" ondragover="allowDrop(event)" class="row" style="margin-bottom: 2px">
-                              <div class="card" draggable="true" ondragstart="drag(event)">
-                                <h4 class="bg-info font-weight-bold mb-10">กรมอุทยานแห่งชาติ สัตว์ป่า และพันธุ์พืช</h4>
-                                <h5>วันที่เริ่ม <?php $date2 = "06-01-2024";
-                                            $date2 = str_replace('-', '/', $date2); echo date('d-m-Y',strtotime($date2 . "+$y days"));?></h5>
-                                <h5>วันที่สิ้นสุด</h5>
-                              </div>
-                              </div>
-                            <?php }?>
-                              <div class="color-border"></div>
-                            </div>
-                            <div class="item">
-                              <h3 class="mb-">เสร็จสิ้น</h3>
-                              <?php for($z=0;$z<5;$z++){?>
-                              <div class="row" style="margin-bottom: 2px">
-                              <div class="card">
-                                <h4 class="bg-success font-weight-bold mb-10">กรมป่าไม้</h4>
-                                <h5>วันที่เริ่ม <?php $date3 = "06-01-2024";
-                                            $date3 = str_replace('-', '/', $date3); echo date('d-m-Y',strtotime($date3 . "+$z days"));?></h5>
-                                <h5>วันที่สิ้นสุด</h5>
-                              </div>
-                              </div>
-                            <?php }?>
-                              <div class="color-border"></div>
                             </div>
                           </div>
                         </div>
+                      </div>
+
+  
+  <!-- <div class="col-2"></div> -->
+   
+</div>
+
+                     
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+                        <!-- </div>
                        
                       </div>
                     
@@ -124,267 +214,85 @@ $(function(){
                   </div>
                 </div>
               
-            
-              </div>
-            </div>
-           
-          </div>
-          <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Financial management review</h4>
-                  <div class="table-responsive">
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>
-                            User
-                          </th>
-                          <th>
-                            First name
-                          </th>
-                          <th>
-                            Progress
-                          </th>
-                          <th>
-                            Amount
-                          </th>
-                          <th>
-                            Deadline
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td class="py-1">
-                            <img src="spica_rs/images/faces/face1.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            Herman Beck
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 77.99
-                          </td>
-                          <td>
-                            May 15, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="spica_rs/images/faces/face2.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            Messsy Adam
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $245.30
-                          </td>
-                          <td>
-                            July 1, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="spica_rs/images/faces/face3.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            John Richards
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $138.00
-                          </td>
-                          <td>
-                            Apr 12, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="spica_rs/images/faces/face4.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            Peter Meggik
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 77.99
-                          </td>
-                          <td>
-                            May 15, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="spica_rs/images/faces/face5.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            Edward
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 160.25
-                          </td>
-                          <td>
-                            May 03, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="spica_rs/images/faces/face6.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            John Doe
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 123.21
-                          </td>
-                          <td>
-                            April 05, 2015
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="spica_rs/images/faces/face7.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            Henry Tom
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 150.00
-                          </td>
-                          <td>
-                            June 16, 2015
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- row end -->
-          <div class="row">
-            <div class="col-md-4 grid-margin stretch-card">
-              <div class="card bg-facebook d-flex align-items-center">
-                <div class="card-body py-5">
-                  <div
-                    class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
-                    <i class="mdi mdi-facebook text-white icon-lg"></i>
-                    <div class="ml-3 ml-md-0 ml-xl-3">
-                      <h5 class="text-white font-weight-bold">2.62 Subscribers</h5>
-                      <p class="mt-2 text-white card-text">You main list growing</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 grid-margin stretch-card">
-              <div class="card bg-google d-flex align-items-center">
-                <div class="card-body py-5">
-                  <div
-                    class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
-                    <i class="mdi mdi-google-plus text-white icon-lg"></i>
-                    <div class="ml-3 ml-md-0 ml-xl-3">
-                      <h5 class="text-white font-weight-bold">3.4k Followers</h5>
-                      <p class="mt-2 text-white card-text">You main list growing</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 grid-margin stretch-card">
-              <div class="card bg-twitter d-flex align-items-center">
-                <div class="card-body py-5">
-                  <div
-                    class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
-                    <i class="mdi mdi-twitter text-white icon-lg"></i>
-                    <div class="ml-3 ml-md-0 ml-xl-3">
-                      <h5 class="text-white font-weight-bold">3k followers</h5>
-                      <p class="mt-2 text-white card-text">You main list growing</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- row end -->
-        </div>
-        <!-- content-wrapper ends -->
+             <?php echo $this->include('templates/footer');?>
+              </div> -->
+                      <!-- content-wrapper ends -->
         <!-- partial:./partials/_footer.html -->
           <?php echo $this->include('templates/footer');?>
         <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
-  <div class="modal_fade modal-dialog modal-md" id='jobadd' tabindex='-1' role='dialog' >
-      <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                 <div class="modal-body">
-                 <h4 class="modal-title" id="modalpreviewlabel">เพิ่มข้อมูล</h4>                                     
-                 <form class="row g-3">
-  <div class="col-md-12">
-    <label for="inputjob" class="form-label">ชื่อหัวข้อ</label>
-    <input type="email" class="form-control" id="job_name" name="job_name">
-  </div>
-  <div class="col-md-6">
-    <label for="jobstart" class="form-label">วันที่เริ่ม</label>
-    <input type="text" class="form-control" id="date_start" name="job_start">
-  </div>
-  <div class="col-6">
-  <label for="jobend" class="form-label">วันที่สิ้นสุด</label>
-    <input type="text" class="form-control" id="date_end" name="job_end">
-  </div>
-<br>
-<div class="col-6">
- <br><br>
-  </div>
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary">บันทึก</button>
-  </div>
-</form>
-                 </div>
             </div>
+           
+          </div>
+  
+          <!-- row end -->
+          
+          <!-- row end -->
         </div>
       </div>
-  </div>
+  
+<script> //ตั้งค่าชาร์ตแสดงงาน
+// Data for the donut chart (Group 2 first, then Group 1)
+const data = {
+    labels: ['จำนวนหน่วยงานที่งานเสร็จแล้ว', 'จำนวนหน่วยงานที่งานยังไม่เสร็จ'], // Swap the order of labels
+    datasets: [{
+        data: [<?php echo $total_ts ?>,<?php echo count($job) ?>], // Swap the order of data values
+        backgroundColor: ['#F1BC00','#A1A5B7'], // Colors for each group
+    }]
+};
+
+// Configuration for the chart
+const config = {
+    type: 'doughnut', // Use doughnut chart type for a donut chart
+    data: data,
+    options: {
+        rotation: -90, 
+        circumference: 180,
+        cutout: '70%', // Cutout percentage for a 180-degree chart
+        plugins: {
+            legend: {
+                display: true, // Hide the legend if not needed
+            },
+        },
+    },
+};
+
+// Get the canvas element and create the chart
+const canvas = document.getElementById('donut-chart');
+const ctx = canvas.getContext('2d');
+new Chart(ctx, config);
+</script>
+
+<script> //ตั้งค่าชาร์ตแสดงงาน
+// Data for the donut chart (Group 2 first, then Group 1)
+const dataa = {
+    labels: ['จำนวนงานรวมที่เสร็จแล้ว', 'จำนวนงานรวมที่คงเหลือ'], // Swap the order of labels
+    datasets: [{
+        data: [<?php echo $total_s ?>,<?php echo $total_c-$total_s ?>], // Swap the order of data values
+        backgroundColor: ['#2ECC71', '#F1BC00'], // Colors for each group
+    }]
+};
+
+// Configuration for the chart
+const configa = {
+    type: 'doughnut', // Use doughnut chart type for a donut chart
+    data: dataa,
+    options: {
+        rotation: -90, 
+        circumference: 180,
+        cutout: '70%', // Cutout percentage for a 180-degree chart
+        plugins: {
+            legend: {
+                display: true, // Hide the legend if not needed
+            },
+        },
+    },
+};
+
+// Get the canvas element and create the chart
+const canvasa = document.getElementById('donut-charta');
+const ctxa = canvasa.getContext('2d');
+new Chart(ctxa, configa);
+</script>
 
   <?php $this->endSection();?>
 </body>

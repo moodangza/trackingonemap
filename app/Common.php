@@ -13,3 +13,16 @@
  *
  * @see: https://codeigniter.com/user_guide/extending/common.html
  */
+use CodeIgniter\Exceptions\PageNotFoundException;
+
+// Show 404 error
+
+if (!function_exists('show_404')) {
+
+    function show_404(string $error_text): string
+    {
+
+        throw PageNotFoundException::forPageNotFound($error_text);
+
+    }
+} 
