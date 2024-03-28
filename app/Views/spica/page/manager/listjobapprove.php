@@ -141,7 +141,7 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">test</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -151,24 +151,17 @@
                 <div class="col-12">
                         <div class="card">
                           <div class="card-header text-center border">
-                            <h5 id="job_name" class="card-title align-middle">หัวข้อการทำงาน</h5>
-                          <input type="hidden" id="job_id" value="">
-                          <div class="">
-                              
-                              เริ่มต้น : <em id="showjob_start">วันที่เริ่มต้น</em>
-                              สิ้นสุด : <em id="showjob_end">วันที่สิ้นสุด</em>
-                               
-                          </div>
-                            
+                            <h5 id="job_name" class="card-title align-middle">โปรดกรอกเหตุผลที่ไม่อนุมัติขั้นตอนการทำงาน</h5>
+                            <div class="form-floating mb-3">
+                              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                              <label for="floatingInput">Email address</label>
+                            </div>
                           </div>
                             <div class="card-body">
-                             <div id="showprocess">
-                                  
-                             </div>
-                           
-                                
-                               
-
+                              <div class="form-floating">
+                                <textarea class="form-control" placeholder="บันทึกเหตุผล" id="floatingTextarea"></textarea>
+                                <label for="floatingTextarea">หมายเหตุ</label>
+                              </div>
                             </div>
                         </div>
                 </div>

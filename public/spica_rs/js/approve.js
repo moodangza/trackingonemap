@@ -22,7 +22,7 @@ function detailprocessapprove(jobid){
     rs_data.process.forEach(rs_process => {
      
         $('#showprocess').append('<div id="process'+rs_process.process_id+'" '+
-         'class="card" data-bs-toggle="collapse" data-bs-target="#collapsesubprocess'+rs_process.process_id+'" '+ 'aria-expanded="false" aria-controls="collapseExample">'+
+         'class="card table" data-bs-toggle="collapse" data-bs-target="#collapsesubprocess'+rs_process.process_id+'" '+ 'aria-expanded="false" aria-controls="collapseExample">'+
         '&nbsp; ขั้นตอนการทำงาน : ' + rs_process.process_name +'<br>&nbsp; วันที่เริ่ม : '+ rs_process.process_start +'&nbsp; วันที่สิ้นสุด : '+ rs_process.process_end +'<br>'+
         '</div>'
         );
@@ -60,8 +60,11 @@ $(document).on( "click",".approvejob", function() {
           }
         });  
   } else {
-   $('#exampleModalCenter').modal();
-   $('#exampleModalCenter1').modal('show')
+    closemodal();
+  //  $('#exampleModalCenter1').modal('show');
   }
 
 } );
+function closemodal(){
+  $('#exampleModalCenter').modal('hide');
+}
