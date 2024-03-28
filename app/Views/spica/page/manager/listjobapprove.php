@@ -36,11 +36,11 @@
          position: fixed;
          background-color: #ffffff;
          border: 1px solid #cccccc;
-         width: 80%;
-         height: 500px;
+         width: 90%;
+        
          top: 50%;
          left: 50%;
-         transform: translate(-50%, -50%);
+         transform: scale(1) translate(-45%, -45%);
          /* additional styles for the modal */
       }
 </style>  
@@ -92,7 +92,7 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">รายละเอียด ก่อนอนุมัติ</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -103,7 +103,7 @@
                         <div class="card">
                           <div class="card-header text-center border">
                             <h5 id="job_name" class="card-title align-middle">หัวข้อการทำงาน</h5>
-                          
+                          <input type="hidden" id="job_id" value="">
                           <div class="">
                               
                               เริ่มต้น : <em id="showjob_start">วันที่เริ่มต้น</em>
@@ -125,13 +125,66 @@
                 </div>
             </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+      <div class="modal-footer ">
+        <div class="text-center">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary approvejob">อนุมัติการทำงาน</button>
+        </div>
+        
       </div>
     </div>
   </div>
 </div>
+
+<div class="modal fade modal-lg" id="exampleModalCenter1" tabindex="-1" role="dialog" data-bs-backdrop="static"
+       data-bs-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">test</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <div class="row">
+                <div class="col-12">
+                        <div class="card">
+                          <div class="card-header text-center border">
+                            <h5 id="job_name" class="card-title align-middle">หัวข้อการทำงาน</h5>
+                          <input type="hidden" id="job_id" value="">
+                          <div class="">
+                              
+                              เริ่มต้น : <em id="showjob_start">วันที่เริ่มต้น</em>
+                              สิ้นสุด : <em id="showjob_end">วันที่สิ้นสุด</em>
+                               
+                          </div>
+                            
+                          </div>
+                            <div class="card-body">
+                             <div id="showprocess">
+                                  
+                             </div>
+                           
+                                
+                               
+
+                            </div>
+                        </div>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer ">
+        <div class="text-center">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary approvejob">อนุมัติการทำงาน</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
         <div class="content-wrapper">
           <div class="row">
             <div class="col-12 col-xl-12 grid-margin stretch-card">
