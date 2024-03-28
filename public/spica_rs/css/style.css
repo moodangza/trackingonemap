@@ -44,7 +44,7 @@
 /* === Import template variables === */
 /*-------------------------------------------------------------------*/
 /* === SCSS Compass Functions === */
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900");
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
 @-moz-keyframes flash {
   0% {
     opacity: 1;
