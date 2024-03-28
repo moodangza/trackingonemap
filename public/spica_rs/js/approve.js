@@ -60,11 +60,8 @@ $(document).on( "click",".approvejob", function() {
           }
         });  
   } else {
-    closemodal();
+   
   //  $('#exampleModalCenter1').modal('show');
   }
 
 } );
-function closemodal(){
-  $('#exampleModalCenter').modal('hide');
-}

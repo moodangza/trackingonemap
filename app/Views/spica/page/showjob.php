@@ -49,14 +49,14 @@ function drop(ev) {
 
 <style>
           .modal {
-         position: absolute;
+         position: fixed;
          background-color: #ffffff;
          border: 1px solid #cccccc;
-         width: 500px;
-         height: 500px;
+         width: 90%;
+         height: auto;
          top: 50%;
          left: 50%;
-         transform: translate(-50%, -50%);
+         transform: scale(1) translate(-45%, -45%);
          /* additional styles for the modal */
       }
 #jobadd {
