@@ -32,17 +32,7 @@
 .fs-14 {
     font-size: 14px;
 }
-.modal {
-         position: fixed;
-         background-color: #ffffff;
-         border: 1px solid #cccccc;
-         width: 90%;
-         height: auto;
-         top: 50%;
-         left: 50%;
-         transform: scale(1) translate(-45%, -45%);
-         /* additional styles for the modal */
-      }
+
 </style>  
 <?php 
  function cardlistjobapprove($rs_job)

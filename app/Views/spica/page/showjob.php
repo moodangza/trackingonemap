@@ -52,7 +52,7 @@ function drop(ev) {
          position: fixed;
          background-color: #ffffff;
          border: 1px solid #cccccc;
-         width: 90%;
+         width: 60%;
          height: auto;
          top: 50%;
          left: 50%;
