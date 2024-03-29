@@ -101,13 +101,12 @@ class Approvecontroller extends BaseController
    
     public function confirmapprove($job_id)
     {
-        // echo $process_id;
-        // exit;
+      
         $approvejob = new jobModel();
         $datajob = array(
-                              'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-                                'status'=>'4'
-                            );
+                            'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+                            'status'=>'4'
+                        );
        
         $approvejob ->set($datajob) ->where('job_id',$job_id) -> update();
        
@@ -127,34 +126,9 @@ class Approvecontroller extends BaseController
     }
     public function rejectapprove($job_id)
     {
-        
+        echo $job_id;
        
     }
    
-    public function updatesubprocess(){
-        $subprocessid = $_POST['sub_id'];
-        $editsubprocess = new subprocessModel();
-        $dataprocess = array('subprocess_name'=>$_POST['subprocess_name'],
-                              'subprocess_start'=>$_POST['subprocess_start'],
-                              'subprocess_end'=>$_POST['subprocess_end'],                  
-                              'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
-    );
-    $editsubprocess ->set($dataprocess) ->where('subprocess_id',$subprocessid) ->update();
-    header('Content-Type: application/json');
-        
-    echo json_encode( $editsubprocess );
-    }
-    public function confirmsubprocess(){
-        $subprocessid = $_POST['subprocessid'];
-        $confirmsubprocess = new subprocessModel();
-        $dataprocess = array('subprocess_status'=>'2',
-                              'subprocess_finish'=>date('Y-m-d'),
-                              'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
-    );
-    $confirmsubprocess ->set($dataprocess) ->where('subprocess_id',$subprocessid) ->update();
-    header('Content-Type: application/json');
-        
-    echo json_encode( $confirmsubprocess );
-    }
   
 }

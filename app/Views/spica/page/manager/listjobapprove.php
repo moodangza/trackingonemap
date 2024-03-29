@@ -32,7 +32,16 @@
 .fs-14 {
     font-size: 14px;
 }
-
+.modal{
+        position: absolute;
+        background-color: #ffffff;
+        border: 1px solid #cccccc;
+        width: 85%;
+        height: auto;
+        top: 65%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+}
 </style>  
 <?php 
  function cardlistjobapprove($rs_job)
@@ -103,13 +112,19 @@
                             
                           </div>
                             <div class="card-body">
-                             <div id="showprocess">
-                                  
-                             </div>
-                           
-                                
-                               
-
+                             
+                                <div id="showprocess">
+                                      
+                                </div>
+                                <div class="mb-3 text-center">
+                                <input class="radioapprove" type="radio" name="radioapprove" id="radioapprove" value="0"> ไม่อนุมัติ
+                                  <input class="radioapprove" type="radio" name="radioapprove" id="radioapprove1" value="1"> อนุมัติ<br>
+                                </div>
+                                <div id="reason">
+                                    <label for="exampleInputtext" class="form-label" style="color:red;">*โปรดระบุเหตุผล</label>
+                                    <input type="text" class="form-control" id="reasoninput" value="">
+                                    
+                                  </div>
                             </div>
                         </div>
                 </div>

@@ -1,4 +1,19 @@
+$(document).ready(function() {
+  $("#reason").hide();
+$(".radioapprove").change(function(){
+  // alert('aaa');
+  var approvval = $('input[name="radioapprove"]:checked').val();
+  // console.log(approvval);
 
+  if(approvval != 1){
+    $("#reason").show();
+  }else{
+    $("#reason").hide().attr('disabled',true);
+    
+
+  }
+});
+});
 function detailprocessapprove(jobid){
         $.ajax(
       {
@@ -22,13 +37,14 @@ function detailprocessapprove(jobid){
     rs_data.process.forEach(rs_process => {
      
         $('#showprocess').append('<div id="process'+rs_process.process_id+'" '+
-         'class="card table" data-bs-toggle="collapse" data-bs-target="#collapsesubprocess'+rs_process.process_id+'" '+ 'aria-expanded="false" aria-controls="collapseExample">'+
-        '&nbsp; ขั้นตอนการทำงาน : ' + rs_process.process_name +'<br>&nbsp; วันที่เริ่ม : '+ rs_process.process_start +'&nbsp; วันที่สิ้นสุด : '+ rs_process.process_end +'<br>'+
+            'class="card table" data-bs-toggle="collapse " data-bs-target="#collapsesubprocess'+rs_process.process_id+'" '+ 'aria-expanded="true" aria-controls="collapseExample">'+
+            '&nbsp; ขั้นตอนการทำงาน : ' + rs_process.process_name +'<br>&nbsp; วันที่เริ่ม : '+ rs_process.process_start +'&nbsp; วันที่สิ้นสุด : '+ rs_process.process_end +'<br>'+
         '</div>'
         );
         rs_process.subprocess.forEach(rs_subprocess => {
           console.log(rs_subprocess)
-          $('#process'+rs_process.process_id+'').append('<div class="collapse" id="collapsesubprocess'+rs_process.process_id+'"><div class="col-1"></div>'+
+          $('#process'+rs_process.process_id+'').append('<div class="collapse" id="collapsesubprocess'+rs_process.process_id+'">'+
+          '<div class="col-1"></div>'+
           '<div class="col-auto">'+
           '<div class="list-group list-group-light" >'+
         
@@ -48,20 +64,41 @@ $(document).on( "click",".approvejob", function() {
   let job_id = $('#job_id').val();
   console.log(job_id);
   let text = "ยืนยันหรือไม่";
-  if (confirm(text) == true) {
-    $.ajax(
-      {
-          url: "/confirmapprove",
-          type: "post",
-          // dataType: 'json',
-          data: { job_id : job_id},
-          success: function (rs_data) {
-
-          }
-        });  
-  } else {
-   
-  //  $('#exampleModalCenter1').modal('show');
-  }
+  let ckradio = $('.radioapprove').val();
+  let ckreason = $('#reasoninput').val();
+  
+    if (confirm(text) == true) {
+      if(ckradio == '1'){
+        $.ajax(
+          {
+              url: "/confirmapprove",
+              type: "post",
+              dataType: 'text',
+              data: { job_id : job_id},
+              success: function (rs_data) {
+              }
+            });  
+    
+      }
+       if(ckradio != '1' && ckreason!=''){
+        $.ajax(
+          {
+              url: "/rejectapprove",
+              type: "post",
+              dataType: 'text',
+              data: { job_id : job_id},
+              success: function (rs_data) {
+  
+              }
+            });  
+      }if(ckradio != '1' && ckreason==''){
+        $("#reasoninput").prop('required',true);
+        alert('กรุณาบันทึกเหตุผลที่ไม่อนุมัติ');
+        return false;
+      }
+      
+    }
+ 
 
 } );
+
