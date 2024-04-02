@@ -71,6 +71,7 @@ function detailprocessapprove(jobid){
       
      
 }
+
 $(document).on( "click",".approvejob", function() {
   let job_id = $('#job_id').val();
   // console.log(job_id);
@@ -89,6 +90,7 @@ $(document).on( "click",".approvejob", function() {
               dataType: 'text',
               data: { job_id : job_id},
               success: function (rs_data) {
+                location.reload(true);
               }
             });  
     
@@ -107,10 +109,14 @@ $(document).on( "click",".approvejob", function() {
               dataType: 'text',
               data: { job_id : job_id, reject_detail : ckreason},
               success: function (rs_data) {
-  
+                location.reload(true);
               }
             });  
       }
+    }else{
+      alert('กรุณาเลือกผลการอนุมัติ');
+      $("#radioapprove1").focus();
+      return(false);
     }
       
     }else{

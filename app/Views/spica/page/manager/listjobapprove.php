@@ -116,10 +116,14 @@
                                 <div id="showprocess">
                                       
                                 </div>
-                                <div class="mb-3 text-center radiapprove">
-                                <input class="radioapprove" type="radio" name="radioapprove" id="radioapprove" value="0"> ไม่อนุมัติ
-                                  <input class="radioapprove" type="radio" name="radioapprove" id="radioapprove1" value="1"> อนุมัติ<br>
+                                <div class="mb-3 radiapprove">
+                                  <h6 style="background-color: lightgray;">&nbsp;ผลการอนุมัติ</h6>
+                                    <div class="text-center">
+                                      <input class="radioapprove" type="radio" name="radioapprove" id="radioapprove" value="0"> ไม่อนุมัติ
+                                                                      <input class="radioapprove" type="radio" name="radioapprove" id="radioapprove1" value="1"> อนุมัติ<br>
+                                    </div>
                                 </div>
+
                                 <div id="reason">
                                     <label for="exampleInputtext" class="form-label" style="color:red;">*โปรดระบุเหตุผล</label>
                                     <input type="text" class="form-control" id="reasoninput" value="">
