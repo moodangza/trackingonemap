@@ -99,9 +99,9 @@ class Approvecontroller extends BaseController
     echo json_encode( $return );
    }
    
-    public function confirmapprove($job_id)
+    public function confirmapprove()
     {
-      
+        $job_id = $this->request->getVar('job_id');
         $approvejob = new jobModel();
         $datajob = array(
                             'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
@@ -121,12 +121,25 @@ class Approvecontroller extends BaseController
                               'subprocess_finish'=>date('Y-m-d'),
                               'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
     );
-    $confirmsubprocess ->set($dataprocess) ->where('subprocess_id',$subprocessid) ->update();
+    $confirmsubprocess ->set($dataprocess) ->where('subprocess_id',$job_id) ->update();
+    $approve = new approveModel();
+    $data = array('job_id'=>$job_id,
+    'approve_date'=>date('Y-m-d'),
+    'approve_create'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+    'status'=>'1');
+    $approve -> insert($data);
        
     }
-    public function rejectapprove($job_id)
+    public function rejectapprove()
     {
-        echo $job_id;
+        $job_id = $this->request->getVar('job_id');
+        $approve = new approveModel();
+        $data = array('job_id'=>$job_id,
+                        'reject_date'=>date('Y-m-d'),
+                        'reject_detail'=>$reject_detail,
+                        'approve_create'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+                        'status'=>'0');
+    $approve -> insert($data);
        
     }
    

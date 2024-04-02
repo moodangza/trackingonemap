@@ -171,7 +171,7 @@ public function addjob()
     'job_start'=>$_POST['jobstart'],
     'job_end'=>$_POST['jobend'],
     'created_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-    'status'=>'1');
+    'status'=>'1',);
     $addjobmodel1 -> insert($data);
     // $return = [
 

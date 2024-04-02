@@ -41,8 +41,8 @@ $routes->post('updatesubprocess','Managecontroller::updatesubprocess');
 $routes->get('approvefirstpage','Approvecontroller::approvefirstpage');
 $routes->get('listjobapprove/(:num)','Approvecontroller::listjobapprove/$1');
 $routes->post('detailapprove','Approvecontroller::detailapprove');
-$routes->post('confirmapprove/(:num)','Approvecontroller::confirmapprove/$1');
-$routes->post('rejectapprove/(:num)','Approvecontroller::rejectapprove/$1');
+$routes->post('confirmapprove','Approvecontroller::confirmapprove');
+$routes->post('rejectapprove','Approvecontroller::rejectapprove');
 // ต้อง login ถึงจะทำงานได้
 // $routes->group('', ['filter' => 'auth'], function($routes){
 // });

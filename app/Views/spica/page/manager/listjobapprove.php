@@ -116,7 +116,7 @@
                                 <div id="showprocess">
                                       
                                 </div>
-                                <div class="mb-3 text-center">
+                                <div class="mb-3 text-center radiapprove">
                                 <input class="radioapprove" type="radio" name="radioapprove" id="radioapprove" value="0"> ไม่อนุมัติ
                                   <input class="radioapprove" type="radio" name="radioapprove" id="radioapprove1" value="1"> อนุมัติ<br>
                                 </div>
@@ -132,7 +132,7 @@
       </div>
       <div class="modal-footer ">
         <div class="text-center">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary closemodal" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary approvejob">อนุมัติการทำงาน</button>
         </div>
         
