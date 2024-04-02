@@ -39,10 +39,16 @@ class Approvecontroller extends BaseController
     }
     public function listjobapprove($d_id){
         $jobselect = new jobModel();
-        $jobselect ->select('job_id,job_name,job_start,job_finish,status')
+        $jobselect ->select('job_id,job_name,job_start,job_end,job_finish,status')
         ->where('job_tb.delete_flag','1')
         ->where('job_tb.division_id',$d_id);
         $job_rs = $jobselect->findAll();
+        $dateth = new Date();
+        foreach($job_rs as $key => $date_th){
+            $job_rs[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
+            $job_rs[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
+            $job_rs[$key]['job_finish'] = $dateth->DateThai($date_th['job_finish']);
+        }
         $returndata = [
             'showjob'=>$job_rs,
             
@@ -132,11 +138,35 @@ class Approvecontroller extends BaseController
     }
     public function rejectapprove()
     {
+
+
         $job_id = $this->request->getVar('job_id');
+
+        $approvejob = new jobModel();
+        $datajob = array(
+                            'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+                            'status'=>'2'
+                        );
+       
+        $approvejob ->set($datajob) ->where('job_id',$job_id) -> update();
+       
+        $approveprocess = new processModel();
+        $dataprocess = array(
+        'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+          'status'=>'2'
+      );
+
+      $confirmsubprocess = new subprocessModel();
+        $dataprocess = array('subprocess_status'=>'1',
+                              'subprocess_finish'=>date('Y-m-d'),
+                              'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
+    );
+    $confirmsubprocess ->set($dataprocess) ->where('subprocess_id',$job_id) ->update();
+
         $approve = new approveModel();
         $data = array('job_id'=>$job_id,
                         'reject_date'=>date('Y-m-d'),
-                        'reject_detail'=>$reject_detail,
+                        'reject_detail'=>$_POST['reject_detail'],
                         'approve_create'=>date('Y-m-d H:i:s', strtotime('7 hour')),
                         'status'=>'0');
     $approve -> insert($data);

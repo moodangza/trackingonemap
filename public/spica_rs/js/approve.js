@@ -94,18 +94,24 @@ $(document).on( "click",".approvejob", function() {
     
       }
       else if($("#radioapprove").prop('checked') ){
-        console.log(ckreason);
-        // $.ajax(
-        //   {
-        //       url: "/rejectapprove",
-        //       type: "post",
-        //       dataType: 'text',
-        //       data: { job_id : job_id},
-        //       success: function (rs_data) {
+        // console.log(ckreason);
+        if($('#reasoninput').val()==''){
+          alert ('กรุณากรอกเหตุผล');
+          return false;
+        }else{
+          alert('บันทึก');
+        $.ajax(
+          {
+              url: "/rejectapprove",
+              type: "post",
+              dataType: 'text',
+              data: { job_id : job_id, reject_detail : ckreason},
+              success: function (rs_data) {
   
-        //       }
-        //     });  
+              }
+            });  
       }
+    }
       
     }else{
 

@@ -59,10 +59,10 @@
                     '<p class="text-muted mb-2">คนบันทึก</p>'.
                     '<ul class="list-inline mb-0 text-muted">'.
                         '<li class="list-inline-item">'.
-                            '<i class="mdi mdi-map-marker"></i> วันที่ เริ่มต้น วันที่ สิ้นสุด'.
+                            '<i class="mdi mdi-map-marker"></i> วันที่ '.$rs_job['job_start'] .' ถึง '. $rs_job['job_end'].
                         '</li>'.
-                        '<li class="list-inline-item">'.
-                            '<i class="mdi mdi-wallet"></i> วันที่เสร็จสิ้นการดำเนินการ'.
+                        '<br><li class="list-inline-item">'.
+                            '<i class="mdi mdi-wallet"></i>'. $rs_job['job_finish'].
                         '</li>'.
                     '</ul>'.
                 '</div>'.
