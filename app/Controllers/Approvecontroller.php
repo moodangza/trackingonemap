@@ -40,6 +40,8 @@ class Approvecontroller extends BaseController
     public function listjobapprove($d_id){
         $jobselect = new jobModel();
         $jobselect ->select('job_id,job_name,job_start,job_end,job_finish,status')
+        ->select('division_tb.division_name')
+        ->join('division_tb','job_tb.division_id = division_tb.division_id','inner')
         ->where('job_tb.delete_flag','1')
         ->where('job_tb.division_id',$d_id);
         $job_rs = $jobselect->findAll();
@@ -47,10 +49,13 @@ class Approvecontroller extends BaseController
         foreach($job_rs as $key => $date_th){
             $job_rs[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
             $job_rs[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
-            $job_rs[$key]['job_finish'] = $dateth->DateThai($date_th['job_finish']);
+                if($job_rs[$key]['job_finish']!=''){
+                $job_rs[$key]['job_finish'] = $dateth->DateThai($date_th['job_finish']);
+            }
         }
         $returndata = [
             'showjob'=>$job_rs,
+            
             
         ];
         return view('spica/page/manager/listjobapprove',$returndata);

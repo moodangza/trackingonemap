@@ -46,28 +46,35 @@
 <?php 
  function cardlistjobapprove($rs_job)
 {
+  if($rs_job['job_finish']!='' ){
+    $rsfi = $rs_job['job_finish'];
+  }else{
+    $rsfi = '<span style="color:red">ยังไม่สิ้นสุดกระบวนการ</span>';
+  }
     print ' <div class="candidate-list-box card mt-2">'.
     '<div class="p-2 card-body">'.
         
         '<div class="align-items-center row">'.
         
-            '<div class="col-10">'.
+            '<div class="col-12">'.
                 '<div class="candidate-list-content mt-3 mt-lg-0">'.
-                    '<h5 class="fs-19 mb-0" nowrap>'.
+                    '<h5 class="fs-19 mb-0" style="
+                    text-justify: inter-character;">'.
                             '<b>'.$rs_job["job_name"].'</b>'.
                       '</h5>'.
+                      '<hr>'.
                     '<p class="text-muted mb-2">คนบันทึก</p>'.
                     '<ul class="list-inline mb-0 text-muted">'.
                         '<li class="list-inline-item">'.
-                            '<i class="mdi mdi-map-marker"></i> วันที่ '.$rs_job['job_start'] .' ถึง '. $rs_job['job_end'].
+                            '<b><i class="fa fa-calendar-o "></i> วันที่ '.$rs_job['job_start'] .' ถึง '. $rs_job['job_end'].'</b>'.
                         '</li>'.
                         '<br><li class="list-inline-item">'.
-                            '<i class="mdi mdi-wallet"></i>'. $rs_job['job_finish'].
+                            '<i class="fa fa-calendar-check-o"></i>&nbsp;'. $rsfi.
                         '</li>'.
                     '</ul>'.
                 '</div>'.
             '</div>'.
-            '<div class="col-auto">'.
+            '<div class="col-12" style="text-align:end">'.
             '<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalCenter" onclick="detailprocessapprove(\''.$rs_job['job_id'].'\')">ดูรายละเอียด</button>'.
             '</div>'.
         '</div>'.
@@ -191,10 +198,19 @@
           <div class="row">
             <div class="col-12 col-xl-12 grid-margin stretch-card">
               <div class="row w-100 flex-grow">
+
+              <div class="row">
+            <div class="col-12 col-xl-12 grid-margin stretch-card">
+              <div class="row w-100 flex-grow" style="justify-content: center">
+                    <?php   echo $showjob[0]['division_name']; ?>
+              </div>
+            </div>
+              </div>  
+              
                 <div class="col-md-4 grid-margin stretch-card">
                   <div class="card">
-                    <div class="card-head bg-primary text-center">
-                        กำลังดำเนินการ
+                    <div class="card-head bg-primary text-center" style="padding: 10px;color:white;">
+                        <b>กำลังดำเนินการ</b>
                     </div>
                 
                     <div class="card-body">
@@ -214,8 +230,8 @@
             </div>
             <div class="col-md-4 grid-margin stretch-card text-white">
                   <div class="card">
-                    <div class="card-head bg-primary text-center">
-                        รออนุมัติ
+                    <div class="card-head bg-warning text-center" style="padding: 10px;color:white;">
+                        <b>รออนุมัติ</b>
                     </div>
                     <div class="card-body">
                   <div class="candidate-list">
@@ -232,8 +248,8 @@
 
             <div class="col-md-4 grid-margin stretch-card text-white">
                   <div class="card">
-                    <div class="card-head bg-primary text-center">
-                        อนุมัติเสร็จสิ้น
+                    <div class="card-head bg-success text-center" style="padding: 10px; color:white;">
+                        <b>อนุมัติเสร็จสิ้น</b>
                     </div>
                     <div class="card-body">
                   <div class="candidate-list">
