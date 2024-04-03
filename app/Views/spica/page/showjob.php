@@ -53,7 +53,7 @@ function drop(ev) {
          background-color: #ffffff;
          border: 1px solid #cccccc;
          width: 500px;
-         height: 500px;
+         height: auto;
          top: 50%;
          left: 50%;
          transform: translate(-50%, -50%);
@@ -103,7 +103,7 @@ function drop(ev) {
       <label for="inputjob" class="form-label">ชื่อหัวข้อ</label>
         <input type="text" class="form-control" id="job_name" name="job_name">
         <label for="jobstart" class="form-label">วันที่เริ่ม</label>
-        <input type="text" class="form-control datepicker-input" id="job_start" readonly name="job_start"> <div class="input-group-append">
+        <input type="text" class="form-control datepicker-input" id="job_start" style="width: fit-content;" readonly name="job_start"> <div class="input-group-append">
                                                     <div  class="input-group-text toggle-datepicker" data-toggle="#create-e-date"><i class="fa fa-calendar"></i>
                                                     </div>
                                                 </div>

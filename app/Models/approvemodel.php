@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 use CodeIgniter\Model;
-class jobModel extends Model{
+class approveModel extends Model{
         // protected $DBGroup      = 'project';
         protected $table        = 'approve_tb';
         protected $primaryKey   = 'approve_id';
@@ -15,11 +15,11 @@ class jobModel extends Model{
         ];
 
          // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    protected $createdField  = 'approve_create';
+    protected $updatedField  = false;
+    // protected $deletedField  = 'deleted_at';
 
     // Validation
     protected $validationRules      = [];
@@ -38,9 +38,5 @@ class jobModel extends Model{
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    function getProduct()
-    {
-       
-        
-    }
+   
 }

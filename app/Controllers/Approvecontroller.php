@@ -39,12 +39,23 @@ class Approvecontroller extends BaseController
     }
     public function listjobapprove($d_id){
         $jobselect = new jobModel();
-        $jobselect ->select('job_id,job_name,job_start,job_finish,status')
+        $jobselect ->select('job_id,job_name,job_start,job_end,job_finish,status')
+        ->select('division_tb.division_name')
+        ->join('division_tb','job_tb.division_id = division_tb.division_id','inner')
         ->where('job_tb.delete_flag','1')
         ->where('job_tb.division_id',$d_id);
         $job_rs = $jobselect->findAll();
+        $dateth = new Date();
+        foreach($job_rs as $key => $date_th){
+            $job_rs[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
+            $job_rs[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
+                if($job_rs[$key]['job_finish']!=''){
+                $job_rs[$key]['job_finish'] = $dateth->DateThai($date_th['job_finish']);
+            }
+        }
         $returndata = [
             'showjob'=>$job_rs,
+            
             
         ];
         return view('spica/page/manager/listjobapprove',$returndata);
@@ -99,15 +110,14 @@ class Approvecontroller extends BaseController
     echo json_encode( $return );
    }
    
-    public function confirmapprove($job_id)
+    public function confirmapprove()
     {
-        // echo $process_id;
-        // exit;
+        $job_id = $this->request->getVar('job_id');
         $approvejob = new jobModel();
         $datajob = array(
-                              'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-                                'status'=>'4'
-                            );
+                            'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+                            'status'=>'4'
+                        );
        
         $approvejob ->set($datajob) ->where('job_id',$job_id) -> update();
        
@@ -122,39 +132,51 @@ class Approvecontroller extends BaseController
                               'subprocess_finish'=>date('Y-m-d'),
                               'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
     );
-    $confirmsubprocess ->set($dataprocess) ->where('subprocess_id',$subprocessid) ->update();
+    $confirmsubprocess ->set($dataprocess) ->where('subprocess_id',$job_id) ->update();
+    $approve = new approveModel();
+    $data = array('job_id'=>$job_id,
+    'approve_date'=>date('Y-m-d'),
+    'approve_create'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+    'status'=>'1');
+    $approve -> insert($data);
        
     }
-    public function rejectapprove($job_id)
+    public function rejectapprove()
     {
-        
+
+
+        $job_id = $this->request->getVar('job_id');
+
+        $approvejob = new jobModel();
+        $datajob = array(
+                            'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+                            'status'=>'2'
+                        );
        
-    }
-   
-    public function updatesubprocess(){
-        $subprocessid = $_POST['sub_id'];
-        $editsubprocess = new subprocessModel();
-        $dataprocess = array('subprocess_name'=>$_POST['subprocess_name'],
-                              'subprocess_start'=>$_POST['subprocess_start'],
-                              'subprocess_end'=>$_POST['subprocess_end'],                  
-                              'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
-    );
-    $editsubprocess ->set($dataprocess) ->where('subprocess_id',$subprocessid) ->update();
-    header('Content-Type: application/json');
-        
-    echo json_encode( $editsubprocess );
-    }
-    public function confirmsubprocess(){
-        $subprocessid = $_POST['subprocessid'];
-        $confirmsubprocess = new subprocessModel();
-        $dataprocess = array('subprocess_status'=>'2',
+        $approvejob ->set($datajob) ->where('job_id',$job_id) -> update();
+       
+        $approveprocess = new processModel();
+        $dataprocess = array(
+        'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+          'status'=>'2'
+      );
+
+      $confirmsubprocess = new subprocessModel();
+        $dataprocess = array('subprocess_status'=>'1',
                               'subprocess_finish'=>date('Y-m-d'),
                               'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
     );
-    $confirmsubprocess ->set($dataprocess) ->where('subprocess_id',$subprocessid) ->update();
-    header('Content-Type: application/json');
-        
-    echo json_encode( $confirmsubprocess );
+    $confirmsubprocess ->set($dataprocess) ->where('subprocess_id',$job_id) ->update();
+
+        $approve = new approveModel();
+        $data = array('job_id'=>$job_id,
+                        'reject_date'=>date('Y-m-d'),
+                        'reject_detail'=>$_POST['reject_detail'],
+                        'approve_create'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+                        'status'=>'0');
+    $approve -> insert($data);
+       
     }
+   
   
 }
