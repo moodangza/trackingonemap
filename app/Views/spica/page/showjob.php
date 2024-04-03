@@ -163,7 +163,7 @@ function drop(ev) {
             <div class="card">
             <div class="card-body">
             <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                            <a href="#" class="list-group-item list-group-item-action bg-danger text-white" aria-current="true">
                             ต้องดำเนินการ
                             </a>
                             
@@ -198,7 +198,7 @@ function drop(ev) {
               <div class="card">
                 <div class="card-body">
                   <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                            <a href="#" class="list-group-item list-group-item-action bg-warning text-white" aria-current="true">
                             รออนุมัติ
                             </a>
                        
@@ -214,7 +214,7 @@ function drop(ev) {
               <div class="card">
                 <div class="card-body">
                   <div class="list-group">
-                            <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                            <a href="#" class="list-group-item list-group-item-action bg-success text-white" aria-current="true">
                             เสร็จสิ้น
                             </a>
                            
