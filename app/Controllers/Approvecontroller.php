@@ -116,6 +116,7 @@ class Approvecontroller extends BaseController
         $approvejob = new jobModel();
         $datajob = array(
                             'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+                            
                             'status'=>'4'
                         );
        
