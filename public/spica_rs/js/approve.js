@@ -19,6 +19,7 @@ $(".close,.closemodal").click(function(){
   $(".radioapprove").prop('checked',false);
   $("#reason").hide();
   $('#reasoninput').attr('disabled',true).val('');
+  location.reload(true);
 });
 });
 function detailprocessapprove(jobid){
