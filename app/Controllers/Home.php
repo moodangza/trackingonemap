@@ -140,9 +140,14 @@ class Home extends BaseController
     public function showjobselect($job_id=null)
     {
         $jobmodel1 = new jobModel();
+        $jobdivision = $jobmodel1 ->select('division_id')
+        ->where('job_id',$job_id)
+        ->first();
+        
+
         $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,job_finish')
         // -> select ('CURRENT_DATE-job_end as dateremain')
-        ->where('job_tb.division_id', '1' )
+        ->where('job_tb.division_id', $jobdivision["division_id"] )
         ->where('delete_flag', '1') 
         ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish')
         ->orderBy('job_id','asc');
@@ -182,7 +187,7 @@ public function updatejobform()
 {
     $updatejobmodel = new jobModel();
     $dateth = new Date();
-    $updatejobmodel ->select('job_tb.job_id,job_tb.job_name,job_start,job_end')
+    $updatejobmodel ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status')
         ->where('job_id',$_POST['jobid']);
         $updatejobmodel_rs = $updatejobmodel->first();
         $updatejobmodel_rs["job_start"] = $dateth->Dateinpicker($updatejobmodel_rs['job_start']);
@@ -234,11 +239,11 @@ public function showprocess(){
     $jobid1 = $this->request->getVar('jobid1');
 
     $processmodel = new processModel();
-    $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status')
+    $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status,process_tb.status ')
     ->where('delete_flag', '1') 
     ->where('process_finish ',NULL)
     ->where('process_tb.job_id', $jobid1 )
-    ->groupBy('process_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
+    ->groupBy('process_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status,process_tb.status ')
     ->orderBy('process_start','asc');
 
     $process_rs = $processmodel->findAll();
@@ -274,8 +279,12 @@ public function showprocess(){
     // หน้าเพิ่ม process
     public function formprocess($job_id){
         $jobmodel = new jobModel();
+        $jobdivisionid = $jobmodel ->select('division_id')
+        ->where('job_id',$job_id)
+        ->first();
+
         $jobmodel  ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status ')
-        ->where('job_tb.division_id ', 1)
+        ->where('job_tb.division_id ', $jobdivisionid["division_id"])
         // $jobid1 = $this->request->getVar('jobid1');
         ->where('job_tb.job_id', $job_id )
         ->groupBy('job_tb.job_id,job_tb.job_name ')

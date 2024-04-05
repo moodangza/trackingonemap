@@ -115,7 +115,7 @@ data-bs-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="
             </div>
               <div class="col-6">
                 <label for="jobend" class="form-label">วันที่สิ้นสุด</label>
-                <input type="text" class="form-control datepicker-input" id="job_end" style="width: fit-content;" readonly name="job_end">  <i class="fa fa-calendar"></i>
+                <input type="text" class="form-control datepicker-input" id="job_end" style="width: fit-content;" readonly name="job_end">
                   
               </div>
         </div>
@@ -136,7 +136,7 @@ data-bs-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="
   <!-- formodalupdate -->
     <div id="myModaledit" class="modal fade modal-lg"  tabindex="-1" role="dialog" data-bs-backdrop="static" 
         data-bs-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document" >
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -149,22 +149,28 @@ data-bs-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="
       <input type="hidden" class="form-control" id="editjob_id" name="editjob_id">
       <div class="modal-body">
       <label for="inputjob" class="form-label">ชื่อหัวข้อ</label>
+      <div class="container">
+          <div class="row">
+            
         <input type="text" class="form-control" id="editjob_name" name="editjob_name">
+        <div class="col-6">
         <label for="editjobstart" class="form-label">วันที่เริ่ม</label>
-        <input type="text" class="form-control datepicker-input" id="editjob_start" readonly name="editjob_start"> <div class="input-group-append">
-                                                    <div  class="input-group-text toggle-datepicker" data-toggle="#create-e-date"><i class="fa fa-calendar"></i>
-                                                    </div>
-                                                </div>
+        <input type="text" class="form-control datepicker-input" id="editjob_start" readonly name="editjob_start"> 
+          <i class="fa fa-calendar"></i>
+          </div>
+              <div class="col-6">
+                                                 
         <label for="editjobend" class="form-label">วันที่สิ้นสุด</label>
-        <input type="text" class="form-control datepicker-input" id="editjob_end" readonly name="editjob_end"> <div class="input-group-append">
-                                                    <div  class="input-group-text toggle-datepicker" data-toggle="#create-e-date"><i class="fa fa-calendar"></i>
+        <input type="text" class="form-control datepicker-input" id="editjob_end" readonly name="editjob_end"> 
+        <i class="fa fa-calendar"></i>
                                                     </div>
                                                 </div>
       </div>
-      <div class="modal-footer">
-      <button type="button" class="btn btn-primary" onclick="editjob()">บันทึก</button>
+      <div class="modal-footer center-block footer-edit">
+      <button type="button" class="btn btn-primary " onclick="editjob()">บันทึก</button>
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
       </div>
+    </div>
     </div>
     </div>
     </div>

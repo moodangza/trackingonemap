@@ -238,6 +238,8 @@ function showjobselect(divid){
 
 //เลือก job แสดง process
 
+
+
 function jobselect(jobid){
   $('#urladdprocess').show();
   $.ajax(
@@ -259,7 +261,8 @@ function jobselect(jobid){
       $("#urladdprocess").attr("href", "/formprocess/"+a.process[0]['job_id']+""); 
        
       a.process.forEach(element => {
-       
+        if(element.status == 1){
+        
           $('#processitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
           '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
           '<div class="text-right">'+
@@ -274,20 +277,19 @@ function jobselect(jobid){
           
           
           );
-          
+          }else if(element.status == 2){
+            
+            $('#finishprocessitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
+            '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
+            '<div class="text-right">'+
+            '<a class="btn btn-success" href="/formupdateprocess/'+element.process_id+' " title="ดูข้อมูล">'+ '<i class="fa fa-search" aria-hidden="true"></i></a>'+
+            '</div>'+
+            '</li>'
+            
+            );
+          }
       });
-      a.processfinish.forEach(element => {
-       
-        $('#finishprocessitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
-        '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
-        '<div class="text-right">'+
-        '<a class="btn btn-success" href="/formupdateprocess/'+element.process_id+' " title="ดูข้อมูล">'+ '<i class="fa fa-search" aria-hidden="true"></i></a>'+
-        '</div>'+
-        '</li>'
-        
-        );
-        
-    });
+
       
     }
 });   
@@ -582,6 +584,12 @@ function updatejobform(jobid){
       $("#editjob_name").val(data.job_name);
       $("#editjob_start").val(data.job_start);
       $("#editjob_end").val(data.job_end);
+      
+      if(data.status == '4'){
+        $('.footer-edit').hide();
+      }else{
+        $('.footer-edit').show();
+      }
     }
 });   
 }
