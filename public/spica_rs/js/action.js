@@ -232,9 +232,7 @@ function showjobselect(divid){
         
     });
   }
-  else{
-    alert('ไม่พบ');
-  }
+
       
     }
 });   
@@ -255,14 +253,14 @@ function jobselect(jobid){
     data: { jobid1: jobid},
     success: function (data) {
       var a = JSON.parse(data);
-      console.log(a.process)
+      console.log(a.job_id)
      
       $('#processitem').html('');
       $('#finishprocessitem').html('');
       
       // $('#addjob_id').html('');
       // $('#addjob_id').append('<input class="addprocessid" type="text" value="'+a.process[0]['job_id']+'">');
-      $("#urladdprocess").attr("href", "/formprocess/"+a.process[0]['job_id']+""); 
+      // $("#urladdprocess").attr("href", "/formprocess/"+a.job_id[0][job_id]+""); 
        
       a.process.forEach(element => {
         if(element.status == 1){
