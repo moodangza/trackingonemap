@@ -86,7 +86,7 @@
                                   <h6 class="card-header bg-success text-center text-white">ขั้นตอนการทำงาน</h6>
                                   <div class= "card-body">
                                   <div class="row" nowrap>
-                                  <div class="col-7">                             
+                                  <div class="col-12">                             
                                   <div id='processitem'>
                               
                               </div>
@@ -102,7 +102,7 @@
                                   <h6 class="card-header bg-success text-center text-white">จบขั้นตอนการทำงาน</h6>
                                   <div class= "card-body">
                                   <div class="row" nowrap>
-                                  <div class="col-7">                             
+                                  <div class="col-12">                             
                                   <div id='finishprocessitem'>
                               
                               </div>
