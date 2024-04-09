@@ -74,36 +74,48 @@
             </div>
             </div>
             </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-6 grid-margin stretch-card ">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">ขั้นตอนการทำงาน</h4>
-                  <div class="draggable-container">
-                  <ol class="list-group list-group-numbered">    
-                         <div id='processitem'>
+            <br>
+
+            <div class="justify-content-center">
+                        <div class="card">
+                          <h5 class="card-header bg-warning text-black text-center" >ขั้นตอนการทำงาน</h5>
+                            <div class="card-body">
+                              <div class="row">
+                                  <div class="col-6">
+                                  <div class="card" style="margin: 10px;" bg-primary>
+                                  <h6 class="card-header bg-success text-center text-white">ขั้นตอนการทำงาน</h6>
+                                  <div class= "card-body">
+                                  <div class="row" nowrap>
+                                  <div class="col-7">                             
+                                  <div id='processitem'>
                               
-                         </div>
-                                <!-- <a href="#" id='processitem' class="list-group-item list-group-item-action"></a> -->
-                        </ol>
-                    </div>
-              
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 grid-margin stretch-card ">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">จบขั้นตอนการทำงาน</h4>
-                  <div class="draggable-container">
-                  <ol class="list-group list-group-numbered">    
-                         <div id='finishprocessitem'>
+                              </div>
+                                            
+                                                                      
+                                  </div>
+                                  </div>
+                                  </div>
+                                  </div>
+                                  </div>
+                                  <div class="col-6">
+                                  <div class="card" style="margin: 10px;" bg-primary>
+                                  <h6 class="card-header bg-success text-center text-white">จบขั้นตอนการทำงาน</h6>
+                                  <div class= "card-body">
+                                  <div class="row" nowrap>
+                                  <div class="col-7">                             
+                                  <div id='finishprocessitem'>
                               
-                         </div>
-                                <!-- <a href="#" id='processitem' class="list-group-item list-group-item-action"></a> -->
-                        </ol>
-                    </div>
+                              </div>
+                                            
+                                                                      
+                                  </div>
+                                  </div>
+                                  </div>
+                                  </div>
+                                  </div>
+                                  </div>
+                                  </div>
+                                  </div>
                 </div>
               </div>
             </div>
