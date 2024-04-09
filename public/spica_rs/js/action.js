@@ -74,7 +74,7 @@ $(document).on( "click",".addsubprocess", function() {
      alert('บันทึกสำเร็จ');
      
       showsubprocess();       
-    
+      location.reload();
     }
 });   
 } );
