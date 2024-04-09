@@ -83,7 +83,7 @@ $(document).on( "click",".addsubprocess", function() {
     $('#urladdprocess').hide();
 //ปฏิทิน
   $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date,#editjob_start,#editjob_end').datepicker({
-    language:'th',
+    language:'th-th',
     format: 'dd/mm/yyyy',
     todayBtn: 'linked',
     todayHighlight: true,
@@ -97,6 +97,7 @@ $(document).on( "click",".addsubprocess", function() {
   if(text[1] = 'formupdateprocess'){
   showsubprocess();
   }
+  $("input").autoresize({padding:20,minWidth:40,maxWidth:350});
 });
 
 // โชว subprocess
@@ -126,9 +127,12 @@ function showsubprocess(){
       $('#processitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
       '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
       '<div class="text-right">'+
-      '<button class="btn btn-warning editsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">'+ '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>'+
-      '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน"><i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
-      '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ"><i class="fa fa-window-close" aria-hidden="true"></i></button>'+
+      '<button class="btn btn-warning editsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">'+ 
+      '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>'+
+      '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน">'+
+      '<i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
+      '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ">'+
+      '<i class="fa fa-window-close" aria-hidden="true"></i></button>'+
       '</div>'+
       '</li>'
       );
@@ -234,6 +238,8 @@ function showjobselect(divid){
 
 //เลือก job แสดง process
 
+
+
 function jobselect(jobid){
   $('#urladdprocess').show();
   $.ajax(
@@ -255,32 +261,35 @@ function jobselect(jobid){
       $("#urladdprocess").attr("href", "/formprocess/"+a.process[0]['job_id']+""); 
        
       a.process.forEach(element => {
-       
+        if(element.status == 1){
+        
           $('#processitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
           '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
           '<div class="text-right">'+
-          '<a class="btn btn-warning" href="/formupdateprocess/'+element.process_id+'" title="แก้ไข">'+ '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>'+
-          '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน"><i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
-          '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ"><i class="fa fa-window-close" aria-hidden="true"></i></button>'+
+          '<a class="btn btn-warning" href="/formupdateprocess/'+element.process_id+'" title="แก้ไข">'+ 
+          '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>'+
+          '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน">'+
+          '<i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
+          '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ">'+
+          '<i class="fa fa-window-close" aria-hidden="true"></i></button>'+
           '</div>'+
           '</li>'
           
           
           );
-          
+          }else if(element.status == 2){
+            
+            $('#finishprocessitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
+            '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
+            '<div class="text-right">'+
+            '<a class="btn btn-success" href="/formupdateprocess/'+element.process_id+' " title="ดูข้อมูล">'+ '<i class="fa fa-search" aria-hidden="true"></i></a>'+
+            '</div>'+
+            '</li>'
+            
+            );
+          }
       });
-      a.processfinish.forEach(element => {
-       
-        $('#finishprocessitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
-        '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
-        '<div class="text-right">'+
-        '<a class="btn btn-success" href="/formupdateprocess/'+element.process_id+' " title="ดูข้อมูล">'+ '<i class="fa fa-search" aria-hidden="true"></i></a>'+
-        '</div>'+
-        '</li>'
-        
-        );
-        
-    });
+
       
     }
 });   
@@ -313,9 +322,12 @@ function showsubprocess(){
       $('#processitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
       '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
       '<div class="text-right">'+
-      '<button class="btn btn-warning editsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">'+ '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>'+
-      '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน"><i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
-      '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ"><i class="fa fa-window-close" aria-hidden="true"></i></button>'+
+      '<button class="btn btn-warning editsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">'+
+       '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>'+
+      '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน">'+
+      '<i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
+      '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ">'+
+      '<i class="fa fa-window-close" aria-hidden="true"></i></button>'+
       '</div>'+
       '</li>'
       );
@@ -572,6 +584,12 @@ function updatejobform(jobid){
       $("#editjob_name").val(data.job_name);
       $("#editjob_start").val(data.job_start);
       $("#editjob_end").val(data.job_end);
+      
+      if(data.status == '4'){
+        $('.footer-edit').hide();
+      }else{
+        $('.footer-edit').show();
+      }
     }
 });   
 }
