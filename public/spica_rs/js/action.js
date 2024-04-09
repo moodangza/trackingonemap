@@ -124,18 +124,22 @@ function showsubprocess(){
    
   a.process.forEach(element => {
    
-      $('#processitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
-      '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
-      '<div class="text-right">'+
-      '<button class="btn btn-warning editsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">'+ 
-      '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>'+
-      '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน">'+
-      '<i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
-      '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ">'+
-      '<i class="fa fa-window-close" aria-hidden="true"></i></button>'+
+    $('#processitem').append('<div class="card">'+
+    '<div class="card process_list" id="process'+element.process_id+'">'+
+      '<div class="card-body">'+
+        '<h5 class="card-title">'+ element.process_name +'</h5>'+
+        '<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
+        '<div class="text-right">'+
+            '<button class="btn btn-warning editsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">'+
+            '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>'+
+            '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน">'+
+            '<i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
+            '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ">'+
+            '<i class="fa fa-window-close" aria-hidden="true"></i></button>'+
+        '</div>'+
       '</div>'+
-      '</li>'
-      );
+    '</div>'+
+  '</div>')
   });
  
 }
@@ -279,6 +283,15 @@ function jobselect(jobid){
           );
           }else if(element.status == 2){
             
+            $('#processitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
+            '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
+            '<div class="text-right">'+
+              '<a class="btn btn-success" href="/formupdateprocess/'+element.process_id+' " title="ดูข้อมูล">'+ '<i class="fa fa-search" aria-hidden="true"></i></a>'+
+            '</div>'+
+            '</li>'
+            
+            
+            );
             $('#finishprocessitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
             '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
             '<div class="text-right">'+
@@ -319,18 +332,34 @@ function showsubprocess(){
    
   a.process.forEach(element => {
    
-      $('#processitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
-      '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
-      '<div class="text-right">'+
-      '<button class="btn btn-warning editsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">'+
-       '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>'+
-      '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน">'+
-      '<i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
-      '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ">'+
-      '<i class="fa fa-window-close" aria-hidden="true"></i></button>'+
-      '</div>'+
-      '</li>'
-      );
+      // $('#processitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
+      // '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
+      // '<div class="text-right">'+
+      // '<button class="btn btn-warning editsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">'+
+      //  '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>'+
+      // '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน">'+
+      // '<i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
+      // '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ">'+
+      // '<i class="fa fa-window-close" aria-hidden="true"></i></button>'+
+      // '</div>'+
+      // '</li>'
+      // );
+      $('#processitem').append('<div class="card">'+
+        '<div class="card process_list" id="process'+element.process_id+'">'+
+          '<div class="card-body">'+
+            '<h5 class="card-title">'+ element.process_name +'</h5>'+
+            '<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
+            '<div class="text-right">'+
+                '<button class="btn btn-warning editsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">'+
+                '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>'+
+                '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน">'+
+                '<i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
+                '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ">'+
+                '<i class="fa fa-window-close" aria-hidden="true"></i></button>'+
+            '</div>'+
+          '</div>'+
+        '</div>'+
+      '</div>')
   });
  
 }
