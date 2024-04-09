@@ -269,9 +269,9 @@ function jobselect(jobid){
         
           $('#processitem').append('<ul style="padding-bottom: 2px;" class="list-group">'+
           // '<li class="list-group-item "> '+
+          '<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
           '<div class="row">'+
           '<div class="col-8">'+
-          '<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
           '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
           '</div>'+
           '<div class="col-4" class="text-right">'+
