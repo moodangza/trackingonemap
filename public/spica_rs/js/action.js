@@ -270,9 +270,11 @@ function jobselect(jobid){
           $('#processitem').append('<ul style="padding-bottom: 2px;" class="list-group">'+
           // '<li class="list-group-item "> '+
           '<div class="row">'+
-          '<div class="col-12">'+
+          '<div class="col-8">'+
           '<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
           '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
+          '</div>'+
+          '<div class="col-4" class="text-right">'+
           '<div class="text-right">'+
           '<a class="btn btn-warning" href="/formupdateprocess/'+element.process_id+'" title="แก้ไข">'+ 
           '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>'+
@@ -280,7 +282,11 @@ function jobselect(jobid){
           '<i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
           '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ">'+
           '<i class="fa fa-window-close" aria-hidden="true"></i></button>'+
-          '</div>'+'</li>'+'</div>'+'</div>'+'</ul>'
+          '</div>'+
+          '</div>'+
+          '</div'+
+          '</li>'+
+          '</ul>'
           
           
           );
@@ -289,12 +295,18 @@ function jobselect(jobid){
             $('#processitem').append('<ul style="padding-bottom: 2px;" class="list-group">'+
             // '<li class="list-group-item "> '+
             '<div class="row">'+
-            '<div class="col-12">'+
+            '<div class="col-8">'+
             '<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
             '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
+            '</div>'+
+            '<div class="col-4" class="text-right">'+
             '<div class="text-right">'+
             '<a class="btn btn-success" href="/formupdateprocess/'+element.process_id+' " title="ดูข้อมูล">'+ '<i class="fa fa-search" aria-hidden="true"></i></a>'+
-            '</div>'+'</li>'+'</div>'+'</div>'+'</ul>'
+            '</div>'+
+            '</div>'+
+            '</div'+
+            '</li>'+
+            '</ul>'
             
             
             );
