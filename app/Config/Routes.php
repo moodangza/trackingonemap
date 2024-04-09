@@ -20,6 +20,7 @@ $routes->get('showdvselect', 'Home::showdvselect');
 $routes->get('showafterdiv','Home::showafterdiv');
 $routes->get('showdvselect/(:num)', 'Home::showdvselect/$1');
 $routes->get('showjobselect/(:num)', 'Home::showjobselect/$1');
+$routes->get('showjobselect1/(:num)', 'Home::showjobselect1/$1');
 
 $routes->get('formprocess', 'Home::formprocess');
 $routes->get('formprocess/(:num)', 'Home::formprocess/$1');

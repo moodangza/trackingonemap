@@ -217,7 +217,7 @@ function showjobselect(divid){
               '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
                   '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
                 '</button>'+
-                '<a href="/showjobselect/'+element.job_id+'" class="btn btn-success">'+
+                '<a href="/showjobselect1/'+element.job_id+'" class="btn btn-success">'+
                   '<i class="fa fa-eye" aria-hidden="true" ></i>'+
                 '</a>'+
                 '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+
@@ -255,14 +255,14 @@ function jobselect(jobid){
     data: { jobid1: jobid},
     success: function (data) {
       var a = JSON.parse(data);
-      console.log(a.job_id)
+      console.log(a.job_id);
      
       $('#processitem').html('');
       $('#finishprocessitem').html('');
       
       // $('#addjob_id').html('');
       // $('#addjob_id').append('<input class="addprocessid" type="text" value="'+a.process[0]['job_id']+'">');
-      // $("#urladdprocess").attr("href", "/formprocess/"+a.job_id[0][job_id]+""); 
+      $("#urladdprocess").attr("href", "/formprocess/"+a.job_id+""); 
        
       a.process.forEach(element => {
         if(element.status == 1){

@@ -159,6 +159,29 @@ class Home extends BaseController
 
         return view('spica/page/showprocess',$return);
     }
+    // คลิกดูprocess จาก job
+    public function showjobselect1($job_id)
+    {
+        $jobmodel1 = new jobModel();
+        $jobdivision = $jobmodel1 ->select('division_id')
+        ->where('job_id',$job_id)
+        ->first();
+        
+
+        $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,job_finish')
+        // -> select ('CURRENT_DATE-job_end as dateremain')
+        ->where('job_tb.division_id', $jobdivision["division_id"] )
+        ->where('delete_flag', '1') 
+        ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish')
+        ->orderBy('job_id','asc');
+        $job_rs1 = $jobmodel1->findAll();
+        $return = [
+            'job'=> $job_rs1,
+            // 'job_id'=> $job_id
+        ];
+
+        return view('spica/page/showprocess',$return);
+    }
 
 // เพิ่มหัวข้อ
 public function addjob()
@@ -230,13 +253,17 @@ public function deletejob()
 // หน้า showprocess เลือกjob
 public function showprocess(){
     $jobmodel = new jobModel();
+    $jobid1 = $this->request->getVar('jobid1');
+    $jobdivision = $jobmodel ->select('division_id')
+    ->where('job_id',$jobid1)
+    ->first();    
     $jobmodel  ->select('job_tb.job_id,job_tb.job_name ')
-    ->where('job_tb.division_id',  '1' )
+    ->where('job_tb.division_id',  $jobdivision["division_id"] )
     ->where('delete_flag !=','0')
     ->groupBy('job_tb.job_id,job_tb.job_name ')
     ->orderBy('job_id','asc');
     $job_rs = $jobmodel->findAll();
-    $jobid1 = $this->request->getVar('jobid1');
+   
 
     $processmodel = new processModel();
     $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status,process_tb.status ')
@@ -268,8 +295,7 @@ public function showprocess(){
     $data = [
         'job'=> $job_rs,
         'process' => $process_rs ,
-        // if()
-        // 'processfinish' => $processfinfish_rs,
+       'job_id'=>$jobid1,
        
     ];
     header('Content-Type: application/json');
