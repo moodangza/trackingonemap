@@ -232,7 +232,9 @@ function showjobselect(divid){
         
     });
   }
-
+  else{
+    alert('ไม่พบ');
+  }
       
     }
 });   
