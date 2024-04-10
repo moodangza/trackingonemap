@@ -32,14 +32,14 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" method="post" action="<?php echo base_url('ckuser');?>">
 					<span class="login100-form-title p-b-43">
 						Login to continue
 					</span>
 					
-					
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email">
+				
+					<div class="wrap-input100 validate-input" >
+						<input class="input100" type="text" name="username">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Email</span>
 					</div>
@@ -68,7 +68,8 @@
 			
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						
+						<button type="submit" value="Submit" class="login100-form-btn">
 							Login
 						</button>
 					</div>

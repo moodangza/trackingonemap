@@ -14,8 +14,9 @@ class Home extends BaseController
     {
         
         return view('spica/page/login/login');
+        // $this->load->library('Auth_Ldap');
     }
-
+    
     public function index()
     {
         $total_ts=0; //ตัวแปรเก็บค่าหน่วยงานที่ทำงานเสร็จแล้ว

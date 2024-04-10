@@ -6,7 +6,10 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+// login
 $routes->get('login','Home::login');
+$routes->post('ckuser','Authencontroller:ckuser');
+// 
 $routes->get('/', 'Home::index');
 $routes->get('showdata','Home::showdata');
 $routes->add('showjob','Home::showjob');
