@@ -122,7 +122,10 @@
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                 <img src="spica_rs/images/faces/face5.jpg" alt="profile"/>
-                <span class="nav-profile-name">Eleanor Richardson</span>
+                <?php $usertbl = session()->get('usertbl');
+                      $userldap = session()->get('userldap');
+                      ?>
+                <span class="nav-profile-name"><?php  echo $usertbl['user_name']; ?></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                 <a class="dropdown-item">

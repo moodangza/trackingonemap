@@ -8,8 +8,9 @@ use CodeIgniter\Router\RouteCollection;
  */
 // login
 $routes->get('login','Home::login');
-$routes->post('ckuser','Authencontroller:ckuser');
+$routes->post('ckuser','Authencontroller::ckuser');
 // 
+$routes->group('', ['filter' => 'auth'], function($routes){
 $routes->get('/', 'Home::index');
 $routes->get('showdata','Home::showdata');
 $routes->add('showjob','Home::showjob');
@@ -47,6 +48,7 @@ $routes->get('listjobapprove/(:num)','Approvecontroller::listjobapprove/$1');
 $routes->post('detailapprove','Approvecontroller::detailapprove');
 $routes->post('confirmapprove','Approvecontroller::confirmapprove');
 $routes->post('rejectapprove','Approvecontroller::rejectapprove');
+});
 // ต้อง login ถึงจะทำงานได้
 // $routes->group('', ['filter' => 'auth'], function($routes){
 // });
