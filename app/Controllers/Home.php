@@ -13,7 +13,7 @@ class Home extends BaseController
     public function login()
     {
         
-        return view('spica/login/index');
+        return view('spica/page/login/login');
     }
 
     public function index()
