@@ -1,8 +1,8 @@
 <?php
-namespace App\Controllers;
+namespace App\Libraries;
 
 
-class Date extends BaseController
+class Date 
 {
   public function DateThai($strDate)
 	{
@@ -27,9 +27,21 @@ class Date extends BaseController
 		$year = date("Y",strtotime($strDate))+543;
 		$month = date("n",strtotime($strDate));
 		$day = date("j",strtotime($strDate));
+		$textday = date("l");
+		$strtextday = array(
+			"Monday" => "จันทร์",
+			"Tuesday" => "อังคาร",
+			"Wednesday" => "พุธ",
+			"Thursday" => "พฤหัสบดี",
+			"Friday" => "ศุกร์",
+			"Sathurnday" => "เสาร์",
+			"Sunday" => "อาทิตย์",
+
+		);
+		$text = $strtextday[$textday];
 		$strMonth = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
 		$strMonthThai=$strMonth[$month];
-		return "$day $strMonthThai $year";
+		return "$text $day $strMonthThai $year";
 	}
 }
 
