@@ -1,22 +1,33 @@
+<?php 
+ function Datethaifull($strDate)
+	{
+		$year = date("Y",strtotime($strDate))+543;
+		$month = date("n",strtotime($strDate));
+		$day = date("j",strtotime($strDate));
+		$strMonth = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
+		$strMonthThai=$strMonth[$month];
+		return "$day $strMonthThai $year";
+	}
+  ?>
 <nav class="navbar col-lg-12 col-12 px-0 py-0 py-lg-4 d-flex flex-row">
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-menu"></span>
           </button>
           <div class="navbar-brand-wrapper">
-            <a class="navbar-brand brand-logo" href="index.html"><img src="spica_rs/images/logo.svg" alt="logo"/></a>
-            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="spica_rs/images/logo-mini.svg" alt="logo"/></a>
+            <a class="navbar-brand brand-logo" href="../"><img width="40%" src="spica_rs/images/auth/onlb.png" alt="logo"/></a>
+            <!-- <a class="navbar-brand brand-logo-mini" href="../"><img width="15%" src="spica_rs/images/auth/onlb.png" alt="logo"/></a> -->
           </div>
-          <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">Welcome back, Brandon Haynes</h4>
+          <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">ระบบการติดตามการทำงาน</h4>
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item">
-              <h4 class="mb-0 font-weight-bold d-none d-xl-block">Mar 12, 2019 - Apr 10, 2019</h4>
+              <h4 class="mb-0 font-weight-bold d-none d-xl-block"><?php echo Datethaifull(date("Y-m-d")); ?></h4>
             </li>
             <li class="nav-item dropdown mr-1">
-              <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
+              <!-- <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
                 <i class="mdi mdi-calendar mx-0"></i>
                 <span class="count bg-info">2</span>
-              </a>
+              </a> -->
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
                 <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
                 <a class="dropdown-item preview-item">
@@ -58,10 +69,7 @@
               </div>
             </li>
             <li class="nav-item dropdown mr-2">
-              <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-toggle="dropdown">
-                <i class="mdi mdi-email-open mx-0"></i>
-                <span class="count bg-danger">1</span>
-              </a>
+             
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
                 <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
                 <a class="dropdown-item preview-item">
@@ -114,7 +122,7 @@
           <ul class="navbar-nav mr-lg-2">
             <li class="nav-item nav-search d-none d-lg-block">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search Here..." aria-label="search" aria-describedby="search">
+                <!-- <input type="text" class="form-control" placeholder="Search Here..." aria-label="search" aria-describedby="search"> -->
               </div>
             </li>
           </ul>
@@ -128,17 +136,14 @@
                 <span class="nav-profile-name"><?php  echo $usertbl['user_name']; ?></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                <a class="dropdown-item">
-                  <i class="mdi mdi-settings text-primary"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item">
+             
+                <a class="dropdown-item" href="<?php echo base_url('logout');?>">
                   <i class="mdi mdi-logout text-primary"></i>
                   Logout
                 </a>
               </div>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a href="#" class="nav-link icon-link">
                 <i class="mdi mdi-plus-circle-outline"></i>
               </a>
@@ -152,7 +157,7 @@
               <a href="#" class="nav-link icon-link">
                 <i class="mdi mdi-clock-outline"></i>
               </a>
-            </li>
+            </li> -->
           </ul>
         </div>
       </nav>

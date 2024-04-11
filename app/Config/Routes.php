@@ -48,6 +48,7 @@ $routes->get('listjobapprove/(:num)','Approvecontroller::listjobapprove/$1');
 $routes->post('detailapprove','Approvecontroller::detailapprove');
 $routes->post('confirmapprove','Approvecontroller::confirmapprove');
 $routes->post('rejectapprove','Approvecontroller::rejectapprove');
+$routes->get('logout','Authencontroller::logout');
 });
 // ต้อง login ถึงจะทำงานได้
 // $routes->group('', ['filter' => 'auth'], function($routes){
