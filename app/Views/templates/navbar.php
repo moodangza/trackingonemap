@@ -1,14 +1,4 @@
-<?php 
- function Datethaifull($strDate)
-	{
-		$year = date("Y",strtotime($strDate))+543;
-		$month = date("n",strtotime($strDate));
-		$day = date("j",strtotime($strDate));
-		$strMonth = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
-		$strMonthThai=$strMonth[$month];
-		return "$day $strMonthThai $year";
-	}
-  ?>
+
 <nav class="navbar col-lg-12 col-12 px-0 py-0 py-lg-4 d-flex flex-row">
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -21,7 +11,7 @@
           <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">ระบบการติดตามการทำงาน</h4>
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item">
-              <h4 class="mb-0 font-weight-bold d-none d-xl-block"><?php echo Datethaifull(date("Y-m-d")); ?></h4>
+              <h4 class="mb-0 font-weight-bold d-none d-xl-block"><?php echo $datenow; ?></h4>
             </li>
             <li class="nav-item dropdown mr-1">
               <!-- <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">

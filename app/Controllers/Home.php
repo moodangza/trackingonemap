@@ -6,7 +6,7 @@ use App\Models\approveModel;
 use App\Models\processModel;
 use App\Models\subprocessModel;
 use App\Models\divisionModel;
-use App\Controllers\Date;
+use App\Libraries\Date;
 
 class Home extends BaseController
 {
@@ -66,7 +66,8 @@ class Home extends BaseController
         ->where('job_tb.division_id = 1' )
         ->groupBy('job_tb.job_id,job_tb.job_name,status,division_tb.division_id,division_tb.division_name,job_tb.job_start,job_tb.job_end,job_finish ')
         ->orderBy('job_start','asc');
-
+        $rs_datenow1 = new Date();
+        $rs_datenow = $rs_datenow1->Datethaifull(date("Y-m-d"));
         $return = [
             'job' => $dv_rs,
             'total_ts' => $total_ts, //ส่งค่าตัวแปรเก็บค่าหน่วยงานที่ทำงานเสร็จแล้ว
@@ -74,8 +75,8 @@ class Home extends BaseController
             'total_a' => $total_a,
             'total_p' => $total_p,
             'total_w' => $total_w,
-            'total_s' => $total_s
-
+            'total_s' => $total_s,
+            'datenow' => $rs_datenow
         ];
         return view('spica/index',$return);
     }
@@ -89,7 +90,8 @@ class Home extends BaseController
         ->groupBy('division_tb.division_id,division_tb.division_name,division_status')
         ->orderBy('division_tb.division_id','asc');
         $division_rs1 = $divisionmodel1->findAll();
-        
+        $rs_datenow1 = new Date();
+        $rs_datenow = $rs_datenow1->Datethaifull(date("Y-m-d"));
         
         // $approve = new $approveModel();
         // $approve ->select ('approve_id,approve_tb.status')
@@ -98,7 +100,8 @@ class Home extends BaseController
 
         $returnjob = [
             'division'=> $division_rs1,
-            'divisionid'=> $division
+            'divisionid'=> $division,
+            'datenow'=>$rs_datenow
         ];
         
         return view('spica/page/showjob',$returnjob);
