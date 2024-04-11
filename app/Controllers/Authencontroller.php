@@ -11,9 +11,10 @@ class Authencontroller extends BaseController
         $session = session();
         $usermodel = new userModel();
         echo $_POST['username'] . 'password'. $_POST['pass'];
-        $usermodel ->select('user_name,division_id')
+        $usermodel ->select('user_name,division_id,level')
        ->where('user_name',$_POST['username']);
        $user_rs = $usermodel->first();
+       if(isset($user_rs['division_id'])){
         if($user_rs['division_id']==13){
             $ldap_au = new LDAPLibrary;
             $ldap_rs = $ldap_au ->login($_POST['username'],$_POST['pass']);
@@ -25,28 +26,22 @@ class Authencontroller extends BaseController
            
             $session->set($arr);
             return redirect()->to('/'); 
+        }else{
+            
+            $arr = [
+                'usertbl' => $user_rs,
+             
+            ];
+            $session->set($arr);
+            return redirect()->to('/'); 
         }
-        exit();
-
-       $passmodel = $usermodel;
-       $passmodel ->select('password')
-       ->where('password',$_POST['pass']);
-       $pass_rs = $passmodel->first();
-    //    echo '<br>'. $user_rs . '   ' . $pass_rs;
-       
-       if($user_rs["user_name"] == $_POST['username'] && $pass_rs["password"] == $_POST['pass']){
-        echo 'aaaa';
-       
-        exit();
-        
-       }else if($user_rs["user_name"] == $_POST['username'] && $pass_rs["password"] == ''){
-        echo 'bbbb';
-       
-        exit();
-       }else{
-        echo 'cccc';
-       
-        exit();
-       }
+      }else{
+        return redirect()->to('login'); 
+      }
+    }
+    public function logout(){
+        $session = session();
+        $session->destroy();
+        return redirect()->to('login'); 
     }
 }    

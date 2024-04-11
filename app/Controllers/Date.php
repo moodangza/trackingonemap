@@ -22,7 +22,15 @@ class Date extends BaseController
 		return "$strshdate";
   	
 	}
-	
+	public function Datethaifull($strDate)
+	{
+		$year = date("Y",strtotime($strDate))+543;
+		$month = date("n",strtotime($strDate));
+		$day = date("j",strtotime($strDate));
+		$strMonth = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
+		$strMonthThai=$strMonth[$month];
+		return "$day $strMonthThai $year";
+	}
 }
 
 ?>
