@@ -144,8 +144,8 @@ function showsubprocess(){
  
 }
 
-function jobText(id, element){
-    console.log('in Function('+id+')');
+function jobText(id, element,cedit){
+    console.log('in Function('+id+''+cedit+')');
     $('#'+id).append('<ul style="padding-bottom: 2px;" class="list-group">'+
           '<li class="list-group-item "> '+
           '<div class="row">'+
@@ -155,15 +155,17 @@ function jobText(id, element){
           '<br> '+ ((+element.dateremain<0)?'ล่าช้ามาแล้ว :'+(element.dateremain*-1):'วันคงเหลือก่อนครบกำหนด :'+element.dateremain) +'วัน' +
           '</div>'+
           '<div class="col-4" class="text-right">'+
-            '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
-                '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
-              '</button>'+
+        
+          (cedit == 'can' ?  '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
+          '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
+        '</button>': '') +
+          
               '<a href="/showjobselect/'+element.job_id+'" class="btn btn-success">'+
                 '<i class="fa fa-eye" aria-hidden="true" ></i>'+
               '</a>'+
-              '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+
+              (cedit == 'can' ?  '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+
               '<i class="fa fa-trash" aria-hidden="true"></i></i> '+
-              '</button>'+
+              '</button>': '') +
           '</div>'+
         '</li>'+
     '</ul>'
@@ -191,19 +193,27 @@ function showjobselect(divid){
     success: function (data) {
       // location.reload();
       let showdata = JSON.parse(data);
-      console.log(showdata.job)
+      // console.log(showdata.cedit);
+      var cedit = showdata.cedit;
+     if(cedit!='can'){
+        $('#addjob').hide();
+     }else{
+      $('#addjob').show();
+     }
       $('#mustact,#inprogress,#waitapprove,#approve').html('');
       // $('#finishjobitem').html('');
       if(showdata.job != 0){
       showdata.job.forEach(element => {
+      
+
       if(element.status == '1'){
-        jobText('mustact', element);
+        jobText('mustact', element,cedit);
       }
       if(element.status == '2'){
-        jobText('inprogress', element);
+        jobText('inprogress', element,cedit);
       }
       if(element.status == '3'){
-        jobText('waitapprove', element);
+        jobText('waitapprove', element,cedit);
       }
       if(element.status == '4'){
         $('#approve').append('<ul style="padding-bottom: 2px;" class="list-group">'+
@@ -230,7 +240,8 @@ function showjobselect(divid){
         );
       }
         
-    });
+   
+  });
   }
   else{
     alert('ไม่พบ');
