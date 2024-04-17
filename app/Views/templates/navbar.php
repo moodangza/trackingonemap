@@ -11,7 +11,7 @@
           <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">ระบบการติดตามการทำงาน</h4>
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item">
-              <h4 class="mb-0 font-weight-bold d-none d-xl-block"><?php echo $datenow; ?></h4>
+              <h4 class="mb-0 font-weight-bold d-none d-xl-block">วัน<?php echo $datenow; ?></h4>
             </li>
             <li class="nav-item dropdown mr-1">
               <!-- <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
