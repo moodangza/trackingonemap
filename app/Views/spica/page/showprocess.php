@@ -3,17 +3,7 @@
 
 <?php echo $this->extend('templates/header'); ?>
 <?php echo $this->section('content'); ?>
-
-<body>
-  <div class="container-scroller d-flex">
-    <!-- partial:./partials/_sidebar.html -->
-   <?php echo $this->include('templates/menu');?>
-    <!-- partial -->
-    <div class="page-body-wrapper">
-      <!-- partial:./partials/_navbar.html -->
-     <?php echo $this->include('templates/navbar');?>
-      <!-- partial -->
-      <style>
+<style>
       .draggable-container {
   background-color: #bddad5;
   padding: 1rem;
@@ -36,6 +26,16 @@
   transition: opacity 1s ease;
 }
       </style>
+<body>
+  <div class="container-scroller d-flex">
+    <!-- partial:./partials/_sidebar.html -->
+   <?php echo $this->include('templates/menu');?>
+    <!-- partial -->
+    <div class="page-body-wrapper">
+      <!-- partial:./partials/_navbar.html -->
+     <?php echo $this->include('templates/navbar');?>
+      <!-- partial -->
+   
      
       <div class="main-panel">
         <div class="content-wrapper">
@@ -120,20 +120,15 @@
               </div>
             </div>
           </div>
-          </div>
         
-          <!-- row end -->
-        </div>
-      
+          </div>
+          <?php //echo $this->include('templates/footer');?>
+         
         <!-- content-wrapper ends -->
         <!-- partial:./partials/_footer.html -->
-          <?php echo $this->include('templates/footer');?>
+    
         <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
-  </div>
+    
   <script>
   <?php 
 if ($job_id){?>

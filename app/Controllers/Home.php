@@ -10,6 +10,8 @@ use App\Libraries\Date;
 
 class Home extends BaseController
 {
+  
+
     public function login()
     {
         
@@ -25,6 +27,7 @@ class Home extends BaseController
         $total_p=0;
         $total_w=0;
         $total_s=0;
+      
         $divisionmodel = new divisionModel();
         $divisionmodel ->select('division_tb.division_id,division_tb.division_name,division_tb.division_status')
         ->select('count(division_name) as d_division')
@@ -33,9 +36,12 @@ class Home extends BaseController
         ->select("(select count(*) from job_tb where job_tb.division_id=division_tb.division_id and status = '2' ) As p_job")
         ->select("(select count(*) from job_tb where job_tb.division_id=division_tb.division_id and status = '3' ) As w_job")
         ->select("(select count(*) from job_tb where job_tb.division_id=division_tb.division_id and status = '4' ) As s_job")
-        ->where("division_tb.division_status!=",'1') //แสดงหน่วยงานต้องส่งมอบงาน
         ->join("job_tb","division_tb.division_id = job_tb.division_id","left")
-        ->groupBy('division_tb.division_id,division_tb.division_name,division_tb.division_status')
+        ->where("division_tb.division_status!=",'1'); //แสดงหน่วยงานต้องส่งมอบงาน
+        // if($_SESSION['usertbl']['level'] != 'admin'){
+        //     $divisionmodel ->where("division_tb.division_id",$_SESSION['usertbl']['division_id']);
+        // }
+        $divisionmodel->groupBy('division_tb.division_id,division_tb.division_name,division_tb.division_status')
         ->orderBy('division_id','asc');
         $dv_rs = $divisionmodel->findAll();
         $jobmodel1 = new jobModel();
@@ -84,10 +90,15 @@ class Home extends BaseController
     //ดู job
     public function showjob($division=null)
     {
+        
         $divisionmodel1 = new divisionModel();
+       
         $divisionmodel1  ->select('division_tb.division_id,division_tb.division_name,division_status')
-        ->where("division_tb.division_status!=",'1') //แสดงหน่วยงานต้องส่งมอบงาน
-        ->groupBy('division_tb.division_id,division_tb.division_name,division_status')
+        ->where("division_tb.division_status!=",'1'); //แสดงหน่วยงานต้องส่งมอบงาน
+        // if($_SESSION['usertbl']['level'] != 'admin'){
+        //     $divisionmodel1 ->where("division_tb.division_id",$_SESSION['usertbl']['division_id']);
+        // }
+       $divisionmodel1->groupBy('division_tb.division_id,division_tb.division_name,division_status')
         ->orderBy('division_tb.division_id','asc');
         $division_rs1 = $divisionmodel1->findAll();
         $rs_datenow1 = new Date();
@@ -129,11 +140,22 @@ class Home extends BaseController
         foreach($job_rs1 as $key => $date_th){
             $job_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
             $job_rs1[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
+           
         }
+        if($divisionid1 == $_SESSION['usertbl']['division_id']){
+            $cedit = 'can';
+        }else{
+            $cedit = 'cant';
+        }
+        
+        // $job_rs1 = array_merge($job_rs1,$cedit);
+        // print_r($job_rs1);
         $return = [
             'division'=> $division_rs1,
             'job'=> $job_rs1,
-            'flag'=>'afterselect'
+            'flag'=>'afterselect',
+            'cedit'=>$cedit
+
         ];
         header('Content-Type: application/json');
         echo json_encode( $return );
@@ -143,6 +165,8 @@ class Home extends BaseController
     //คลิก job ดู process
     public function showjobselect($job_id=null)
     {
+        $rs_datenow1 = new Date();
+        $rs_datenow = $rs_datenow1->Datethaifull(date("Y-m-d"));
         $jobmodel1 = new jobModel();
         $jobdivision = $jobmodel1 ->select('division_id')
         ->where('job_id',$job_id)
@@ -158,7 +182,8 @@ class Home extends BaseController
         $job_rs1 = $jobmodel1->findAll();
         $return = [
             'job'=> $job_rs1,
-            'job_id'=> $job_id
+            'job_id'=> $job_id,
+
         ];
 
         return view('spica/page/showprocess',$return);
