@@ -180,6 +180,11 @@ class Home extends BaseController
         ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish')
         ->orderBy('job_id','asc');
         $job_rs1 = $jobmodel1->findAll();
+        foreach($job_rs1 as $key => $str_th){
+            if(strlen($job_rs1[$key]['job_name']) > 150){
+                $job_rs1[$key]['job_name'] = mb_substr($str_th['job_name'], 0, 152).'...';
+            }
+        }
         $return = [
             'job'=> $job_rs1,
             'job_id'=> $job_id,
@@ -195,8 +200,6 @@ class Home extends BaseController
         $jobdivision = $jobmodel1 ->select('division_id')
         ->where('job_id',$job_id)
         ->first();
-        
-
         $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,job_finish')
         // -> select ('CURRENT_DATE-job_end as dateremain')
         ->where('job_tb.division_id', $jobdivision["division_id"] )
@@ -204,6 +207,11 @@ class Home extends BaseController
         ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish')
         ->orderBy('job_id','asc');
         $job_rs1 = $jobmodel1->findAll();
+        foreach($job_rs1 as $key => $str_th){
+            if(strlen($job_rs1['job_name']) > 150){
+                $job_rs1[$key]['job_name'] = mb_substr($str_th['job_name'], 0, 152).'...';
+            }
+        }
         $return = [
             'job'=> $job_rs1,
             // 'job_id'=> $job_id
@@ -292,7 +300,11 @@ public function showprocess(){
     ->groupBy('job_tb.job_id,job_tb.job_name ')
     ->orderBy('job_id','asc');
     $job_rs = $jobmodel->findAll();
-   
+    foreach($job_rs as $key){
+        if(strlen($job_rs['job_name']) > 150){
+            $job_rs[$key]['job_name'] = mb_substr($job_rs['job_name'], 0, 152).'...';
+        }
+    }
 
     $processmodel = new processModel();
     $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status,process_tb.status ')
@@ -317,6 +329,7 @@ public function showprocess(){
         $process_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
         $process_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
     }
+  
     // foreach($processfinish_rs as $key => $date_th){
     //     $processfinfish_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
     //     $processfinfish_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
