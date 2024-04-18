@@ -41,7 +41,7 @@ class Date
 		$text = $strtextday[$textday];
 		$strMonth = Array("","มกราคม","กุมภาพันธ์","มีนาคม","เมษายน","พฤษภาคม","มิถุนายน","กรกฎาคม","สิงหาคม","กันยายน","ตุลาคม","พฤศจิกายน","ธันวาคม");
 		$strMonthThai=$strMonth[$month];
-		return "$text $day $strMonthThai $year";
+		return "วัน".$text."ที่ ". "$day $strMonthThai $year";
 	}
 }
 
