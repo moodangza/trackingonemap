@@ -224,15 +224,15 @@ function showjobselect(divid){
             '<br> วันที่เริ่ม :'+ element.job_start + '<br> วันที่สิ้นสุด :'+ element.job_end +
             '</div>'+
             '<div class="col-4" class="text-right">'+
-              '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
+            (cedit == 'can' ?  '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
                   '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
-                '</button>'+
+                '</button>': '') +
                 '<a href="/showjobselect1/'+element.job_id+'" class="btn btn-success">'+
                   '<i class="fa fa-eye" aria-hidden="true" ></i>'+
                 '</a>'+
-                '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+
+                (cedit == 'can' ?  '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+
                 '<i class="fa fa-trash" aria-hidden="true"></i></i> '+
-                '</button>'+
+                '</button>': '') +
             '</div>'+
           '</li>'+
       '</ul>'

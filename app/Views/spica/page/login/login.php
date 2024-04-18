@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V18</title>
+	<title>Login tracking onemap</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -34,14 +34,14 @@
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" method="post" action="<?php echo base_url('ckuser');?>">
 					<span class="login100-form-title p-b-43">
-						Login to continue
+						Login to tracking onemap
 					</span>
 					
 				
 					<div class="wrap-input100 validate-input" >
 						<input class="input100" type="text" name="username">
 						<span class="focus-input100"></span>
-						<span class="label-input100">Email</span>
+						<span class="label-input100">Username</span>
 					</div>
 					
 					
@@ -70,7 +70,7 @@
 					<div class="container-login100-form-btn">
 						
 						<button type="submit" value="Submit" class="login100-form-btn">
-							Login
+							เข้าสู่ระบบ
 						</button>
 					</div>
 					
