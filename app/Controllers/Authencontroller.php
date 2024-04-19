@@ -15,7 +15,7 @@ class Authencontroller extends BaseController
        ->where('user_name',$_POST['username']);
        $user_rs = $usermodel->first();
         if(isset($user_rs['division_id']) && $user_rs['division_id'] == '13'){
-            if($user_rs['division_id']==13){
+            if($user_rs['division_id']==13 && md5($_POST['pass'].'onlb+-') != $user_rs['password']){
                 $ldap_au = new LDAPLibrary;
                 $ldap_rs = $ldap_au ->login($_POST['username'],$_POST['pass']);
                 print_r($ldap_rs);
@@ -46,6 +46,7 @@ class Authencontroller extends BaseController
                 
                 ];
                 $session->set($arr);
+                echo 'aaaa';
                 return redirect()->to('/'); 
             } else{
                 echo '<script type ="text/JavaScript">';  

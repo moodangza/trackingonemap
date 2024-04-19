@@ -145,19 +145,13 @@ class Home extends BaseController
             $job_rs1[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
            
         }
-        if($divisionid1 == $_SESSION['usertbl']['division_id']){
-            $cedit = 'can';
-        }else{
-            $cedit = 'cant';
-        }
-  
-        // $job_rs1 = array_merge($job_rs1,$cedit);
-        // print_r($job_rs1);
+     
+       
         $return = [
             'division'=> $division_rs1,
             'job'=> $job_rs1,
             'flag'=>'afterselect',
-            'cedit'=>$cedit
+       
 
         ];
         header('Content-Type: application/json');
@@ -303,11 +297,13 @@ public function showprocess(){
     ->groupBy('job_tb.job_id,job_tb.job_name ')
     ->orderBy('job_id','asc');
     $job_rs = $jobmodel->findAll();
-    foreach($job_rs as $key => $str_th){
-        if(strlen($job_rs['job_name']) > 150){
-            $job_rs[$key]['job_name'] = mb_substr($str_th['job_name'], 0, 152).'...';
-        }
-    }
+    // foreach($job_rs as $key => $str_th){
+    //     if(strlen($job_rs['job_name']) > 150){
+    //         $job_rs[$key]['job_name'] = mb_substr($str_th['job_name'], 0, 152).'...';
+    //     }else{
+    //         $job_rs[$key]['job_name'] = $str_th['job_name'];
+    //     }
+    // }
 
     $processmodel = new processModel();
     $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status,process_tb.status ')
@@ -324,7 +320,8 @@ public function showprocess(){
         $process_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
         $process_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
     }
-  
+    $can = new Ckedit();
+    $cedit = $can->ckcan($jobdivision["division_id"]);
     // foreach($processfinish_rs as $key => $date_th){
     //     $processfinfish_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
     //     $processfinfish_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
@@ -333,6 +330,7 @@ public function showprocess(){
         'job'=> $job_rs,
         'process' => $process_rs ,
        'job_id'=>$jobid1,
+       'cedit'=>$cedit,
        
     ];
     header('Content-Type: application/json');
@@ -360,10 +358,12 @@ public function showprocess(){
             $job_rs[$key]['job_startpic'] = $dateth->Dateinpicker($date_th['job_start']);
             $job_rs[$key]['job_endpic'] = $dateth->Dateinpicker($date_th['job_end']);
         }
-        
+        $can = new Ckedit();
+        $cedit = $can->ckcan($jobdivisionid["division_id"]);
         $data = [
             'job'=> $job_rs,
-            'flag'=> 'add'
+            'flag'=> 'add',
+            'cedit'=>$cedit,
         ];
             if($job_id !=''){
             return view('spica/page/formprocess',$data);
@@ -375,12 +375,12 @@ public function formupdateprocess($process_id){
     // print_r($process_id);
     // exit;
     $updateprocessmodel = new processModel();
-    $updateprocessmodel ->select('job_tb.job_id,job_tb.job_name,job_tb.job_start,job_tb.job_end')
+    $updateprocessmodel ->select('job_tb.job_id,job_tb.job_name,job_tb.job_start,job_tb.job_end,job_tb.division_id')
     ->select('process_tb.process_id,process_tb.process_name,process_tb.process_start,process_end,detail,process_tb.status')
     ->join('job_tb','job_tb.job_id = process_tb.job_id','inner')
     ->where('process_tb.process_id', $process_id )
     ->where('process_tb.delete_flag', '1') 
-    ->groupBy('job_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status,process_tb.status ');
+    ->groupBy('job_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status,process_tb.status,job_tb.division_id ');
     $process_rs1 = $updateprocessmodel->findAll();
     
     // print_r($process_rs1);
@@ -409,10 +409,13 @@ public function formupdateprocess($process_id){
         $subprocess_rs1[$key]['subprocess_start'] = $dateth->Dateinpicker($date_th['subprocess_start']);
         $subprocess_rs1[$key]['subprocess_end'] = $dateth->Dateinpicker($date_th['subprocess_start']);
     }
+    $can = new Ckedit();
+    $cedit = $can->ckcan($process_rs1["0"]["division_id"]);
     $returndata = [
         'job'=> $process_rs1,
         'subprocess' =>$subprocess_rs1,
         'flag' => $text,
+        'cedit' => $cedit,
     ];
     // print_r($returndata);
     // exit;
