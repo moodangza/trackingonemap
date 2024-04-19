@@ -20,20 +20,25 @@ class Authencontroller extends BaseController
                 $ldap_rs = $ldap_au ->login($_POST['username'],$_POST['pass']);
                 print_r($ldap_rs);
                 // exit;
-            if(isset($ldap_rs['user'])){
+                if(isset($ldap_rs['user'])){
+                    
+                    $arr = [
+                        'usertbl' => $user_rs,
+                        'userldap' => $ldap_rs,
+                    ];
                 
-                $arr = [
-                    'usertbl' => $user_rs,
-                    'userldap' => $ldap_rs,
-                ];
-            
-                $session->set($arr);
-                return redirect()->to('/'); 
-            }
-            if(isset($ldap_rs['error'])){
-                return redirect()->to('login'); 
-                die(0);
-            }
+                    $session->set($arr);
+                    return redirect()->to('/'); 
+                }
+                if(isset($ldap_rs['error'])){
+                    echo '<script type ="text/JavaScript">';  
+                    echo 'alert("ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง");';  
+                    echo 'location.href = "login";';
+                    echo '</script>';  
+
+                    // return redirect()->to('login'); 
+                    die(0);
+                }
             }elseif(md5($_POST['pass'].'onlb+-') == $user_rs['password']){
                 
                 $arr = [
@@ -44,22 +49,30 @@ class Authencontroller extends BaseController
                 echo 'aaaa';
                 return redirect()->to('/'); 
             } else{
-                return redirect()->to('login'); 
+                echo '<script type ="text/JavaScript">';  
+                echo 'alert("ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง");';  
+                echo 'location.href = "login";';
+                echo '</script>';  
+                // return redirect()->to('login'); 
                 die(0);
             }
         }
         else if(md5($_POST['pass'].'onlb+-') == $user_rs['password']) {
-     echo 'ไม่ใช่ onlb แต่ login ถูก';
-     $arr = [
-        'usertbl' => $user_rs,
-    
-    ];
-    $session->set($arr);
+            echo 'ไม่ใช่ onlb แต่ login ถูก';
+            $arr = [
+                'usertbl' => $user_rs,
+            
+            ];
+            $session->set($arr);
             return redirect()->to('/'); 
         }
         else{
-            echo 'ไม่ใช่ onlb แต่ login ผิด';
-            return redirect()->to('login'); 
+            echo '<script type ="text/JavaScript">';  
+            echo 'alert("ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง");';  
+            echo 'location.href = "login";';
+            echo '</script>';   
+            // echo 'ไม่ใช่ onlb แต่ login ผิด';
+            // return redirect()->to('login'); 
             die(0);
         }
     }
