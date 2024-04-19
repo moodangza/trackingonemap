@@ -93,6 +93,7 @@
      <?php echo $this->include('templates/navbar');?>
       <!-- partial -->
       <div class="main-panel">
+        <?php print_r($_SESSION);?>
       <div class="modal fade modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" data-bs-backdrop="static"
        data-bs-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -144,7 +145,9 @@
       <div class="modal-footer ">
         <div class="text-center">
           <button type="button" class="btn btn-secondary closemodal" data-dismiss="modal">Close</button>
+          <?php if($_SESSION['usertbl']['level'] == 'aprove'){?>
           <button type="button" class="btn btn-primary approvejob">อนุมัติการทำงาน</button>
+            <?php }?>
         </div>
         
       </div>
@@ -186,7 +189,9 @@
       <div class="modal-footer ">
         <div class="text-center">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <?php if($_SESSION['usertbl']['level'] == 'aprove'){?>
           <button type="button" class="btn btn-primary approvejob">อนุมัติการทำงาน</button>
+          <?php }?>
         </div>
         
       </div>
