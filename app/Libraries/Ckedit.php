@@ -11,14 +11,5 @@ namespace App\Libraries;
         }
         return $cedit;
     }
-    public function ckacan($level)
-      {
-        if($level == $_SESSION['usertbl']['level']){
-            $caedit = 'can';
-        }else{
-            $caedit = 'cant';
-        }
-        return $caedit;
-    }
 }
 ?>        
