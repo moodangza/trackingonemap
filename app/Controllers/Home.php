@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Controllers;
+
+
 use App\Models\jobModel;
 use App\Models\approveModel;
 use App\Models\processModel;
 use App\Models\subprocessModel;
 use App\Models\divisionModel;
 use App\Libraries\Date;
+use App\Libraries\Ckedit;
 
 class Home extends BaseController
 {
@@ -147,7 +150,7 @@ class Home extends BaseController
         }else{
             $cedit = 'cant';
         }
-        
+  
         // $job_rs1 = array_merge($job_rs1,$cedit);
         // print_r($job_rs1);
         $return = [
@@ -171,8 +174,6 @@ class Home extends BaseController
         $jobdivision = $jobmodel1 ->select('division_id')
         ->where('job_id',$job_id)
         ->first();
-        
-
         $jobmodel1  ->select('job_tb.job_id,job_tb.job_name,status,job_finish')
         // -> select ('CURRENT_DATE-job_end as dateremain')
         ->where('job_tb.division_id', $jobdivision["division_id"] )
@@ -185,10 +186,12 @@ class Home extends BaseController
                 $job_rs1[$key]['job_name'] = mb_substr($str_th['job_name'], 0, 152).'...';
             }
         }
+        $can = new Ckedit();
+        $cedit = $can->ckcan($jobdivision["division_id"]);
         $return = [
             'job'=> $job_rs1,
             'job_id'=> $job_id,
-
+            'cedit'=>$cedit,
         ];
 
         return view('spica/page/showprocess',$return);
@@ -300,9 +303,9 @@ public function showprocess(){
     ->groupBy('job_tb.job_id,job_tb.job_name ')
     ->orderBy('job_id','asc');
     $job_rs = $jobmodel->findAll();
-    foreach($job_rs as $key){
+    foreach($job_rs as $key => $str_th){
         if(strlen($job_rs['job_name']) > 150){
-            $job_rs[$key]['job_name'] = mb_substr($job_rs['job_name'], 0, 152).'...';
+            $job_rs[$key]['job_name'] = mb_substr($str_th['job_name'], 0, 152).'...';
         }
     }
 
@@ -311,19 +314,11 @@ public function showprocess(){
     ->where('delete_flag', '1') 
     ->where('process_finish ',NULL)
     ->where('process_tb.job_id', $jobid1 )
-    ->groupBy('process_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status,process_tb.status ')
+    ->groupBy('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status,process_tb.status ')
     ->orderBy('process_start','asc');
 
     $process_rs = $processmodel->findAll();
 
-    // $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status')
-    // ->where('delete_flag', '1') 
-    // ->where('process_finish != ',NULL)
-    // ->where('process_tb.job_id', $jobid1 )
-    // ->groupBy('process_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
-    // ->orderBy('process_start','asc');
-
-    // $processfinish_rs = $processmodel->findAll();
     $dateth = new Date();
     foreach($process_rs as $key => $date_th){
         $process_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
