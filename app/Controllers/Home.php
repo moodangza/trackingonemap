@@ -145,13 +145,15 @@ class Home extends BaseController
             $job_rs1[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
            
         }
-     
+        $can = new Ckedit();
+        $cedit = $can->ckcan($divisionid1);
+
        
         $return = [
             'division'=> $division_rs1,
             'job'=> $job_rs1,
             'flag'=>'afterselect',
-       
+            'cedit'=>$cedit,
 
         ];
         header('Content-Type: application/json');

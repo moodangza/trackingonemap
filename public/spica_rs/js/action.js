@@ -81,7 +81,7 @@ $(document).on( "click",".addsubprocess", function() {
 //
   $(document).ready(function() {
     $('#urladdprocess').hide();
-    $('#addjob').hide();
+    // $('#addjob').hide();
 //ปฏิทิน
   $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date,#editjob_start,#editjob_end').datepicker({
     language:'th-th',
