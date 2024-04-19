@@ -249,9 +249,11 @@
                            <?php if($flag != 'add'){?>
                             <div class="row">
                                     <div class="col-2">
+                                    <?php if($cedit == 'can'){?>
                                         <button class="btn btn-primary formaddsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
                                             <i class="fa fa-plus-square"></i> เพิ่ม
                                         </button>
+                                        <?php }?>
                                     </div>
                                    
                                         <div class="form-group row subprocess " id="subprocess">
@@ -298,11 +300,12 @@
                                                     </div>
                                                     </td>
                                                     <td nowrap>
+                                                    <?php if($cedit == 'can'){?>
                                                     <?php if($rsub['subprocess_finish']==''){?>
                                                         <button class='btn btn-warning' type="button" id="editsub" onclick="editsubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-pencil'></i> แก้ไข</button>
                                                         <button class='btn btn-success' type="button" id="confirmsub" onclick="confirmsubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-check'></i> ยืนยัน</button>
                                                         <button class='btn btn-danger' type="button" id="deletesub" onclick="deletesubprocess(<?php echo $rsub['subprocess_id'];?>)"><i class='fa fa-times-circle'></i> ลบ</button>
-                                                    <?php }?>
+                                                    <?php }}?>
                                                     </td>
                                                    </tr>
                                                    <?php }
@@ -317,11 +320,13 @@
                             <?php }?>
                             <div class="row">
                                     <div class="col-12 text-center">
+                                    <?php if($cedit == 'can'){?>
                                         <?php if($flag=='add'){?>
                                                 <button class="btn btn-success insertprocess" type="button" >บันทึก</button>
                                         <?php }else if($flag=='update'){?>
                                             <button class="btn btn-warning updateprocess" type="button" >แก้ไข</button>
                                             <?php } ?>
+                                            <?php }?>
                                           <a class="btn btn-danger"  href="<?php echo base_url('showjobselect/'.$job_id);?>">ย้อนกลับ</a>
                                           
                                     </div>

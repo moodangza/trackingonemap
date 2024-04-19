@@ -256,7 +256,7 @@ function showjobselect(divid){
 
 
 function jobselect(jobid){
-  $('#urladdprocess').show();
+ 
   $.ajax(
     {
       
@@ -266,7 +266,13 @@ function jobselect(jobid){
     data: { jobid1: jobid},
     success: function (data) {
       var a = JSON.parse(data);
-      console.log(a.job_id);
+      console.log(a.cedit);
+      if(a.cedit=='can'){
+        $('#urladdprocess').show();
+      }else{
+        $('#urladdprocess').hide();
+      }
+      
      
       $('#processitem').html('');
       $('#finishprocessitem').html('');
@@ -287,19 +293,17 @@ function jobselect(jobid){
           '</div>'+
           '<div class="col-4" class="text-right">'+
           '<div class="text-right">'+
-          '<a class="btn btn-warning" href="/formupdateprocess/'+element.process_id+'" title="แก้ไข">'+ 
+          (a.cedit == 'can' ?  '<a class="btn btn-warning" href="/formupdateprocess/'+element.process_id+'" title="แก้ไข">'+
           '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>'+
           '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน">'+
           '<i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
           '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ">'+
-          '<i class="fa fa-window-close" aria-hidden="true"></i></button>'+
-          
-          
+          '<i class="fa fa-window-close" aria-hidden="true"></i></button>': '')+
+          (a.cedit == 'cant' ? '<a class="btn btn-success" href="/formupdateprocess/'+element.process_id+'" title="ดูข้อมูล">'+
+          '<i class="fa fa-search" aria-hidden="true"></i></a>': '')+
           '</div></div>'+
-          
           '</li>'+
           '</div>'+
-          
           '</ul>'
           
           
