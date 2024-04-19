@@ -131,8 +131,7 @@ data-bs-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="
     </div>
     </div>
     </div>
-    <br>   <br>   <br>
-    
+  
   <!-- formodalupdate -->
     <div id="myModaledit" class="modal fade modal-lg"  tabindex="-1" role="dialog" data-bs-backdrop="static" 
         data-bs-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
