@@ -178,7 +178,7 @@ data-bs-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="
     </div>
 
             <div class="row mt-5">          
-            <div class="col-lg-6 grid-margin stretch-card">
+            <div class="col-lg-6 grid-margin stretch-card" style="height: fit-content">
             <div class="card">
             <div class="card-body">
             <div class="list-group">
@@ -195,7 +195,7 @@ data-bs-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="
               </div>
             </div>
 
-            <div class="col-lg-6 grid-margin stretch-card">
+            <div class="col-lg-6 grid-margin stretch-card" style="height: fit-content">
               <div class="card">
                 <div class="card-body">
                   <div class="list-group">
@@ -213,7 +213,7 @@ data-bs-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="
               </div>
             </div>
 
-            <div class="col-lg-6 grid-margin stretch-card">
+            <div class="col-lg-6 grid-margin stretch-card" style="height: fit-content">
               <div class="card">
                 <div class="card-body">
                   <div class="list-group">
@@ -229,7 +229,7 @@ data-bs-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="
               </div>
             </div>
 
-            <div class="col-lg-6 grid-margin stretch-card">
+            <div class="col-lg-6 grid-margin stretch-card" style="height: fit-content">
               <div class="card">
                 <div class="card-body">
                   <div class="list-group">
