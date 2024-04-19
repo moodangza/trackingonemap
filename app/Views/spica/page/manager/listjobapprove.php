@@ -42,6 +42,9 @@
         left: 50%;
         transform: translate(-50%, -50%);
 }
+
+
+
 </style>  
 <?php 
  function cardlistjobapprove($rs_job)
@@ -107,7 +110,7 @@
       <div class="modal-body">
             <div class="row">
                 <div class="col-12">
-                        <div class="card">
+                        <div class="card" style="height: 100%;">
                           <div class="card-header text-center border">
                             <h5 id="job_name" class="card-title align-middle">หัวข้อการทำงาน</h5>
                           <input type="hidden" id="job_id" value="">
@@ -125,11 +128,15 @@
                                       
                                 </div>
                                 <div class="mb-3 radiapprove">
+                                <?php if($_SESSION['usertbl']['level'] == 'aprove'){?>
                                   <h6 style="background-color: lightgray;">&nbsp;ผลการอนุมัติ</h6>
                                     <div class="text-center">
+                                   
                                       <input class="radioapprove" type="radio" name="radioapprove" id="radioapprove" value="0"> ไม่อนุมัติ
-                                                                      <input class="radioapprove" type="radio" name="radioapprove" id="radioapprove1" value="1"> อนุมัติ<br>
-                                    </div>
+                                      <input class="radioapprove" type="radio" name="radioapprove" id="radioapprove1" value="1"> อนุมัติ<br>
+                                     
+                                    </div> 
+                                    <?php } ?>
                                 </div>
 
                                 <div id="reason">
@@ -168,7 +175,7 @@
       <div class="modal-body">
             <div class="row">
                 <div class="col-12">
-                        <div class="card">
+                        <div class="card" >
                           <div class="card-header text-center border">
                             <h5 id="job_name" class="card-title align-middle">โปรดกรอกเหตุผลที่ไม่อนุมัติขั้นตอนการทำงาน</h5>
                             <div class="form-floating mb-3">
@@ -218,7 +225,7 @@
                         <b>กำลังดำเนินการ</b>
                     </div>
                 
-                    <div class="card-body">
+                    <div class="card-body overflow-scroll">
                 
                   <div class="candidate-list">
                   <?php foreach($showjob as $rs_job){?>
@@ -238,7 +245,7 @@
                     <div class="card-head bg-warning text-center" style="padding: 10px;color:white;">
                         <b>รออนุมัติ</b>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body scroll">
                   <div class="candidate-list">
                   <?php foreach($showjob as $rs_job){?>
                     <?php if($rs_job["status"] == 3){
@@ -256,7 +263,7 @@
                     <div class="card-head bg-success text-center" style="padding: 10px; color:white;">
                         <b>อนุมัติเสร็จสิ้น</b>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body scroll">
                   <div class="candidate-list">
                   <?php foreach($showjob as $rs_job){?>
                   
