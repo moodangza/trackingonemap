@@ -10,6 +10,9 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('login','Home::login');
 $routes->post('ckuser','Authencontroller::ckuser');
 // 
+$routes->set404Override(function(){
+    return view('spica/page/error404');
+});
 $routes->group('', ['filter' => 'auth'], function($routes){
 $routes->get('/', 'Home::index');
 $routes->get('showdata','Home::showdata');
