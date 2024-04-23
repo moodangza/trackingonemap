@@ -56,6 +56,7 @@ function manageuserform(user_id){
   }
   function updateuser(user_id)
   {
+    alert('aaaab');
     var password = $('#password').val();
     var level = $('#level').val(); 
     $.ajax(
@@ -64,8 +65,8 @@ function manageuserform(user_id){
       type: "post",
       dataType: "json",
       data: { user_id: user_id,password: password,level: level},
-      success: function (data) {
-        alert('แก้ไขข้อมูลสำเร็จ');
+      success: function () {
+        $('#manageusermodal').modal('close');
         location.reload();
       }
   });  
