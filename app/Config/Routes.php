@@ -54,6 +54,7 @@ $routes->post('rejectapprove','Approvecontroller::rejectapprove');
 // ส่วน usermanage
 $routes->get('usermanage','Usermanagecontroller::usermanage');
 $routes->post('manageuserform','Usermanagecontroller::manageuserform');
+$routes->post('updateuser','Usermanagecontroller::updateuser');
 // 
 $routes->get('logout','Authencontroller::logout');
 });

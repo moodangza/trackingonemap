@@ -40,18 +40,31 @@ class Usermanagecontroller extends BaseController
         header('Content-Type: application/json');
         echo json_encode( $return );
     }
-    // public function deletesubprocess()
-    // {
-    //     $deletesubprocess = new subprocessModel();
-    //     $datasubprocess = array('delete_flag'=>'0',
-    //                           'deleted_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-    //                           'delete_by'=>$_SESSION['usertbl']['user_name']
-    //                         );
-    //     $deletesubprocess ->set($datasubprocess) ->where('subprocess_id',$subprocessid) -> update();
+    public function updateuser()
+    {   
+        $updateuserid = $this->request->getVar('user_id');
+        $ckuser = new userModel();
+        $ckuser->select('*')
+                ->where('user_tb.user_id',$updateuserid);
+                $ck_rs = $ckuser->first();
+
+
+        $updateusermodel = new userModel();
+        if(md5($_POST['password'].'onlb+-') != $ck_rs['password']){
+            $password = md5($_POST['password'].'onlb+-');
+        }else{
+            $password =$ck_rs['password'];
+        }
+        $updateuser = array(
+                                'password'=>$password,
+                              'level'=>$_POST["level"]
+                            );
+                          
+        $updateusermodel ->set($updateuser) ->where('user_id',$updateuserid ) -> update();
         
         
        
-    // }
+    }
     // public function confirmprocess($process_id)
     // {
     //     // echo $process_id;

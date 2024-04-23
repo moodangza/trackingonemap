@@ -54,3 +54,19 @@ function manageuserform(user_id){
       }
   });   
   }
+  function updateuser(user_id)
+  {
+    var password = $('#password').val();
+    var level = $('#level').val(); 
+    $.ajax(
+      {
+      url: "/updateuser",
+      type: "post",
+      dataType: "json",
+      data: { user_id: user_id,password: password,level: level},
+      success: function (data) {
+        alert('แก้ไขข้อมูลสำเร็จ');
+        location.reload();
+      }
+  });  
+  }

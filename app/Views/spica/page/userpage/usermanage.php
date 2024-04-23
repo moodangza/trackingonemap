@@ -72,13 +72,22 @@
                          
                             <div class="card-body">
                             <div class="mb-3 row">
-    <label for="staticusername" class="col-sm-2 col-form-label">username</label>
+    <label for="staticusername" class="col-sm-2 col-form-label">Username</label>
     <div class="col-sm-10">
       <input type="text" readonly class="form-control-plaintext" id="staticusername" value="">
     </div>
   </div>
+  <div class="mb-2 row">
+  <label for="password">Password</label>
+    <div class="col-sm-10">
+    <input type="password" class="form-control" id="password" maxlength="25" placeholder="Password">
+    <small id="password"  class="text-muted">
+      สามารถใส่รหัสผ่านได้สูงสุด 25 ตัว
+    </small>
+    </div>
+  </div>
   <div class="mb-3 row">
-    <label for="inputPassword" nowrap class="col-sm-2 col-form-label d-inline-flex">เลือกประเภทผู้ใช้</label>
+    <label for="inputlevel" nowrap class="col-sm-2 col-form-label d-inline-flex">เลือกประเภทผู้ใช้</label>
     <div class="col-sm-10">
       <select id="level" style="width: fit-content;" class="form-select" aria-label="Default select example">
         <option value="user">ผู้ใช้ทั่วไป</option>
@@ -103,14 +112,10 @@
     </div>
   </div>
 </div>
-
-
-
         <div class="content-wrapper">
           <div class="row">
             <div class="col-12 col-xl-12 grid-margin stretch-card">
               <div class="row w-100 flex-grow">
-
               <div class="row">
             <div class="col-12 col-xl-12 grid-margin stretch-card">
               <div class="row w-100 flex-grow" style="justify-content: center">
@@ -118,14 +123,13 @@
               </div>
             </div>
               </div>  
-              
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-head bg-primary text-center" style="padding: 10px;color:white;">
                         <b>user</b>
                     </div>
-                
                     <div class="card-body ">
+                      <button class="btn btn-primary" onclick="">เพิ่มผู้ใช้ <i class="fa fa-plus-square"></i></button>
                     <table class="table table-striped">
   <thead>
     <tr>
