@@ -51,6 +51,10 @@ $routes->get('listjobapprove/(:num)','Approvecontroller::listjobapprove/$1');
 $routes->post('detailapprove','Approvecontroller::detailapprove');
 $routes->post('confirmapprove','Approvecontroller::confirmapprove');
 $routes->post('rejectapprove','Approvecontroller::rejectapprove');
+// ส่วน usermanage
+$routes->get('usermanage','Usermanagecontroller::usermanage');
+$routes->post('manageuserform','Usermanagecontroller::manageuserform');
+// 
 $routes->get('logout','Authencontroller::logout');
 });
 // ต้อง login ถึงจะทำงานได้

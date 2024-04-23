@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<?php echo $this->extend('templates/header'); ?>
+<?php echo $this->section('content'); ?>
+<style>
+.bookmark-post .favorite-icon a, .job-box.bookmark-post .favorite-icon a {
+    background-color: #da3746;
+    color: #fff;
+    border-color: danger;
+}
+.favorite-icon a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #eff0f2;
+    border-radius: 6px;
+    color: rgba(173,181,189,.55);
+    -webkit-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+
+.candidate-list-box .favorite-icon {
+    position: absolute;
+    right: 22px;
+    top: 22px;
+}
+.fs-14 {
+    font-size: 14px;
+}
+.modal{
+        position: absolute;
+        background-color: #ffffff;
+        border: 1px solid #cccccc;
+        width: 85%;
+        height: auto;
+        top: 65%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+}
+
+</style>  
+<body>
+  <div class="container-scroller d-flex">
+    <!-- partial:./partials/_sidebar.html -->
+   <?php echo $this->include('templates/menu');?>
+    <!-- partial -->
+    <div class="page-body-wrapper">
+      <!-- partial:./partials/_navbar.html -->
+     <?php echo $this->include('templates/navbar');?>
+      <!-- partial -->
+      <div class="main-panel">
+        <?php print_r($_SESSION);?>
+      <div class="modal fade modal-lg" id="manageusermodal" tabindex="-1" role="dialog" data-bs-backdrop="static"
+       data-bs-keyboard="false" aria-labelledby="manageusermodalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="manageusermodalLongTitle">รายละเอียด</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <div class="row">
+                <div class="col-12">
+                        <div class="card" style="height: 100%;">
+                         
+                            <div class="card-body">
+                            <div class="mb-3 row">
+    <label for="staticusername" class="col-sm-2 col-form-label">username</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" id="staticusername" value="">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="inputPassword" nowrap class="col-sm-2 col-form-label d-inline-flex">เลือกประเภทผู้ใช้</label>
+    <div class="col-sm-10">
+      <select id="level" style="width: fit-content;" class="form-select" aria-label="Default select example">
+        <option value="user">ผู้ใช้ทั่วไป</option>
+        <option value="aprove">ผู้อนุมัติ</option>
+      </select>
+    </div>
+  </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer ">
+        <div class="text-center">
+          <button type="button" class="btn btn-secondary closemodal" data-dismiss="modal">Close</button>
+         <button id="actionbutton" class="btn btn-warnning"></button>
+          <!-- <div id="actionbutton"></div> -->
+         
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-12 col-xl-12 grid-margin stretch-card">
+              <div class="row w-100 flex-grow">
+
+              <div class="row">
+            <div class="col-12 col-xl-12 grid-margin stretch-card">
+              <div class="row w-100 flex-grow" style="justify-content: center">
+                    <?php   echo $division_rs['division_name']; ?>
+              </div>
+            </div>
+              </div>  
+              
+                <div class="col-md-12 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-head bg-primary text-center" style="padding: 10px;color:white;">
+                        <b>user</b>
+                    </div>
+                
+                    <div class="card-body ">
+                    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">username</th>
+      <th scope="col">สถานะ</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php $i = 1;
+         foreach($user_rs as $rs){?>
+    <tr>
+      <th scope="row"> <?php echo $i; $i++;?></th>
+      <td><?php echo $rs["user_name"];?> </td>
+      <td><?php if($rs["level"]=='aprove'){
+                                            echo 'ผู้อนุมัติงาน';
+                                        }else{
+                                             echo 'ผู้ใช้ทั่วไป';
+                                            }?>
+      </td>
+      <td>
+            <button class="btn btn-warning" onclick="manageuserform('<?php echo $rs['user_id'];?>')">
+                <i class="fa fa-pencil " aria-hidden="true" ></i>
+            </button>
+    </td>
+    </tr>
+<?php }?>
+  </tbody>
+</table>
+                  
+              
+                </div>
+             
+            <!-- row end -->
+            </div>
+            </div>
+          
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  </div>
+      <!-- main-panel ends -->
+      <?php echo $this->include('templates/footer');?>
+    </div>
+    <!-- page-body-wrapper ends -->
+    
+  </div>
+
+        <!-- content-wrapper ends -->
+        <!-- partial:./partials/_footer.html -->
+         
+        <!-- partial -->
+     
+  <?php $this->endSection();?>
+</body>
+
+</html>
