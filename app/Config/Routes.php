@@ -55,6 +55,7 @@ $routes->post('rejectapprove','Approvecontroller::rejectapprove');
 $routes->get('usermanage','Usermanagecontroller::usermanage');
 $routes->post('manageuserform','Usermanagecontroller::manageuserform');
 $routes->post('updateuser','Usermanagecontroller::updateuser');
+$routes->post('adduser','Usermanagecontroller::adduser');
 // 
 $routes->get('logout','Authencontroller::logout');
 });

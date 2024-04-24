@@ -43,7 +43,8 @@
         transform: translate(-50%, -50%);
 }
 
-</style>  
+</style> 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
 <body>
   <div class="container-scroller d-flex">
     <!-- partial:./partials/_sidebar.html -->
@@ -74,11 +75,11 @@
                             <div class="mb-3 row">
     <label for="staticusername" class="col-sm-2 col-form-label">Username</label>
     <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="staticusername" value="">
+      <input type="text" readonly class="form-control" id="staticusername" value="" onchange="ckuser();">
     </div>
   </div>
   <div class="mb-2 row">
-  <label for="password">Password</label>
+  <label for="password" class="col-sm-2 col-form-label">Password</label>
     <div class="col-sm-10">
     <input type="password" class="form-control" id="password" maxlength="25" placeholder="Password">
     <small id="password"  class="text-muted">
@@ -87,7 +88,7 @@
     </div>
   </div>
   <div class="mb-3 row">
-    <label for="inputlevel" nowrap class="col-sm-2 col-form-label d-inline-flex">เลือกประเภทผู้ใช้</label>
+    <label for="inputlevel" nowrap class="col-sm-2 text-nowrap col-form-label d-inline-flex">เลือกประเภทผู้ใช้</label>
     <div class="col-sm-10">
       <select id="level" style="width: fit-content;" class="form-select" aria-label="Default select example">
         <option value="user">ผู้ใช้ทั่วไป</option>
@@ -95,6 +96,35 @@
       </select>
     </div>
   </div>
+  <div class="mb-3 row">
+  <label for="staticprefix" class="col-sm-2 text-nowrap col-form-label">คำนำหน้าชื่อ</label>
+  <div class="col-sm-3">
+  <select id="prefix" style="width: fit-content;" class="form-select" aria-label="Default select example">
+        <option value="นาย">นาย</option>
+        <option value="นาง">นาง</option>
+        <option value="นางสาว">นางสาว</option>
+      </select>
+     
+    </div>  
+  </div>
+  <div class="mb-3 row">
+    <label for="staticname" class="col-sm-1 text-nowrap col-form-label">ชื่อ</label>
+    <div class="col-sm-5">
+      <input type="text"  class="form-control" id="staticname" value="">
+    </div>
+    <label for="staticsurname" class="col-sm-1 text-nowrap col-form-label">นามสกุล&nbsp;</label>
+    <div class="col-sm-5">
+      <input type="text"  class="form-control" id="staticsurname" value="">
+    </div>
+  </div>
+  <div class="mb-3 row">
+    <label for="staticposition" class="col-sm-1 text-nowrap col-form-label">ตำแหน่ง</label>
+    <div class="col-sm-5">
+      <input type="text"  class="form-control" id="position" value="">
+    </div>
+   
+  </div>
+  
                             </div>
                         </div>
                 </div>
@@ -129,7 +159,7 @@
                         <b>user</b>
                     </div>
                     <div class="card-body ">
-                      <button class="btn btn-primary" onclick="">เพิ่มผู้ใช้ <i class="fa fa-plus-square"></i></button>
+                      <button class="btn btn-primary" onclick="adduserform('adduser');">เพิ่มผู้ใช้ <i class="fa fa-plus-square"></i></button>
                     <table class="table table-striped">
   <thead>
     <tr>

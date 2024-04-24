@@ -14,9 +14,9 @@ class Usermanagecontroller extends BaseController
         ->where('division_id',$_SESSION['usertbl']['division_id']);
         $division_rs = $divisionmodel->first();
         $usermodel = new userModel();
-        $usermodel ->select('user_id,user_name,level,user_tb.division_id')
-        ->where('user_tb.division_id',$division_rs['division_id'])
-        ->groupBy('user_id,user_name,level,user_tb.division_id');
+        $usermodel ->select('*')
+        ->where('user_tb.division_id',$division_rs['division_id']);
+       
         $user_rs = $usermodel->findAll();
         $returnuser = [
             'division_rs' =>$division_rs,
@@ -29,9 +29,8 @@ class Usermanagecontroller extends BaseController
     {
         $usermodel = new userModel();
         $userid = $this->request->getVar('user_id');
-        $usermodel ->select('user_id,user_name,level')
-        ->where('user_tb.user_id',$userid)
-        ->groupBy('user_id,user_name,level');
+        $usermodel ->select('user_id,user_name,level,prefix,name,surname,position')
+        ->where('user_tb.user_id',$userid);
         $user_rs = $usermodel->findAll();
         $return = [
             'user_rs'=> $user_rs,
@@ -61,28 +60,55 @@ class Usermanagecontroller extends BaseController
                             );
                           
         $updateusermodel ->set($updateuser) ->where('user_id',$updateuserid ) -> update();
+        $return =[
+                'success'=>'success',
+        ];
+        header('Content-Type: application/json');
+        echo json_encode( $return );
         
         
        
     }
-    // public function confirmprocess($process_id)
-    // {
-    //     // echo $process_id;
-    //     // exit;
-    //     $deleteprocess = new processModel();
-    //     $dataprocess = array('delete_flag'=>'1',
-    //                           'process_finish'=>date('Y-m-d'),
-    //                           'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-    //                             'status'=>'2',
-    //                             'delete_by'=>$_SESSION['usertbl']['user_name']
-    //                         );
-       
-    //     $deleteprocess ->set($dataprocess) ->where('process_id',$process_id) -> update();
-    //     $deletesubprocess = new subprocessModel();
-    //     $deletesubprocess ->set($dataprocess) ->where('process_id',$process_id) -> update();
+
+    public function saveuser()
+    {
+        // echo $process_id;
+        // exit;
+        
+        $addusermodel = new userModel();
+        
+        $password = md5($_POST['password'].'onlb+-');
+        
+        $addeuser = array(
+                                'user_name'=> $_POST['user_name'],
+                                'password'=> md5($_POST['password'].'onlb+-'),
+                                'level'=> $_POST["level"],
+                                'prefix'=> $_POST['prefix'],
+                                'name' =>$_POST['name'],
+                                'surname' =>$_POST['surname'],
+                                'position' =>$_POST['position']
+                            );
+                          
+                            $a = $addusermodel -> insert($addeuser);
         
        
-    // }
+    }
+    public function ckdupuser()
+    {
+        $ckdupuser = new userModel();
+        $ckdupuser ->select('*')
+        ->where('user_name',$_POST['user_name']);
+        $rsckdup = $ckdupuser->countAll() ;
+
+        if($rsckdup==1){
+            $rs = 'USER_EXISTS';
+        }else{
+            $rs = 'USER_AVAILABLE';
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode( $rs );
+    }
     // public function insertprocess()
     // {
     //     // print_r($_POST['e_sub_date']);
