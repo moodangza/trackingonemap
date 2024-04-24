@@ -28,6 +28,13 @@
         </li>
         
         <li class="nav-item">
+          <a class="nav-link" href="<?php echo base_url('settinguser');?>">
+            <i class="mdi mdi-view-headline menu-icon"></i>
+            <span class="menu-title">ตั้งค่าผู้ใช้งาน</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
           <a class="nav-link" href="<?php echo base_url('logout');?>">
           &nbsp;&nbsp;<i class="mdi mdi-logout"></i>
             <span class="menu-title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logout</span>

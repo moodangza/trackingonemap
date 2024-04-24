@@ -89,6 +89,23 @@ class Home extends BaseController
         ];
         return view('spica/index',$return);
     }
+
+    //ตั้งค่าผู้ใช้งาน
+    public function settinguser()
+    {
+        $setttigusermodel = new settinguser();
+        $setttigusermodel ->select('user_id,password,user_name,prefix,name,sername,position,level,division_id')
+        ->groupBy('user_id,password,user_name,prefix,name,sername,position,level,division_id')
+        ->orderBy('user_id','asc');
+        $setttigusermodel_rs = $setttigusermodel->findAll();
+        $returnsettinguser = [
+            'user'=> $setttigusermodel_rs
+            // 'divisionid'=> $division
+            
+        ];
+        
+        return view('spica/page/setting/setttiguser',$returnsettinguser);
+    }
  
     //ดู job
     public function showjob($division=null)

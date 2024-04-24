@@ -13,6 +13,7 @@ $routes->post('ckuser','Authencontroller::ckuser');
 $routes->group('', ['filter' => 'auth'], function($routes){
 $routes->get('/', 'Home::index');
 $routes->get('showdata','Home::showdata');
+$routes->get('settinguser','Home::settinguser');
 $routes->add('showjob','Home::showjob');
 $routes->add('showjob/(:num)','Home::showjob/$1');
 $routes->get('showprocess','Home::showprocess');
