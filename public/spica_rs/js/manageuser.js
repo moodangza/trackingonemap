@@ -86,15 +86,15 @@ function manageuserform(user_id){
   }
   function adduser(){
 
-  Swal.fire({
-    title: "ต้องการเพิ่มผู้ใช้ใช่หรือไม่?",
-    showDenyButton: true,
-    showCancelButton: false,
-    confirmButtonText: "Save",
-    denyButtonText: `Don't save`
-  }).then((result) => {
-    /* Read more about isConfirmed, isDenied below */
-    if (result.isConfirmed) {
+  // Swal.fire({
+  //   title: "ต้องการเพิ่มผู้ใช้ใช่หรือไม่?",
+  //   showDenyButton: true,
+  //   showCancelButton: false,
+  //   confirmButtonText: "Save",
+  //   denyButtonText: `Don't save`
+  // }).then((result) => {
+  //   /* Read more about isConfirmed, isDenied below */
+  //   if (result.isConfirmed) {
       Swal.fire("Saved!", "", "success");
       var user_name = $('#staticusername').val();
       var password = $('#password').val();
@@ -107,42 +107,48 @@ function manageuserform(user_id){
         {
         url: "/adduser",
         type: "post",
-        dataType: "json",
+        dataType: "text",
         data: { user_name: user_name,password: password,level: level, prefix: prefix, name:name, surname:surname , position:position},
         success: function (data) {
           $('#manageusermodal').modal('toggle');
           location.reload();
         }
     });  
-    } else if (result.isDenied) {
-      // Swal.fire("Changes are not saved", "", "info");
-      $('#manageusermodal').modal('toggle');
-      location.reload();
-    }
-  });
+  //   } else if (result.isDenied) {
+  //     // Swal.fire("Changes are not saved", "", "info");
+  //     $('#manageusermodal').modal('toggle');
+  //     location.reload();
+  //   }
+  // });
 }
 function ckdupuser()
-{
-  var user_name = $('#staticusername').val();
-  $.ajax(
-    {
-    url: "/ckdupuser",
-    type: "post",
-    dataType: "json",
-    data: { user_name: user_name},
-    success: function (data) {
-      if(data === 'USER_EXISTS')
-         {
-            $('#user')
-              .css('color', 'red')
-              .html("This user already exists!");
-          }
-      else if(data === 'USER_AVAILABLE')
-          {
-            $('#user')
-              .css('color', 'green')
-              .html("User available.");
-          }
-    }
-});  
-}
+  {
+    var user_name = $('#staticusername').val();
+    $.ajax(
+      {
+      url: "/ckdupuser",
+      type: "post",
+      dataType: "json",
+      data: { user_name: user_name},
+      success: function (data) {
+        var rs = data.rs;
+        console.log(rs);
+        if(rs == 'USER_EXISTS')
+           {
+              // alert(rs);
+              $('#staticusername')
+                .css('color', 'red')
+                .addClass("is-invalid");
+                $('#actionbutton').hide();
+            }
+        else if(rs == 'USER_AVAILABLE')
+            {
+              // alert(rs);
+              $('#staticusername')
+                // .css('color', 'green')
+                .removeClass("is-invalid");
+                $('#actionbutton').show();
+            }
+      }
+  });  
+  }

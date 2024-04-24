@@ -11,7 +11,13 @@ class userModel extends Model{
         protected $protectFields    = false;
         protected $allowedFields    = [
             'user_name',
-            'password'        
+            'password',
+            'level',
+            'division_id',
+            'prefix',
+            'name',
+            'surname', 
+            'position'       
         ];
 
          // Dates
