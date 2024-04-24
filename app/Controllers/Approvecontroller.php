@@ -120,8 +120,8 @@ class Approvecontroller extends BaseController
         $approvejob = new jobModel();
         $datajob = array(
                             'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+                            'status'=>'4',
                             
-                            'status'=>'4'
                         );
        
         $approvejob ->set($datajob) ->where('job_id',$job_id) -> update();
@@ -135,14 +135,16 @@ class Approvecontroller extends BaseController
       $confirmsubprocess = new subprocessModel();
         $dataprocess = array('subprocess_status'=>'2',
                               'subprocess_finish'=>date('Y-m-d'),
-                              'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
+                              'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+                              'update_by'=>$_SESSION['usertbl']['user_name']
     );
     $confirmsubprocess ->set($dataprocess) ->where('subprocess_id',$job_id) ->update();
     $approve = new approveModel();
     $data = array('job_id'=>$job_id,
     'approve_date'=>date('Y-m-d'),
     'approve_create'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-    'status'=>'1');
+    'status'=>'1',
+    'create_by'=>$_SESSION['usertbl']['user_name']);
     $approve -> insert($data);
        
     }
@@ -155,7 +157,8 @@ class Approvecontroller extends BaseController
         $approvejob = new jobModel();
         $datajob = array(
                             'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-                            'status'=>'2'
+                            'status'=>'2',
+                            'update_by'=>$_SESSION['usertbl']['user_name']
                         );
        
         $approvejob ->set($datajob) ->where('job_id',$job_id) -> update();
@@ -163,7 +166,8 @@ class Approvecontroller extends BaseController
         $approveprocess = new processModel();
         $dataprocess = array(
         'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-          'status'=>'2'
+          'status'=>'2',
+          'update_by'=>$_SESSION['usertbl']['user_name']
       );
 
       $confirmsubprocess = new subprocessModel();
@@ -178,7 +182,8 @@ class Approvecontroller extends BaseController
                         'reject_date'=>date('Y-m-d'),
                         'reject_detail'=>$_POST['reject_detail'],
                         'approve_create'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-                        'status'=>'0');
+                        'status'=>'0',
+                        'create_by'=>$_SESSION['usertbl']['user_name']);
     $approve -> insert($data);
        
     }

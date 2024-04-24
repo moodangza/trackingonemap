@@ -743,36 +743,6 @@ function deletesubprocess(subid){
               window.location.reload();
             }
       }); 
-  // let text = ('ท่านต้องการลบขั้นตอนการทำงานย่อยใช่หรือไม่');
-  // Swal.fire({
-  //   title: text,
-  //   showDenyButton: false,
-  //   showCancelButton: true,
-  //   confirmButtonText: "ยืนยัน",
-  //   cancelButtonText: "ยกเลิก",
-  //   // denyButtonText: `Don't save`
-  // }).then((result) => {
-  //   /* Read more about isConfirmed, isDenied below */
-  //   if (result.isConfirmed) {
-  //     // alert(subprocessid);
-  //     Swal.fire("ได้ทำการลบข้อมูลแล้ว!", "", "success");
-  //     // return false;
-  //     let subprocess_id = subprocessid;
-  //     $.ajax(
-  //       {
-  //       url: "deletesubprocess/"+subprocessid,
-  //       type: "post",
-  //       dataType: "text",
-  //       // data: { subprocessid: subprocess_id},
-  //       success: function (data) {
-  //         // window.location.reload(false);
-  //       }
-  //   }); 
-  //   } 
-  //   // else if (result.isDenied) {
-  //   //   Swal.fire("Changes are not saved", "", "info");
-  //   // }
-  // });
   }
 }
 $(document).on( "change",".selectjob", function() {

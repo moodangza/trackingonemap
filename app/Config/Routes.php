@@ -10,6 +10,9 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('login','Home::login');
 $routes->post('ckuser','Authencontroller::ckuser');
 // 
+$routes->set404Override(function(){
+    return view('spica/page/error404');
+});
 $routes->group('', ['filter' => 'auth'], function($routes){
 $routes->get('/', 'Home::index');
 $routes->get('showdata','Home::showdata');
@@ -49,6 +52,12 @@ $routes->get('listjobapprove/(:num)','Approvecontroller::listjobapprove/$1');
 $routes->post('detailapprove','Approvecontroller::detailapprove');
 $routes->post('confirmapprove','Approvecontroller::confirmapprove');
 $routes->post('rejectapprove','Approvecontroller::rejectapprove');
+// ส่วน usermanage
+$routes->get('usermanage','Usermanagecontroller::usermanage');
+$routes->post('manageuserform','Usermanagecontroller::manageuserform');
+$routes->post('updateuser','Usermanagecontroller::updateuser');
+$routes->post('adduser','Usermanagecontroller::adduser');
+// 
 $routes->get('logout','Authencontroller::logout');
 });
 // ต้อง login ถึงจะทำงานได้

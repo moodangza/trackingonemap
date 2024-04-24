@@ -30,6 +30,8 @@
   <script src="<?php echo base_url('spica_rs/js/action.js');?>"></script>
   <!-- aprove js -->
   <script src="<?php echo base_url('spica_rs/js/approve.js');?>"></script>
+  <!-- manageuser js -->
+  <script src="<?php echo base_url('spica_rs/js/manageuser.js');?>"></script>
   <!-- modal js -->
   <script src="<?php echo base_url('spica_rs/js/modal.js');?>"></script>
     <!-- base:js -->

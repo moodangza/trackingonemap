@@ -26,7 +26,14 @@
             <span class="menu-title">approve</span>
           </a>
         </li>
-        
+        <!-- usermanage -->
+        <li class="nav-item">
+          <a class="nav-link" href="<?php echo base_url('usermanage');?>">
+            <i class="mdi mdi-view-headline menu-icon"></i>
+            <span class="menu-title">จัดการผู้ใช้</span>
+          </a>
+        </li>
+        <!-- register -->
         <li class="nav-item">
           <a class="nav-link" href="<?php echo base_url('settinguser');?>">
             <i class="mdi mdi-view-headline menu-icon"></i>

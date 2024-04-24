@@ -13,7 +13,9 @@
             <span class="mdi mdi-menu"></span>
           </button>
           <div class="navbar-brand-wrapper">
-            <a class="navbar-brand brand-logo" href="../"><img width="40%" src="spica_rs/images/auth/onlb.png" alt="logo"/></a>
+            <a class="navbar-brand brand-logo" href="../">
+              <img width="20%" src="<?php echo base_url();?>spica_rs/images/auth/onlb.png" alt="logo"/>
+            </a>
             <!-- <a class="navbar-brand brand-logo-mini" href="../"><img width="15%" src="spica_rs/images/auth/onlb.png" alt="logo"/></a> -->
           </div>
           <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">ระบบการติดตามการทำงาน</h4>
