@@ -7,10 +7,7 @@
         echo $rs_datenow;
 }
 ?>
-  <?php $usertbl = session()->get('usertbl');
-                      $userldap = session()->get('userldap');
-                      ?>
-<nav class="navbar col-lg-12 col-12 px-0 py-0 py-lg-4 d-flex flex-row">
+<nav class="navbar col-lg-12 col-12 px-0 py-0 py-lg-4 d-flex flex-row  align-content-end sticky-top">
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-menu"></span>
@@ -117,7 +114,19 @@
               </div>
             </li>
           </ul>
-          <!-- <ul class="navbar-nav navbar-nav-right">
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+        <div class="navbar-menu-wrapper navbar-search-wrapper d-none d-lg-flex align-items-center">
+          <!-- <ul class="navbar-nav mr-lg-2"> -->
+            <!-- <li class="nav-item nav-search d-none d-lg-block">
+              <div class="input-group"> -->
+                <!-- <input type="text" class="form-control" placeholder="Search Here..." aria-label="search" aria-describedby="search"> -->
+              <!-- </div>
+            </li> -->
+          <!-- </ul> -->
+          <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                 <img src="spica_rs/images/faces/face5.jpg" alt="profile"/>
@@ -133,7 +142,7 @@
               </div>
             </li>
         
-          </ul> -->
+          </ul> 
           <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
             <span class="mdi mdi-menu"></span>
           </button>

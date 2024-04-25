@@ -33,7 +33,7 @@
             <span class="menu-title">จัดการผู้ใช้</span>
           </a>
         </li>
-        <!-- register -->
+        
         <li class="nav-item">
           <a class="nav-link" href="<?php echo base_url('logout');?>">
           &nbsp;&nbsp;<i class="mdi mdi-logout"></i>

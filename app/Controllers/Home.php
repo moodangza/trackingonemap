@@ -89,7 +89,7 @@ class Home extends BaseController
         ];
         return view('spica/index',$return);
     }
- 
+
     //ดู job
     public function showjob($division=null)
     {
