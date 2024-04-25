@@ -129,7 +129,7 @@ class Approvecontroller extends BaseController
         $approveprocess = new processModel();
         $dataprocess = array(
         'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-          'status'=>'4'
+          'status'=>'2'
       );
 
       $confirmsubprocess = new subprocessModel();

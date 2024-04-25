@@ -307,16 +307,30 @@ function jobselect(jobid){
           
           );
           }else if(element.status == 2){
-            
-
-            $('#finishprocessitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
+            $('#finishprocessitem').append('<ul style="padding-bottom: 2px;" class="list-group">'+
+            // '<li class="list-group-item "> '+
+            '<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
+            '<div class="row">'+
+            '<div class="col-8">'+
             '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
+            '</div>'+
+            '<div class="col-4" class="text-right">'+
             '<div class="text-right">'+
             '<a class="btn btn-success" href="/formupdateprocess/'+element.process_id+' " title="ดูข้อมูล">'+ '<i class="fa fa-search" aria-hidden="true"></i></a>'+
             '</div>'+
-            '</li>'
+            '</div>'+
+            '</li>'+
+            '</div>'+
+            '</ul>'
+          );
+            // $('#finishprocessitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
+            // '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
+            // '<div class="text-right">'+
+            // '<a class="btn btn-success" href="/formupdateprocess/'+element.process_id+' " title="ดูข้อมูล">'+ '<i class="fa fa-search" aria-hidden="true"></i></a>'+
+            // '</div>'+
+            // '</li>'
             
-            );
+            // );
           }
       });
 
