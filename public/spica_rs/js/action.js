@@ -109,7 +109,6 @@ function showsubprocess(){
   const process_id = $('#process_id').val();
   $.ajax(
     {
-      
     url: "/showsubprocess",
     type: "get",
     dataType: 'text',
@@ -125,7 +124,6 @@ function showsubprocess(){
   // $('#addjob_id').html('');
   // $('#addjob_id').append('<input class="addprocessid" type="text" value="'+a.process[0]['job_id']+'">');
   $("#urladdprocess").attr("href", "/formprocess/"+a.process[0]['job_id']+""); 
-   
   a.process.forEach(element => {
    
     $('#processitem').append('<div class="card">'+
@@ -183,7 +181,6 @@ $(document).on( "change",".selectdivision", function() {
   } );
   // $('#urladdprocess').hide();
   showjobselect(divid)    
-
 } );
 // show job หลังจากเลือกหน่วยงาน
 function showjobselect(divid){
@@ -256,9 +253,6 @@ function showjobselect(divid){
 }
 
 //เลือก job แสดง process
-
-
-
 function jobselect(jobid){
  
   $.ajax(
@@ -314,27 +308,7 @@ function jobselect(jobid){
           );
           }else if(element.status == 2){
             
-            $('#processitem').append('<ul style="padding-bottom: 2px;" class="list-group">'+
-            // '<li class="list-group-item "> '+
-            '<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
-            '<div class="row">'+
-            '<div class="col-8">'+
-           
-            '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
-            '</div>'+
-            '<div class="col-4" class="text-right">'+
-            '<div class="text-right">'+
-            '<a class="btn btn-success" href="/formupdateprocess/'+element.process_id+' " title="ดูข้อมูล">'+ '<i class="fa fa-search" aria-hidden="true"></i></a>'+
-            
-            '</div>'+
-            '</div>'+
-            '</li>'+
-            '</div>'+
-           
-            '</ul>'
-            
-            
-            );
+
             $('#finishprocessitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
             '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
             '<div class="text-right">'+
@@ -440,10 +414,10 @@ function confirmprocess(process_id){
     // return false;
     $.ajax(
       {
-      url: "confirmprocess/"+process_id,
+      url: "/confirmprocess",
       type: "post",
       dataType: 'text',
-      // data: { process_id: process_id},
+      data: { process_id: process_id},
       success: function (data) {
        
         window.location.reload(false);

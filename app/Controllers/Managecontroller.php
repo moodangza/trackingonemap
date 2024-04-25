@@ -16,7 +16,7 @@ class Managecontroller extends BaseController
         $deleteprocess = new processModel();
         $dataprocess = array('delete_flag'=>'0',
                               'deleted_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-                              'delete_by'=>$_SESSION['usertbl']['user_name']
+                            //   'delete_by'=>$_SESSION['usertbl']['user_name']
                             );
        
         $deleteprocess ->set($dataprocess) ->where('process_id',$process_id) -> update();
@@ -35,28 +35,29 @@ class Managecontroller extends BaseController
         $deletesubprocess = new subprocessModel();
         $datasubprocess = array('delete_flag'=>'0',
                               'deleted_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-                              'delete_by'=>$_SESSION['usertbl']['user_name']
+                            //   'delete_by'=>$_SESSION['usertbl']['user_name']
                             );
         $deletesubprocess ->set($datasubprocess) ->where('subprocess_id',$subprocessid) -> update();
         
         
        
     }
-    public function confirmprocess($process_id)
+    public function confirmprocess()
     {
-        // echo $process_id;
+        echo  $_POST["process_id"];
         // exit;
+      
         $deleteprocess = new processModel();
         $dataprocess = array('delete_flag'=>'1',
                               'process_finish'=>date('Y-m-d'),
                               'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
                                 'status'=>'2',
-                                'delete_by'=>$_SESSION['usertbl']['user_name']
+                                // 'delete_by'=>$_SESSION['usertbl']['user_name']
                             );
        
-        $deleteprocess ->set($dataprocess) ->where('process_id',$process_id) -> update();
+        $deleteprocess ->set($dataprocess) ->where('process_id',$_POST["process_id"]) -> update();
         $deletesubprocess = new subprocessModel();
-        $deletesubprocess ->set($dataprocess) ->where('process_id',$process_id) -> update();
+        $deletesubprocess ->set($dataprocess) ->where('process_id',$_POST["process_id"]) -> update();
         
        
     }
@@ -77,14 +78,15 @@ class Managecontroller extends BaseController
         'detail'=>$_POST['detail'],
         'delete_flag'=>'1',
         'status'=>'1',
-        'create_by'=>$_SESSION['usertbl']['user_name']);
+        // 'create_by'=>$_SESSION['usertbl']['user_name']
+    );
         
         $last_id = $addprocessmodel -> insert($data);
          
         $updatejob = new jobModel();
         $dataupdate = array('status'=>'2',
                             'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-                            'update_by'=>$_SESSION['usertbl']['user_name']
+                            // 'update_by'=>$_SESSION['usertbl']['user_name']
         );
        
         $updatejob ->set($dataupdate) ->where('job_id',$job_id) -> update();
@@ -106,7 +108,7 @@ class Managecontroller extends BaseController
                               'process_finish'=>date('Y-m-d'),
                               'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
                                 'status'=>'2',
-                                'update_by'=>$_SESSION['usertbl']['user_name']
+                                // 'update_by'=>$_SESSION['usertbl']['user_name']
                             );
         $deleteprocess ->set($dataprocess) ->where('process_id',$processid) -> update();
     }
@@ -117,7 +119,7 @@ class Managecontroller extends BaseController
                               'subprocess_start'=>$_POST['subprocess_start'],
                               'subprocess_end'=>$_POST['subprocess_end'],                  
                               'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-                              'update_by'=>$_SESSION['usertbl']['user_name']
+                            //   'update_by'=>$_SESSION['usertbl']['user_name']
     );
     $editsubprocess ->set($dataprocess) ->where('subprocess_id',$subprocessid) ->update();
     header('Content-Type: application/json');
@@ -130,7 +132,7 @@ class Managecontroller extends BaseController
         $dataprocess = array('subprocess_status'=>'2',
                               'subprocess_finish'=>date('Y-m-d'),
                               'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-                              'update_by'=>$_SESSION['usertbl']['user_name']
+                            //   'update_by'=>$_SESSION['usertbl']['user_name']
     );
     $confirmsubprocess ->set($dataprocess) ->where('subprocess_id',$subprocessid) ->update();
     header('Content-Type: application/json');

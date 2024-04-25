@@ -133,7 +133,7 @@ $userldap = session()->get('userldap');
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                <img src="spica_rs/images/faces/face5.jpg" alt="profile"/>
+                <!-- <img src="spica_rs/images/faces/face5.jpg" alt="profile"/> -->
               
                 <span class="nav-profile-name"><?php  echo $usertbl['user_name']; ?></span>
               </a>

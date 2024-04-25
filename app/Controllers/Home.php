@@ -310,7 +310,7 @@ public function showprocess(){
     $processmodel = new processModel();
     $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status,process_tb.status ')
     ->where('delete_flag', '1') 
-    ->where('process_finish ',NULL)
+    // ->where('process_finish ',NULL)
     ->where('process_tb.job_id', $jobid1 )
     ->groupBy('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status,process_tb.status ')
     ->orderBy('process_start','asc');
@@ -451,10 +451,11 @@ public function addsubprocess(){
             $process_id = $this->request->getVar('process_id');
             $showsubprocees = new subprocessModel();
             $showsubprocees ->where('subprocess_tb.delete_flag', '1') 
-        ->where('subprocess_tb.process_id', $process_id )
+        ->where('subproces_tb.process_id', $process_id )
         ->orderBy('subprocess_start','asc');
         $process_rs = $showsubprocees->findAll();
         print_r($process_rs);
+        exit;
         header('Content-Type: application/json');
         
         echo json_encode( $process_rs );

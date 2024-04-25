@@ -90,12 +90,11 @@
 						</a>
 					</div>
 				</form>
-				<div class="login100-more" >
-				<!--  style="background-image: url('../spica_rs/images/slide-one.jpg'); height: 450px; width= 100px;  background-position: center;
-				background-repeat: no-repeat; background-size: cover; position: relative;">   -->
+				<div class="login100-more" style="background-image: url('../spica_rs/login/images/bg-01.png');   background-position: center;
+				background-repeat: repeat; background-size: cover; position: relative;">  
 				
-				<img  src='../spica_rs/images/slide-one.jpg' width="100%" style=" height: px;  background-position: center;
-				background-repeat: no-repeat; background-size: cover; position: static; padding: 200px;"  />
+				<!-- <img  src='../spica_rs/images/slide-one.jpg' width="100%" style=" height: px;  background-position: center;
+				background-repeat: no-repeat; background-size: cover; position: static; padding: 200px;"  /> -->
 				</div>
 			</div>
 		</div>

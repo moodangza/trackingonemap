@@ -36,7 +36,7 @@ $routes->post('addjob', 'Home::addjob');
 $routes->post('insertprocess', 'Managecontroller::insertprocess');
 $routes->post('updatejobform','Home::updatejobform');
 $routes->post('deleteprocess/(:num)','Managecontroller::deleteprocess/$1');
-$routes->post('confirmprocess/(:num)','Managecontroller::confirmprocess/$1');
+$routes->post('confirmprocess','Managecontroller::confirmprocess');
 $routes->post('editjob','Home::editjob');
 $routes->post('deletejob','Home::deletejob');
 $routes->get('showsubprocess','Home::showsubprocess');

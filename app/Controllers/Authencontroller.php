@@ -11,7 +11,7 @@ class Authencontroller extends BaseController
         $session = session();
         $usermodel = new userModel();
         echo $_POST['username'] . 'password:  ' .md5($_POST['pass'].'onlb+-');
-        $usermodel ->select('user_name,password,division_id,level')
+        $usermodel ->select('user_name,password,division_id,level,prefix,name,surname,position')
        ->where('user_name',$_POST['username']);
        $user_rs = $usermodel->first();
         if(isset($user_rs['division_id']) && $user_rs['division_id'] == '13'){

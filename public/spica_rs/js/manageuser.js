@@ -24,7 +24,7 @@ function manageuserform(user_id){
             $("#level").val(rs.level).change();
             $("#prefix").val(rs.prefix).change();
         $('#actionbutton').append( (flag == 'update' ?  '<button class="btn btn-warning" onclick="updateuser('+ rs.user_id + ')">'+
-        '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
+        '<i class="fa fa-pencil " aria-hidden="true" ></i> แก้ไข'+
       '</button>': '') );
         })
       }
@@ -91,7 +91,7 @@ function manageuserform(user_id){
     $('#staticusername').prop('readonly', false);
     $('#actionbutton').html();
     $('#actionbutton').append( (flag == 'adduser' ?  '<button class="btn btn-success" onclick="adduser()">'+
-    '<i class="fa fa-check-circle-o  " aria-hidden="true" ></i> '+
+    '<i class="fa fa-check-circle-o  " aria-hidden="true" ></i> บันทึก'+
   '</button>': '') );
   }
   function adduser(){

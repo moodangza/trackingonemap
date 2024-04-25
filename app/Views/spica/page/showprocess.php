@@ -91,7 +91,7 @@
                                   <div class="col-12">                             
                                   <div id='processitem'>
                               
-                              </div>
+                                </div>
                                             
                                                                       
                                   </div>
@@ -107,7 +107,7 @@
                                   <div class="col-12">                             
                                   <div id='finishprocessitem'>
                               
-                              </div>
+                                  </div>
                                             
                                                                       
                                   </div>
