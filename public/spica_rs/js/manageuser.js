@@ -18,7 +18,11 @@ function manageuserform(user_id){
         $("#user_id").val(data.user_rs[0].user_id);
         data.user_rs.forEach(rs => {
             $('#staticusername').val(rs.user_name);
+            $('#staticname').val(rs.name);
+            $('#staticsurname').val(rs.surname);
+            $('#position').val(rs.position);
             $("#level").val(rs.level).change();
+            $("#prefix").val(rs.prefix).change();
         $('#actionbutton').append( (flag == 'update' ?  '<button class="btn btn-warning" onclick="updateuser('+ rs.user_id + ')">'+
         '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
       '</button>': '') );
@@ -60,12 +64,18 @@ function manageuserform(user_id){
     
     var password = $('#password').val();
     var level = $('#level').val(); 
+    var level = $('#level').val();
+    var prefix =  $('#prefix').val();
+    var name = $('#staticname').val();
+    var surname = $('#staticsurname').val();
+    var position = $('#position').val();
     $.ajax(
       {
       url: "/updateuser",
       type: "post",
       dataType: "json",
-      data: { user_id: user_id,password: password,level: level},
+      data: { user_id: user_id,password: password,level: level,
+               prefix: prefix,name: name,surname: surname,position:position },
       success: function (data) {
         // alert(data);
         $('#manageusermodal').modal('toggle');
@@ -145,7 +155,7 @@ function ckdupuser()
             {
               // alert(rs);
               $('#staticusername')
-                // .css('color', 'green')
+                .css('color', 'black')
                 .removeClass("is-invalid");
                 $('#actionbutton').show();
             }

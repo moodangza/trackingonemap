@@ -156,7 +156,7 @@
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-head bg-primary text-center" style="padding: 10px;color:white;">
-                        <b>user</b>
+                        <b>ผู้ใช้งาน</b>
                     </div>
                     <div class="card-body ">
                       <button class="btn btn-primary" onclick="adduserform('adduser');">เพิ่มผู้ใช้ <i class="fa fa-plus-square"></i></button>
@@ -165,6 +165,8 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">username</th>
+      <th scope="col">ชื่อ-สกุล</th>
+      <th scope="col">ตำแหน่ง</th>
       <th scope="col">สถานะ</th>
       <th scope="col">Handle</th>
     </tr>
@@ -175,6 +177,8 @@
     <tr>
       <th scope="row"> <?php echo $i; $i++;?></th>
       <td><?php echo $rs["user_name"];?> </td>
+      <td><?php echo $rs["prefix"]." ".$rs["name"]." ".$rs["surname"]; ?></td>
+      <td><?php echo $rs["position"];?></td>
       <td><?php if($rs["level"]=='aprove'){
                                             echo 'ผู้อนุมัติงาน';
                                         }else{

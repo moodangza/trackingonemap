@@ -55,8 +55,13 @@ class Usermanagecontroller extends BaseController
             $password =$ck_rs['password'];
         }
         $updateuser = array(
-                                'password'=>$password,
-                              'level'=>$_POST["level"]
+
+                              'password'=>$password,
+                              'level'=>$_POST["level"],
+                              'prefix'=> $_POST['prefix'],
+                              'name' =>$_POST['name'],
+                              'surname' =>$_POST['surname'],
+                              'position' =>$_POST['position'],
                             );
                           
         $updateusermodel ->set($updateuser) ->where('user_id',$updateuserid ) -> update();
