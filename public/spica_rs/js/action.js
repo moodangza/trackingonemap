@@ -420,7 +420,7 @@ function confirmprocess(process_id){
       data: { process_id: process_id},
       success: function (data) {
        
-        window.location.reload(false);
+        window.location.reload();
       }
   });   
   } 
