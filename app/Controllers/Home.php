@@ -451,11 +451,10 @@ public function addsubprocess(){
             $process_id = $this->request->getVar('process_id');
             $showsubprocees = new subprocessModel();
             $showsubprocees ->where('subprocess_tb.delete_flag', '1') 
-        ->where('subproces_tb.process_id', $process_id )
+        ->where('subprocess_tb.process_id', $process_id )
         ->orderBy('subprocess_start','asc');
         $process_rs = $showsubprocees->findAll();
         print_r($process_rs);
-        exit;
         header('Content-Type: application/json');
         
         echo json_encode( $process_rs );
