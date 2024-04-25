@@ -70,14 +70,12 @@ class Usermanagecontroller extends BaseController
        
     }
 
-    public function saveuser()
+    public function adduser()
     {
         // echo $process_id;
         // exit;
         
         $addusermodel = new userModel();
-        
-        $password = md5($_POST['password'].'onlb+-');
         
         $addeuser = array(
                                 'user_name'=> $_POST['user_name'],
@@ -86,28 +84,31 @@ class Usermanagecontroller extends BaseController
                                 'prefix'=> $_POST['prefix'],
                                 'name' =>$_POST['name'],
                                 'surname' =>$_POST['surname'],
-                                'position' =>$_POST['position']
+                                'position' =>$_POST['position'],
+                                'division_id' =>$_SESSION['usertbl']['division_id'],
                             );
                           
-                            $a = $addusermodel -> insert($addeuser);
+        $addusermodel -> insert($addeuser);
         
        
     }
     public function ckdupuser()
     {
         $ckdupuser = new userModel();
-        $ckdupuser ->select('*')
+        $ckdupuser ->select('user_name')
         ->where('user_name',$_POST['user_name']);
-        $rsckdup = $ckdupuser->countAll() ;
+        $rsckdup = $ckdupuser->first();
 
-        if($rsckdup==1){
+        if(isset($rsckdup["user_name"]) && $rsckdup["user_name"]==$_POST['user_name']){
             $rs = 'USER_EXISTS';
         }else{
             $rs = 'USER_AVAILABLE';
         }
-
+        $return = [
+                    'rs' => $rs,
+        ];
         header('Content-Type: application/json');
-        echo json_encode( $rs );
+        echo json_encode( $return );
     }
     // public function insertprocess()
     // {

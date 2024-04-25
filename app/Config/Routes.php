@@ -56,6 +56,7 @@ $routes->get('usermanage','Usermanagecontroller::usermanage');
 $routes->post('manageuserform','Usermanagecontroller::manageuserform');
 $routes->post('updateuser','Usermanagecontroller::updateuser');
 $routes->post('adduser','Usermanagecontroller::adduser');
+$routes->post('ckdupuser','Usermanagecontroller::ckdupuser');
 // 
 $routes->get('logout','Authencontroller::logout');
 });

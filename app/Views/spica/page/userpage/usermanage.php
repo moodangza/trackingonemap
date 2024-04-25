@@ -75,7 +75,7 @@
                             <div class="mb-3 row">
     <label for="staticusername" class="col-sm-2 col-form-label">Username</label>
     <div class="col-sm-10">
-      <input type="text" readonly class="form-control" id="staticusername" value="" onchange="ckuser();">
+      <input type="text" readonly class="form-control" id="staticusername" value="" onchange="ckdupuser();"><div id='#user'></div>
     </div>
   </div>
   <div class="mb-2 row">

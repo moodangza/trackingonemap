@@ -99,6 +99,9 @@ $(document).on( "click",".addsubprocess", function() {
   showsubprocess();
   }
   $("input").autoresize({padding:20,minWidth:40,maxWidth:350});
+
+  
+
 });
 
 // โชว subprocess
