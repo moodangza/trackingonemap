@@ -136,7 +136,7 @@ class Approvecontroller extends BaseController
         $dataprocess = array('subprocess_status'=>'2',
                               'subprocess_finish'=>date('Y-m-d'),
                               'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-                              'update_by'=>$_SESSION['usertbl']['user_name']
+                            //   'update_by'=>$_SESSION['usertbl']['user_name']
     );
     $confirmsubprocess ->set($dataprocess) ->where('subprocess_id',$job_id) ->update();
     $approve = new approveModel();
