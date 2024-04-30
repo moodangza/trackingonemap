@@ -228,7 +228,7 @@ function showjobselect(divid){
             (cedit == 'can' ?  '<button class="btn btn-warning" onclick="updatejobform('+ element.job_id + ')">'+
                   '<i class="fa fa-pencil " aria-hidden="true" ></i> '+
                 '</button>': '') +
-                '<a href="/showjobselect1/'+element.job_id+'" class="btn btn-success">'+
+                '<a href="/showjobselect/'+element.job_id+'" class="btn btn-success">'+
                   '<i class="fa fa-eye" aria-hidden="true" ></i>'+
                 '</a>'+
                 (cedit == 'can' ?  '<button class="btn btn-danger" onclick="deletejob('+ element.job_id + ')">'+

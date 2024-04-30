@@ -377,32 +377,37 @@ public function formupdateprocess($process_id){
     // print_r($process_id);
     // exit;
     $updateprocessmodel = new processModel();
-    $updateprocessmodel ->select('job_tb.job_id,job_tb.job_name,job_tb.job_start,job_tb.job_end,job_tb.division_id')
-    ->select('process_tb.process_id,process_tb.process_name,process_tb.process_start,process_end,detail,process_tb.status')
-    ->join('job_tb','job_tb.job_id = process_tb.job_id','inner')
+    $updateprocessmodel ->select('process_tb.job_id,process_tb.process_id,process_tb.process_name,process_tb.process_start,process_end,detail,process_tb.status as p_status')
     ->where('process_tb.process_id', $process_id )
-    ->where('process_tb.delete_flag', '1') 
-    ->groupBy('job_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status,process_tb.status,job_tb.division_id ');
-    $process_rs1 = $updateprocessmodel->findAll();
-    
-    // print_r($process_rs1);
-    // echo $process_rs1[0]["status"];
-    // exit;
-    if($process_rs1[0]["status"]=='2'){
+    ->where('process_tb.delete_flag', '1') ;
+    // ->groupBy('job_tb.job_id,process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status,process_tb.status,job_tb.division_id ');
+    $process_rs = $updateprocessmodel->first();
+   
+    $updatejobmodel = new jobModel();
+    $updatejobmodel -> select('job_tb.job_id,job_tb.job_name,job_tb.job_start,job_tb.job_end,job_tb.division_id,job_tb.status as j_status')
+    ->where('job_tb.job_id', $process_rs['job_id'] )
+    ->where('job_tb.delete_flag', '1') ;
+    $job_rs = $updatejobmodel->first();
+    if(($job_rs["j_status"]=='3' || $job_rs["j_status"]=='4') || ($process_rs["p_status"]==2) ){
             $text = 'view';
     }else{
         $text = 'update';
     }
+//     echo $text;
+//    exit;
     $dateth = new Date();
-    foreach($process_rs1 as $key => $date_th){
-        $process_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
-        $process_rs1[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
-        $process_rs1[$key]['job_startpic'] = $dateth->Dateinpicker($date_th['job_start']);
-        $process_rs1[$key]['job_endpic'] = $dateth->Dateinpicker($date_th['job_end']);
-        $process_rs1[$key]['process_start'] = $dateth->Dateinpicker($date_th['process_start']);
-        $process_rs1[$key]['process_end'] = $dateth->Dateinpicker($date_th['process_end']);
+   
+    $job_rs['job_start'] = $dateth->DateThai($job_rs['job_start']);
+    $job_rs['job_end'] = $dateth->DateThai($job_rs['job_end']);
+    // $job_rs['job_startpic'] = $dateth->Dateinpicker($job_rs['job_start']);
+    // $job_rs['job_endpic'] = $dateth->Dateinpicker($job_rs['job_end']);
+
+ 
+    
+        $process_rs['process_start'] = $dateth->Dateinpicker($process_rs['process_start']);
+        $process_rs['process_end'] = $dateth->Dateinpicker($process_rs['process_end']);
       
-    }
+
     $updatesubprocessmodel = new subprocessModel();
     $updatesubprocessmodel ->select('subprocess_id,subprocess_name,subprocess_start,subprocess_end,subprocess_finish')
                            ->where('process_id',$process_id);
@@ -412,9 +417,10 @@ public function formupdateprocess($process_id){
         $subprocess_rs1[$key]['subprocess_end'] = $dateth->Dateinpicker($date_th['subprocess_start']);
     }
     $can = new Ckedit();
-    $cedit = $can->ckcan($process_rs1["0"]["division_id"]);
+    $cedit = $can->ckcan($job_rs["division_id"]);
     $returndata = [
-        'job'=> $process_rs1,
+        'job'=> $job_rs,
+        'process'=> $process_rs,
         'subprocess' =>$subprocess_rs1,
         'flag' => $text,
         'cedit' => $cedit,
