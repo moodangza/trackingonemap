@@ -404,8 +404,8 @@ public function formupdateprocess($process_id){
 
  
     
-        $process_rs['process_start'] = $dateth->Dateinpicker($process_rs['process_start']);
-        $process_rs['process_end'] = $dateth->Dateinpicker($process_rs['process_end']);
+        $process_rs['process_start'] = $dateth->showdatethai($process_rs['process_start']);
+        $process_rs['process_end'] = $dateth->showdatethai($process_rs['process_end']);
       
 
     $updatesubprocessmodel = new subprocessModel();
@@ -413,8 +413,8 @@ public function formupdateprocess($process_id){
                            ->where('process_id',$process_id);
     $subprocess_rs1 = $updatesubprocessmodel->findAll();
     foreach($subprocess_rs1 as $key => $date_th){
-        $subprocess_rs1[$key]['subprocess_start'] = $dateth->Dateinpicker($date_th['subprocess_start']);
-        $subprocess_rs1[$key]['subprocess_end'] = $dateth->Dateinpicker($date_th['subprocess_start']);
+        $subprocess_rs1[$key]['subprocess_start'] = $dateth->showdatethai($date_th['subprocess_start']);
+        $subprocess_rs1[$key]['subprocess_end'] = $dateth->showdatethai($date_th['subprocess_start']);
     }
     $can = new Ckedit();
     $cedit = $can->ckcan($job_rs["division_id"]);
@@ -425,7 +425,7 @@ public function formupdateprocess($process_id){
         'flag' => $text,
         'cedit' => $cedit,
     ];
-    // print_r($returndata);
+    // print_r($subprocess_rs1);
     // exit;
    
     return view('spica/page/formprocess',$returndata);
@@ -437,8 +437,8 @@ public function addsubprocess(){
             
                 $s = explode("/",$_POST['s_sub_date']);
                 $e = explode("/",$_POST['e_sub_date']);
-                $subprocessstart = $s[2].'-'.$s[1].'-'.$s[0];
-                $subprocessend = $e[2].'-'.$e[1].'-'.$e[0];
+                $subprocessstart = $s[2]-543..'-'.$s[1].'-'.$s[0];
+                $subprocessend = $e[2]-543..'-'.$e[1].'-'.$e[0];
                 $subprocess_data = [
                  'job_id' => $_POST['job_id'],
                  'process_id' => $_POST['process_id'],

@@ -43,6 +43,14 @@ class Date
 		$strMonthThai=$strMonth[$month];
 		return "วัน".$text."ที่ ". "$day $strMonthThai $year";
 	}
+	public function showdatethai($dateformatdb){
+		$year = date("Y",strtotime($dateformatdb))+543;
+		$month = date("n",strtotime($dateformatdb));
+		$day = date("j",strtotime($dateformatdb));
+		$strMonth = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+		$strMonthThai=$strMonth[$month];
+		return $day.'/'.$strMonthThai.'/'.$year;
+	}
 }
 
 ?>
