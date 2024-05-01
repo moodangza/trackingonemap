@@ -17,13 +17,14 @@
 <style>
   .modal {
          position: absolute;
-         /* background-color: #fffff4; */
+         background-color: #fffff4;
          border: 1px solid #fffff4;
-         width: 100%;
-         height: 450px;
-         top: 20%;
+         width: 60%;
+         height: fit-content;
+         top: 50%;
          left: 50%;
          transform: translate(-50%, -50%);
+         padding: 0; 
          /* additional styles for the modal */
       }
       .form-control{
@@ -60,7 +61,7 @@ ul {
  
  ?>
       <!-- partial -->
-      <div class="modal fade" id="exampleModalToggle" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
+      <div class="modal fade modal-xl" id="exampleModalToggle" aria-labelledby="exampleModalToggleLabel" tabindex="-1" aria-hidden="true" style="display: none;">
       <div class="modal-dialog modal-xl ">
         <div class="modal-content">
           <div class="modal-header">
@@ -81,25 +82,36 @@ ul {
                 </div>      
           </div>
           <div class="row g-3">
-                    <div class="col-md">
-                        <div class="form-floating">
-                        <input type="hidden" id="sub_id" value="">
-                        <input type="text" autocomplete="off" class="form-control" id="subprocessinput" name="subprocessinput" placeholder="จัดทำร่าง พรบ." value="">
-                        <label for="floatingInputGrid">ขั้นตอนการทำงานย่อย</label>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="form-floating">
-                            <input type='text' id='s_sub_date' readonly='readonly' class='form-control datepicker create-s-date' name='s_sub_date' data-old='' value=''>
-                            <label for="s_sub_date">ระบุวันที่เริ่มต้น</label>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="form-floating">
-                            <input type='text' id='e_sub_date' readonly='readonly' class='form-control datepicker create-s-date' name='e_sub_date' data-old='' value=''>
-                            <label for="e_sub_date">ระบุวันที่สิ้นสุด</label>
-                        </div>
-                    </div>
+                  
+                    <ul class="list-group list-group-horizontal-md ">
+                             <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
+                             ขั้นตอนการทำงานย่อย <em class="em">*</em>
+                             </div>
+                                     
+                              
+                              <div class="list-group-item col-10 form-floating">
+                                  <input type="hidden" id="sub_id" value="">
+                                  <input type="text" autocomplete="off" class="form-control" id="subprocessinput" name="subprocessinput" placeholder="จัดทำร่าง พรบ." value="">
+                                  <label for="floatingInputGrid">ขั้นตอนการทำงานย่อย</label>
+                              </div>
+                         
+                          </ul>
+                          <ul class="list-group list-group-horizontal-md ">
+                            <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
+                                    ระยะเวลาการทำงาน <em class="em">*</em>
+                                </div>
+                                <div class="list-group-item col-10 form-floating">
+                                  <div class="p-2 g-col-6">
+                                  <input type='text' id='s_sub_date' readonly='readonly' class='form-control datepicker create-s-date' name='s_sub_date' data-old='' value=''>
+                                  
+                                    ถึง 
+                                    <input type='text' id='e_sub_date' readonly='readonly' class='form-control datepicker create-s-date' name='e_sub_date' data-old='' value=''>
+                                    
+                                  </div>
+                                </div>
+                          </ul>
+                  
+                
             </div>
             
           </div>
@@ -138,7 +150,7 @@ ul {
                           </ul>
                           <ul class="list-group list-group-horizontal-md ">
                              <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
-                             ขั้นตอนการทำงาน
+                             ขั้นตอนการทำงาน <em class="em">*</em>
                              </div>
                                      
                               
@@ -150,7 +162,7 @@ ul {
                           </ul>
                           <ul class="list-group list-group-horizontal-md ">
                               <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
-                                  ระยะเวลาการทำงาน
+                                  ระยะเวลาการทำงาน <em class="em">*</em>
                               </div>
                               <div class="list-group-item col-10">
                                 <div class="p-2 g-col-6">
@@ -159,18 +171,7 @@ ul {
                                 </div>
                               </div>
                           </ul>
-                          <ul class="list-group list-group-horizontal-md ">
-                             <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
-                             ขั้นตอนการทำงาน
-                             </div>
-                                     
-                              
-                              <div class="list-group-item col-10">
-                              <input type="hidden" id="sub_id" value="">
-                              <input type="text" autocomplete="off" class="form-control" id="subprocessinput" name="subprocessinput" placeholder="จัดทำร่าง พรบ." value="">
-                              </div>
-                         
-                          </ul>
+                     
                           <ul class="list-group list-group-horizontal-md ">
                              <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
                              รายละเอียด
@@ -180,8 +181,8 @@ ul {
                               <div class="list-group-item col-10">
                               <div class="form-floating">
                                           
-                                          <textarea autocomplete="off"  class="form-control" placeholder="Leave a comment here" id="detail" name="detail" style="height: 50px; width: 600px"><?php echo $process["detail"];?></textarea>
-                                          <label for="floatingTextarea2">Comments</label>
+                                          <textarea autocomplete="off"  class="form-control" placeholder="Leave a comment here" id="detail" name="detail" style="height: 50px; width: 600px"><?php echo $process["detail"];?></textarea>                                          
+                                          <label for="floatingTextarea2">คำอธิบาย</label>
                                       </div>
                               </div>
                          

@@ -51,32 +51,47 @@ $(document).on( "click",".addsubprocess", function() {
   let e_job = $('#e_job').val();
   let s_sub_date = $('#s_sub_date').val();
   let e_sub_date = $('#e_sub_date').val();
-  let sub_process = $('#subprocessinput').val();
+  // let sub_process = $('#subprocessinput').val();
   let job_id = $('#job_id').val();
   let process_id = $('#process_id').val();
-  if(s_sub_date<s_job||s_sub_date>e_job){
-    alert('โปรดตรวจสอบวันที่เริ่มต้น');
-    return false;
-  }
-  if(e_sub_date<s_job||s_sub_date>e_job){
-    alert('โปรดตรวจสอบวันที่สิ้นสุด');
-    return false;
-  }
-  $.ajax(
-    {
-      
-    url: "/addsubprocess",
-    type: "post",
-    dataType: 'text',
-    data: { job_id : job_id,process_id : process_id, sub_process: sub_process,s_sub_date : s_sub_date ,e_sub_date : e_sub_date},
-    success: function (data) {
+  // if(s_sub_date<s_job||s_sub_date>e_job){
+  //   alert('โปรดตรวจสอบวันที่เริ่มต้น');
+  //   return false;
+  // }
+  // if(e_sub_date<s_job||s_sub_date>e_job){
+  //   alert('โปรดตรวจสอบวันที่สิ้นสุด');
+  //   return false;
+  // }
 
-     alert('บันทึกสำเร็จ');
+  Swal.fire({
+    title: 'ยืนยันการลบข้อมูล',
+    text: $(this).data('project_data_detail'),
+    icon: 'warning',
+    confirmButtonText: 'ยืนยัน',
+    showDenyButton: true,
+    denyButtonText: 'ไม่',
+}).then((result) => {
+    if (result.isConfirmed) {
      
-      showsubprocess();       
-      location.reload();
+      $.ajax(
+        {
+          
+        url: "/addsubprocess",
+        type: "post",
+        dataType: 'text',
+        data: { job_id : job_id,process_id : process_id, sub_process: sub_process,s_sub_date : s_sub_date ,e_sub_date : e_sub_date},
+        success: function (data) {
+    
+         alert('บันทึกสำเร็จ');
+         
+          showsubprocess();       
+          location.reload();
+        }
+    });   
     }
-});   
+});
+
+
 } );
 //
   $(document).ready(function() {
