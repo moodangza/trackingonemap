@@ -165,7 +165,7 @@
 
                 <div class="list-group-item col-10">
                   <input type="hidden" id="sub_id" value="">
-                  <input type="text" autocomplete="off" class="form-control" id="subprocessinput" name="subprocessinput" placeholder="จัดทำร่าง พรบ." value="<?php echo $process["process_name"]; ?>">
+                  <input type="text" autocomplete="off" class="form-control" id="subprocessinput" name="subprocessinput" placeholder="จัดทำร่าง พรบ." value="<?php if(isset($process)){echo $process["process_name"];} ?>">
                 </div>
                 <input type="hidden" id="job_id" name="job_id" value="<?php echo $job["job_id"]; ?>">
               </ul>
@@ -175,10 +175,10 @@
                 </div>
                 <div class="list-group-item col-10">
                   <div class="p-2 g-col-6">
-                    <input type="text" id="s_date" readonly="readonly" class="form-control datepicker create-s-date" name="s_date" data-old="" value="<?php echo $process["process_start"]; ?>">
+                    <input type="text" id="s_date" readonly="readonly" class="form-control datepicker create-s-date" name="s_date" data-old="" value="<?php if(isset($process)){ echo $process["process_start"];} ?>">
 
                     ถึง
-                    <input type="text" required readonly="readonly" id="e_date" class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="<?php echo $process["process_end"]; ?>">
+                    <input type="text" required readonly="readonly" id="e_date" class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="<?php if(isset($process)){echo $process["process_end"];} ?>">
 
                   </div>
                 </div>
@@ -193,7 +193,7 @@
                 <div class="list-group-item col-10">
                   <div class="form-floating">
 
-                    <textarea autocomplete="off" class="form-control" placeholder="Leave a comment here" id="detail" name="detail" style="height: 50px; width: 600px"><?php echo $process["detail"]; ?></textarea>
+                    <textarea autocomplete="off" class="form-control" placeholder="Leave a comment here" id="detail" name="detail" style="height: 50px; width: 600px"><?php if(isset($process)){echo $process["detail"];} ?></textarea>
                     <label for="floatingTextarea2">คำอธิบาย</label>
                   </div>
                 </div>
@@ -212,7 +212,7 @@
                       <th>จัดการ</th>
                     </thead>
                     <tbody>
-                      <input id="process_id" class="hidden-field" type="hidden" name="process_id" value="<?php echo $process["process_id"]; ?>">
+                      <input id="process_id" class="hidden-field" type="hidden" name="process_id" value="<?php if(isset($process)){echo $process["process_id"];} ?>">
 
 
                       <?php

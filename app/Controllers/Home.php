@@ -345,22 +345,24 @@ public function showprocess(){
         $jobdivisionid = $jobmodel ->select('division_id')
         ->where('job_id',$job_id)
         ->first();
-
-        $jobmodel  ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status ')
+        $jobid1 = $this->request->getVar('jobid1');
+        $jobmodel  ->select('job_tb.job_id,job_tb.job_name,job_tb.job_start,job_tb.job_end,job_tb.division_id,job_tb.status as j_status ')
         ->where('job_tb.division_id ', $jobdivisionid["division_id"])
-        // $jobid1 = $this->request->getVar('jobid1');
+       
         ->where('job_tb.job_id', $job_id )
         ->groupBy('job_tb.job_id,job_tb.job_name ')
         ->orderBy('job_id','asc');
-        $job_rs = $jobmodel->findAll();
+        $job_rs = $jobmodel->first();
         $dateth = new Date();
-        foreach($job_rs as $key => $date_th){
-            $job_rs[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
-            $job_rs[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
-            $job_rs[$key]['job_startpic'] = $dateth->Dateinpicker($date_th['job_start']);
-            $job_rs[$key]['job_endpic'] = $dateth->Dateinpicker($date_th['job_end']);
-        }
+      
+            $job_rs['job_start'] = $dateth->DateThai($job_rs['job_start']);
+            $job_rs['job_end'] = $dateth->DateThai($job_rs['job_end']);
+            // $job_rs['job_startpic'] = $dateth->Dateinpicker($job_rs['job_start']);
+            // $job_rs['job_endpic'] = $dateth->Dateinpicker($job_rs['job_end']);
+        
         $can = new Ckedit();
+        print_r($job_rs);
+        // exit;
         $cedit = $can->ckcan($jobdivisionid["division_id"]);
         $data = [
             'job'=> $job_rs,
