@@ -20726,7 +20726,7 @@ dl li {
   background: center center no-repeat;
   /* background: url(../images/other/navbar-cover.jpg) center center no-repeat; */
   background-size: cover;
-  /* height: 262px; */
+  height: 262px;
   width: auto;
 }
 
@@ -20735,7 +20735,7 @@ dl li {
   -webkit-transition: width 0.25s ease;
   -moz-transition: width 0.25s ease;
   -ms-transition: width 0.25s ease;
-  color: #000000;
+  color: #ddd;
   margin-left: 1.437rem;
   margin-right: 1.437rem;
   width: 100%;
