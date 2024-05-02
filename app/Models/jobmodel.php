@@ -38,9 +38,5 @@ class jobModel extends Model{
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    function getProduct()
-    {
-       
-        
-    }
+ 
 }

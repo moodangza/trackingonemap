@@ -138,7 +138,8 @@ class Home extends BaseController
         ->orderBy('job_id','asc')
         ;
         $job_rs1 = $jobmodel1->findAll();
-        // print_r($job_rs1);
+        print_r($job_rs1);
+        exit;
         $dateth = new Date();
         foreach($job_rs1 as $key => $date_th){
             $job_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
@@ -222,14 +223,7 @@ class Home extends BaseController
 // เพิ่มหัวข้อ
 public function addjob()
 {
-    $processmodel = new processModel();
-    $processmodel ->select('process_id,process_name,process_start,process_end,detail, process_tb.process_status')
-    ->where('delete_flag', '1') 
-    ->groupBy('process_tb.process_id,process_tb.process_name,process_start,process_end,detail, process_tb.process_status ')
-    ->orderBy('process_start','asc');
-
-    $process_rs = $processmodel->findAll();
-
+    
     $addjobmodel1 = new jobModel();
     $data = array('job_name'=>$_POST['jobname'],
     'job_start'=>$_POST['jobstart'],
