@@ -57,11 +57,11 @@ $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date,#editjob_st
 });
 const pathname = window.location.pathname;
 const text = pathname.split("/");
-// alert(text[1]);
+alert(text[1]);
 
 // return false;
 if(text[1] = 'formupdateprocess'){
-showsubprocess();
+    showsubprocess();
 }
 $("input").autoresize({padding:20,minWidth:40,maxWidth:350});
 
@@ -451,7 +451,7 @@ function confirmprocess(process_id){
       dataType: 'text',
       data: { process_id: process_id},
       success: function (data) {
-        location.reload(true);
+        location.reload();
       }
   });   
   } 
@@ -465,9 +465,9 @@ $(document).on("click",".insertprocess",function(){
   let detail = $('#detail').val();
   
   var p_s_start = processstart.split('/');
-  let rs_start = p_s_start[2]+'-'+p_s_start[1]+'-'+p_s_start[0];
+  let rs_start = p_s_start[2]-543+'-'+p_s_start[1]+'-'+p_s_start[0];
   var p_s_end= processend.split('/');
-  let rs_end = p_s_end[2]+'-'+p_s_end[1]+'-'+p_s_end[0];
+  let rs_end = p_s_end[2]-543+'-'+p_s_end[1]+'-'+p_s_end[0];
   // alert(rs_start);
   // alert(rs_end);
   let s_job = $('#s_job').val();
@@ -501,7 +501,7 @@ $(document).on("click",".insertprocess",function(){
       
       const obj = JSON.parse(data);
       console.log(obj);
-      location.replace("/formupdateprocess/"+obj.process)
+      location.replace("/formupdateprocess/")
     }
 });   
 });

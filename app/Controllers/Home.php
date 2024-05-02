@@ -456,7 +456,9 @@ public function addsubprocess(){
         }
         // แสดง subprocess
         public function showsubprocess(){
+
             $process_id = $this->request->getVar('process_id');
+            if(isset($process_id)){
             $showsubprocees = new subprocessModel();
             $showsubprocees ->where('subprocess_tb.delete_flag', '1') 
         ->where('subprocess_tb.process_id', $process_id )
@@ -466,7 +468,7 @@ public function addsubprocess(){
         header('Content-Type: application/json');
         
         echo json_encode( $process_rs );
-         
+         }
         }
         // แก้ไข subprocess
         public function editsubprocess(){

@@ -46,8 +46,8 @@ class Managecontroller extends BaseController
     {
         echo  $_POST["process_id"];
         // exit;
-      
-        $deleteprocess = new processModel();
+        $processid = $this->request->getVar('process_id');
+        $confirmprocess = new processModel();
         $dataprocess = array('delete_flag'=>'1',
                               'process_finish'=>date('Y-m-d'),
                               'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
@@ -55,9 +55,15 @@ class Managecontroller extends BaseController
                                 // 'delete_by'=>$_SESSION['usertbl']['user_name']
                             );
        
-        $deleteprocess ->set($dataprocess) ->where('process_id',$_POST["process_id"]) -> update();
-        $deletesubprocess = new subprocessModel();
-        $deletesubprocess ->set($dataprocess) ->where('process_id',$_POST["process_id"]) -> update();
+        $confirmprocess ->set($dataprocess) ->where('process_id',$processid) -> update();
+        $confirmsubprocess = new subprocessModel();
+        $datasubprocess = array('delete_flag'=>'1',
+        'subprocess_finish'=>date('Y-m-d'),
+        'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+          'subprocess_status'=>'2',
+          // 'delete_by'=>$_SESSION['usertbl']['user_name']
+      );
+        $confirmsubprocess ->set($datasubprocess) ->where('process_id',$processid) -> update();
         
        
     }
@@ -68,7 +74,7 @@ class Managecontroller extends BaseController
         $addprocessmodel = new processModel();
         $job_id = $this->request->getVar('job_id');
         // echo $job_id;
-        print_r($_POST);
+        // print_r($_POST);
         // exit;
         $data = array('job_id'=>$_POST['job_id'],
         'process_name'=>$_POST['process_name'],
