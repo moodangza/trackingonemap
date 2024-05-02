@@ -165,7 +165,7 @@
 
                 <div class="list-group-item col-10">
                   <input type="hidden" id="sub_id" value="">
-                  <input type="text" autocomplete="off" class="form-control" id="subprocessinput" name="subprocessinput" placeholder="จัดทำร่าง พรบ." value="<?php if(isset($process)){echo $process["process_name"];} ?>">
+                  <input type="text" autocomplete="off" class="form-control" id="process_name" name="process_name" placeholder="จัดทำร่าง พรบ." value="<?php if(isset($process)){echo $process["process_name"];} ?>">
                 </div>
                 <input type="hidden" id="job_id" name="job_id" value="<?php echo $job["job_id"]; ?>">
               </ul>

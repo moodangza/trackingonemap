@@ -68,7 +68,7 @@ class Managecontroller extends BaseController
         $addprocessmodel = new processModel();
         $job_id = $this->request->getVar('job_id');
         // echo $job_id;
-        // print_r($_POST);
+        print_r($_POST);
         // exit;
         $data = array('job_id'=>$_POST['job_id'],
         'process_name'=>$_POST['process_name'],
