@@ -27,7 +27,7 @@ $errorId = uniqid('error', true);
             <h1><?= esc($title), esc($exception->getCode() ? ' #' . $exception->getCode() : '') ?></h1>
             <p>
                 <?= nl2br(esc($exception->getMessage())) ?>
-                <a href="https://www.duckduckgo.com/?q=<?= urlencode($title . ' ' . preg_replace('#\'.*\'|".*"#Us', '', $exception->getMessage())) ?>"
+                <a href="https://www.google.com/search?q=<?= urlencode($title . ' ' . preg_replace('#\'.*\'|".*"#Us', '', $exception->getMessage())) ?>"
                    rel="noreferrer" target="_blank">search &rarr;</a>
             </p>
         </div>
@@ -63,7 +63,6 @@ $errorId = uniqid('error', true);
 
                 <ol class="trace">
                 <?php foreach ($trace as $index => $row) : ?>
-
                     <li>
                         <p>
                             <!-- Trace info -->

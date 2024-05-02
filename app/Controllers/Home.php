@@ -139,7 +139,7 @@ class Home extends BaseController
         ;
         $job_rs1 = $jobmodel1->findAll();
         print_r($job_rs1);
-        exit;
+        // exit;
         $dateth = new Date();
         foreach($job_rs1 as $key => $date_th){
             $job_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
