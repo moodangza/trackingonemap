@@ -644,18 +644,25 @@ function updatejobform(jobid){
 //ลบหัวข้อ job
 function deletejob(job_id){
   let text = "ยืนยันการลบข้อมูล";
+  alert(job_id);
   if (confirm(text) == true) {
     text = "ทำการลบข้อมูลแล้ว";
     alert(text);
 
       $.ajax({
-      url: "deletejob",
+      url: "/deletejob",
       type: "POST",
       dataType: 'text',
       data: { job_id: job_id},
       success: function (data) {
-            alert('ลบข้อมูลเรียบร้อย')
-            location.reload(true);
+        if(data.success){
+        
+          alert('ลบข้อมูลเรียบร้อย')
+          location.reload(true);
+          }else{
+            alert(data.error);
+          }
+      
           }
       });
   }

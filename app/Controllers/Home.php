@@ -296,11 +296,26 @@ public function editjob()
 //ลบหัวข้อ job
 public function deletejob()
 { 
+    print_r($_POST);
+    // exit;
+    try {
     $deletejob = new jobModel();
-    $datajob = $_POST['job_id'];
-    $dataj = array('delete_flag'=>'0','deleted_at'=>date('Y-m-d H:i:s', strtotime('7 hour')));
-    // $datajob = ['delete_flag'] = $deletejob ->where('job_id',$datajob['job_id'])-> update();
-    $deletejob ->set($dataj) ->where('job_id',$datajob) -> update();
+    
+    $data = array('delete_flag'=>'0',
+                    'deleted_at'=>date('Y-m-d H:i:s', strtotime('7 hour'))
+                );
+    $success = $deletejob ->set($data) ->where('job_id',$_POST['job_id']) -> update();
+    if($success){
+        echo 'ฟฟฟ';
+        return $this->response->setJson(['success'=>$success]);
+    }
+    else{
+        return $this->response->setJson(['error'=>'fail']);
+    }
+    } catch (Exception $e) {
+        return $this->response->setJson(['error'=>$e->getMessage()]);
+        echo $e->getMessage();
+}
     // echo $datajob;
     // exit;  
 }
