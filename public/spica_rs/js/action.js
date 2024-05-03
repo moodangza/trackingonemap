@@ -387,7 +387,7 @@ function deleteprocess(process_id){
     // return false;
     $.ajax(
       {
-      url: "deleteprocess/"+process_id,
+      url: "/deleteprocess/"+process_id,
       type: "post",
       dataType: 'text',
       // data: { process_id: process_id},
