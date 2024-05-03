@@ -265,18 +265,31 @@ public function updatejobform()
 // แก้ไข  job (update)
 public function editjob()
 {
+    print_r($_POST);
+    try {
     $editjobmodel = new jobmodel();
     $jobid1 = $this->request->getVar('editjobid');
     // $dataedit = array('status'=>'2');
     // $editjobmodel ->set($dataedit) ->where('status',$_POST['job_id']) -> update();
     $dataedit = array('job_name'=>$_POST['editjobname'],
     'job_start'=>$_POST['editjobstart'],
+    'job_end'=>$_POST['editjobend'],
     'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-    'job_end'=>$_POST['editjobend']);
+    );
     // 'status'=>'1');
     // $editjobmodel -> update($dataedit);
-    $u=$editjobmodel ->set($dataedit) ->where('job_id',$jobid1 ) -> update();
-    print_r($dataedit);
+    $success=$editjobmodel ->set($dataedit) ->where('job_id',$_POST['editjobid'] ) -> update();
+  
+    if($success){
+        return $this->response->setJson(['success'=>$success]);
+    }
+    else{
+        return $this->response->setJson(['error'=>'fail']);
+    }
+    } catch (Exception $e) {
+        return $this->response->setJson(['error'=>$e->getMessage()]);
+        echo $e->getMessage();
+}
 
 }
 

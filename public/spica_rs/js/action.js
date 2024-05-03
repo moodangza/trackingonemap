@@ -601,13 +601,18 @@ function editjob(){
   
   $.ajax(
     {
-    url: "editjob",
+    url: "/editjob",
     type: "post",
     dataType: 'text',
     data: { editjobid: editjob_id,editjobname: editjobname,editjobstart: editjstart,editjobend: editjend},
     success: function (data) {
-      alert('บันทึก')
-      window.location.reload(false);
+      if(data.success){
+        
+        alert('บันทึก')
+        location.reload(true);
+        }else{
+          alert(data.error);
+        }
     }
 });   
 }
