@@ -530,9 +530,9 @@ function addjob(){
   let jobstart = $('#job_start').val();
   let jobend = $('#job_end').val();
   var arr1 = jobstart.split('/');
-  let jstart = arr1[2]+'-'+arr1[1]+'-'+arr1[0];
+  let jstart = arr1[2]-543+'-'+arr1[1]+'-'+arr1[0];
   var arr2 = jobend.split('/');
-  let jend = arr2[2]+'-'+arr2[1]+'-'+arr2[0];  
+  let jend = arr2[2]-543+'-'+arr2[1]+'-'+arr2[0];  
   var name = document.getElementById("job_name");
   var start = document.getElementById("job_start");
   var end = document.getElementById("job_end");
@@ -578,23 +578,21 @@ function editjob(){
   let editjobstart = $('#editjob_start').val();
   let editjobend = $('#editjob_end').val();
   var arr1 = editjobstart.split('/');
-  let editjstart = arr1[2]+'-'+arr1[1]+'-'+arr1[0];
+  let editjstart = arr1[2]-543+'-'+arr1[1]+'-'+arr1[0];
   var arr2 = editjobend.split('/');
-  let editjend = arr2[2]+'-'+arr2[1]+'-'+arr2[0];  
-  var editname = document.getElementById("editjob_name");
-  var editstart = document.getElementById("editjob_start");
-  var editend = document.getElementById("editjob_end");
-  if( editname.value == "") {
+  let editjend = arr2[2]-543+'-'+arr2[1]+'-'+arr2[0];  
+ 
+  if( editjobname.value == "") {
       alert("กรุณากรอกข้อมูลให้ครบถ้วน")
-      editname.focus();
+      $('#editjob_name').focus();
       return false;
-  }else if (editstart.value ==""){
+  }else if (editjobstart.value ==""){
     alert("กรุณากรอกข้อมูลให้ครบถ้วน")
-    editstart.focus();
+    $('#editjob_start').focus();
       return false;
-  }else if (editend.value == "" ){
+  }else if (editjobend.value == "" ){
     alert("กรุณากรอกข้อมูลให้ครบถ้วน")
-    editend.focus();
+    $('#editjob_end').focus();
       return false;
   }else if (editjend < editjstart){
     alert("กรุณากรอกข้อมูลวันที่ให้ถูกต้อง")

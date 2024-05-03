@@ -151,7 +151,7 @@
                               <h5 class="modal-title" id="staticBackdropLabel">แก้ไขหัวข้อ</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <input type="hidden" class="form-control" id="editjob_id" name="editjob_id">
+                            <input type="hidden" class="form-control" id="editjob_id" name="editjob_id" value="">
                             <div class="modal-body">
                               <label for="inputjob" class="form-label">ชื่อหัวข้อ</label>
                               <div class="container">
