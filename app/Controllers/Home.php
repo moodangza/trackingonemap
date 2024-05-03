@@ -10,6 +10,7 @@ use App\Models\subprocessModel;
 use App\Models\divisionModel;
 use App\Libraries\Date;
 use App\Libraries\Ckedit;
+use Exception;
 
 class Home extends BaseController
 {
@@ -60,8 +61,8 @@ class Home extends BaseController
             $jobmodel1 ->select('job_tb.job_id,job_tb.job_name,status')
             ->where('job_tb.delete_flag', '1') 
             ->where('job_tb.division_id',$value["division_id"])
-            ->groupBy('job_tb.job_id,job_tb.job_name,status')
-            ->orderBy('job_start','asc');
+            ->groupBy('job_tb.job_id,job_tb.job_name,status');
+            // ->orderBy('job_start','asc');
             $job_rs = $jobmodel1->findAll();
             $dv_rs[$x]["job"] = $job_rs;
             if($value["c_job"]-$value["s_job"]=='0'&& $value["c_job"]!='0'&&$value["s_job"]!=0) {
@@ -127,19 +128,15 @@ class Home extends BaseController
         ->groupBy('division_tb.division_id,division_tb.division_name')
         ->orderBy('division_tb.division_id','asc');
         $division_rs1 = $divisionmodel1->findAll();
-
-        $divisionid1 = $this->request->getVar('divisionid1');
+        $divisionid1 = $this->request->getVar('division_id');
         $jobmodel1 = new jobModel();
-        $jobmodel1  
-        ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status,job_finish,status,job_end-CURRENT_DATE as dateremain', false)
+        $jobmodel1  ->select('job_id,job_name,job_start,job_end,status,job_finish,job_end-CURRENT_DATE as dateremain', false)
         ->where('delete_flag' ,'1') // ไม่แสดงข้อมูลที่ลบ (ลบไม่จริง)
         ->where('job_tb.division_id', $divisionid1 )
-        ->groupBy('job_tb.job_id,job_tb.job_name,status,job_finish,status')
-        ->orderBy('job_id','asc')
-        ;
+        ->groupBy('job_id,job_name,job_start,job_end,status,job_finish,dateremain')
+        ->orderBy('job_id','asc');
         $job_rs1 = $jobmodel1->findAll();
-        print_r($job_rs1);
-        exit;
+     
         $dateth = new Date();
         foreach($job_rs1 as $key => $date_th){
             $job_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
@@ -223,14 +220,28 @@ class Home extends BaseController
 // เพิ่มหัวข้อ
 public function addjob()
 {
-    
-    $addjobmodel1 = new jobModel();
-    $data = array('job_name'=>$_POST['jobname'],
-    'job_start'=>$_POST['jobstart'],
-    'job_end'=>$_POST['jobend'],
-    'created_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-    'status'=>'1',);
-    $addjobmodel1 -> insert($data);
+    try {
+        $addjobmodel1 = new jobModel();
+        $data = array('job_name'=>$_POST['jobname'],
+        'job_start'=>$_POST['jobstart'],
+        'job_end'=>$_POST['jobend'],
+        'created_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+        'division_id'=>$_SESSION['usertbl']['division_id'],
+        'status'=>'1',
+        'delete_flag'=>'1',);
+        // print_r($data);
+        // exit;
+        $success = $addjobmodel1 -> insert($data);
+        if($success){
+            return $this->response->setJson(['success'=>$success]);
+        }
+        else{
+            return $this->response->setJson(['error'=>'fail']);
+        }
+    } catch (Exception $e) {
+        return $this->response->setJson(['error'=>$e->getMessage()]);
+        echo $e->getMessage();
+    }
     // $return = [
 
     // ];

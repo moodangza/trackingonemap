@@ -57,7 +57,7 @@ $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date,#editjob_st
 });
 const pathname = window.location.pathname;
 const text = pathname.split("/");
-alert(text[1]);
+
 
 // return false;
 if(text[1] = 'formupdateprocess'){
@@ -125,7 +125,7 @@ $(document).on( "click",".addsubprocess", function() {
 
 // โชว subprocess
 function showsubprocess(){
-  const process_id = $('#process_id').val();
+  let process_id = $('#process_id').val();
   $.ajax(
     {
     url: "/showsubprocess",
@@ -196,7 +196,10 @@ function jobText(id, element,cedit){
 //เลือก หน่วยงาน แสดง job
 $(document).on( "change",".selectdivision", function() {
   $( "select option:selected" ).each( function() {
+
     divid = $(this).val();
+    alert(divid);
+    return;
   } );
   // $('#urladdprocess').hide();
   showjobselect(divid)    
@@ -208,12 +211,20 @@ function showjobselect(divid){
     {
       url: "/showafterdiv",
       type: "get",
-      dataType: 'text',
-      data: { divisionid1: divid},
+      dataType: 'json',
+      data: { division_id: divid},
     success: function (data) {
-      // location.reload();
-      let showdata = JSON.parse(data);
-      // console.log(showdata.cedit);
+      try {
+        // let showdata = JSON.parse(data);
+        console.log(data);
+        // Process the parsed JSON data
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+        // Handle the error appropriately
+      }
+      let showdata =data;
+     
+      // return;
       var cedit = showdata.cedit;
      if(cedit!='can'){
         $('#addjob').hide();
@@ -267,7 +278,12 @@ function showjobselect(divid){
     alert('ไม่พบ');
   }
       
+    },
+    error: function(xhr, status, error) {
+      console.error("AJAX request error:", error);
+      // Handle the AJAX error appropriately
     }
+
 });   
 }
 
@@ -358,61 +374,7 @@ function jobselect(jobid){
 });   
 }
 
-// โชว subprocess
-function showsubprocess(){
-  const process_id = $('#process_id').val();
-  $.ajax(
-    {
-      
-    url: "/showsubprocess",
-    type: "get",
-    dataType: 'text',
-    data: { process_id : process_id},
-    success: function (data) {
-      let a = JSON.parse(data);
-      // console.log(a)   
-      $('#subprocess_id').val(data.subprocess_id);
-    }
-});  
-  $('#processitem').html('');
-        
-  // $('#addjob_id').html('');
-  // $('#addjob_id').append('<input class="addprocessid" type="text" value="'+a.process[0]['job_id']+'">');
-  $("#urladdprocess").attr("href", "/formprocess/"+a.process[0]['job_id']+""); 
-   
-  a.process.forEach(element => {
-   
-      // $('#processitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
-      // '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
-      // '<div class="text-right">'+
-      // '<button class="btn btn-warning editsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">'+
-      //  '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>'+
-      // '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน">'+
-      // '<i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
-      // '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ">'+
-      // '<i class="fa fa-window-close" aria-hidden="true"></i></button>'+
-      // '</div>'+
-      // '</li>'
-      // );
-      $('#processitem').append('<div class="card">'+
-        '<div class="card process_list" id="process'+element.process_id+'">'+
-          '<div class="card-body">'+
-            '<h5 class="card-title">'+ element.process_name +'</h5>'+
-            '<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
-            '<div class="text-right">'+
-                '<button class="btn btn-warning editsubprocess" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">'+
-                '<i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>'+
-                '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess('+element.process_id+')" title="จบขั้นตอนการทำงาน">'+
-                '<i class="fa fa-check-circle" aria-hidden="true"></i></button>'+
-                '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess('+element.process_id+')" title="ลบ">'+
-                '<i class="fa fa-window-close" aria-hidden="true"></i></button>'+
-            '</div>'+
-          '</div>'+
-        '</div>'+
-      '</div>')
-  });
- 
-}
+
 
 
 // ลบขั้นตอนการทำงาน
@@ -593,13 +555,18 @@ function addjob(){
   
   $.ajax(
     {
-    url: "addjob",
+    url: "/addjob",
     type: "post",
-    dataType: 'text',
+    dataType: 'json',
     data: { jobname: jobname,jobstart: jstart,jobend: jend},
     success: function (data) {
+      if(data.success){
+        
       alert('บันทึก')
       location.reload(true);
+      }else{
+        alert(data.error);
+      }
     }
 });   
 }
