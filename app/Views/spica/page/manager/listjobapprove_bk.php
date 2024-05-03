@@ -108,25 +108,16 @@
         </button>
       </div>
       <div class="modal-body">
-            <div class="row g-3">
-                <div class="col-md">
-                <figure class="text-left">
-                <h5 id="job_name" class="card-title align-middle">หัวข้อการทำงาน</h5>
-                          <input type="hidden" id="job_id" value="">
-                        เริ่มต้น : <em id="showjob_start">วันที่เริ่มต้น</em>
-                        สิ้นสุด : <em id="showjob_end">วันที่สิ้นสุด</em>
-</figure>
-                </div>
-                <div class="row g-3">
-                    
-                </div>
+            <div class="row">
                 <div class="col-12">
                         <div class="card" style="height: 100%;">
                           <div class="card-header text-center border">
-                           
+                            <h5 id="job_name" class="card-title align-middle">หัวข้อการทำงาน</h5>
+                          <input type="hidden" id="job_id" value="">
                           <div class="">
                               
-                            
+                              เริ่มต้น : <em id="showjob_start">วันที่เริ่มต้น</em>
+                              สิ้นสุด : <em id="showjob_end">วันที่สิ้นสุด</em>
                                
                           </div>
                             
