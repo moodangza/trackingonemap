@@ -43,7 +43,13 @@
         transform: translate(-50%, -50%);
 }
 
-
+.form-control {
+          display: inline;
+          width: inherit;
+          border-top: 0px;
+          border-left: 0px;
+          border-right: 0px;
+        }
 
 </style>  
 <?php 
@@ -102,7 +108,7 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">รายละเอียด ก่อนอนุมัติ</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">รายละเอียด</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -117,42 +123,52 @@
                         สิ้นสุด : <em id="showjob_end">วันที่สิ้นสุด</em>
 </figure>
                 </div>
-                <div class="row g-3">
-                    
-                </div>
+               
                 <div class="col-12">
                         <div class="card" style="height: 100%;">
                           <div class="card-header text-center border">
-                           
-                          <div class="">
-                              
-                            
-                               
-                          </div>
                             
                           </div>
                             <div class="card-body">
-                             
-                                <div id="showprocess">
-                                      
-                                </div>
-                                <div class="mb-3 radiapprove">
-                                <?php if($_SESSION['usertbl']['level'] == 'aprove'){?>
-                                  <h6 style="background-color: lightgray;">&nbsp;ผลการอนุมัติ</h6>
-                                    <div class="text-center">
-                                   
-                                      <input class="radioapprove" type="radio" name="radioapprove" id="radioapprove" value="0"> ไม่อนุมัติ
-                                      <input class="radioapprove" type="radio" name="radioapprove" id="radioapprove1" value="1"> อนุมัติ<br>
-                                     
-                                    </div> 
-                                    <?php } ?>
-                                </div>
+                            <ul class="list-group list-group-horizontal-md ">
+                    <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
+                      ขั้นตอนการทำงาน
+                    </div>
 
-                                <div id="reason">
-                                    <label for="exampleInputtext" class="form-label" style="color:red;">*โปรดระบุเหตุผล</label>
-                                    <input type="text" class="form-control" id="reasoninput" value="">
-                                    
-                                  </div>
+
+                    <div class="list-group-item col-10 form-floating" id="showprocess">
+                     
+                    </div>
+
+                  </ul>
+                  <ul class="list-group list-group-horizontal-md radiapprove">
+                    <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
+                        <span style="">&nbsp;ผลการอนุมัติ</span>
+                    </div>
+                    <div class="list-group-item col-10 form-floating">
+                      <div class="p-2 g-col-6">
+                       
+                                <input class="radioapprove" type="radio" 
+                                <?php if($_SESSION['usertbl']['level'] != 'aprove'){?> disabled  <?php } ?> 
+                                name="radioapprove" id="radioapprove" value="0">&nbsp; ไม่อนุมัติ &nbsp;&nbsp;
+                                <input class="radioapprove" type="radio" 
+                                <?php if($_SESSION['usertbl']['level'] != 'aprove'){?> disabled  <?php } ?>  
+                                name="radioapprove" id="radioapprove1" value="1"> &nbsp;อนุมัติ
+  
+                      </div>
+                    </div>
+                  </ul>
+                  <ul class="list-group list-group-horizontal-md radiapprove" id="reason">
+                    <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
+                    <label for="exampleInputtext" class="form-label" style="color:red;">*โปรดระบุเหตุผล</label>
+                    </div>
+                    <div class="list-group-item col-10 form-floating">
+                      <div class="p-2 g-col-6">
+                        <input type="text" class="form-control" autocomplete="off" id="reasoninput" value="">
+                      </div>
+                    </div>
+                  </ul>
+
                             </div>
                         </div>
                 </div>
@@ -160,9 +176,9 @@
       </div>
       <div class="modal-footer ">
         <div class="text-center">
-          <button type="button" class="btn btn-secondary closemodal" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger closemodal" data-dismiss="modal">Close</button>
           <?php if($_SESSION['usertbl']['level'] == 'aprove'){?>
-          <button type="button" class="btn btn-primary approvejob">อนุมัติการทำงาน</button>
+          <button type="button" class="btn btn-success approvejob">อนุมัติการทำงาน</button>
             <?php }?>
         </div>
         

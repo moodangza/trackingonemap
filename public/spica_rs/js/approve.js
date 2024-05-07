@@ -89,9 +89,9 @@ $(document).on( "click",".approvejob", function() {
               url: "/confirmapprove",
               type: "post",
               dataType: 'text',
-              data: { job_id : job_id},
+              data: { job_id : job_id, status : ckradio},
               success: function (rs_data) {
-                location.reload(true);
+                // location.reload(true);
               }
             });  
     
@@ -108,7 +108,7 @@ $(document).on( "click",".approvejob", function() {
               url: "/rejectapprove",
               type: "post",
               dataType: 'text',
-              data: { job_id : job_id, reject_detail : ckreason},
+              data: { job_id : job_id, status : ckradio, reject_detail : ckreason},
               success: function (rs_data) {
                 location.reload(true);
               }

@@ -198,7 +198,7 @@ $(document).on( "change",".selectdivision", function() {
   $( "select option:selected" ).each( function() {
 
     divid = $(this).val();
-    alert(divid);
+    // alert(divid);
     return;
   } );
   // $('#urladdprocess').hide();
@@ -609,7 +609,7 @@ function editjob(){
       if(data.success){
         
         alert('บันทึก')
-        location.reload(true);
+        location.reload();
         }else{
           alert(data.error);
         }
@@ -637,6 +637,7 @@ function updatejobform(jobid){
       }else{
         $('.footer-edit').show();
       }
+
     }
 });   
 }
@@ -644,7 +645,7 @@ function updatejobform(jobid){
 //ลบหัวข้อ job
 function deletejob(job_id){
   let text = "ยืนยันการลบข้อมูล";
-  alert(job_id);
+  // alert(job_id);
   if (confirm(text) == true) {
     text = "ทำการลบข้อมูลแล้ว";
     alert(text);
