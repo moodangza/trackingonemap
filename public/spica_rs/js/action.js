@@ -544,9 +544,9 @@ function editjob() {
   let editjobstart = $('#editjob_start').val();
   let editjobend = $('#editjob_end').val();
   var arr1 = editjobstart.split('/');
-  let editjstart = arr1[2] - 543 + '-' + arr1[1] + '-' + arr1[0];
+  let editjstart = arr1[2] + '-' + arr1[1] + '-' + arr1[0];
   var arr2 = editjobend.split('/');
-  let editjend = arr2[2] - 543 + '-' + arr2[1] + '-' + arr2[0];
+  let editjend = arr2[2] + '-' + arr2[1] + '-' + arr2[0];
 
   if (editjobname.value == "") {
     alert("กรุณากรอกข้อมูลให้ครบถ้วน")
