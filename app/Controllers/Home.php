@@ -306,7 +306,7 @@ public function deletejob()
                 );
     $success = $deletejob ->set($data) ->where('job_id',$_POST['job_id']) -> update();
     if($success){
-        echo 'ฟฟฟ';
+
         return $this->response->setJson(['success'=>$success]);
     }
     else{
