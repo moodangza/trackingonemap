@@ -81,11 +81,10 @@
                         <select class="form-select selectdivision" aria-label="Default select example" style="width:auto;">
                           <option value="0" selected>เลือกหน่วยงาน</option>
                           <?php foreach ($division as $opj) { ?>
-                            <option value="<?php echo $opj['division_id']; ?>" 
-                                <?php
-                                  if ($divisionid == $opj['division_id']) {
-                                    echo 'selected';
-                                  } ?>><?php echo $opj['division_name']; ?>
+                            <option value="<?php echo $opj['division_id']; ?>" <?php
+                                                                                if ($divisionid == $opj['division_id']) {
+                                                                                  echo 'selected';
+                                                                                } ?>><?php echo $opj['division_name']; ?>
                             </option>
                           <?php } ?>
                         </select>
@@ -102,33 +101,35 @@
                           <!-- Modal content-->
                           <div class="modal-content">
                             <div class="modal-header">
-                              <!-- <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h5 class="modal-title" id="staticBackdropLabel">เพิ่มหัวข้อ</h5> -->
+
                               <h5 class="modal-title" id="staticBackdropLabel">เพิ่มหัวข้อ</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-
-                              <label for="inputjob" class="form-label">ชื่อหัวข้อ</label>
-                              <input type="text" class="form-control" id="job_name" name="job_name">
-                              <div class="container">
-                                <div class="row">
-
-
-                                  <div class="col-6">
-                                    <label for="jobstart" class="form-label">วันที่เริ่ม</label>
-                                    <input type="text" class="form-control datepicker-input" id="job_start" style="width: fit-content;" readonly name="job_start"> <i class="fa fa-calendar"></i>
-
-                                  </div>
-                                  <div class="col-6">
-                                    <label for="jobend" class="form-label">วันที่สิ้นสุด</label>
-                                    <input type="text" class="form-control datepicker-input" id="job_end" style="width: fit-content;" readonly name="job_end">
-
+                              <ul class="list-group list-group-horizontal-md">
+                                <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
+                                  <label for="inputlevel" nowrap class="text-nowrap col-form-label d-inline-flex">ชื่อหัวข้อ</label>
+                                </div>
+                                <div class="list-group-item col-10 form-floating">
+                                  <div class="p-2 g-col-6">
+                                    <input type="text" class="form-control" id="job_name" name="job_name">
                                   </div>
                                 </div>
-                              </div>
+                              </ul>
 
-
+                              <ul class="list-group list-group-horizontal-md">
+                                <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
+                                  <label for="inputlevel" nowrap class="text-nowrap col-form-label d-inline-flex">ชื่อหัวข้อ</label>
+                                </div>
+                                <div class="list-group-item col-10 d-flex form-floating">
+                                  <div class="p-2 g-col-6 d-flex">
+                                    <label for="jobstart" class="form-label">วันที่เริ่ม</label>
+                                    <input type="text" class="form-control datepicker-input" id="job_start" style="width: fit-content;" readonly name="job_start"> <i class="fa fa-calendar"></i>
+                                    <label for="jobend" class="form-label">วันที่สิ้นสุด</label>
+                                    <input type="text" class="form-control datepicker-input" id="job_end" style="width: fit-content;" readonly name="job_end">
+                                  </div>
+                                </div>
+                              </ul>
                               <input type="hidden" class="form-control" id="division_id" name="division_id">
                             </div>
                             <div class="modal-footer">

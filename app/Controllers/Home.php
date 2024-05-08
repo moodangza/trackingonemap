@@ -282,6 +282,7 @@ public function editjob()
   
     if($success){
         return $this->response->setJson(['success'=>$success]);
+        
     }
     else{
         return $this->response->setJson(['error'=>'fail']);
@@ -308,6 +309,7 @@ public function deletejob()
     if($success){
 
         return $this->response->setJson(['success'=>$success]);
+
     }
     else{
         return $this->response->setJson(['error'=>'fail']);
