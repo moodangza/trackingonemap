@@ -77,64 +77,69 @@
                       <div class="card-body">
                         <ul class="list-group list-group-horizontal-md">
                           <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
-                          <label for="staticusername" class="col-form-label">Username</label>
+                            <label for="staticusername" class="col-form-label">Username</label>
                           </div>
                           <div class="list-group-item col-10 form-floating">
                             <div class="p-2 g-col-6">
-                            <input type="text" readonly class="form-control" id="staticusername" value="" onchange="ckdupuser();">
-                            <div id='#user'></div>
+                              <input type="text" readonly class="form-control" id="staticusername" value="" onchange="ckdupuser();">
+                              <div id='#user'></div>
                             </div>
                           </div>
                         </ul>
                         <ul class="list-group list-group-horizontal-md">
                           <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
-                          <label for="password" class="col-form-label">Password</label>
+                            <label for="password" class="col-form-label">Password</label>
                           </div>
                           <div class="list-group-item col-10 form-floating">
                             <div class="p-2 g-col-6">
-                            <input type="password" class="form-control" id="password" maxlength="25" placeholder="Password">
-                            <small id="password" class="text-muted">
-                              สามารถใส่รหัสผ่านได้สูงสุด 25 ตัว
-                            </small>
-                            <div id='#user'></div>
+                              <input type="password" class="form-control" id="password" maxlength="25" placeholder="Password">
+                              <small id="password" class="text-muted">
+                                สามารถใส่รหัสผ่านได้สูงสุด 25 ตัว
+                              </small>
+                              <div id='#user'></div>
                             </div>
                           </div>
                         </ul>
                         <ul class="list-group list-group-horizontal-md">
                           <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
-                          <label for="inputlevel" nowrap class="text-nowrap col-form-label d-inline-flex">เลือกประเภทผู้ใช้</label>
+                            <label for="inputlevel" nowrap class="text-nowrap col-form-label d-inline-flex">เลือกประเภทผู้ใช้</label>
                           </div>
                           <div class="list-group-item col-10 form-floating">
                             <div class="p-2 g-col-6">
-                            <select id="level" style="width: fit-content;" class="form-select" aria-label="Default select example">
-                              <option value="user">ผู้ใช้ทั่วไป</option>
-                              <option value="aprove">ผู้อนุมัติ</option>
-                            </select>
+                              <select id="level" style="width: fit-content;" class="form-select" aria-label="Default select example">
+                                <option value="user">ผู้ใช้ทั่วไป</option>
+                                <option value="aprove">ผู้อนุมัติ</option>
+                              </select>
                             </div>
                           </div>
                         </ul>
                         <ul class="list-group list-group-horizontal-md">
                           <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
-                          <label for="inputlevel" nowrap class="text-nowrap col-form-label d-inline-flex">ข้อมูลทั่วไป</label>
+                            <label for="inputlevel" nowrap class="text-nowrap col-form-label d-inline-flex">ข้อมูลทั่วไป</label>
                           </div>
                           <div class="list-group-item col-10 form-floating">
                             <div class="p-2 g-col-6">
-                            <select id="prefix" style="width: fit-content;" class="form-select" aria-label="Default select example">
-                              <option value="นาย">นาย</option>
-                              <option value="นาง">นาง</option>
-                              <option value="นางสาว">นางสาว</option>
-                            </select>
-                            <input type="text" class="form-control" id="staticname" value="">
-                            <input type="text" class="form-control" id="staticsurname" value="">
-                            <label for="staticposition" class="col-sm-1 text-nowrap col-form-label">ตำแหน่ง</label>
-                            <input type="text" class="form-control" id="position" value="">
+                              <select id="prefix" style="width: fit-content;" class="form-select" aria-label="Default select example">
+                                <option value="นาย">นาย</option>
+                                <option value="นาง">นาง</option>
+                                <option value="นางสาว">นางสาว</option>
+                              </select>
+                              <div class="d-flex">
+                              
+                                <input type="text" class="form-control col-6" id="staticname" placeholder="ชื่อ" value="">
+                               
+                                <input type="text" class="form-control col-6" id="staticsurname" placeholder="นามสกุล" value="">
+
+                              </div>
+
+                              <input type="text" class="form-control col-6" id="position" placeholder="ตำแหน่ง" value="">
                             </div>
                           </div>
                         </ul>
-                      
-                     
-                      
-                    
+
+
+
+
 
                       </div>
                     </div>
