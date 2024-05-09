@@ -608,7 +608,7 @@ function updatejobform(jobid) {
     });
 }
 
-//ลบหัวข้อ job
+//ลบหัวข้อ job //172.31.0.54
 function deletejob(job_id) {
   let text = "ยืนยันการลบข้อมูล";
   // alert(job_id);
@@ -616,22 +616,15 @@ function deletejob(job_id) {
     text = "ทำการลบข้อมูลแล้ว";
     alert(text);
 
-    $.ajax({
-      url: "/deletejob",
-      type: "POST",
-      dataType: 'text',
-      data: { job_id: job_id },
-      success: function (data) {
-        if (data.success) {
+    $.post( "/deletejob",{job_id: job_id}, function( data ) {
+      if (data.success) {
 
           alert('ลบข้อมูลเรียบร้อย')
           location.reload(true);
         } else {
           alert(data.error);
         }
-
-      }
-    });
+    },'json');
   }
 };
 $(document).on('click', '.formaddsubprocess', function () {

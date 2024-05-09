@@ -297,7 +297,7 @@ public function editjob()
 //ลบหัวข้อ job
 public function deletejob()
 { 
-    print_r($_POST);
+    
     // exit;
     try {
     $deletejob = new jobModel();
@@ -309,7 +309,7 @@ public function deletejob()
     if($success){
 
         return $this->response->setJson(['success'=>$success]);
-
+        //55
     }
     else{
         return $this->response->setJson(['error'=>'fail']);
