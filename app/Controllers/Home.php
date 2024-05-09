@@ -254,8 +254,8 @@ public function updatejobform()
     $updatejobmodel ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status')
         ->where('job_id',$_POST['jobid']);
         $updatejobmodel_rs = $updatejobmodel->first();
-        $updatejobmodel_rs["job_start"] = $dateth->Dateinpicker($updatejobmodel_rs['job_start']);
-        $updatejobmodel_rs["job_end"] = $dateth->Dateinpicker($updatejobmodel_rs['job_end']);
+        $updatejobmodel_rs["job_start"] = $dateth->Dateinpickerth($updatejobmodel_rs['job_start']);
+        $updatejobmodel_rs["job_end"] = $dateth->Dateinpickerth($updatejobmodel_rs['job_end']);
         //array_push//($updatejobmodel_rs ,$datestart,$dateend);
         header('Content-Type: application/json');
         echo json_encode( $updatejobmodel_rs );

@@ -22,6 +22,14 @@ class Date
 		return "$strshdate";
   	
 	}
+	public function Dateinpickerth($strDate)
+	{	
+		$strDate = explode("-",$strDate);
+		
+		$strshdate = $strDate[2].'/'.$strDate[1].'/'.$strDate[0]+543;
+		return "$strshdate";
+  	
+	}
 	public function Datethaifull($strDate)
 	{
 		$year = date("Y",strtotime($strDate))+543;
