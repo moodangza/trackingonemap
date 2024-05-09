@@ -395,9 +395,9 @@ $(document).on("click", ".insertprocess", function () {
   let processend = $('#e_date').val();
   let detail = $('#detail').val();
   var p_s_start = processstart.split('/');
-  let rs_start = p_s_start[2]  + '-' + p_s_start[1] + '-' + p_s_start[0];
+  let rs_start = p_s_start[2]-543  + '-' + p_s_start[1] + '-' + p_s_start[0];
   var p_s_end = processend.split('/');
-  let rs_end = p_s_end[2]  + '-' + p_s_end[1] + '-' + p_s_end[0];
+  let rs_end = p_s_end[2]-543  + '-' + p_s_end[1] + '-' + p_s_end[0];
   // alert(rs_start);
   // alert(rs_end);
   let s_job = $('#s_job').val();
@@ -426,10 +426,10 @@ $(document).on("click", ".insertprocess", function () {
       dataType: 'text',
       data: { job_id: job_id, process_name: process_name, process_start: rs_start, process_end: rs_end, detail: detail },
       success: function (data) {
-
-        const obj = JSON.parse(data);
-        console.log(obj);
-        location.replace("/formupdateprocess/")
+        // console.log(data);
+        var obj = JSON.parse(data);
+        console.log(obj.process);
+        location.replace("/formupdateprocess/"+obj.process)
       }
     });
 });
@@ -449,9 +449,9 @@ $(document).on("click", ".updateprocess", function () {
   // alert(processend);
 
   var p_s_start = processstart.split('/');
-  let rs_start = p_s_start[2] + '-' + p_s_start[1] + '-' + p_s_start[0];
+  let rs_start = p_s_start[2]-543 + '-' + p_s_start[1] + '-' + p_s_start[0];
   var p_s_end = processend.split('/');
-  let rs_end = p_s_end[2] + '-' + p_s_end[1] + '-' + p_s_end[0];
+  let rs_end = p_s_end[2]-543 + '-' + p_s_end[1] + '-' + p_s_end[0];
   // alert(rs_start);
   // alert(rs_end);
   let s_job = $('#s_job').val();
@@ -735,9 +735,9 @@ $(document).on("click", ".updatesubprocess", function () {
   let s_sub_date = $('#s_sub_date').val();
   let e_sub_date = $('#e_sub_date').val();
   var arr1 = s_sub_date.split('/');
-  let substart = arr1[2]  + '-' + arr1[1] + '-' + arr1[0];
+  let substart = arr1[2]-543  + '-' + arr1[1] + '-' + arr1[0];
   var arr2 = e_sub_date.split('/');
-  let subend = arr2[2]  + '-' + arr2[1] + '-' + arr2[0];
+  let subend = arr2[2]-543  + '-' + arr2[1] + '-' + arr2[0];
   var start = document.getElementById("s_date");
   var end = document.getElementById("e_date");
   if (subinput.value == "") {

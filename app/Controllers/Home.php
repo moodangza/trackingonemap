@@ -354,8 +354,8 @@ public function showprocess(){
 
     $dateth = new Date();
     foreach($process_rs as $key => $date_th){
-        $process_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
-        $process_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
+        $process_rs[$key]['process_start'] = $dateth->Dateinpickerth($date_th['process_start']);
+        $process_rs[$key]['process_end'] = $dateth->Dateinpickerth($date_th['process_end']);
     }
     $can = new Ckedit();
     $cedit = $can->ckcan($jobdivision["division_id"]);
@@ -441,8 +441,8 @@ public function formupdateprocess($process_id){
 
  
     
-        $process_rs['process_start'] = $dateth->showdatethai($process_rs['process_start']);
-        $process_rs['process_end'] = $dateth->showdatethai($process_rs['process_end']);
+        $process_rs['process_start'] = $dateth->Dateinpickerth($process_rs['process_start']);
+        $process_rs['process_end'] = $dateth->Dateinpickerth($process_rs['process_end']);
       
 
     $updatesubprocessmodel = new subprocessModel();
@@ -450,8 +450,8 @@ public function formupdateprocess($process_id){
                            ->where('process_id',$process_id);
     $subprocess_rs1 = $updatesubprocessmodel->findAll();
     foreach($subprocess_rs1 as $key => $date_th){
-        $subprocess_rs1[$key]['subprocess_start'] = $dateth->showdatethai($date_th['subprocess_start']);
-        $subprocess_rs1[$key]['subprocess_end'] = $dateth->showdatethai($date_th['subprocess_start']);
+        $subprocess_rs1[$key]['subprocess_start'] = $dateth->Dateinpickerth($date_th['subprocess_start']);
+        $subprocess_rs1[$key]['subprocess_end'] = $dateth->Dateinpickerth($date_th['subprocess_start']);
     }
     $can = new Ckedit();
     $cedit = $can->ckcan($job_rs["division_id"]);
