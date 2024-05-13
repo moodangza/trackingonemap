@@ -134,7 +134,9 @@
     opacity: 1;
   }
 }
-
+.top-nav{
+  background-color: #0050e3;
+}
 @-moz-keyframes bounce {
   0% {
     -webkit-transform: translateY(0);
@@ -20725,6 +20727,7 @@ dl li {
   -ms-transition: background 0.25s ease;
   background: center center no-repeat;
   /* background: url(../images/other/navbar-cover.jpg) center center no-repeat; */
+  background-color: #2b50c6;
   background-size: cover;
   height: 262px;
   width: auto;

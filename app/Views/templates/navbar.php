@@ -10,8 +10,8 @@ $usertbl = session()->get('usertbl');
 $userldap = session()->get('userldap');
 ?>
 
-<nav class="navbar col-lg-12 col-12 px-0 py-0 py-lg-4 d-flex flex-row  align-content-center sticky-top">
-        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+<nav class="navbar col-lg-12 col-12 px-0 py-0 py-lg-2 d-flex flex-row  align-content-center sticky-top top-nav" style="height: 5% !important;"> 
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end" >
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-menu"></span>
           </button>
@@ -121,7 +121,7 @@ $userldap = session()->get('userldap');
             <span class="mdi mdi-menu"></span>
           </button>
         </div>
-        <div class="navbar-menu-wrapper navbar-search-wrapper d-none d-lg-flex align-items-center">
+        <div class="navbar-menu-wrapper navbar-search-wrapper d-none d-lg-flex align-items-center" style="display: none !important;">
           <!-- <ul class="navbar-nav mr-lg-2"> -->
             <!-- <li class="nav-item nav-search d-none d-lg-block">
               <div class="input-group"> -->
