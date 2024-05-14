@@ -27,13 +27,14 @@
           </a>
         </li>
         <!-- usermanage -->
+        <?php if($_SESSION["usertbl"]["level"] != 'user'){?>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo base_url('usermanage');?>">
             <i class="mdi mdi-view-headline menu-icon"></i>
             <span class="menu-title">จัดการผู้ใช้</span>
           </a>
         </li>
-        
+        <?php }?>
         <li class="nav-item">
           <a class="nav-link" href="<?php echo base_url('logout');?>">
           &nbsp;&nbsp;<i class="mdi mdi-logout"></i>
