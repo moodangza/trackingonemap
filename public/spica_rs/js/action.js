@@ -267,17 +267,18 @@ function showjobselect(divid) {
 
 //เลือก job แสดง process
 function jobselect(jobid) {
-
   $.ajax(
     {
 
       url: "/home/get",
       type: "post",
       dataType: 'text',
-      data: { jobid1: jobid },
+      data: {jobid1: jobid},
       success: function (data) {
+       
         var a = JSON.parse(data);
-        console.log(a.cedit);
+        
+        console.log('job'+a.job_id);
         if (a.cedit == 'can') {
           $('#urladdprocess').show();
         } else {
@@ -290,8 +291,17 @@ function jobselect(jobid) {
         $("#urladdprocess").attr("href", "/formprocess/" + a.job_id + "");
 
         a.process.forEach(element => {
-          if (element.status == 1) {
+          console.log("tf"+(a.job_id == element.job_id)+a.job_id+element.job_id);
+          // console.log('cf:'+element.cf+'cc'+element.cc);
+          if(a.job_id == element.job_id && element.cf=='1' && element.cc=='0'){
+            // alert('fff');
+            $("#urladdprocess").hide();
 
+          }else if(a.job_id == element.job_id && element.cc=='1'){
+            $("#urladdprocess").show();
+          }
+          if (element.status == 1) {
+            console.log(element.status);
             $('#processitem').append('<ul style="padding-bottom: 2px;" class="list-group">' +
               // '<li class="list-group-item "> '+
               '<li id="process' + element.process_id + '" class="list-group-item  process_list ">' +
@@ -317,6 +327,7 @@ function jobselect(jobid) {
 
             );
           } else if (element.status == 2) {
+            console.log(element.status);
             $('#finishprocessitem').append('<ul style="padding-bottom: 2px;" class="list-group">' +
               // '<li class="list-group-item "> '+
               '<li id="process' + element.process_id + '" class="list-group-item  process_list ">' +
@@ -333,16 +344,13 @@ function jobselect(jobid) {
               '</div>' +
               '</ul>'
             );
-            // $('#finishprocessitem').append('<li id="process'+element.process_id+'" class="list-group-item  process_list ">'+
-            // '&nbsp; ชื่อ: ' + element.process_name +'<br>&nbsp; วันที่เริ่ม: '+ element.process_start +'<br>&nbsp; วันที่สิ้นสุด :'+ element.process_end +'<br>'+
-            // '<div class="text-right">'+
-            // '<a class="btn btn-success" href="/formupdateprocess/'+element.process_id+' " title="ดูข้อมูล">'+ '<i class="fa fa-search" aria-hidden="true"></i></a>'+
-            // '</div>'+
-            // '</li>'
-
-            // );
+          
           }
+          for (const [i, value] of a.process.entries()) {
+            console.log('%d: %s', i, value);
+        }
         });
+      
       }
     });
 }
@@ -690,7 +698,7 @@ function deletesubprocess(subid) {
 }
 $(document).on("change", ".selectjob", function () {
   $("select option:selected").each(function () {
-    jobid = $(this).val() + " ";
+    jobid = $(this).val();
   });
   $('#urladdprocess').hide();
   jobselect(jobid)

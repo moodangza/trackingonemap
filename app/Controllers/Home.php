@@ -225,6 +225,7 @@ public function addjob()
         $data = array('job_name'=>$_POST['jobname'],
         'job_start'=>$_POST['jobstart'],
         'job_end'=>$_POST['jobend'],
+        'create_by'=>$_SESSION['usertbl']['user_name'],
         'created_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
         'division_id'=>$_SESSION['usertbl']['division_id'],
         'status'=>'1',
@@ -334,16 +335,10 @@ public function showprocess(){
     ->groupBy('job_tb.job_id,job_tb.job_name ')
     ->orderBy('job_id','asc');
     $job_rs = $jobmodel->findAll();
-    // foreach($job_rs as $key => $str_th){
-    //     if(strlen($job_rs['job_name']) > 150){
-    //         $job_rs[$key]['job_name'] = mb_substr($str_th['job_name'], 0, 152).'...';
-    //     }else{
-    //         $job_rs[$key]['job_name'] = $str_th['job_name'];
-    //     }
-    // }
-
     $processmodel = new processModel();
-    $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status,process_tb.status ')
+    $processmodel ->select('process_tb.job_id,process_id,process_name,process_start,process_end,detail, process_tb.process_status,process_tb.status ,
+     count(status = 1 OR NULL) AS cc
+    , count(status = 2 OR NULL) AS cf ')
     ->where('delete_flag', '1') 
     // ->where('process_finish ',NULL)
     ->where('process_tb.job_id', $jobid1 )
@@ -357,6 +352,7 @@ public function showprocess(){
         $process_rs[$key]['process_start'] = $dateth->Dateinpickerth($date_th['process_start']);
         $process_rs[$key]['process_end'] = $dateth->Dateinpickerth($date_th['process_end']);
     }
+   
     $can = new Ckedit();
     $cedit = $can->ckcan($jobdivision["division_id"]);
     // foreach($processfinish_rs as $key => $date_th){
