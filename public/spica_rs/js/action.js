@@ -278,7 +278,8 @@ function jobselect(jobid) {
        
         var a = JSON.parse(data);
         
-        console.log('job'+a.job_id);
+        console.log('job'+a.job_status.status);
+      
         if (a.cedit == 'can') {
           $('#urladdprocess').show();
         } else {
@@ -286,20 +287,28 @@ function jobselect(jobid) {
         }
         $('#processitem').html('');
         $('#finishprocessitem').html('');
-        // $('#addjob_id').html('');
-        // $('#addjob_id').append('<input class="addprocessid" type="text" value="'+a.process[0]['job_id']+'">');
+       
+        $('#hiddenid').attr("value",a.job_id);
         $("#urladdprocess").attr("href", "/formprocess/" + a.job_id + "");
-
+      
         a.process.forEach(element => {
-          console.log("tf"+(a.job_id == element.job_id)+a.job_id+element.job_id);
+         
           // console.log('cf:'+element.cf+'cc'+element.cc);
           if(a.job_id == element.job_id && element.cf=='1' && element.cc=='0'){
             // alert('fff');
             $("#urladdprocess").hide();
+            if(a.job_status.status <3){
+              $("#finishjob").show();
+            }else{
+              $("#finishjob").hide();
+            }
+            
 
           }else if(a.job_id == element.job_id && element.cc=='1'){
             $("#urladdprocess").show();
+            $("#finishjob").hide();
           }
+
           if (element.status == 1) {
             console.log(element.status);
             $('#processitem').append('<ul style="padding-bottom: 2px;" class="list-group">' +
@@ -327,7 +336,7 @@ function jobselect(jobid) {
 
             );
           } else if (element.status == 2) {
-            console.log(element.status);
+         
             $('#finishprocessitem').append('<ul style="padding-bottom: 2px;" class="list-group">' +
               // '<li class="list-group-item "> '+
               '<li id="process' + element.process_id + '" class="list-group-item  process_list ">' +
@@ -346,14 +355,42 @@ function jobselect(jobid) {
             );
           
           }
-          for (const [i, value] of a.process.entries()) {
-            console.log('%d: %s', i, value);
-        }
+          
         });
       
       }
     });
 }
+function reoload(){ 
+  location.reload();
+}
+$(document).on("click", "#finishjob", function () {
+  let job_id = $('#hiddenid').val();
+
+Swal.fire({
+  title: 'ยืนยันขั้นตอนการทำงานหรือไม่',
+  // text: $(this).data('project_data_detail'),
+  icon: 'warning',
+  confirmButtonText: 'ยืนยัน',
+  showDenyButton: true,
+  denyButtonText: 'ไม่',
+}).then((result) => {
+  if (result.isConfirmed) {
+// return false;
+    $.ajax(
+      {
+        url: "/confirmallprocess",
+        type: "post",
+        dataType: 'json',
+        data: { job_id: job_id },
+        success: function (data) {
+          reoload();
+        
+        }
+      });
+  }
+});
+});
 
 // ลบขั้นตอนการทำงาน
 function deleteprocess(process_id) {

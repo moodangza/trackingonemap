@@ -67,6 +67,21 @@ class Managecontroller extends BaseController
         
        
     }
+    public function confirmallprocess()
+    {
+       
+        $job_id = $this->request->getVar('job_id');
+        $confirmprocess = new jobModel();
+        $dataprocess = array('delete_flag'=>'1',
+                             
+                              'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
+                                'status'=>'3',
+                                'update_by'=>$_SESSION['usertbl']['user_name']
+                            );
+        $confirmprocess ->set($dataprocess) ->where('job_id',$job_id) -> update();
+        
+       
+    }
     public function insertprocess()
     {
         // print_r($_POST['e_sub_date']);

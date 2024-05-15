@@ -20,7 +20,7 @@
               <div class="row w-100 flex-grow">
                 <div class="col-md-12 grid-margin stretch-card">
                   <div class="card">
-                    <div class="card-body container">
+                    <div class="card-body">
                       <div class="row mb-4">
                         <?php
                         foreach ($divi as $x) { ?>

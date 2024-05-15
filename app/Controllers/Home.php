@@ -329,7 +329,7 @@ public function showprocess(){
     $jobdivision = $jobmodel ->select('division_id')
     ->where('job_id',$jobid1)
     ->first();    
-    $jobmodel  ->select('job_tb.job_id,job_tb.job_name ')
+    $jobmodel  ->select('job_tb.job_id,job_tb.job_name')
     ->where('job_tb.division_id',  $jobdivision["division_id"] )
     ->where('delete_flag !=','0')
     ->groupBy('job_tb.job_id,job_tb.job_name ')
@@ -359,8 +359,13 @@ public function showprocess(){
     //     $processfinfish_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
     //     $processfinfish_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
     // }
+    $jobmodel  ->select('job_tb.status')
+    ->where('job_tb.job_id',  $jobid1)
+    ->where('delete_flag !=','0');
+    $job_status = $jobmodel->first();
     $data = [
         'job'=> $job_rs,
+        'job_status' => $job_status,
         'process' => $process_rs ,
        'job_id'=>$jobid1,
        'cedit'=>$cedit,
