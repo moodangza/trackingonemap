@@ -72,10 +72,10 @@
                             '<b>'.$rs_job["job_name"].'</b>'.
                       '</h5>'.
                       '<hr>'.
-                    '<p class="text-muted mb-2">'.$rs_job["create_by"].'</p>'.
+                    '<p class="text-muted mb-2">'.$rs_job["prefix"].' '.$rs_job["name"].' '.$rs_job["surname"].'</p>'.
                     '<ul class="list-inline mb-0 text-muted">'.
                         '<li class="list-inline-item">'.
-                            '<b><i class="fa fa-calendar-o "></i> วันที่ '.$rs_job['job_start'] .' ถึง '. $rs_job['job_end'].'</b>'.
+                            '<b><i class="fa fa-calendar-o "></i> '.$rs_job['job_start'] .' ถึง '. $rs_job['job_end'].'</b>'.
                         '</li>'.
                         '<br><li class="list-inline-item">'.
                             '<i class="fa fa-calendar-check-o"></i>&nbsp;'. $rsfi.
@@ -165,6 +165,16 @@
                     <div class="list-group-item col-10 form-floating">
                       <div class="p-2 g-col-6">
                         <input type="text" class="form-control" autocomplete="off" id="reasoninput" value="">
+                      </div>
+                    </div>
+                  </ul>
+                  <ul class="list-group list-group-horizontal-md radiapprove" id="historyreason">
+                    <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
+                    <label for="exampleInputtext" class="form-label" style="color:red;">ประวัติการอนุมัติ</label>
+                    </div>
+                    <div class="list-group-item col-10 form-floating">
+                      <div class="p-2 g-col-6">
+                        ข้อมูลลลลล
                       </div>
                     </div>
                   </ul>

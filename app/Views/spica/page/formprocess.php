@@ -54,11 +54,10 @@
           padding: 0;
 
         }
-
         #formupdateprocess>ul {
-          box-shadow: 5px 10px #888888;
-          margin-bottom: 2px;
-        }
+  box-shadow: 5px 10px #888888;
+  margin-bottom: 2px;
+}
 
         .em {
           color: red;

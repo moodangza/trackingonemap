@@ -45,7 +45,9 @@ class Approvecontroller extends BaseController
         $jobselect = new jobModel();
         $jobselect->select('job_id,job_name,job_start,job_end,job_finish,status,create_by')
             ->select('division_tb.division_name')
+            ->select('prefix , name, surname ')
             ->join('division_tb', 'job_tb.division_id = division_tb.division_id', 'inner')
+            ->join('user_tb','user_tb.user_name = job_tb.create_by','left')
             ->where('job_tb.delete_flag', '1')
             ->where('job_tb.division_id', $d_id);
         $job_rs = $jobselect->findAll();
@@ -104,10 +106,14 @@ class Approvecontroller extends BaseController
             // $dateth->DateThai($date_th['subprocess_end']);
             $process_rs[$x]["subprocess"] = $subprocess_rs;
         }
+        $approvesql = new approveModel();
+        $approvesql->select('')
+        ->where('job_id',$job_id)
+        ->orderBy('approve_create', 'asc');
         $return = [
             'job' => $job_rs,
             'process' => $process_rs,
-            // 'subprocess' => $subprocess_rs,
+            'history' => $approvehis_rs,
             'flag' => 'afterselect'
         ];
         return $this->response->setJSON($return);

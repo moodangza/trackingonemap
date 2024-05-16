@@ -124,22 +124,15 @@
                                 <option value="นาง">นาง</option>
                                 <option value="นางสาว">นางสาว</option>
                               </select>
-                              <div class="d-flex">
-                              
-                                <input type="text" class="form-control col-6" id="staticname" placeholder="ชื่อ" value="">
+                                                           
+                                <input type="text" class="form-control col-9" id="staticname" placeholder="ชื่อ" value="">
                                
-                                <input type="text" class="form-control col-6" id="staticsurname" placeholder="นามสกุล" value="">
+                                <input type="text" class="form-control col-9" id="staticsurname" placeholder="นามสกุล" value="">
 
-                              </div>
-
-                              <input type="text" class="form-control col-6" id="position" placeholder="ตำแหน่ง" value="">
+                              <input type="text" class="form-control col-9" id="position" placeholder="ตำแหน่ง" value="">
                             </div>
                           </div>
                         </ul>
-
-
-
-
 
                       </div>
                     </div>

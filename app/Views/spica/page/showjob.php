@@ -59,10 +59,7 @@
           /* additional styles for the modal */
         }
 
-        /* #jobadd {
-                    width: 750px;
-                    margin: auto;
-                  } */
+    
       </style>
       <!-- partial -->
       <div class="main-panel">
@@ -107,7 +104,7 @@
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                              <ul class="list-group list-group-horizontal-md">
+                              <ul class="list-group list-group-horizontal-md" style="box-shadow: 5px 10px #888888;margin-bottom: 2px;">
                                 <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
                                   <label for="inputlevel" nowrap class="text-nowrap col-form-label d-inline-flex">ชื่อหัวข้อ</label>
                                 </div>

@@ -61,28 +61,47 @@ function updateuser(user_id) {
 }
 function updateuser(user_id) {
 
-  var password = $('#password').val();
-  var level = $('#level').val();
-  var level = $('#level').val();
-  var prefix = $('#prefix').val();
-  var name = $('#staticname').val();
-  var surname = $('#staticsurname').val();
-  var position = $('#position').val();
-  $.ajax(
-    {
-      url: "/updateuser",
-      type: "post",
-      dataType: "json",
-      data: {
-        user_id: user_id, password: password, level: level,
-        prefix: prefix, name: name, surname: surname, position: position
-      },
-      success: function (data) {
-        // alert(data);
-        $('#manageusermodal').modal('toggle');
-        location.reload();
-      }
-    });
+  Swal.fire({
+    title: "ต้องการแก้ไขข้อมูลผู้ใช้ใช่หรือไม่?",
+    showDenyButton: true,
+    showCancelButton: false,
+    confirmButtonText: "Save",
+    denyButtonText: `Don't save`
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      Swal.fire("Saved!", "", "success");
+      var password = $('#password').val();
+      var level = $('#level').val();
+      var level = $('#level').val();
+      var prefix = $('#prefix').val();
+      var name = $('#staticname').val();
+      var surname = $('#staticsurname').val();
+      var position = $('#position').val();
+      $.ajax(
+        {
+          url: "/updateuser",
+          type: "post",
+          dataType: "json",
+          data: {
+            user_id: user_id, password: password, level: level,
+            prefix: prefix, name: name, surname: surname, position: position
+          },
+          success: function (data) {
+            // alert(data);
+            $('#manageusermodal').modal('toggle');
+            location.reload();
+          }
+
+        });
+    } else if (result.isDenied) {
+      // Swal.fire("Changes are not saved", "", "info");
+      $('#manageusermodal').modal('toggle');
+      location.reload();
+    }
+  });
+
+
 }
 function adduserform(adduser) {
   var flag = adduser;
@@ -118,8 +137,10 @@ function adduser() {
           url: "/adduser",
           type: "post",
           dataType: "text",
-          data: { user_name: user_name, password: password,
-            prefix: prefix, level: level,  name: name, surname: surname, position: position },
+          data: {
+            user_name: user_name, password: password,
+            prefix: prefix, level: level, name: name, surname: surname, position: position
+          },
           success: function (data) {
             $('#manageusermodal').modal('toggle');
             location.reload();
