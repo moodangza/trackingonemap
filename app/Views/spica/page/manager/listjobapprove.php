@@ -72,7 +72,7 @@
                             '<b>'.$rs_job["job_name"].'</b>'.
                       '</h5>'.
                       '<hr>'.
-                    '<p class="text-muted mb-2">คนบันทึก</p>'.
+                    '<p class="text-muted mb-2">'.$rs_job["create_by"].'</p>'.
                     '<ul class="list-inline mb-0 text-muted">'.
                         '<li class="list-inline-item">'.
                             '<b><i class="fa fa-calendar-o "></i> วันที่ '.$rs_job['job_start'] .' ถึง '. $rs_job['job_end'].'</b>'.
@@ -102,7 +102,7 @@
      <?php echo $this->include('templates/navbar');?>
       <!-- partial -->
       <div class="main-panel">
-        <?php print_r($_SESSION);?>
+       
       <div class="modal fade modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" data-bs-backdrop="static"
        data-bs-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -239,7 +239,7 @@
               <div class="row">
             <div class="col-12 col-xl-12 grid-margin stretch-card">
               <div class="row w-100 flex-grow" style="justify-content: center">
-                    <?php   echo $showjob[0]['division_name']; ?>
+                    <h4><?php echo $showjob[0]['division_name']; ?></h4>
               </div>
             </div>
               </div>  
@@ -250,7 +250,7 @@
                         <b>กำลังดำเนินการ</b>
                     </div>
                 
-                    <div class="card-body overflow-scroll">
+                    <div class="card-body">
                 
                   <div class="candidate-list">
                   <?php foreach($showjob as $rs_job){?>

@@ -91,7 +91,7 @@ $(document).on( "click",".approvejob", function() {
               dataType: 'text',
               data: { job_id : job_id, status : ckradio},
               success: function (rs_data) {
-                // location.reload(true);
+                location.reload();
               }
             });  
     
@@ -110,7 +110,7 @@ $(document).on( "click",".approvejob", function() {
               dataType: 'text',
               data: { job_id : job_id, status : ckradio, reject_detail : ckreason},
               success: function (rs_data) {
-                location.reload(true);
+                location.reload();
               }
             });  
       }

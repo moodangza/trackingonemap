@@ -10,7 +10,7 @@ $usertbl = session()->get('usertbl');
 $userldap = session()->get('userldap');
 ?>
 
-<nav class="navbar col-lg-12 col-12 px-0 py-0 py-lg-2 d-flex flex-row  align-content-center sticky-top top-nav" style="height: 5% !important;"> 
+<nav class="navbar col-lg-12 col-12 px-0 py-0 py-lg-2 d-flex flex-row  align-content-center sticky-top top-nav" style="height:auto !important;"> 
         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end" >
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-menu"></span>

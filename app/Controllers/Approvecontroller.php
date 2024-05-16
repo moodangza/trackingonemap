@@ -43,7 +43,7 @@ class Approvecontroller extends BaseController
     public function listjobapprove($d_id)
     {
         $jobselect = new jobModel();
-        $jobselect->select('job_id,job_name,job_start,job_end,job_finish,status')
+        $jobselect->select('job_id,job_name,job_start,job_end,job_finish,status,create_by')
             ->select('division_tb.division_name')
             ->join('division_tb', 'job_tb.division_id = division_tb.division_id', 'inner')
             ->where('job_tb.delete_flag', '1')
@@ -128,7 +128,7 @@ class Approvecontroller extends BaseController
             'updated_at' => date('Y-m-d H:i:s', strtotime('7 hour')),
             'status' => '4',
             'update_by' => $_SESSION["usertbl"]["user_name"],
-        
+            'job_finish' =>date('Y-m-d'),
         );
 
         $approvejob->set($datajob)->where('job_id', $job_id)->update();
