@@ -49,9 +49,9 @@ class Usermanagecontroller extends BaseController
 
 
         $updateusermodel = new userModel();
-        if(md5($_POST['password'].'onlb+-') != $ck_rs['password']){
+        if(md5($_POST['password'].'onlb+-') != $ck_rs['password'] && $_POST['password']!=''){
             $password = md5($_POST['password'].'onlb+-');
-        }else{
+        }else{ 
             $password =$ck_rs['password'];
         }
         $updateuser = array(
@@ -114,83 +114,5 @@ class Usermanagecontroller extends BaseController
         ];
         header('Content-Type: application/json');
         echo json_encode( $return );
-    }
-    // public function insertprocess()
-    // {
-    //     // print_r($_POST['e_sub_date']);
-    //     // exit;
-    //     $addprocessmodel = new processModel();
-    //     $job_id = $this->request->getVar('job_id');
-    //     // echo $job_id;
-    //     // print_r($_POST);
-    //     // exit;
-    //     $data = array('job_id'=>$_POST['job_id'],
-    //     'process_name'=>$_POST['process_name'],
-    //     'process_start'=>$_POST['process_start'],
-    //     'process_end'=>$_POST['process_end'],
-    //     'created_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-    //     'detail'=>$_POST['detail'],
-    //     'delete_flag'=>'1',
-    //     'status'=>'1',
-    //     'create_by'=>$_SESSION['usertbl']['user_name']);
-        
-    //     $last_id = $addprocessmodel -> insert($data);
-         
-    //     $updatejob = new jobModel();
-    //     $dataupdate = array('status'=>'2',
-    //                         'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-    //                         'update_by'=>$_SESSION['usertbl']['user_name']
-    //     );
-       
-    //     $updatejob ->set($dataupdate) ->where('job_id',$job_id) -> update();
-
-       
-    //     $returndata = [
-    //         'process'=> $last_id,
-    //         'flag' => 'update',
-    //     ];
-    //     header('Content-Type: application/json');
-        
-    //     echo json_encode( $returndata );
-       
-    // }
-    // public function updateprocess(){
-    //     $processid = $this->request->getVar('processid');
-    //     $deleteprocess = new processModel();
-    //     $dataprocess = array('process_name'=>$_POST[''],
-    //                           'process_finish'=>date('Y-m-d'),
-    //                           'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-    //                             'status'=>'2',
-    //                             'update_by'=>$_SESSION['usertbl']['user_name']
-    //                         );
-    //     $deleteprocess ->set($dataprocess) ->where('process_id',$processid) -> update();
-    // }
-    // public function updatesubprocess(){
-    //     $subprocessid = $_POST['sub_id'];
-    //     $editsubprocess = new subprocessModel();
-    //     $dataprocess = array('subprocess_name'=>$_POST['subprocess_name'],
-    //                           'subprocess_start'=>$_POST['subprocess_start'],
-    //                           'subprocess_end'=>$_POST['subprocess_end'],                  
-    //                           'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-    //                           'update_by'=>$_SESSION['usertbl']['user_name']
-    // );
-    // $editsubprocess ->set($dataprocess) ->where('subprocess_id',$subprocessid) ->update();
-    // header('Content-Type: application/json');
-        
-    // echo json_encode( $editsubprocess );
-    // }
-    // public function confirmsubprocess(){
-    //     $subprocessid = $_POST['subprocessid'];
-    //     $confirmsubprocess = new subprocessModel();
-    //     $dataprocess = array('subprocess_status'=>'2',
-    //                           'subprocess_finish'=>date('Y-m-d'),
-    //                           'updated_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
-    //                           'update_by'=>$_SESSION['usertbl']['user_name']
-    // );
-    // $confirmsubprocess ->set($dataprocess) ->where('subprocess_id',$subprocessid) ->update();
-    // header('Content-Type: application/json');
-        
-    // echo json_encode( $confirmsubprocess );
-    // }
-  
+    } 
 }

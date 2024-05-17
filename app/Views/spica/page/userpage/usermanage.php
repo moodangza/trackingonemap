@@ -59,7 +59,7 @@
       <?php echo $this->include('templates/navbar'); ?>
       <!-- partial -->
       <div class="main-panel">
-        <?php print_r($_SESSION); ?>
+        <?php //print_r($_SESSION); ?>
         <div class="modal fade modal-lg" id="manageusermodal" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="manageusermodalCenterTitle" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
             <div class="modal-content">

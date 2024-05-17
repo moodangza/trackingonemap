@@ -71,7 +71,7 @@ $(function(){
                     <div class="card-body p-5">
                     <div class="card">
   <h5 class="card-header bg-info text-center">ความก้าวหน้าการดำเนินการทั้งหมด</h5>
-  <?php print_r($_SESSION);?>
+  <?php //print_r($_SESSION);?>
   <div class="card-body">
   <div class="row">
                                     <div class="col-6 pe-0">

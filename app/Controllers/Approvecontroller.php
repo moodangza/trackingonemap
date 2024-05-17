@@ -107,10 +107,18 @@ class Approvecontroller extends BaseController
             $process_rs[$x]["subprocess"] = $subprocess_rs;
         }
         $approvesql = new approveModel();
-        $approvesql->select('reject_detail,status,approve_date,reject_date')
+        $approvesql->select('approve_id,reject_detail,status,approve_date,reject_date')
         ->where('job_id',$job_id)
         ->orderBy('approve_create', 'asc');
         $approvehis_rs = $approvesql->findAll();
+        foreach ($approvehis_rs as $key3 => $date_th) {
+            if(isset($date_th['approve_date'])){
+            $approvehis_rs[$key3]['approve_date'] = $dateth->DateThai($date_th['approve_date']);
+        }
+        if(isset($date_th['reject_date'])){
+            $approvehis_rs[$key3]['reject_date'] = $dateth->DateThai($date_th['reject_date']);
+        }
+        }
         $return = [
             'job' => $job_rs,
             'process' => $process_rs,

@@ -168,13 +168,13 @@
                       </div>
                     </div>
                   </ul>
-                  <ul class="list-group list-group-horizontal-md radiapprove" id="historyreason">
+                  <ul class="list-group list-group-horizontal-md" id="historyreason">
                     <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
                     <label for="exampleInputtext" class="form-label" style="color:red;">ประวัติการอนุมัติ</label>
                     </div>
                     <div class="list-group-item col-10 form-floating">
-                      <div class="p-2 g-col-6">
-                        ข้อมูลลลลล
+                      <div class="p-2 g-col-6" id="historyapprove">
+
                       </div>
                     </div>
                   </ul>
