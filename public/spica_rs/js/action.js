@@ -143,7 +143,7 @@ function showsubprocess() {
       '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess(' + element.process_id + ')" title="จบขั้นตอนการทำงาน">' +
       '<i class="fa fa-check-circle" aria-hidden="true"></i></button>' +
       '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess(' + element.process_id + ')" title="ลบ">' +
-      '<i class="fa fa-window-close" aria-hidden="true"></i></button>' +
+      '<i class="fa fa-trash" aria-hidden="true"></i></button>' +
       '</div>' +
       '</div>' +
       '</div>' +
@@ -164,7 +164,7 @@ function jobText(id, element, cedit) {
     '<div class="col-4" class="text-right">' +
 
     (cedit == 'can' ? '<button class="btn btn-warning" onclick="updatejobform(' + element.job_id + ')">' +
-      '<i class="fa fa-pencil " aria-hidden="true" ></i> ' +
+      '<i class="fa fa-pencil-square-o " aria-hidden="true" ></i> ' +
       '</button>' : '') +
 
     '<a href="/showjobselect/' + element.job_id + '" class="btn btn-success">' +
@@ -238,7 +238,7 @@ function showjobselect(divid) {
                 '</div>' +
                 '<div class="col-4" class="text-right">' +
                 (cedit == 'can' ? '<button class="btn btn-warning" onclick="updatejobform(' + element.job_id + ')">' +
-                  '<i class="fa fa-pencil " aria-hidden="true" ></i> ' +
+                  '<i class="fa fa-pencil-square-o " aria-hidden="true" ></i> ' +
                   '</button>' : '') +
                 '<a href="/showjobselect/' + element.job_id + '" class="btn btn-success">' +
                 '<i class="fa fa-eye" aria-hidden="true" ></i>' +
@@ -325,9 +325,9 @@ function jobselect(jobid) {
                 '&nbsp;&nbsp;<button class="btn btn-success" onclick="confirmprocess(' + element.process_id + ')" title="จบขั้นตอนการทำงาน">' +
                 '<i class="fa fa-check-circle" aria-hidden="true"></i></button>' +
                 '&nbsp;&nbsp;<button class="btn btn-danger" onclick="deleteprocess(' + element.process_id + ')" title="ลบ">' +
-                '<i class="fa fa-window-close" aria-hidden="true"></i></button>' : '') +
+                '<i class="fa fa-trash" aria-hidden="true"></i></button>' : '') +
               (a.cedit == 'cant' ? '<a class="btn btn-success" href="/formupdateprocess/' + element.process_id + '" title="ดูข้อมูล">' +
-                '<i class="fa fa-search" aria-hidden="true"></i></a>' : '') +
+                '<i class="fa fa-eye" aria-hidden="true"></i></a>' : '') +
               '</div></div>' +
               '</li>' +
               '</div>' +
@@ -346,7 +346,7 @@ function jobselect(jobid) {
               '</div>' +
               '<div class="col-4" class="text-right">' +
               '<div class="text-right">' +
-              '<a class="btn btn-success" href="/formupdateprocess/' + element.process_id + ' " title="ดูข้อมูล">' + '<i class="fa fa-search" aria-hidden="true"></i></a>' +
+              '<a class="btn btn-success" href="/formupdateprocess/' + element.process_id + ' " title="ดูข้อมูล">' + '<i class="fa fa-eye" aria-hidden="true"></i></a>' +
               '</div>' +
               '</div>' +
               '</li>' +
