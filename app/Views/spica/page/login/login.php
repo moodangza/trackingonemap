@@ -52,7 +52,7 @@
 					</div>
 
 					<div class="flex-sb-m w-full p-t-3 p-b-32">
-						<div class="contact100-form-checkbox">
+						<!-- <div class="contact100-form-checkbox">
 							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
 							<label class="label-checkbox100" for="ckb1">
 								Remember me
@@ -63,7 +63,7 @@
 							<a href="#" class="txt1">
 								Forgot Password?
 							</a>
-						</div>
+						</div> -->
 					</div>
 			
 
@@ -74,7 +74,7 @@
 						</button>
 					</div>
 					
-					<div class="text-center p-t-46 p-b-20">
+					<!-- <div class="text-center p-t-46 p-b-20">
 						<span class="txt2">
 							or sign up using
 						</span>
@@ -88,7 +88,7 @@
 						<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
 							<i class="fa fa-twitter" aria-hidden="true"></i>
 						</a>
-					</div>
+					</div> -->
 				</form>
 				<div class="login100-more" style="background-image: url('../spica_rs/login/images/bg-01.png');   background-position: center;
 				background-repeat: repeat; background-size: cover; position: relative;">  
