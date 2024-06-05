@@ -26,7 +26,7 @@
                         foreach ($divi as $x) { ?>
                           <div class="col-4">
                             <div class="card" style="margin : 10px">
-                              <div class="card-header bg-primary text-white">
+                              <div class="card-header bg-success text-white">
                                 <?php echo $x["d_name"] . "<br>"; ?>
                               </div>
                               <div class="card-body">
