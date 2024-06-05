@@ -121,7 +121,7 @@
               </div>
            
            
-              <div class="card-footer text-center" style="display: none;">
+              <div class="card-footer text-center" >
                 <input type="hidden" id="hiddenid" value="">
                 <button class="btn btn-primary" id="finishjob">
                   จบขั้นตอนการทำงาน
