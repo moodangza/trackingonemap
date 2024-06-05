@@ -384,7 +384,7 @@ Swal.fire({
         dataType: 'json',
         data: { job_id: job_id },
         success: function (data) {
-          reoload();
+          reload();
         
         }
       });
