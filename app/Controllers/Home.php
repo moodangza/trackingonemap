@@ -355,6 +355,11 @@ public function showprocess(){
    
     $can = new Ckedit();
     $cedit = $can->ckcan($jobdivision["division_id"]);
+    if($_SESSION['usertbl']['division_id'] == $jobdivision["division_id"]){
+    $showckcan = 1;
+    }else{
+        $showckcan = 0;
+    }
     // foreach($processfinish_rs as $key => $date_th){
     //     $processfinfish_rs[$key]['process_start'] = $dateth->DateThai($date_th['process_start']);
     //     $processfinfish_rs[$key]['process_end'] = $dateth->DateThai($date_th['process_end']);
@@ -369,6 +374,8 @@ public function showprocess(){
         'process' => $process_rs ,
        'job_id'=>$jobid1,
        'cedit'=>$cedit,
+       'showckcan'=>$showckcan,
+
        
     ];
     header('Content-Type: application/json');

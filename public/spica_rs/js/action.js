@@ -297,7 +297,7 @@ function jobselect(jobid) {
           if(a.job_id == element.job_id && element.cf=='1' && element.cc=='0'){
             // alert('fff');
             $("#urladdprocess").hide();
-            if(a.job_status.status <3){
+            if(a.job_status.status <3 && a.showckcan == 1){
               $("#finishjob").show();
             }else{
               $("#finishjob").hide();

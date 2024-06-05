@@ -1,5 +1,10 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
       <ul class="nav">
+      <li class="nav-item sidebar-category">
+        <p>ยินดีต้อนรับคุณ</p>
+          <p> <?php echo $_SESSION["usertbl"]["name"].' '.$_SESSION["usertbl"]["surname"] ?></p>
+         
+        </li>
         <li class="nav-item sidebar-category">
           <p>Navigation</p>
           <span></span>
