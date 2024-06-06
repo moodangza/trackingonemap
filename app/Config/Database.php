@@ -26,9 +26,9 @@ class Database extends Config
      */
     public array $default = [
         'DSN'      => '',
-        'hostname' => '172.31.0.193',
-        'username' => 'test',
-        'password' => 'test',
+        'hostname' => '172.31.0.193', //หมูแดง
+        'username' => 'test', //หมูแดง
+        'password' => 'test', //หมูแดง
         'database' => 'postgres',
         'DBDriver' => 'Postgre',
         'DBPrefix' => '',
