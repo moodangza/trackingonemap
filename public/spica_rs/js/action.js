@@ -617,13 +617,10 @@ function editjob() {
       dataType: 'text',
       data: { editjobid: editjob_id, editjobname: editjobname, editjobstart: editjstart, editjobend: editjend },
       success: function (data) {
-        if (data.success == true) {
-
+        
           alert('บันทึก')
-          location.reload();
-        } else {
-          // alert(data.error);
-        }
+          location.reload(true);
+        
       }
     });
 }
