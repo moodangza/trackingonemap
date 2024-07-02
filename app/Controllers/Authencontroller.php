@@ -10,7 +10,7 @@ class Authencontroller extends BaseController
     {
         $session = session();
         $usermodel = new userModel();
-        echo $_POST['username'] . 'password:  ' .md5($_POST['pass'].'onlb+-');
+        // echo $_POST['username'] . 'password:  ' .md5($_POST['pass'].'onlb+-');
         $usermodel ->select('user_name,password,division_id,level,prefix,name,surname,position')
        ->where('user_name',$_POST['username']);
        $user_rs = $usermodel->first();
@@ -18,7 +18,7 @@ class Authencontroller extends BaseController
             if($user_rs['division_id']==13 && md5($_POST['pass'].'onlb+-') != $user_rs['password']){
                 $ldap_au = new LDAPLibrary;
                 $ldap_rs = $ldap_au ->login($_POST['username'],$_POST['pass']);
-                print_r($ldap_rs);
+                // print_r($ldap_rs);
                 // exit;
                 if(isset($ldap_rs['user'])){
                     
@@ -46,18 +46,19 @@ class Authencontroller extends BaseController
                 
                 ];
                 $session->set($arr);
-                echo 'aaaa';
+                // echo 'aaaa';
                 return redirect()->to('/'); 
             } else{
                 echo '<script type ="text/JavaScript">';  
                 echo 'alert("ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง");';  
                 echo 'location.href = "login";';
                 echo '</script>';  
-                // return redirect()->to('login'); 
-                die(0);
+                return redirect()->to('login'); 
+                // die(0);
             }
         }
-        else if(md5($_POST['pass'].'onlb+-') == $user_rs['password']) {
+        elseif(isset($user_rs['division_id']) && $user_rs['division_id'] != '13') {
+            if(md5($_POST['pass'].'onlb+-') == $user_rs['password']){
             echo 'ไม่ใช่ onlb แต่ login ถูก';
             $arr = [
                 'usertbl' => $user_rs,
@@ -65,6 +66,7 @@ class Authencontroller extends BaseController
             ];
             $session->set($arr);
             return redirect()->to('/'); 
+        }
         }
         else{
             echo '<script type ="text/JavaScript">';  
