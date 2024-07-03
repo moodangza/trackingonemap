@@ -77,7 +77,7 @@
                                   </li>
                                   <li class="list-group-item text-center" style="border: none;">
                                   <a href="/listjobapprove/<?php echo $x["d_id"]; ?>">
-                                    <button class="btn btn-success btn-sm">ดูรายละเอียด</button>
+                                    <button class="btn btn-primary btn-sm">ดูรายละเอียด</button>
                                   </a>
                                   </li>
                                   

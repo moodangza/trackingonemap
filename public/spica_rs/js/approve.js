@@ -48,22 +48,22 @@ function detailprocessapprove(jobid) {
         const colorlist = ['#80CBC4', '#FAD7A0'];
         rs_data.process.forEach(rs_process => {
 
-          $('#showprocess').append('<div id="process' + rs_process.process_id + '" ' +
-            'class="card table" data-bs-toggle="collapse" data-bs-target="#collapsesubprocess' + rs_process.process_id + '" ' + 'aria-expanded="true" >' +
-            '&nbsp; ขั้นตอนการทำงาน : ' + rs_process.process_name + '<br>&nbsp; วันที่เริ่ม : ' + rs_process.process_start + '&nbsp; วันที่สิ้นสุด : ' + rs_process.process_end + '<br>' +
-            '</div>'
+          $('#showprocess').append('<tr id="process' + rs_process.process_id + '" ' +
+            'class="table table-sm" data-bs-toggle="collapse" data-bs-target="#collapsesubprocess' + rs_process.process_id + '" ' + 'aria-expanded="true" >' +
+            '<td>' + rs_process.process_name + '</td><td>' + rs_process.process_start + '</td><td>' + rs_process.process_end + '</td>'+
+            // '&nbsp; ขั้นตอนการทำงาน : ' + rs_process.process_name + '<br>&nbsp; วันที่เริ่ม : ' + rs_process.process_start + '&nbsp; วันที่สิ้นสุด : ' + rs_process.process_end + '<br>' +
+            '</tr>'+
+            '<tr class="table table-sm" id="rsprocess' + rs_process.process_id + '" ></tr>' 
           );
           rs_process.subprocess.forEach(rs_subprocess => {
             // console.log(rs_subprocess)
-            $('#process' + rs_process.process_id + '').append('<div class="collapse" id="collapsesubprocess' + rs_process.process_id + '">' +
-              '<div class="col-1"></div>' +
-              '<div class="col-auto">' +
-              '<div class="list-group list-group-light" >' +
-              '<a href="#" class="list-group-item list-group-item-action px-2 border-0 rounded-3 mb-1 list-group-item-success" style="background-color:' + colorlist + '">' +
-              rs_subprocess.subprocess_name + ' ตั้งแต่วันที่ : ' + rs_subprocess.subprocess_start + ' ถึง ' + rs_subprocess.subprocess_end + '</a>' +
-              '</div>' +
-              '</div>' +
-              '</div>'
+            $('#rsprocess' + rs_process.process_id + '').append('<tr class="collapse table table-sm" id="collapsesubprocess' + rs_process.process_id + '">'+
+              
+              // '<td>' +
+              // '<a href="#" class="list-group-item list-group-item-action px-2 border-0 rounded-3 mb-1 list-group-item-success" style="background-color:' + colorlist + '">' +
+              '<td>' + rs_subprocess.subprocess_name + '</td><td>' + rs_subprocess.subprocess_start + '</td><td>' + rs_subprocess.subprocess_end + '</td>'+
+             
+              '</tr>'
             );
           });
         });
