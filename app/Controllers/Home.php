@@ -258,6 +258,15 @@ public function updatejobform()
         $updatejobmodel_rs["job_start"] = $dateth->Dateinpickerth($updatejobmodel_rs['job_start']);
         $updatejobmodel_rs["job_end"] = $dateth->Dateinpickerth($updatejobmodel_rs['job_end']);
         //array_push//($updatejobmodel_rs ,$datestart,$dateend);
+        $processsql = new processModel();
+        $processsql->select('process_tb.process_id,process_tb.process_name,process_tb.process_start,process_tb.process_end,process_tb.process_finish,process_tb.detail,process_tb.status')
+            ->where('process_tb.delete_flag', '1')
+            ->where('process_tb.job_id', $_POST['jobid']);
+        $process_rs = $processsql->findAll();
+        foreach ($process_rs as $key1 => $date_th) {
+            $process_rs[$key1]['process_start'] = $dateth->DateThai($date_th['process_start']);
+            $process_rs[$key1]['process_end'] = $dateth->DateThai($date_th['process_end']);
+        }
         header('Content-Type: application/json');
         echo json_encode( $updatejobmodel_rs );
 

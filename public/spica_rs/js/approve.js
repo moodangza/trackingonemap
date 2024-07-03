@@ -96,7 +96,11 @@ function detailprocessapprove(jobid) {
 
 
 }
-
+$(document).on("click",".addprocess",function(){
+  $("#myModaledit").modal('hide');
+  $("#testModal").modal('show');
+  // $("#listprocess").append("<input type='text' name=''>");
+});
 $(document).on("click", ".approvejob", function () {
   let job_id = $('#job_id').val();
   // console.log(job_id);

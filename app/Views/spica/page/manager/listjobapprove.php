@@ -191,7 +191,19 @@
                                   </div>
                                 </div>
                               </ul>
-
+                              <ul class="list-group list-group-horizontal-md">
+                                <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
+                                  <label for="inputlevel" nowrap class="text-nowrap col-form-label d-inline-flex">ขั้นตอนการทำงาน</label>
+                                </div>
+                                <div class="list-group-item col-10 form-floating">
+                                  <div class="p-2 g-col-6">
+                                    <!-- <input type="text" class="form-control" id="editjob_name" name="editjob_name"> -->
+                                    <button class="btn btn-success addprocess" >เพิ่มขั้นตอน</button>
+                                    <div id="listprocess"></div>
+                                   
+                                  </div>
+                                </div>
+                              </ul>
                               <div class="modal-footer center-block footer-edit">
                                 <button type="button" class="btn btn-primary " onclick="editjob()">บันทึก</button>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
@@ -350,6 +362,62 @@
   </div>
 </div>
 
+<div id="testModal" class="modal fade modal-lg" role="dialog" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+
+                          <!-- Modal content-->
+                          <div class="modal-content">
+                            <div class="modal-header">
+
+                              <h5 class="modal-title" id="staticBackdropLabel">testprocess</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <ul class="list-group list-group-horizontal-md" style="box-shadow: 5px 10px #888888;margin-bottom: 2px;">
+                                <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
+                                  <label for="inputlevel" nowrap class="text-nowrap col-form-label d-inline-flex">ชื่อหัวข้อ</label>
+                                </div>
+                                <div class="list-group-item col-10 form-floating">
+                                  <div class="p-2 g-col-6">
+                                  
+                                  <input type="text" autocomplete="off" class="form-control" id="process_name" name="process_name" placeholder="จัดทำร่าง พรบ." value="">
+                                  </div>
+                                </div>
+                              </ul>
+
+                              <ul class="list-group list-group-horizontal-md">
+                                <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
+                                  <label for="inputlevel" nowrap class="text-nowrap col-form-label d-inline-flex">ระยะเวลาการทำงาน</label>
+                                </div>
+                                <div class="list-group-item col-10 d-flex form-floating">
+                                  <div class="p-2 g-col-6 d-flex align-items-center text-center justify-content-center">
+                                 
+                    <input type="text" id="s_date" readonly="readonly" class="form-control datepicker create-s-date" name="s_date" data-old="" value="">
+                    ถึง
+                    <input type="text" required="" readonly="readonly" id="e_date" class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="">
+                                    <!-- <label for="job_start" class="form-label">ตั้งแต่</label>
+                                    &nbsp;&nbsp;<input type="text" class="form-control datepicker-input" id="job_start" style="width: fit-content;" readonly name="job_start">
+                                    &nbsp;&nbsp;<label for="job_end" class="form-label">ถึง</label>
+                                    &nbsp;&nbsp;<input type="text" class="form-control datepicker-input" id="job_end" style="width: fit-content;" readonly name="job_end"> -->
+                                  </div>
+                                </div>
+                              </ul>
+                              <input type="hidden" class="form-control" id="division_id" name="division_id">
+                            </div>
+                            <div class="modal-footer">
+                            <?php //if ($cedit == 'can') { ?>
+                    <?php // if ($flag == 'add') { ?>
+                      <button class="btn btn-success insertprocess" type="button">บันทึก</button>&nbsp;
+                    <?php //} else if ($flag == 'update') { ?>
+                      <button class="btn btn-warning updateprocess" type="button">แก้ไข</button>&nbsp;
+                    <?php // } ?>
+                  <?php //} ?>
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
         <div class="content-wrapper">
           <div class="row">
             <div class="col-12 col-xl-12 grid-margin stretch-card">
@@ -414,8 +482,40 @@
                   <?php foreach($showjob as $rs_job){?>
                   
                     <?php if($rs_job["status"] == 4){
-                          cardlistjobapprove($rs_job); 
-                     }?>
+                       if($rs_job['job_finish']!='' ){
+                        $rsfi = $rs_job['job_finish'];
+                      }
+                         echo  '<div class="candidate-list-box card mt-2">'.
+                           '<div class="p-2 card-body">'.
+                               
+                               '<div class="align-items-center row">'.
+                               
+                                   '<div class="col-12">'.
+                                       '<div class="candidate-list-content mt-3 mt-lg-0">'.
+                                           '<h5 class="fs-19 mb-0" style="
+                                           text-justify: inter-character;">'.
+                                                   '<b>'.$rs_job["job_name"].'</b>'.
+                                             '</h5>'.
+                                             '<hr>'.
+                                           '<p class="text-muted mb-2">'.$rs_job["prefix"].' '.$rs_job["name"].' '.$rs_job["surname"].'</p>'.
+                                           '<ul class="list-inline mb-0 text-muted">'.
+                                               '<li class="list-inline-item">'.
+                                                   '<b><i class="fa fa-calendar-o "></i> '.$rs_job['job_start'] .' ถึง '. $rs_job['job_end'].'</b>'.
+                                               '</li>'.
+                                               '<br><li class="list-inline-item">'.
+                                                   '<i class="fa fa-calendar-check-o"></i>&nbsp;'. $rsfi.
+                                               '</li>'.
+                                           '</ul>'.
+                                       '</div>'.
+                                   '</div>'.
+                                   '<div class="col-12" style="text-align:end">'.
+                                  
+                                   '<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalCenter" onclick="detailprocessapprove(\''.$rs_job['job_id'].'\')">ดูรายละเอียด</button>'.
+                                   '</div>'.
+                               '</div>'.
+                           '</div>'.
+                       '</div>';
+                       }?>
                   
                     <?php }?>  
                 </div>
