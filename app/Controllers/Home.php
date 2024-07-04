@@ -252,7 +252,7 @@ public function updatejobform()
 {
     $updatejobmodel = new jobModel();
     $dateth = new Date();
-    $updatejobmodel ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status')
+    $updatejobmodel ->select('job_tb.job_id,job_tb.job_name,job_start,job_end,status,division_id')
         ->where('job_id',$_POST['jobid']);
         $updatejobmodel_rs = $updatejobmodel->first();
         $updatejobmodel_rs["job_start"] = $dateth->Dateinpickerth($updatejobmodel_rs['job_start']);
@@ -267,8 +267,16 @@ public function updatejobform()
             $process_rs[$key1]['process_start'] = $dateth->DateThai($date_th['process_start']);
             $process_rs[$key1]['process_end'] = $dateth->DateThai($date_th['process_end']);
         }
+      
+        $can = new Ckedit();
+        $cedit = $can->ckcan($updatejobmodel_rs["division_id"]);
+        $data = [
+            'job'=> $updatejobmodel_rs,
+            'process'=> $process_rs,
+            'cedit'=>$cedit,
+        ];
         header('Content-Type: application/json');
-        echo json_encode( $updatejobmodel_rs );
+        echo json_encode( $data );
 
 }   
 

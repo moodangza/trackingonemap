@@ -46,7 +46,7 @@ $(document).ready(function () {
   $('#urladdprocess').hide();
   // $('#addjob').hide();
   //ปฏิทิน
-  $('#s_date,#e_date,#job_start,#job_end,.create-s-date,.create-e-date,#editjob_start,#editjob_end').datepicker({
+  $('.create-s-date,.create-e-date,#job_start,#job_end,.create-s-date,.create-e-date,#editjob_start,#editjob_end').datepicker({
     language: 'th-th',
     format: 'dd/mm/yyyy',
     todayBtn: 'linked',
@@ -618,14 +618,15 @@ function editjob() {
       data: { editjobid: editjob_id, editjobname: editjobname, editjobstart: editjstart, editjobend: editjend },
       success: function (data) {
         
-          alert('บันทึก')
-          location.reload(true);
         
       }
     });
 }
 
 function updatejobform(jobid) {
+  console.log(1);
+  $('#listprocess').html('');
+  //$('.tr_items').remove();
   $.ajax(
     {
       url: "../updatejobform",
@@ -635,11 +636,32 @@ function updatejobform(jobid) {
       success: function (data) {
         $('#myModaledit').modal('show');
         console.log(data);
-        $("#editjob_id").val(data.job_id);
-        $("#editjob_name").val(data.job_name);
-        $("#editjob_start").val(data.job_start);
-        $("#editjob_end").val(data.job_end);
-
+        $("#editjob_id").val(data.job.job_id);
+        $("#editjob_name").val(data.job.job_name);
+        $("#editjob_start").val(data.job.job_start);
+        $("#editjob_end").val(data.job.job_end);
+        
+        data.process.forEach(rs_process => {
+          
+          $('#listprocess').prepend('<tr id="process' + rs_process.process_id + '" ' +
+            'class="table table-sm tr_items" data-bs-toggle="collapse" data-bs-target="#collapsesubprocess' + rs_process.process_id + '" ' + 'aria-expanded="true" >' +
+            '<td><input type="text" autocomplete="off" class="form-control" id="process_name" name="process_name" placeholder="จัดทำร่าง พรบ." value="'+ rs_process.process_name +'">'+
+              '</td><td><input type="text" id="s_date' + rs_process.process_id + '" readonly="readonly"  class="form-control datepicker create-s-date" name="s_date" data-old="" value="' + rs_process.process_start +'">'+ '</td>'+
+              '<td><input type="text" required="" readonly="readonly" id="e_date' + rs_process.process_id + '"  class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="' + rs_process.process_end + '"></td>'+
+            '<td><button class="btn btn-warning"><i class="fa fa-pencil-square-o " aria-hidden="false"></i></button></td>'+
+            '</tr>'+
+            '<tr class="table table-sm" id="rsprocess' + rs_process.process_id + '" ></tr>' 
+          );
+       
+        });
+      
+        $('.create-s-date,.create-e-date').datepicker({
+          language: 'th-th',
+          format: 'dd/mm/yyyy',
+          todayBtn: 'linked',
+          todayHighlight: true,
+          autoclose: true
+        });
         if (data.status == '4') {
           $('.footer-edit').hide();
         } else {

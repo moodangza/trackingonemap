@@ -192,20 +192,40 @@
                                 </div>
                               </ul>
                               <ul class="list-group list-group-horizontal-md">
-                                <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
+                                <!-- <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
                                   <label for="inputlevel" nowrap class="text-nowrap col-form-label d-inline-flex">ขั้นตอนการทำงาน</label>
-                                </div>
-                                <div class="list-group-item col-10 form-floating">
+                                </div> -->
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                    <th>checklist</th>
+                                    </tr>
+                                   <tr>
+                                    <th colspan="1">ขั้นตอนการทำงาน</th>
+                                    <th colspan="1">วันที่เริ่ม</th>
+                                    <th colspan="1">วันที่สิ้นสุด</th>
+                                   </tr>
+                                  </thead>
+                                  <tbody id="listprocess">
+                                   
+                                    <tr>
+                                      <td colspan="3"> <button class="btn btn-success addprocess" >เพิ่มขั้นตอน</button></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <!-- <div class="list-group-item col-10 form-floating">
                                   <div class="p-2 g-col-6">
-                                    <!-- <input type="text" class="form-control" id="editjob_name" name="editjob_name"> -->
-                                    <button class="btn btn-success addprocess" >เพิ่มขั้นตอน</button>
-                                    <div id="listprocess"></div>
+                                 
+                                   
+                                    <div id="listprocess">
+                                      
+                                    </div>
                                    
                                   </div>
-                                </div>
+                                </div> -->
                               </ul>
                               <div class="modal-footer center-block footer-edit">
-                                <button type="button" class="btn btn-primary " onclick="editjob()">บันทึก</button>
+                              
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
                               </div>
                             </div>

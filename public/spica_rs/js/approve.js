@@ -21,6 +21,28 @@ $(document).ready(function () {
     $('#reasoninput').attr('disabled', true).val('');
     location.reload(true);
   });
+  $("#process_name,.create-s-date,.create-e-date").change(function(){
+    var job_id = $('#editjob_id').val() ;
+    var process_name = $('#process_name').val() ;
+    
+    var process_start = $('.create-s-date').val() ;
+    var process_end = $('.create-e-date').val() ;
+    var p_s_start = process_start.split('/');
+  let rs_start = p_s_start[2]-543  + '-' + p_s_start[1] + '-' + p_s_start[0];
+  var p_s_end = process_end.split('/');
+  let rs_end = p_s_end[2]-543  + '-' + p_s_end[1] + '-' + p_s_end[0];
+    if($('#process_name').val()!=''){
+      $.ajax({
+        url: "/insertprocess",
+        type: "post",
+        dataType: 'text',
+        data: { job_id: job_id, process_name: process_name, process_start: rs_start, process_end: rs_end, detail: detail },
+      });
+    }
+  });
+  $("#editjob_name,#editjob_start,#editjob_end").change(function(){
+    editjob();
+  });
 });
 function detailprocessapprove(jobid) {
   $.ajax(
@@ -99,7 +121,7 @@ function detailprocessapprove(jobid) {
 $(document).on("click",".addprocess",function(){
   $("#myModaledit").modal('hide');
   $("#testModal").modal('show');
-  // $("#listprocess").append("<input type='text' name=''>");
+
 });
 $(document).on("click", ".approvejob", function () {
   let job_id = $('#job_id').val();
