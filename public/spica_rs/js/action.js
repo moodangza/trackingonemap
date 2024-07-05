@@ -640,15 +640,16 @@ function updatejobform(jobid) {
         $("#editjob_name").val(data.job.job_name);
         $("#editjob_start").val(data.job.job_start);
         $("#editjob_end").val(data.job.job_end);
+       (data.cedit == 'cant') ? $("input,textarea").prop('disabled', true) : '';
         
         data.process.forEach(rs_process => {
-          
+         
           $('#listprocess').prepend('<tr id="process' + rs_process.process_id + '" ' +
             'class="table table-sm tr_items" data-bs-toggle="collapse" data-bs-target="#collapsesubprocess' + rs_process.process_id + '" ' + 'aria-expanded="true" >' +
-            '<td><input type="text" autocomplete="off" class="form-control" id="process_name" name="process_name" placeholder="จัดทำร่าง พรบ." value="'+ rs_process.process_name +'">'+
-              '</td><td><input type="text" id="s_date' + rs_process.process_id + '" readonly="readonly"  class="form-control datepicker create-s-date" name="s_date" data-old="" value="' + rs_process.process_start +'">'+ '</td>'+
-              '<td><input type="text" required="" readonly="readonly" id="e_date' + rs_process.process_id + '"  class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="' + rs_process.process_end + '"></td>'+
-            '<td><button class="btn btn-warning"><i class="fa fa-pencil-square-o " aria-hidden="false"></i></button></td>'+
+            '<td><textarea  autocomplete="off" class="form-control" id="process_name" name="process_name" placeholder="จัดทำร่าง พรบ." >'+ rs_process.process_name +'</textarea>'+
+              '</td><td><input  type="text" id="s_date' + rs_process.process_id + '" readonly="readonly"  class="form-control datepicker create-s-date" name="s_date" data-old="" value="' + rs_process.process_start +'">'+ ''+
+              '<input  type="text" required="" readonly="readonly" id="e_date' + rs_process.process_id + '"  class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="' + rs_process.process_end + '"></td>'+
+            // '<td><input type="checkbox" name="complete" id="complete_'+ rs_process.process_id +' onclick="confirmprocess(' + rs_process.process_id + ')" " value="2"></td>'+
             '</tr>'+
             '<tr class="table table-sm" id="rsprocess' + rs_process.process_id + '" ></tr>' 
           );
@@ -761,13 +762,13 @@ $(document).on("change", ".selectjob", function () {
 
 });
 // ปุ่มเพิ่ม process
-$(document).on("click", ".addprocess", function () {
+function addprocess(){
   let job_idprocess = $('.addprocessid').val();
   // alert(job_idprocess);
   addprocess(job_idprocess);
-});
+}
 // เพิ่ม process
-function addprocess(job_idprocess) {
+function addprocess(job_idprocess) { 
   $.ajax(
     {
       url: "/formprocess/job",

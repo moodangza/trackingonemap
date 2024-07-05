@@ -50,6 +50,41 @@
           border-left: 0px;
           border-right: 0px;
         }
+        .fixed_header{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.fixed_header tbody{
+  display:inline-block;
+  width: 100%;
+  overflow: auto;
+  height: 15rem;
+}
+
+.fixed_header thead tr {
+   display: block;
+}
+.fixed_header th {
+  padding: 5px;
+  text-align: left;
+  width: 88%;
+}
+ .fixed_header td {
+  padding: 5px;
+  text-align: left;
+  width: 50%;
+}
+
+textarea.form-control {
+            max-width: 500px;
+            width: 100%;
+            padding: 8px 12px;
+            /* border: 1px solid #ccc; */
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
 
 </style>  
 <?php 
@@ -60,7 +95,7 @@
   }else{
     $rsfi = '<span style="color:red">ยังไม่สิ้นสุดกระบวนการ</span>';
   }
-    print ' <div class="candidate-list-box card mt-2">'.
+    print ' <div class="candidate-list-box card mt-2" >'.
     '<div class="p-2 card-body">'.
         
         '<div class="align-items-center row">'.
@@ -172,7 +207,7 @@
                                 <div class="list-group-item col-10 form-floating">
                                   <div class="p-2 g-col-6">
                                     <!-- <input type="text" class="form-control" id="editjob_name" name="editjob_name"> -->
-                                    <textarea class="form-control" id="editjob_name" name="editjob_name">
+                                    <textarea  id="editjob_name" class="form-control" style="width : 100%;" name="editjob_name">
 
                                     </textarea>
                                   </div>
@@ -191,27 +226,31 @@
                                   </div>
                                 </div>
                               </ul>
+                              <ul class="list-group list-group-horizontal-md pt-1px">
+                                <div class="align-items-right pt-1px">
+                                  <button class="btn btn-success" onclick="addprocess();">เพิ่มขั้นตอนการทำงาน</button>
+                                </div>
+                                
+                              </ul>
                               <ul class="list-group list-group-horizontal-md">
                                 <!-- <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
                                   <label for="inputlevel" nowrap class="text-nowrap col-form-label d-inline-flex">ขั้นตอนการทำงาน</label>
                                 </div> -->
-                                <table class="table">
+                               
+                                <table class="table fixed_header">
                                   <thead>
-                                    <tr>
-                                    <th>checklist</th>
-                                    </tr>
+                                
                                    <tr>
-                                    <th colspan="1">ขั้นตอนการทำงาน</th>
-                                    <th colspan="1">วันที่เริ่ม</th>
-                                    <th colspan="1">วันที่สิ้นสุด</th>
+                                    <th colspan="2">ขั้นตอนการทำงาน</th>
+                                    <!-- <th colspan="1">วันที่เริ่ม</th> -->
+                                    <th colspan="2">ช่วงวันที่</th>
+                                    <!-- <th colspan="1">ยืนยันขั้นตอน</th> -->
                                    </tr>
                                   </thead>
                                   <tbody id="listprocess">
-                                   
-                                    <tr>
-                                      <td colspan="3"> <button class="btn btn-success addprocess" >เพิ่มขั้นตอน</button></td>
-                                    </tr>
+                                  
                                   </tbody>
+                                  
                                 </table>
                                 <!-- <div class="list-group-item col-10 form-floating">
                                   <div class="p-2 g-col-6">
@@ -459,7 +498,7 @@
                         <button type="button" id="addjob" class="btn btn-primary ms-5" data-bs-toggle="modal" data-bs-target="#myModal"> เพิ่มขั้นตอนการทำงาน </button>
                     </div>
                 
-                    <div class="card-body">
+                    <div class="card-body" style="max-height: 40rem; overflow-y: auto;">
                 
                   <div class="candidate-list">
                   <?php foreach($showjob as $rs_job){?>
@@ -479,7 +518,7 @@
                     <div class="card-head bg-warning text-center" style="padding: 10px;color:white;">
                         <b>รออนุมัติ</b>
                     </div>
-                    <div class="card-body scroll">
+                    <div class="card-body" style="max-height: 40rem; overflow-y: auto;">
                   <div class="candidate-list">
                   <?php foreach($showjob as $rs_job){?>
                     <?php if($rs_job["status"] == 3){
@@ -497,8 +536,8 @@
                     <div class="card-head bg-success text-center" style="padding: 10px; color:white;">
                         <b>อนุมัติเสร็จสิ้น</b>
                     </div>
-                    <div class="card-body scroll">
-                  <div class="candidate-list">
+                    <div class="card-body" style="max-height: 40rem; overflow-y: auto;">
+                 
                   <?php foreach($showjob as $rs_job){?>
                   
                     <?php if($rs_job["status"] == 4){
@@ -538,7 +577,7 @@
                        }?>
                   
                     <?php }?>  
-                </div>
+               
                 </div>
             <!-- row end -->
             </div>
