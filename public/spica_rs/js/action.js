@@ -1,58 +1,14 @@
-
-const draggbles = document.querySelectorAll(".shallow-draggable")
-const containers = document.querySelectorAll(".draggable-container")
-draggbles.forEach((draggble) => {
-  //for start dragging costing opacity
-  draggble.addEventListener("dragstart", () => {
-    draggble.classList.add("dragging")
-  })
-  //for end the dragging opacity costing
-  draggble.addEventListener("dragend", () => {
-    draggble.classList.remove("dragging")
-  })
-})
-//shit
-containers.forEach((container) => {
-  container.addEventListener("dragover", function (e) {
-    e.preventDefault()
-    const afterElement = dragAfterElement(container, e.clientY)
-    const dragging = document.querySelector(".dragging")
-    if (afterElement == null) {
-      container.appendChild(dragging)
-    } else {
-      container.insertBefore(dragging, afterElement)
-    }
-  })
-});
-
-function dragAfterElement(container, y) {
-  const draggbleElements = [...container.querySelectorAll(".shallow-draggable:not(.dragging)")]
-
-  return draggbleElements.reduce(
-    (closest, child) => {
-      const box = child.getBoundingClientRect()
-      const offset = y - box.top - box.height / 2
-      if (offset < 0 && offset > closest.offset) {
-        return { offset: offset, element: child }
-      } else {
-        return closest
-      }
-    },
-    { offset: Number.NEGATIVE_INFINITY }
-  ).element
-}
-
 $(document).ready(function () {
   $('#urladdprocess').hide();
   // $('#addjob').hide();
   //ปฏิทิน
-  $('.create-s-date,.create-e-date,#job_start,#job_end,.create-s-date,.create-e-date,#editjob_start,#editjob_end').datepicker({
-    language: 'th-th',
-    format: 'dd/mm/yyyy',
-    todayBtn: 'linked',
-    todayHighlight: true,
-    autoclose: true
-  });
+  // $('.create-s-date,.create-e-date,#job_start,#job_end,.create-s-date,.create-e-date,#editjob_start,#editjob_end').datepicker({
+  //   language: 'th-th',
+  //   format: 'dd/mm/yyyy',
+  //   todayBtn: 'linked',
+  //   todayHighlight: true,
+  //   autoclose: true
+  // });
   const pathname = window.location.pathname;
   const text = pathname.split("/");
 
@@ -61,30 +17,28 @@ $(document).ready(function () {
   if (text[1] = 'formupdateprocess') {
     // showsubprocess();
   }
-  // $("input").autoresize({ padding: 20, minWidth: 40, maxWidth: 350 });
 
+
+});
+$(document).on("click","#job_start,#job_end,.create-s-date,.create-e-date,#editjob_start,#editjob_end", function () {
+  console.log("click");
+  $(this).datepicker({
+  language: 'th-th',
+  format: 'dd/mm/yyyy',
+  todayBtn: 'linked',
+  todayHighlight: true,
+  autoclose: true});
 });
 //เพิ่ม subprocess
 $(document).on("click", ".addsubprocess", function () {
 
-  // alert( "Handler for `click` called." );
   let s_job = $('#s_job').val();
   let e_job = $('#e_job').val();
   let s_sub_date = $('#s_sub_date').val();
   let e_sub_date = $('#e_sub_date').val();
   let sub_process = $('#subprocessinput').val();
-  // alert(s_sub_date);
-  // alert(e_sub_date);
   let job_id = $('#job_id').val();
   let process_id = $('#process_id').val();
-  // if(s_sub_date<s_job||s_sub_date>e_job){
-  //   alert('โปรดตรวจสอบวันที่เริ่มต้น');
-  //   return false;
-  // }
-  // if(e_sub_date<s_job||s_sub_date>e_job){
-  //   alert('โปรดตรวจสอบวันที่สิ้นสุด');
-  //   return false;
-  // }
   Swal.fire({
     title: 'บันทึกข้อมูลหรือไม่',
     text: $(this).data('project_data_detail'),
@@ -398,8 +352,7 @@ function deleteprocess(process_id) {
   if (confirm(text) == true) {
     text = "ทำการลบข้อมูลแล้ว";
     alert(text);
-    // window.location.reload(false);
-    // return false;
+  
     $.ajax(
       {
         url: "/deleteprocess/" + process_id,
@@ -433,51 +386,51 @@ function confirmprocess(process_id) {
   }
 }
 // เพิ่มขั้นตอนการทำงาน
-$(document).on("click", ".insertprocess", function () {
-  let job_id = $('#job_id').val();
-  let process_name = $('#process_name').val();
-  let processstart = $('#s_date').val();
-  let processend = $('#e_date').val();
-  let detail = $('#detail').val();
-  var p_s_start = processstart.split('/');
-  let rs_start = p_s_start[2]-543  + '-' + p_s_start[1] + '-' + p_s_start[0];
-  var p_s_end = processend.split('/');
-  let rs_end = p_s_end[2]-543  + '-' + p_s_end[1] + '-' + p_s_end[0];
-  // alert(rs_start);
-  // alert(rs_end);
-  let s_job = $('#s_job').val();
-  let e_job = $('#e_job').val();
-  if (rs_end < rs_start) {
-    alert('วันที่ สิ้นสุดต้องไม่น้อยกว่าวันที่เริ่มต้น');
-  }
+// $(document).on("click", ".insertprocess", function () {
+//   let job_id = $('#job_id').val();
+//   let process_name = $('#process_name').val();
+//   let processstart = $('#s_date').val();
+//   let processend = $('#e_date').val();
+//   let detail = $('#detail').val();
+//   var p_s_start = processstart.split('/');
+//   let rs_start = p_s_start[2]-543  + '-' + p_s_start[1] + '-' + p_s_start[0];
+//   var p_s_end = processend.split('/');
+//   let rs_end = p_s_end[2]-543  + '-' + p_s_end[1] + '-' + p_s_end[0];
+//   // alert(rs_start);
+//   // alert(rs_end);
+//   let s_job = $('#s_job').val();
+//   let e_job = $('#e_job').val();
+//   if (rs_end < rs_start) {
+//     alert('วันที่ สิ้นสุดต้องไม่น้อยกว่าวันที่เริ่มต้น');
+//   }
 
-  if (process_name == '') {
-    alert('กรุณากรอก ขั้นตอน');
-    process_name.focus();
-    return false;
-  } else if (processstart == '') {
-    alert('กรุณากรอกวันที่เริ่มต้น');
-    processstart.focus();
-    return false;
-  } else if (processend == '') {
-    alert('กรุณากรอกวันที่สิ้นสุด');
-    processend.focus();
-    return false;
-  }
-  $.ajax(
-    {
-      url: "/insertprocess",
-      type: "post",
-      dataType: 'text',
-      data: { job_id: job_id, process_name: process_name, process_start: rs_start, process_end: rs_end, detail: detail },
-      success: function (data) {
-        // console.log(data);
-        var obj = JSON.parse(data);
-        console.log(obj.process);
-        location.replace("/formupdateprocess/"+obj.process)
-      }
-    });
-});
+//   if (process_name == '') {
+//     alert('กรุณากรอก ขั้นตอน');
+//     process_name.focus();
+//     return false;
+//   } else if (processstart == '') {
+//     alert('กรุณากรอกวันที่เริ่มต้น');
+//     processstart.focus();
+//     return false;
+//   } else if (processend == '') {
+//     alert('กรุณากรอกวันที่สิ้นสุด');
+//     processend.focus();
+//     return false;
+//   }
+//   $.ajax(
+//     {
+//       url: "/insertprocess",
+//       type: "post",
+//       dataType: 'text',
+//       data: { job_id: job_id, process_name: process_name, process_start: rs_start, process_end: rs_end, detail: detail },
+//       success: function (data) {
+//         // console.log(data);
+//         var obj = JSON.parse(data);
+//         console.log(obj.process);
+//         location.replace("/formupdateprocess/"+obj.process)
+//       }
+//     });
+// });
 
 //เพิ่มขั้นตอนการทำงาน
 // แก้ไขขั้นตอนการทำงาน
@@ -671,6 +624,7 @@ function updatejobform(jobid) {
 
       }
     });
+    
 }
 
 //ลบหัวข้อ job //172.31.0.54

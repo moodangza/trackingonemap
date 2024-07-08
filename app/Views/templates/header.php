@@ -21,7 +21,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
 
-
+<?php is_dir('page/modal/modalpage.php');?>
 <!-- inject:css -->
   <link rel="stylesheet" href="<?php echo base_url('spica_rs/css/style.css');?>">
   <!-- endinject -->
@@ -74,7 +74,7 @@
 </head>
 <body>
 
-    <?= $this->renderSection('content') ?>
+<?= $this->renderSection('content') ?>
     
 
 

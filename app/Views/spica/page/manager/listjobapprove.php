@@ -85,7 +85,12 @@ textarea.form-control {
             border-radius: 4px;
             box-sizing: border-box;
         }
-
+        .scroll-container::-webkit-scrollbar {
+  display: none;
+}
+.show{
+  /* max-width: 800px; */
+}
 </style>  
 <?php 
  function cardlistjobapprove($rs_job)
@@ -228,7 +233,7 @@ textarea.form-control {
                               </ul>
                               <ul class="list-group list-group-horizontal-md pt-1px">
                                 <div class="align-items-right pt-1px">
-                                  <button class="btn btn-success" onclick="addprocess();">เพิ่มขั้นตอนการทำงาน</button>
+                                  <button class="btn btn-success plusprocess">เพิ่มขั้นตอนการทำงาน</button>
                                 </div>
                                 
                               </ul>
@@ -422,7 +427,7 @@ textarea.form-control {
 </div>
 
 <div id="testModal" class="modal fade modal-lg" role="dialog" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
 
                           <!-- Modal content-->
                           <div class="modal-content">
