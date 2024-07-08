@@ -22,17 +22,24 @@ $(document).ready(function () {
     location.reload(true);
   });
  
-  
-  
 });
+
+$(document).on("click",".plusprocess",function(){
+  $('#listprocess').prepend('<tr id="process" class="table table-sm tr_items" aria-expanded="true" >' +
+    '<td><textarea  autocomplete="off" class="form-control addprocess_name" id="process_name" name="process_name" placeholder="จัดทำร่าง พรบ." ></textarea>'+
+      '</td><td><input  type="text" id="s_date" readonly="readonly"  class="form-control datepicker addcreate-s-date" name="s_date" data-old="" value="">'+ 
+      '<input  type="text" required="" readonly="readonly" id="e_date"  class="form-control  datepicker-input addcreate-e-date" name="e_date" data-old="" value=""></td>'+
+    // '<td><input type="checkbox" name="complete" id="complete_'+ rs_process.process_id +' onclick="confirmprocess(' + rs_process.process_id + ')" " value="2"></td>'+
+    '</tr>'+
+    '<tr class="table table-sm" id="rsprocess" ></tr>' 
+  );
+  
 $("#editjob_name,#editjob_start,#editjob_end").change(function(){
   editjob();
 });
 
-$(document).on('change', '.create-s-date', function(e) {
-  console.log('bbbb')
-});
-$("#process_name,.create-s-date,.create-e-date").change(function(){
+
+$(".addprocess_name,.addcreate-s-date,.addcreate-e-date").change(function(){
   console.log('aaaa')
   var job_id = $('#editjob_id').val() ;
   var process_name = $('#process_name').val() ;
@@ -42,7 +49,7 @@ $("#process_name,.create-s-date,.create-e-date").change(function(){
 let rs_start = p_s_start[2]-543  + '-' + p_s_start[1] + '-' + p_s_start[0];
 var p_s_end = process_end.split('/');
 let rs_end = p_s_end[2]-543  + '-' + p_s_end[1] + '-' + p_s_end[0];
-  if($('#process_name').val()!='' && $('.create-s-date').val()!='' && $('.create-e-date').val()!=''){
+  if($('.addprocess_name').val()!='' && $('.addcreate-s-date').val()!='' && $('.addcreate-e-date').val()!=''){
     $.ajax({
       url: "/insertprocess",
       type: "post",
@@ -125,15 +132,7 @@ function detailprocessapprove(jobid) {
 
 
 }
-$(document).on("click",".plusprocess",function(){
-  $('#listprocess').prepend('<tr id="process" class="table table-sm tr_items" aria-expanded="true" >' +
-    '<td><textarea  autocomplete="off" class="form-control" id="process_name" name="process_name" placeholder="จัดทำร่าง พรบ." ></textarea>'+
-      '</td><td><input  type="text" id="s_date" readonly="readonly"  class="form-control datepicker create-s-date" name="s_date" data-old="" value="">'+ 
-      '<input  type="text" required="" readonly="readonly" id="e_date"  class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value=""></td>'+
-    // '<td><input type="checkbox" name="complete" id="complete_'+ rs_process.process_id +' onclick="confirmprocess(' + rs_process.process_id + ')" " value="2"></td>'+
-    '</tr>'+
-    '<tr class="table table-sm" id="rsprocess" ></tr>' 
-  );
+
 
 });
 $(document).on("click", ".approvejob", function () {
