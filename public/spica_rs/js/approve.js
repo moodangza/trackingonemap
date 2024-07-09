@@ -77,6 +77,11 @@ $(".addprocess_name,.addcreate-s-date,.addcreate-e-date").change(function(){
     });
   }
 });
+$('textarea[id^="process_name_"]').change(function(){
+  var fieldid = $(this).attr('id');
+  var fieldValue = $(this).val();
+  console.log('Changed field: ' + fieldid + ' Value: ' + fieldValue);
+});
 function detailprocessapprove(jobid) {
   $.ajax(
     {

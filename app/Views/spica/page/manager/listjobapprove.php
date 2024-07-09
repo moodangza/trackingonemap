@@ -88,9 +88,7 @@ textarea.form-control {
         .scroll-container::-webkit-scrollbar {
   display: none;
 }
-.show{
-  /* max-width: 800px; */
-}
+
 </style>  
 <?php 
  function cardlistjobapprove($rs_job)
@@ -145,11 +143,9 @@ textarea.form-control {
       <div class="main-panel">
       <div id="myModal" class="modal fade modal-lg" role="dialog" tabindex="-1" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-
                           <!-- Modal content-->
                           <div class="modal-content">
                             <div class="modal-header">
-
                               <h5 class="modal-title" id="staticBackdropLabel">เพิ่มหัวข้อ</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
@@ -167,7 +163,6 @@ textarea.form-control {
                                   </div>
                                 </div>
                               </ul>
-
                               <ul class="list-group list-group-horizontal-md">
                                 <div class="list-group-item col-2 d-flex align-items-center text-center justify-content-center">
                                   <label for="inputlevel" nowrap class="text-nowrap col-form-label d-inline-flex">ระยะเวลาการทำงาน</label>
@@ -244,7 +239,6 @@ textarea.form-control {
                                
                                 <table class="table fixed_header">
                                   <thead>
-                                
                                    <tr>
                                     <th colspan="2">ขั้นตอนการทำงาน</th>
                                     <!-- <th colspan="1">วันที่เริ่ม</th> -->
@@ -257,16 +251,7 @@ textarea.form-control {
                                   </tbody>
                                   
                                 </table>
-                                <!-- <div class="list-group-item col-10 form-floating">
-                                  <div class="p-2 g-col-6">
-                                 
-                                   
-                                    <div id="listprocess">
-                                      
-                                    </div>
-                                   
-                                  </div>
-                                </div> -->
+                                
                               </ul>
                               <div class="modal-footer center-block footer-edit">
                               
@@ -289,22 +274,20 @@ textarea.form-control {
       <div class="modal-body">
             <div class="row g-3">
                 <div class="col-md">
-                <figure class="text-left">
-                <h5 id="job_name" class="card-title align-middle">หัวข้อการทำงาน</h5>
-                          <input type="hidden" id="job_id" value="">
-                        เริ่มต้น : <em id="showjob_start">วันที่เริ่มต้น</em>
-                        สิ้นสุด : <em id="showjob_end">วันที่สิ้นสุด</em>
-</figure>
+                    <figure class="text-left">
+                      <h5 id="job_name" class="card-title align-middle">หัวข้อการทำงาน</h5>
+                      <input type="hidden" id="job_id" value="">
+                      เริ่มต้น : <em id="showjob_start">วันที่เริ่มต้น</em>
+                      สิ้นสุด : <em id="showjob_end">วันที่สิ้นสุด</em>
+                    </figure>
                 </div>
-               
                 <div class="col-12">
                         <div class="card" style="height: 100%;">
                           <div class="card-header text-center border">
                             
                           </div>
                             <div class="card-body">
-                            <ul class="list-group list-group-horizontal-md ">
-                           
+                            <ul class="list-group list-group-horizontal-md ">     
                     <div class="list-group-item col-12 d-flex align-items-center text-center justify-content-center">
                       
                       <table class="table table-sm">
@@ -321,9 +304,6 @@ textarea.form-control {
                      
                     </div> -->
                     </div>
-
-
-                    
 
                   </ul>
                   <ul class="list-group list-group-horizontal-md radiapprove">
