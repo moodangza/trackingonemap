@@ -95,11 +95,13 @@ class Managecontroller extends BaseController
         'process_name'=>$_POST['process_name'],
         'process_start'=>$_POST['process_start'],
         'process_end'=>$_POST['process_end'],
+        'create_by'=>$_SESSION['usertbl']['user_name'],
         'created_at'=>date('Y-m-d H:i:s', strtotime('7 hour')),
         'detail'=>$_POST['detail'],
         'delete_flag'=>'1',
         'status'=>'1',
-        // 'create_by'=>$_SESSION['usertbl']['user_name']
+      
+
     );
         
         $last_id = $addprocessmodel -> insert($data);

@@ -599,9 +599,9 @@ function updatejobform(jobid) {
          
           $('#listprocess').prepend('<tr id="process' + rs_process.process_id + '" ' +
             'class="table table-sm tr_items" data-bs-toggle="collapse" data-bs-target="#collapsesubprocess' + rs_process.process_id + '" ' + 'aria-expanded="true" >' +
-            '<td><textarea  autocomplete="off" class="form-control" id="process_name" name="process_name" placeholder="จัดทำร่าง พรบ." >'+ rs_process.process_name +'</textarea>'+
-              '</td><td><input  type="text" id="s_date' + rs_process.process_id + '" readonly="readonly"  class="form-control datepicker create-s-date" name="s_date" data-old="" value="' + rs_process.process_start +'">'+ ''+
-              '<input  type="text" required="" readonly="readonly" id="e_date' + rs_process.process_id + '"  class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="' + rs_process.process_end + '"></td>'+
+            '<td><textarea  autocomplete="off" class="form-control" id="process_name_' + rs_process.process_id + '" name="process_name" placeholder="จัดทำร่าง พรบ." >'+ rs_process.process_name +'</textarea>'+
+              '</td><td><input  type="text" id="s_date_' + rs_process.process_id + '" readonly="readonly"  class="form-control datepicker create-s-date" name="s_date" data-old="" value="' + rs_process.process_start +'">'+ ''+
+              '<input  type="text" required="" readonly="readonly" id="e_date_' + rs_process.process_id + '"  class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="' + rs_process.process_end + '"></td>'+
             // '<td><input type="checkbox" name="complete" id="complete_'+ rs_process.process_id +' onclick="confirmprocess(' + rs_process.process_id + ')" " value="2"></td>'+
             '</tr>'+
             '<tr class="table table-sm" id="rsprocess' + rs_process.process_id + '" ></tr>' 

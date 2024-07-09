@@ -78,7 +78,7 @@
 }
 
 textarea.form-control {
-            max-width: 500px;
+            max-width: 300px;
             width: 100%;
             padding: 8px 12px;
             /* border: 1px solid #ccc; */

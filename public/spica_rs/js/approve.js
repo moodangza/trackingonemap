@@ -47,15 +47,33 @@ $(".addprocess_name,.addcreate-s-date,.addcreate-e-date").change(function(){
   var process_start = $('.addcreate-s-date').val() ;
   var process_end = $('.addcreate-e-date').val() ;
   var p_s_start = process_start.split('/');
-let rs_start = p_s_start[2]-543  + '-' + p_s_start[1] + '-' + p_s_start[0];
-var p_s_end = process_end.split('/');
-let rs_end = p_s_end[2]-543  + '-' + p_s_end[1] + '-' + p_s_end[0];
+  let rs_start = p_s_start[2]-543  + '-' + p_s_start[1] + '-' + p_s_start[0];
+  var p_s_end = process_end.split('/');
+  let rs_end = p_s_end[2]-543  + '-' + p_s_end[1] + '-' + p_s_end[0];
+  if (rs_end < rs_start) {
+        alert('วันที่ สิ้นสุดต้องไม่น้อยกว่าวันที่เริ่มต้น');
+    }
   if($('.addprocess_name').val()!='' && $('.addcreate-s-date').val()!='' && $('.addcreate-e-date').val()!=''){
     $.ajax({
       url: "/insertprocess",
       type: "post",
       dataType: 'text',
       data: { job_id: job_id, process_name: process_name, process_start: rs_start, process_end: rs_end, detail: detail },
+      success: function (rs_data) {
+        rs_data.process
+        $(".addprocess_name").attr("name","process_name","id","process_name_" + rs_process.process_id);
+        $(".addcreate-s-date").attr("name","s_date","id","s_date_" + rs_process.process_id);
+        $(".addcreate-e-date").attr("name","e_date","id","e_date_" + rs_process.process_id);
+        '<tr id="process' + rs_data.process.process_id + '" ' +
+            'class="table table-sm tr_items" data-bs-toggle="collapse" data-bs-target="#collapsesubprocess' + rs_process.process_id + '" ' + 'aria-expanded="true" >' +
+            '<td><textarea  autocomplete="off" class="form-control" id="process_name_' + rs_process.process_id + '" name="process_name" placeholder="จัดทำร่าง พรบ." >'+ rs_process.process_name +'</textarea>'+
+              '</td><td><input  type="text" id="s_date_' + rs_process.process_id + '" readonly="readonly"  class="form-control datepicker create-s-date" name="s_date" data-old="" value="' + rs_process.process_start +'">'+ ''+
+              '<input  type="text" required="" readonly="readonly" id="e_date_' + rs_process.process_id + '"  class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="' + rs_process.process_end + '"></td>'+
+            // '<td><input type="checkbox" name="complete" id="complete_'+ rs_process.process_id +' onclick="confirmprocess(' + rs_process.process_id + ')" " value="2"></td>'+
+            '</tr>'+
+            '<tr class="table table-sm" id="rsprocess' + rs_process.process_id + '" ></tr>' 
+            
+      }
     });
   }
 });
