@@ -29,11 +29,11 @@ $(document).on("click",".plusprocess",function(){
     '<td><textarea  autocomplete="off" class="form-control addprocess_name" id="process_name" name="process_name" placeholder="จัดทำร่าง พรบ." ></textarea>'+
       '</td><td><input  type="text" id="s_date" readonly="readonly"  class="form-control datepicker addcreate-s-date" name="s_date" data-old="" value="">'+ 
       '<input  type="text" required="" readonly="readonly" id="e_date"  class="form-control  datepicker-input addcreate-e-date" name="e_date" data-old="" value=""></td>'+
-    // '<td><input type="checkbox" name="complete" id="complete_'+ rs_process.process_id +' onclick="confirmprocess(' + rs_process.process_id + ')" " value="2"></td>'+
+    '<td><textarea autocomplete="off" class="form-control" placeholder="Leave a comment here" id="detail" name="detail" ></textarea></td>'+
     '</tr>'+
     '<tr class="table table-sm" id="rsprocess" ></tr>' 
   );
-  
+
 $("#editjob_name,#editjob_start,#editjob_end").change(function(){
   editjob();
 });
@@ -42,9 +42,10 @@ $("#editjob_name,#editjob_start,#editjob_end").change(function(){
 $(".addprocess_name,.addcreate-s-date,.addcreate-e-date").change(function(){
   console.log('aaaa')
   var job_id = $('#editjob_id').val() ;
-  var process_name = $('#process_name').val() ;
-  var process_start = $('.create-s-date').val() ;
-  var process_end = $('.create-e-date').val() ;
+  var process_name = $('.addprocess_name').val() ;
+  var detail = $('#detail').val();
+  var process_start = $('.addcreate-s-date').val() ;
+  var process_end = $('.addcreate-e-date').val() ;
   var p_s_start = process_start.split('/');
 let rs_start = p_s_start[2]-543  + '-' + p_s_start[1] + '-' + p_s_start[0];
 var p_s_end = process_end.split('/');

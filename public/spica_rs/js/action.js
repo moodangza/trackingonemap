@@ -20,7 +20,7 @@ $(document).ready(function () {
 
 
 });
-$(document).on("click","#job_start,#job_end,.create-s-date,.create-e-date,#editjob_start,#editjob_end", function () {
+$(document).on("click","#job_start,#job_end,.addcreate-s-date,.addcreate-e-date,#editjob_start,#editjob_end", function () {
   console.log("click");
   $(this).datepicker({
   language: 'th-th',
