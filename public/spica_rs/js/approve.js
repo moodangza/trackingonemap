@@ -23,7 +23,27 @@ $(document).ready(function () {
   });
  
 });
+$(document).on("change",'textarea[id^="process_name_"]',function(){
+  var fieldid = $(this).attr('id');
+  const split = fieldid.split("_");
+  var fieldValue = $(this).val();
+  
+  console.log('Changed field: ' + split[2] + ' Value: ' + fieldValue );
+  // $.ajax({
 
+  // });
+});
+
+$(document).on("onSelect",'input[id^="s_date_"]',function(){
+  var fieldid = $(this).attr('id');
+  const split = fieldid.split("_");
+  var fieldValue = $(this).val();
+  
+  console.log('Changed field: ' + split[2] + ' Value: ' + fieldValue );
+  // $.ajax({
+
+  // });
+});
 $(document).on("click",".plusprocess",function(){
   $('#listprocess').prepend('<tr id="process" class="table table-sm tr_items" aria-expanded="true" >' +
     '<td><textarea  autocomplete="off" class="form-control addprocess_name" id="process_name" name="process_name" placeholder="จัดทำร่าง พรบ." ></textarea>'+
@@ -77,11 +97,7 @@ $(".addprocess_name,.addcreate-s-date,.addcreate-e-date").change(function(){
     });
   }
 });
-$('textarea[id^="process_name_"]').change(function(){
-  var fieldid = $(this).attr('id');
-  var fieldValue = $(this).val();
-  console.log('Changed field: ' + fieldid + ' Value: ' + fieldValue);
-});
+
 function detailprocessapprove(jobid) {
   $.ajax(
     {
