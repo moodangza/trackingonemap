@@ -34,21 +34,12 @@ $(document).on("change",'textarea[id^="process_name_"]',function(){
   // });
 });
 
-$(document).on("onSelect",'input[id^="s_date_"]',function(){
-  var fieldid = $(this).attr('id');
-  const split = fieldid.split("_");
-  var fieldValue = $(this).val();
-  
-  console.log('Changed field: ' + split[2] + ' Value: ' + fieldValue );
-  // $.ajax({
 
-  // });
-});
 $(document).on("click",".plusprocess",function(){
   $('#listprocess').prepend('<tr id="process" class="table table-sm tr_items" aria-expanded="true" >' +
     '<td><textarea  autocomplete="off" class="form-control addprocess_name" id="process_name" name="process_name" placeholder="จัดทำร่าง พรบ." ></textarea>'+
-      '</td><td><input  type="text" id="s_date" readonly="readonly"  class="form-control datepicker addcreate-s-date" name="s_date" data-old="" value="">'+ 
-      '<input  type="text" required="" readonly="readonly" id="e_date"  class="form-control  datepicker-input addcreate-e-date" name="e_date" data-old="" value=""></td>'+
+      // '</td><td><input  type="text" id="s_date" readonly="readonly"  class="form-control datepicker addcreate-s-date" name="s_date" data-old="" value="">'+ 
+      // '<input  type="text" required="" readonly="readonly" id="e_date"  class="form-control  datepicker-input addcreate-e-date" name="e_date" data-old="" value=""></td>'+
     '<td><textarea autocomplete="off" class="form-control" placeholder="Leave a comment here" id="detail" name="detail" ></textarea></td>'+
     '</tr>'+
     '<tr class="table table-sm" id="rsprocess" ></tr>' 
@@ -57,45 +48,60 @@ $(document).on("click",".plusprocess",function(){
 $("#editjob_name,#editjob_start,#editjob_end").change(function(){
   editjob();
 });
+});
 
+// $(".addprocess_name,.addcreate-s-date,.addcreate-e-date,.detail").change(function(){
+ 
+$(document).on("change","textarea[id^='process_name_'],textarea[id^='deatail_']",function(){
+  var process_val = $("textarea[id^='process_name_']").val();
+  var process_deatail = $("textarea[id^='deatail_']").val();
+  console.log('process_name: '+process_val+ 'detail: '+process_deatail);
+});
 
-$(".addprocess_name,.addcreate-s-date,.addcreate-e-date").change(function(){
+$(document).on("change",".addprocess_name,.detail",function(){
   console.log('aaaa')
   var job_id = $('#editjob_id').val() ;
   var process_name = $('.addprocess_name').val() ;
-  var detail = $('#detail').val();
-  var process_start = $('.addcreate-s-date').val() ;
-  var process_end = $('.addcreate-e-date').val() ;
-  var p_s_start = process_start.split('/');
-  let rs_start = p_s_start[2]-543  + '-' + p_s_start[1] + '-' + p_s_start[0];
-  var p_s_end = process_end.split('/');
-  let rs_end = p_s_end[2]-543  + '-' + p_s_end[1] + '-' + p_s_end[0];
+  var detail = $('#deatail').val();
+  // var process_start = $('.addcreate-s-date').val() ;
+  // var process_end = $('.addcreate-e-date').val() ;
+  // var p_s_start = process_start.split('/');
+  // let rs_start = p_s_start[2]-543  + '-' + p_s_start[1] + '-' + p_s_start[0];
+  // var p_s_end = process_end.split('/');
+  // let rs_end = p_s_end[2]-543  + '-' + p_s_end[1] + '-' + p_s_end[0];
+  
   if (rs_end < rs_start) {
         alert('วันที่ สิ้นสุดต้องไม่น้อยกว่าวันที่เริ่มต้น');
     }
-  if($('.addprocess_name').val()!='' && $('.addcreate-s-date').val()!='' && $('.addcreate-e-date').val()!=''){
+  // if($('.addprocess_name').val()!='' && $('.detail').val()!='' ){
     $.ajax({
       url: "/insertprocess",
       type: "post",
       dataType: 'text',
-      data: { job_id: job_id, process_name: process_name, process_start: rs_start, process_end: rs_end, detail: detail },
+      // data: { job_id: job_id, process_name: process_name, process_start: rs_start, process_end: rs_end, detail: detail },
+      data: { job_id: job_id, process_name: process_name, detail: detail },
       success: function (rs_data) {
         rs_data.process
         $(".addprocess_name").attr("name","process_name","id","process_name_" + rs_process.process_id);
-        $(".addcreate-s-date").attr("name","s_date","id","s_date_" + rs_process.process_id);
-        $(".addcreate-e-date").attr("name","e_date","id","e_date_" + rs_process.process_id);
+        // $(".addcreate-s-date").attr("name","s_date","id","s_date_" + rs_process.process_id);
+        // $(".addcreate-e-date").attr("name","e_date","id","e_date_" + rs_process.process_id);
         '<tr id="process' + rs_data.process.process_id + '" ' +
             'class="table table-sm tr_items" data-bs-toggle="collapse" data-bs-target="#collapsesubprocess' + rs_process.process_id + '" ' + 'aria-expanded="true" >' +
-            '<td><textarea  autocomplete="off" class="form-control" id="process_name_' + rs_process.process_id + '" name="process_name" placeholder="จัดทำร่าง พรบ." >'+ rs_process.process_name +'</textarea>'+
-              '</td><td><input  type="text" id="s_date_' + rs_process.process_id + '" readonly="readonly"  class="form-control datepicker create-s-date" name="s_date" data-old="" value="' + rs_process.process_start +'">'+ ''+
-              '<input  type="text" required="" readonly="readonly" id="e_date_' + rs_process.process_id + '"  class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="' + rs_process.process_end + '"></td>'+
+            '<td>'+
+            '<textarea  autocomplete="off" class="form-control" id="process_name_' + rs_process.process_id + '" name="process_name" placeholder="จัดทำร่าง พรบ." >'+ rs_process.process_name +'</textarea>'+
+              '</td>'+
+              '<td>'+
+              // '<input  type="text" id="s_date_' + rs_process.process_id + '" readonly="readonly"  class="form-control datepicker create-s-date" name="s_date" data-old="" value="' + rs_process.process_start +'">'+ ''+
+              // '<input  type="text" required="" readonly="readonly" id="e_date_' + rs_process.process_id + '"  class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="' + rs_process.process_end + '">'+
+              '<textarea autocomplete="off" class="form-control detail" id="detail_' + rs_process.process_id + '" name="detail" placeholder="จัดทำร่าง พรบ." >'+ rs_process.detail +'</textarea>'+
+              '</td>'+
             // '<td><input type="checkbox" name="complete" id="complete_'+ rs_process.process_id +' onclick="confirmprocess(' + rs_process.process_id + ')" " value="2"></td>'+
             '</tr>'+
             '<tr class="table table-sm" id="rsprocess' + rs_process.process_id + '" ></tr>' 
             
       }
     });
-  }
+  // }
 });
 
 function detailprocessapprove(jobid) {
@@ -169,12 +175,9 @@ function detailprocessapprove(jobid) {
 
       }
     });
-
-
 }
 
 
-});
 $(document).on("click", ".approvejob", function () {
   let job_id = $('#job_id').val();
   // console.log(job_id);

@@ -1,4 +1,5 @@
-$(document).ready(function () {
+
+$(document).ready(function(){
   $('#urladdprocess').hide();
   // $('#addjob').hide();
   //ปฏิทิน
@@ -17,17 +18,39 @@ $(document).ready(function () {
   if (text[1] = 'formupdateprocess') {
     // showsubprocess();
   }
+  // Initialize datepickers
+  $("#job_start, #job_end, .addcreate-s-date, .addcreate-e-date, #editjob_start, #editjob_end,input[id^='s_date_']").datepicker({
+      language: 'th-th',
+      format: 'dd/mm/yyyy',
+      todayBtn: 'linked',
+      todayHighlight: true,
+      autoclose: true,
+      onSelect: function(dateText, inst) {
+          var fieldId = $(this).attr('id');
+          const split = fieldId ? fieldId.split("_") : [];
+          console.log('Date selected: ' + (split[2] || '') + ' Value: ' + dateText);
 
+          // $.ajax({
+          //     url: 'your-server-endpoint-url',
+          //     type: 'POST',
+          //     data: {
+          //         id: split[2] || '', // fallback if id doesn't split correctly
+          //         value: dateText
+          //     },
+          //     success: function(response) {
+          //         console.log('Server response:', response);
+          //     },
+          //     error: function(xhr, status, error) {
+          //         console.error('AJAX error:', error);
+          //     }
+          // });
+      }
+  });
 
-});
-$(document).on("click","#job_start,#job_end,.addcreate-s-date,.addcreate-e-date,#editjob_start,#editjob_end", function () {
-  console.log("click");
-  $(this).datepicker({
-  language: 'th-th',
-  format: 'dd/mm/yyyy',
-  todayBtn: 'linked',
-  todayHighlight: true,
-  autoclose: true});
+  // Trigger datepicker on click
+  $(document).on("click", "#job_start, #job_end, .addcreate-s-date, .addcreate-e-date, #editjob_start, #editjob_end,input[id^='s_date_']", function () {
+      $(this).datepicker("show");
+  });
 });
 //เพิ่ม subprocess
 $(document).on("click", ".addsubprocess", function () {
@@ -385,52 +408,6 @@ function confirmprocess(process_id) {
       });
   }
 }
-// เพิ่มขั้นตอนการทำงาน
-// $(document).on("click", ".insertprocess", function () {
-//   let job_id = $('#job_id').val();
-//   let process_name = $('#process_name').val();
-//   let processstart = $('#s_date').val();
-//   let processend = $('#e_date').val();
-//   let detail = $('#detail').val();
-//   var p_s_start = processstart.split('/');
-//   let rs_start = p_s_start[2]-543  + '-' + p_s_start[1] + '-' + p_s_start[0];
-//   var p_s_end = processend.split('/');
-//   let rs_end = p_s_end[2]-543  + '-' + p_s_end[1] + '-' + p_s_end[0];
-//   // alert(rs_start);
-//   // alert(rs_end);
-//   let s_job = $('#s_job').val();
-//   let e_job = $('#e_job').val();
-//   if (rs_end < rs_start) {
-//     alert('วันที่ สิ้นสุดต้องไม่น้อยกว่าวันที่เริ่มต้น');
-//   }
-
-//   if (process_name == '') {
-//     alert('กรุณากรอก ขั้นตอน');
-//     process_name.focus();
-//     return false;
-//   } else if (processstart == '') {
-//     alert('กรุณากรอกวันที่เริ่มต้น');
-//     processstart.focus();
-//     return false;
-//   } else if (processend == '') {
-//     alert('กรุณากรอกวันที่สิ้นสุด');
-//     processend.focus();
-//     return false;
-//   }
-//   $.ajax(
-//     {
-//       url: "/insertprocess",
-//       type: "post",
-//       dataType: 'text',
-//       data: { job_id: job_id, process_name: process_name, process_start: rs_start, process_end: rs_end, detail: detail },
-//       success: function (data) {
-//         // console.log(data);
-//         var obj = JSON.parse(data);
-//         console.log(obj.process);
-//         location.replace("/formupdateprocess/"+obj.process)
-//       }
-//     });
-// });
 
 //เพิ่มขั้นตอนการทำงาน
 // แก้ไขขั้นตอนการทำงาน
@@ -599,9 +576,14 @@ function updatejobform(jobid) {
          
           $('#listprocess').prepend('<tr id="process' + rs_process.process_id + '" ' +
             'class="table table-sm tr_items" data-bs-toggle="collapse" data-bs-target="#collapsesubprocess' + rs_process.process_id + '" ' + 'aria-expanded="true" >' +
-            '<td><textarea  autocomplete="off" class="form-control" id="process_name_' + rs_process.process_id + '" name="process_name" placeholder="จัดทำร่าง พรบ." >'+ rs_process.process_name +'</textarea>'+
-              '</td><td><input  type="text" id="s_date_' + rs_process.process_id + '" readonly="readonly"  class="form-control datepicker create-s-date" name="s_date" data-old="" value="' + rs_process.process_start +'">'+ ''+
-              '<input  type="text" required="" readonly="readonly" id="e_date_' + rs_process.process_id + '"  class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="' + rs_process.process_end + '"></td>'+
+            '<td><textarea autocomplete="off" class="form-control" id="process_name_' + rs_process.process_id + '" name="process_name" placeholder="จัดทำร่าง พรบ." >'+ rs_process.process_name +'</textarea>'+
+              '</td>'+
+              '<td>'+
+              // '<input  type="text" id="s_date_' + rs_process.process_id + '" readonly="readonly"  class="form-control datepicker create-s-date" name="s_date" data-old="" value="' + rs_process.process_start +'">'+
+              // '<input  type="text" required="" readonly="readonly" id="e_date_' + rs_process.process_id + '"  class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="' + rs_process.process_end + '">'+
+              '<textarea autocomplete="off" class="form-control detail" id="deatail_' + rs_process.process_id + '" name="detail" placeholder="จัดทำร่าง พรบ." >'+ rs_process.detail +'</textarea>'+
+              '</td>'+
+
             // '<td><input type="checkbox" name="complete" id="complete_'+ rs_process.process_id +' onclick="confirmprocess(' + rs_process.process_id + ')" " value="2"></td>'+
             '</tr>'+
             '<tr class="table table-sm" id="rsprocess' + rs_process.process_id + '" ></tr>' 
