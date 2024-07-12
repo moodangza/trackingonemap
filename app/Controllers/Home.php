@@ -136,17 +136,13 @@ class Home extends BaseController
         ->groupBy('job_id,job_name,job_start,job_end,status,job_finish,dateremain')
         ->orderBy('job_id','asc');
         $job_rs1 = $jobmodel1->findAll();
-     
         $dateth = new Date();
         foreach($job_rs1 as $key => $date_th){
             $job_rs1[$key]['job_start'] = $dateth->DateThai($date_th['job_start']);
-            $job_rs1[$key]['job_end'] = $dateth->DateThai($date_th['job_end']);
-           
+            $job_rs1[$key]['job_end'] = $dateth->DateThai($date_th['job_end']); 
         }
         $can = new Ckedit();
         $cedit = $can->ckcan($divisionid1);
-
-       
         $return = [
             'division'=> $division_rs1,
             'job'=> $job_rs1,
@@ -315,8 +311,6 @@ public function editjob()
 //ลบหัวข้อ job
 public function deletejob()
 { 
-    
-    // exit;
     try {
     $deletejob = new jobModel();
     

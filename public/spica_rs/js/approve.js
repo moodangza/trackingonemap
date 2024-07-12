@@ -52,17 +52,17 @@ $("#editjob_name,#editjob_start,#editjob_end").change(function(){
 
 // $(".addprocess_name,.addcreate-s-date,.addcreate-e-date,.detail").change(function(){
  
-$(document).on("change","textarea[id^='process_name_'],textarea[id^='deatail_']",function(){
+$(document).on("change","textarea[id^='process_name_'],textarea[id^='detail_']",function(){
   var process_val = $("textarea[id^='process_name_']").val();
-  var process_deatail = $("textarea[id^='deatail_']").val();
-  console.log('process_name: '+process_val+ 'detail: '+process_deatail);
+  var process_detail = $("textarea[id^='detail_']").val();
+  console.log('process_name: '+process_val+ 'detail: '+process_detail);
 });
 
 $(document).on("change",".addprocess_name,.detail",function(){
   console.log('aaaa')
   var job_id = $('#editjob_id').val() ;
   var process_name = $('.addprocess_name').val() ;
-  var detail = $('#deatail').val();
+  var detail = $('#detail').val();
   // var process_start = $('.addcreate-s-date').val() ;
   // var process_end = $('.addcreate-e-date').val() ;
   // var p_s_start = process_start.split('/');

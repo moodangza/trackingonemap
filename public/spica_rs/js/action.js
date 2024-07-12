@@ -581,7 +581,7 @@ function updatejobform(jobid) {
               '<td>'+
               // '<input  type="text" id="s_date_' + rs_process.process_id + '" readonly="readonly"  class="form-control datepicker create-s-date" name="s_date" data-old="" value="' + rs_process.process_start +'">'+
               // '<input  type="text" required="" readonly="readonly" id="e_date_' + rs_process.process_id + '"  class="form-control  datepicker-input create-e-date" name="e_date" data-old="" value="' + rs_process.process_end + '">'+
-              '<textarea autocomplete="off" class="form-control detail" id="deatail_' + rs_process.process_id + '" name="detail" placeholder="จัดทำร่าง พรบ." >'+ rs_process.detail +'</textarea>'+
+              '<textarea autocomplete="off" class="form-control detail" id="detail_' + rs_process.process_id + '" name="detail" placeholder="จัดทำร่าง พรบ." >'+ rs_process.detail +'</textarea>'+
               '</td>'+
 
             // '<td><input type="checkbox" name="complete" id="complete_'+ rs_process.process_id +' onclick="confirmprocess(' + rs_process.process_id + ')" " value="2"></td>'+
