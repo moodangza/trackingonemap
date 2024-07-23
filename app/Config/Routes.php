@@ -13,12 +13,14 @@ $routes->post('ckuser','Authencontroller::ckuser');
 $routes->set404Override(function(){
     return view('spica/page/error404');
 });
+
 $routes->group('', ['filter' => 'auth'], function($routes){
 $routes->get('/', 'Home::index');
 $routes->get('showdata','Home::showdata');
 $routes->add('showjob','Home::showjob');
 $routes->add('showjob/(:num)','Home::showjob/$1');
 $routes->get('showprocess','Home::showprocess');
+
 // $routes->get('addprocess','Home::addprocess');
 // $routes->add('job/get', 'Home::showjob');
 $routes->add('home/get', 'Home::showprocess');
