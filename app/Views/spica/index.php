@@ -142,7 +142,7 @@ $(function(){
                                             } 
                                             ?>                                                             
                                             <br>
-                                            <a href="<?php echo base_url('showjob/'.$group['division_id']);?>" class="btn btn-primary mt-4">ดูรายละเอียด</a>
+                                            <!-- <a href="<?php echo base_url('showjob/'.$group['division_id']);?>" class="btn btn-primary mt-4">ดูรายละเอียด</a> -->
                                                                       
                                   </div>
                                   <div class="col-5">
